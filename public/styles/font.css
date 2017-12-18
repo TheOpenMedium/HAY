@@ -1,0 +1,234 @@
+/*##########COLOR##########*/
+
+/* GREY SHADES */
+.c000 {
+    background-color: #000000;
+    color: white;
+}
+.c222 {
+    background-color: #222222;
+    color: white;
+}
+.c696 {
+    background-color: #696969;
+    color: white;
+} /* 696969 | dimgrey */
+.c999 {
+    background-color: #999999;
+    color: white;
+}
+.cDDD {
+    background-color: #dddddd;
+    color: white;
+}
+.cFFF {
+    background-color: #ffffff;
+    color: black;
+}
+/* RED */
+.cE00 {
+    background-color: #EE0000;
+    color: white;
+}
+.cF00 {
+    background-color: #ff0000;
+    color: white;
+}
+.cF44 {
+    background-color: #ff4444;
+    color: white;
+}
+.cF05 {
+    background-color: #ff0055;
+    color: white;
+}
+/* PURPLE */
+.c72C {
+    background-color: #7722cc;
+    color: white;
+}
+.cD0F {
+    background-color: #dd00ff;
+    color: white;
+}
+.cF2E {
+    background-color: #ff22ee;
+    color: white;
+}
+.cF6F {
+    background-color: #ff66ff;
+    color: white;
+}
+/* DARK BLUE */
+.c008 {
+    background-color: #000088;
+    color: white;
+}
+.c22F {
+    background-color: #2222ff;
+    color: white;
+}
+.c08F {
+    background-color: #0088ff;
+    color: white;
+}
+.c0AE {
+    background-color: #00AAEE;
+    color: white;
+}
+/* LIGHT BLUE */
+.c099 {
+    background-color: #009999;
+    color: white;
+}
+.c6DF {
+    background-color: #66ddff;
+    color: white;
+}
+.c0FF {
+    background-color: #00ffff;
+    color: white;
+}
+.c9FF {
+    background-color: #99ffff;
+    color: white;
+}
+/* GREEN */
+.c0A0 {
+    background-color: #00aa00;
+    color: white;
+}
+.c0F0 {
+    background-color: #00ff00;
+    color: white;
+}
+.cBF0 {
+    background-color: #BBFF00;
+    color: white;
+}
+.c5F9 {
+    background-color: #55ff99;
+    color: white;
+} /* "HAY" COLOR */
+/* YELLOW */
+.cF91 {
+    background-color: #ff9911;
+    color: white;
+}
+.cFD0 {
+    background-color: #ffdd00;
+    color: white;
+}
+.cEE0 {
+    background-color: #eeee00;
+    color: white;
+}
+.cFF0 {
+    background-color: #ffff00;
+    color: white;
+}
+
+/*##########FAMILY##########*/
+
+.ffSS {
+    font-family: sans-serif;
+}
+
+/*##########SIZE##########*/
+
+/* FONT 10->19 */
+.fs10 {
+    font-size: 10px;
+}
+.fs12 {
+    font-size: 12px;
+}
+.fs14 {
+    font-size: 14px;
+}
+.fs16 {
+    font-size: 16px;
+}
+.fs18 {
+    font-size: 18px;
+}
+/* FONT 20->29 */
+.fs20 {
+    font-size: 20px;
+}
+.fs22 {
+    font-size: 22px;
+}
+.fs24 {
+    font-size: 24px;
+}
+.fs26 {
+    font-size: 26px;
+}
+.fs28 {
+    font-size: 28px;
+}
+/* FONT 30->39 */
+.fs30 {
+    font-size: 30px;
+}
+.fs32 {
+    font-size: 32px;
+}
+.fs34 {
+    font-size: 34px;
+}
+.fs36 {
+    font-size: 36px;
+}
+.fs38 {
+    font-size: 38px;
+}
+/* FONT 40->49 */
+.fs40 {
+    font-size: 40px;
+}
+.fs42 {
+    font-size: 42px;
+}
+.fs44 {
+    font-size: 44px;
+}
+.fs46 {
+    font-size: 46px;
+}
+.fs48 {
+    font-size: 48px;
+}
+/* FONT 50->59 */
+.fs50 {
+    font-size: 50px;
+}
+.fs52 {
+    font-size: 52px;
+}
+.fs54 {
+    font-size: 54px;
+}
+.fs56 {
+    font-size: 56px;
+}
+.fs58 {
+    font-size: 58px;
+}
+/* FONT 60->69 */
+.fs60 {
+    font-size: 60px;
+}
+.fs62 {
+    font-size: 62px;
+}
+.fs64 {
+    font-size: 64px;
+}
+.fs66 {
+    font-size: 66px;
+}
+.fs68 {
+    font-size: 68px;
+}
