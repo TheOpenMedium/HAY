@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     margin-top: 80px;
@@ -17,7 +21,7 @@ body {
 
 #version {
     color: white;
-    background-color: red;
+    background-color: rgb(255, 0, 0);
     font-size: 13px;
     font-family: monospace;
     position: absolute;
@@ -56,9 +60,9 @@ body {
     resize: none;
     width: 100%;
     height: calc(100% - 20px);
-    background-color: dimgrey;
+    background-color: inherit;
     border: 1px solid grey;
-    color: white;
+    color: inherit;
     font-family: sans-serif;
 }
 
@@ -88,13 +92,14 @@ body {
 
 .footerMenu {
     margin: 0;
+    margin-left: -15px;
 }
 
 .menuChoices {
     list-style: none;
     display: inline-block;
     width: 85.7px;
-    margin: 0px;
+    margin-right: -14px;
 }
 
 .option {
@@ -102,7 +107,7 @@ body {
     padding-left: 30px;
     padding-right: 30px;
     margin: 0;
-    margin-left: -15px;
+    margin-right: -15px;
     height: 50px;
     transform: skewX(-45deg);
 }
@@ -111,9 +116,9 @@ body {
     cursor: pointer;
 }
 
-/*.optOther {
-    margin-left: -6px;
-}*/
+.optPref {
+    margin-right: -9px!important;
+}
 
 .colorUL {
     display: none;
@@ -122,7 +127,7 @@ body {
     padding: 5px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    width: 245px;
+    width: 255px;
 }
 
 .optColor:hover ul.colorUL {
@@ -237,6 +242,14 @@ body {
 #optionMenu {
     display: block;
     transform: skewX(45deg);
+}
+
+.optAccount {
+    margin-left: -1px;
+}
+
+.sendStatus {
+    margin-left: 3px;
 }
 
 .send {

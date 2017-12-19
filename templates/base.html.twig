@@ -2,13 +2,22 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <link rel="icon" href="view/ressources/HAYlogo.png" />
-        <link rel="stylesheet" href="view/fonts/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="view/fonts/icofont/css/icofont.css">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <link rel="icon" href="/ressources/HAYlogo.png" />
+        <link rel="stylesheet" href="/fonts/font-awesome/css/font-awesome.min.css" type="text/css" />
+        <link rel="stylesheet" href="/fonts/icofont/css/icofont.css" type="text/css" />
+        <link rel="stylesheet" href="/styles/style.css" type="text/css" />
+        <link rel="stylesheet" href="/styles/font.css" type="text/css" />
+        <title>{% block title %}Ce titre a un problème...{% endblock %}</title>
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta name="author" content="" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+        <h1>Oulà !</h1>
+        Un problème s'est produit !
+        {% endblock %}
+        {% block js %}
+        {% endblock %}
     </body>
 </html>
