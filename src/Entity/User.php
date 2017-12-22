@@ -50,4 +50,83 @@ class User
      * @ORM\Column(type="boolean")
      */
     private $mail_conf;
+
+    // Construct Method
+
+    public function __construct()
+    {
+        $this->date_sign = new \Datetime();
+    }
+
+    // Getters & setters
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getFirst_name()
+    {
+        return $this->first_name;
+    }
+
+    public function setFirst_name($first_name)
+    {
+        $this->first_name = $first_name;
+    }
+
+    public function getLast_name()
+    {
+        return $this->last_name;
+    }
+
+    public function setLast_name($last_name)
+    {
+        $this->last_name = $last_name;
+    }
+
+    public function getMail_addr()
+    {
+        return $this->mail_addr;
+    }
+
+    public function setMail_addr($mail_addr)
+    {
+        $this->mail_addr = $mail_addr;
+    }
+
+    public function getPseudo()
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo($pseudo)
+    {
+        $this->pseudo = $pseudo;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    public function getDate_sign()
+    {
+        return $this->date_sign;
+    }
+
+    public function getMail_conf()
+    {
+        return $this->mail_conf;
+    }
+
+    public function setMail_conf($mail_conf)
+    {
+        $this->mail_conf = $mail_conf;
+    }
 }
