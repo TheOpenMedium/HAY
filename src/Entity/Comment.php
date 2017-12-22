@@ -16,5 +16,23 @@ class Comment
      */
     private $id;
 
-    // add your own fields
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $id_user;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $id_status;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $comment;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date_send;
 }
