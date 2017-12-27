@@ -1,6 +1,6 @@
 > Work In Progress!
 # HAY Project v0.0.1 (pre-Alpha)
-> Si vous parlez français, vous pourrez visionnez ce même document en français [ici](https://github.com/ProjectOM/HAY/edit/master/READMEFR.md) !
+> Si vous parlez français, vous pourrez visionnez ce même document en français [ici](https://github.com/ProjectOM/HAY/blob/master/READMEFR.md) !
 
 > إن كانت لغتكم العربيّة، إعلموا أنّ ترجمة لهذا النّص ستكون متوفّرة قريبا
 
