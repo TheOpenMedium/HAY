@@ -56,6 +56,7 @@ class User
     public function __construct()
     {
         $this->date_sign = new \Datetime();
+        $this->mail_conf = false;
     }
 
     // Getters & setters

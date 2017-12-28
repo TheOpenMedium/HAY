@@ -1,0 +1,57 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+Connexion - HAY
+{% endblock %}
+
+{% block body %}
+{{ form_start(form) }}
+<table class="loginBody" width="500px"  style="margin-top: 0px;">
+    <!-- Affichage des icônes -->
+    <!-- Icon display -->
+    <tr>
+        <td style="padding-bottom: 10px; border-bottom: 1px solid grey;" colspan="2">
+            <img src="/ressources/icone.png" alt="Logo" width="150px" height="150px" class="loginIcones" />
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-top: 10px;" colspan="2">
+            <img src="/ressources/HAYlogo.png" alt="Logo" width="200px" height="200px" class="loginIcones" />
+        </td>
+    </tr>
+    <!-- Lien vers la page de connection/inscription -->
+    <!-- Link to log in/sign up page -->
+    <tr>
+        <td>
+            <a class="loginSwitch" href="{{ url('app_fr_login') }}">Connexion</a>
+        </td>
+        <td>
+            <a class="loginSwitch" href="{{ url('app_fr_login') }}">Inscription</a>
+        </td>
+    </tr>
+    <!-- Formulaire de l'E-mail et du mot de passe -->
+    <!-- E-mail and password form -->
+    <tr>
+        <td width="50%">
+            {{ form_widget(form.email, {'attr': {'class': 'login', 'placeholder': 'E-mail'}}) }}
+        </td>
+        <td width="50%">
+            {{ form_widget(form.password, {'attr': {'class': 'login', 'placeholder': 'Mot de passe'}}) }}
+        </td>
+    </tr>
+    <!-- Cookies -->
+    <tr>
+        <td colspan="2">
+            {{ form_widget(form.cookies, {'attr': {'class': 'cookies'}}) }}
+        </td>
+    </tr>
+    <!-- Envoie des données -->
+    <!-- Data send -->
+    <tr>
+        <td colspan="2">
+            {{ form_widget(form.submit, {'attr': {'class': 'submit'}, 'label': 'Se connecter'}) }}
+        </td>
+    </tr>
+</table>
+{{ form_end(form) }}
+{% endblock %}
