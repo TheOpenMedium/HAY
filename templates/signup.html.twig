@@ -29,20 +29,41 @@ Connexion - HAY
             <a class="loginSwitch" href="{{ url('app_fr_signup') }}">Inscription</a>
         </td>
     </tr>
-    {# Formulaire de l'E-mail et du mot de passe #}
-    {# E-mail and password form #}
+    {# Formulaire du nom/prénom #}
+    {# First/last name form #}
+    <tr>
+        <td width="50%">
+            {{ form_widget(form.first_name, {'attr': {'class': 'login', 'placeholder': 'Prénom'}}) }}
+        </td>
+        <td width="50%">
+            {{ form_widget(form.last_name, {'attr': {'class': 'login', 'placeholder': 'Nom'}}) }}
+        </td>
+    </tr>
+    {# Formulaire du pseudo #}
+    {# Pseudo form #}
+    <tr>
+        <td colspan="2">
+            {{ form_widget(form.username, {'attr': {'class': 'login loginLarge', 'placeholder': 'Pseudo (Facultatif)'}}) }}
+        </td>
+    </tr>
+    {# Formulaire de l'E-mail #}
+    {# E-mail form #}
     <tr>
         <td width="50%">
             {{ form_widget(form.email, {'attr': {'class': 'login', 'placeholder': 'E-mail'}}) }}
         </td>
         <td width="50%">
-            {{ form_widget(form.password, {'attr': {'class': 'login', 'placeholder': 'Mot de passe'}}) }}
+            {{ form_widget(form.email_conf, {'attr': {'class': 'login', 'placeholder': 'Confirmer'}}) }}
         </td>
     </tr>
-    {# Cookies #}
+    {# Formulaire du mot de passe #}
+    {# Password form #}
     <tr>
-        <td colspan="2">
-            {{ form_widget(form.cookies, {'attr': {'class': 'cookies'}}) }}
+        <td width="50%">
+            {{ form_widget(form.password, {'attr': {'class': 'login', 'placeholder': 'Mot de passe'}}) }}
+        </td>
+        <td width="50%">
+            {{ form_widget(form.password_conf, {'attr': {'class': 'login', 'placeholder': 'Confirmer'}}) }}
         </td>
     </tr>
     {# Envoie des données #}

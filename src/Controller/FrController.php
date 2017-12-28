@@ -46,4 +46,26 @@ class FrController extends Controller
             'form' => $form->createView()
         ));
     }
+    /**
+     * @Route("/fr/inscription", name="app_fr_signup")
+     */
+    public function signupAction()
+    {
+        $user = new User();
+
+        $form = $this->createFormBuilder()
+            ->add('first_name', TextType::class)
+            ->add('last_name', TextType::class)
+            ->add('username', TextType::class)
+            ->add('email', EmailType::class)
+            ->add('email_conf', EmailType::class)
+            ->add('password', PasswordType::class)
+            ->add('password_conf', PasswordType::class)
+            ->add('submit', SubmitType::class)
+            ->getForm();
+
+        return $this->render('signup.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
 }

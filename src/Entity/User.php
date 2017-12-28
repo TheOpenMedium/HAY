@@ -34,7 +34,7 @@ class User
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $pseudo;
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -96,14 +96,14 @@ class User
         $this->mail_addr = $mail_addr;
     }
 
-    public function getPseudo()
+    public function getUsername()
     {
-        return $this->pseudo;
+        return $this->username;
     }
 
-    public function setPseudo($pseudo)
+    public function setUsername($username)
     {
-        $this->pseudo = $pseudo;
+        $this->username = $username;
     }
 
     public function getPassword()
