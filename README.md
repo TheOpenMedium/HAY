@@ -1,5 +1,7 @@
 > Work In Progress!
 # HAY Project v0.0.1 (pre-Alpha)
+> Code of conduct [here](https://github.com/ProjectOM/HAY/blob/master/CODE_OF_CONDUCT.md)
+
 > Si vous parlez français, vous pourrez visionnez ce même document en français [ici](https://github.com/ProjectOM/HAY/blob/master/READMEFR.md) !
 
 > إن كانت لغتكم العربيّة، إعلموا أنّ ترجمة لهذا النّص ستكون متوفّرة قريبا
