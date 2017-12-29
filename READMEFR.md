@@ -11,7 +11,7 @@ avec le club de football, personnellement, je n'aime même pas le sport :p).
 Nous sommes une petite équipe franco-tunisienne qui propose une alternative aux réseaux sociaux actuel ! On croit en l'Open 
 Source et nous voulont créer un meilleur internet pour tout le monde.
 ## Contribuer
-> Plus d'inofs [ici](https://github.com/ProjectOM/HAY/blob/master/CONTRIBUTING.md) (en anglais)
+> Plus d'infos [ici](https://github.com/ProjectOM/HAY/blob/master/CONTRIBUTING.md) (en anglais)
 
 Tout le monde peut contribuer à ce projet en proposant des idées ou des fonctionnalités et en reportant des bugs.
 * Si vous savez programmer, vous pouvez nous proposez des modifications grâce à un "pull request"
