@@ -50,27 +50,27 @@ Connexion - HAY
     {# E-mail form #}
     <tr>
         <td width="50%">
-            {{ form_widget(form.email, {'attr': {'class': 'login', 'placeholder': 'E-mail'}}) }}
+            {{ form_widget(form.email.first, {'attr': {'class': 'login', 'placeholder': 'E-mail'}}) }}
         </td>
         <td width="50%">
-            {{ form_widget(form.email_conf, {'attr': {'class': 'login', 'placeholder': 'Confirmer'}}) }}
+            {{ form_widget(form.email.second, {'attr': {'class': 'login', 'placeholder': 'Confirmer'}}) }}
         </td>
     </tr>
     {# Formulaire du mot de passe #}
     {# Password form #}
     <tr>
         <td width="50%">
-            {{ form_widget(form.password, {'attr': {'class': 'login', 'placeholder': 'Mot de passe'}}) }}
+            {{ form_widget(form.password.first, {'attr': {'class': 'login', 'placeholder': 'Mot de passe'}}) }}
         </td>
         <td width="50%">
-            {{ form_widget(form.password_conf, {'attr': {'class': 'login', 'placeholder': 'Confirmer'}}) }}
+            {{ form_widget(form.password.second, {'attr': {'class': 'login', 'placeholder': 'Confirmer'}}) }}
         </td>
     </tr>
     {# Envoie des données #}
     {# Data send #}
     <tr>
         <td colspan="2">
-            {{ form_widget(form.submit, {'attr': {'class': 'submit'}, 'label': 'Se connecter'}) }}
+            {{ form_widget(form.submit, {'attr': {'class': 'submit'}, 'label': 'S\'inscrire'}) }}
         </td>
     </tr>
 </table>
