@@ -13,6 +13,7 @@ We're a little french and tunisian teams that suggest an alternative to other so
 want to create a better internet for everyone.
 ## Contributing
 > More infos [here](https://github.com/ProjectOM/HAY/blob/master/CONTRIBUTING.md)
+
 Anyone an contribute to this project by suggesting ideas or code or reporting a bug in GitHub.
 * If you know coding, you can suggest code in the pull request section
 * Else, you can simply open an issue
