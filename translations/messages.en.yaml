@@ -1,3 +1,5 @@
+# Login and Signup pages
+
 No cookies: Do not remember me
 months: months
 year: year
@@ -13,3 +15,8 @@ repeat: Repeat
 password: Password
 to_login: Login
 to_signup: Signup
+
+# Home page
+
+search: Search
+write: Write
