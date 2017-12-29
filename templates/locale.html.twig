@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+Choose your language - HAY
+{% endblock %}
+
+{% block css %}
+<style>
+body {
+    margin: 0!important;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+
+<div class="localeHeader">
+    <div>
+        <h1>Choose your language</h1>
+        <h3>Choisissez votre langage</h3>
+    </div>
+</div>
+
+<div class="localeContent">
+    <a class="locale" href="{{ path('app_index', {'_locale': 'en'}) }}">
+        English<i class="icofont icofont-arrow-right"></i>
+    </a>
+    <a class="locale" href="{{ path('app_index', {'_locale': 'fr'}) }}">
+        Français<i class="icofont icofont-arrow-right"></i>
+    </a>
+</div>
+
+{% endblock %}

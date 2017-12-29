@@ -1,14 +1,13 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-Accueil - HAY
+{{ 'home'|trans }} - HAY
 {% endblock %}
 
 {% block body %}
 
 {{ include("menu.html.twig") }}
 {{ include("statusForm.html.twig") }}
-{#{{ include("menu.html.twig") }}#}
 
 {% endblock %}
 

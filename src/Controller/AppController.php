@@ -17,6 +17,21 @@ use Symfony\Component\Translation\TranslatorInterface;
 class AppController extends Controller
 {
     /**
+     * @Route("/")
+     */
+    public function localeAction(Request $request)
+    {
+        $locale = $request->getLocale();
+
+        if($locale == 'en' || 'fr') {
+            return $this->redirectToRoute('app_index', array('_locale' => $locale));
+        }
+        else {
+            return $this->render('locale.html.twig');
+        }
+    }
+
+    /**
      * @Route("/{_locale}/", name="app_index", requirements={
      *     "_locale": "en|fr"
      * })
