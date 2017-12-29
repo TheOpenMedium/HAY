@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-Connexion - HAY
+{{ 'login'|trans }} - HAY
 {% endblock %}
 
 {% block body %}
@@ -23,20 +23,20 @@ Connexion - HAY
     {# Link to log in/sign up page #}
     <tr>
         <td>
-            <a class="loginSwitch" href="{{ url('app_fr_login') }}">Connexion</a>
+            <a class="loginSwitch" href="{{ url('app_login') }}">{{ 'login'|trans }}</a>
         </td>
         <td>
-            <a class="loginSwitch" href="{{ url('app_fr_signup') }}">Inscription</a>
+            <a class="loginSwitch" href="{{ url('app_signup') }}">{{ 'signup'|trans }}</a>
         </td>
     </tr>
     {# Formulaire de l'E-mail et du mot de passe #}
     {# E-mail and password form #}
     <tr>
         <td width="50%">
-            {{ form_widget(form.email, {'attr': {'class': 'login', 'placeholder': 'E-mail'}}) }}
+            {{ form_widget(form.email, {'attr': {'class': 'login', 'placeholder': 'email'|trans}}) }}
         </td>
         <td width="50%">
-            {{ form_widget(form.password, {'attr': {'class': 'login', 'placeholder': 'Mot de passe'}}) }}
+            {{ form_widget(form.password, {'attr': {'class': 'login', 'placeholder': 'password'|trans}}) }}
         </td>
     </tr>
     {# Cookies #}
@@ -49,7 +49,7 @@ Connexion - HAY
     {# Data send #}
     <tr>
         <td colspan="2">
-            {{ form_widget(form.submit, {'attr': {'class': 'submit'}, 'label': 'Se connecter'}) }}
+            {{ form_widget(form.submit, {'attr': {'class': 'submit'}, 'label': 'to_login'|trans}) }}
         </td>
     </tr>
 </table>

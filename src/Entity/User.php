@@ -53,6 +53,8 @@ class User
      * @ORM\Column(type="boolean")
      */
     private $mail_conf;
+    
+    private $cookies;
 
     // Construct Method
 
@@ -132,5 +134,15 @@ class User
     public function setMailConf($mail_conf)
     {
         $this->mail_conf = $mail_conf;
+    }
+
+    public function getCookies()
+    {
+        return $this->cookies;
+    }
+
+    public function setCookies($cookies)
+    {
+        $this->cookies = $cookies;
     }
 }

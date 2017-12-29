@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-Connexion - HAY
+{{ 'signup'|trans }} - HAY
 {% endblock %}
 
 {% block body %}
@@ -23,54 +23,54 @@ Connexion - HAY
     {# Link to log in/sign up page #}
     <tr>
         <td>
-            <a class="loginSwitch" href="{{ url('app_fr_login') }}">Connexion</a>
+            <a class="loginSwitch" href="{{ url('app_login') }}">{{ 'login'|trans }}</a>
         </td>
         <td>
-            <a class="loginSwitch" href="{{ url('app_fr_signup') }}">Inscription</a>
+            <a class="loginSwitch" href="{{ url('app_signup') }}">{{ 'signup'|trans }}</a>
         </td>
     </tr>
     {# Formulaire du nom/prénom #}
     {# First/last name form #}
     <tr>
         <td width="50%">
-            {{ form_widget(form.first_name, {'attr': {'class': 'login', 'placeholder': 'Prénom'}}) }}
+            {{ form_widget(form.first_name, {'attr': {'class': 'login', 'placeholder': 'first_name'|trans}}) }}
         </td>
         <td width="50%">
-            {{ form_widget(form.last_name, {'attr': {'class': 'login', 'placeholder': 'Nom'}}) }}
+            {{ form_widget(form.last_name, {'attr': {'class': 'login', 'placeholder': 'last_name'|trans}}) }}
         </td>
     </tr>
     {# Formulaire du pseudo #}
     {# Pseudo form #}
     <tr>
         <td colspan="2">
-            {{ form_widget(form.username, {'attr': {'class': 'login loginLarge', 'placeholder': 'Pseudo (Facultatif)'}}) }}
+            {{ form_widget(form.username, {'attr': {'class': 'login loginLarge', 'placeholder': 'username'|trans ~ ' (' ~ 'optional'|trans ~ ')'}}) }}
         </td>
     </tr>
     {# Formulaire de l'E-mail #}
     {# E-mail form #}
     <tr>
         <td width="50%">
-            {{ form_widget(form.email.first, {'attr': {'class': 'login', 'placeholder': 'E-mail'}}) }}
+            {{ form_widget(form.email.first, {'attr': {'class': 'login', 'placeholder': 'email'|trans}}) }}
         </td>
         <td width="50%">
-            {{ form_widget(form.email.second, {'attr': {'class': 'login', 'placeholder': 'Confirmer'}}) }}
+            {{ form_widget(form.email.second, {'attr': {'class': 'login', 'placeholder': 'repeat'|trans}}) }}
         </td>
     </tr>
     {# Formulaire du mot de passe #}
     {# Password form #}
     <tr>
         <td width="50%">
-            {{ form_widget(form.password.first, {'attr': {'class': 'login', 'placeholder': 'Mot de passe'}}) }}
+            {{ form_widget(form.password.first, {'attr': {'class': 'login', 'placeholder': 'password'|trans}}) }}
         </td>
         <td width="50%">
-            {{ form_widget(form.password.second, {'attr': {'class': 'login', 'placeholder': 'Confirmer'}}) }}
+            {{ form_widget(form.password.second, {'attr': {'class': 'login', 'placeholder': 'repeat'|trans}}) }}
         </td>
     </tr>
     {# Envoie des données #}
     {# Data send #}
     <tr>
         <td colspan="2">
-            {{ form_widget(form.submit, {'attr': {'class': 'submit'}, 'label': 'S\'inscrire'}) }}
+            {{ form_widget(form.submit, {'attr': {'class': 'submit'}, 'label': 'to_signup'|trans}) }}
         </td>
     </tr>
 </table>

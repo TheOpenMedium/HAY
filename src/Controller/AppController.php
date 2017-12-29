@@ -12,11 +12,14 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Translation\TranslatorInterface;
 
-class FrController extends Controller
+class AppController extends Controller
 {
     /**
-     * @Route("/fr/")
+     * @Route("/{_locale}/", name="app_index", requirements={
+     *     "_locale": "en|fr"
+     * })
      */
     public function indexAction(Request $request)
     {
@@ -24,9 +27,11 @@ class FrController extends Controller
     }
 
     /**
-     * @Route("/fr/connexion", name="app_fr_login")
+     * @Route("/{_locale}/login", name="app_login", requirements={
+     *     "_locale": "en|fr"
+     * })
      */
-    public function loginAction(Request $request)
+    public function loginAction(Request $request, TranslatorInterface $translator)
     {
         $user = new User();
 
@@ -35,11 +40,11 @@ class FrController extends Controller
             ->add('password', PasswordType::class)
             ->add('cookies', ChoiceType::class, array(
                 'choices' => array(
-                    'Ne pas se connecter automatiquement' => 0,
-                    '3 mois' => 0.25,
-                    '6 mois' => 0.5,
-                    '1 an' => 1,
-                    '2 ans' => 2
+                    $translator->trans('No cookies') => 0,
+                    '3 '.$translator->trans('months') => 0.25,
+                    '6 '.$translator->trans('months') => 0.5,
+                    '1 '.$translator->trans('year') => 1,
+                    '2 '.$translator->trans('years') => 2
                 )))
             ->add('submit', SubmitType::class)
             ->getForm();
@@ -49,7 +54,9 @@ class FrController extends Controller
         ));
     }
     /**
-     * @Route("/fr/inscription", name="app_fr_signup")
+     * @Route("/{_locale}/signup", name="app_signup", requirements={
+     *     "_locale": "en|fr"
+     * })
      */
     public function signupAction(Request $request)
     {
@@ -77,7 +84,7 @@ class FrController extends Controller
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('app_fr_index');
+            return $this->redirectToRoute('app_index');
         }
 
         return $this->render('signup.html.twig', array(
