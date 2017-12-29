@@ -447,3 +447,43 @@ body {
 .loginSwitch:hover {
     background-color: #44EE88
 }
+
+.localeHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    text-align: center;
+    background-color: #00FFFF;
+    background-image: url('../ressources/icone.png');
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    background-size: 130px;
+    color: white;
+    font-family: sans-serif;
+}
+
+.localeContent {
+    padding: 15px;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.locale {
+    margin: 15px auto;
+    padding: 10px;
+    background-color: #55ff99;
+    border-radius: 7px;
+    width: 110px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.8s background;
+    display: block;
+    color: white;
+    text-decoration: none;
+}
+
+.locale:hover {
+    transition: 0.8s background;
+    background-color: #33dd77;
+}
