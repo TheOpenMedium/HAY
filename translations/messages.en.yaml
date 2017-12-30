@@ -4,8 +4,8 @@ No cookies: Do not remember me
 months: months
 year: year
 years: years
-login: Login
-signup: Signup
+login: Log In
+signup: Sign Up
 first_name: First name
 last_name: Last name
 username: Username
@@ -13,8 +13,8 @@ optional: Optional
 email: Email
 repeat: Repeat
 password: Password
-to_login: Login
-to_signup: Signup
+to_login: Log In
+to_signup: Sign Up
 
 # Home page
 
