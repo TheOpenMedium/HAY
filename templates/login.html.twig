@@ -54,4 +54,24 @@
     </tr>
 </table>
 {{ form_end(form) }}
+{% if error %}
+<div class="loginError" id="Error">
+{{ error.messageKey|trans(error.messageData, 'security') }}
+    <span id="closeError" onclick="parentNode.">
+        <i class="icofont icofont-close-line"></i>
+    </span>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block js %}
+<script>
+function closeError(e) {
+    var error = document.getElementById("Error")
+    error.parentNode.removeChild(error)
+}
+
+var closeButton = document.getElementById('closeError')
+closeButton.addEventListener('click', closeError)
+</script>
 {% endblock %}
