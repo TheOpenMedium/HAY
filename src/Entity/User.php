@@ -4,13 +4,14 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields="email", message="Email already taken")
  * @UniqueEntity(fields="username", message="Username already taken")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -53,8 +54,10 @@ class User
      * @ORM\Column(type="boolean")
      */
     private $mail_conf;
-    
+
     private $cookies;
+
+    private $salt;
 
     // Construct Method
 
@@ -144,5 +147,44 @@ class User
     public function setCookies($cookies)
     {
         $this->cookies = $cookies;
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    public function setSalt()
+    {
+        $this->salt = $salt;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->salt
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->salt
+        ) = unserialize($serialized);
     }
 }

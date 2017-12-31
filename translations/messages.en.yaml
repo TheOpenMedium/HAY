@@ -13,6 +13,7 @@ optional: Optional
 email: Email
 repeat: Repeat
 password: Password
+or: or
 to_login: Log In
 to_signup: Sign Up
 
