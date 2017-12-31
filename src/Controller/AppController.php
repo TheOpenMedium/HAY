@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -47,21 +48,16 @@ class AppController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function loginAction(Request $request, TranslatorInterface $translator, AuthenticationUtils $authUtils)
+    public function loginAction(Request $request, AuthenticationUtils $authUtils)
     {
         $user = new User();
 
         $form = $this->createFormBuilder($user)
             ->add('username', TextType::class)
             ->add('password', PasswordType::class)
-            /*->add('cookies', ChoiceType::class, array(
-                'choices' => array(
-                    $translator->trans('No cookies') => 0,
-                    '3 '.$translator->trans('months') => 0.25,
-                    '6 '.$translator->trans('months') => 0.5,
-                    '1 '.$translator->trans('year') => 1,
-                    '2 '.$translator->trans('years') => 2
-                )))*/
+            ->add('rememberme', CheckboxType::class, array(
+                'required' => 'false'
+            ))
             ->add('submit', SubmitType::class)
             ->getForm();
 
@@ -74,6 +70,7 @@ class AppController extends Controller
             'error' => $error
         ));
     }
+
     /**
      * @Route("/{_locale}/signup", name="app_signup", requirements={
      *     "_locale": "en|fr"
@@ -112,5 +109,14 @@ class AppController extends Controller
         return $this->render('signup.html.twig', array(
             'form' => $form->createView()
         ));
+    }
+
+    /**
+     * @Route("/{_locale}/logout", name="app_logout", requirements={
+     *     "_locale": "en|fr"
+     * })
+     */
+    public function logoutAction(Request $request)
+    {
     }
 }
