@@ -14,6 +14,7 @@ optional: Facultatif
 email: E-mail
 repeat: Confirmer
 password: Mot de passe
+or: ou
 to_login: Se connecter
 to_signup: S'inscrire
 
