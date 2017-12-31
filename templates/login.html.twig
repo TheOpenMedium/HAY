@@ -33,18 +33,18 @@
     {# E-mail and password form #}
     <tr>
         <td width="50%">
-            {{ form_widget(form.email, {'attr': {'class': 'login', 'placeholder': 'email'|trans}}) }}
+            {{ form_widget(form.username, {'attr': {'class': 'login', 'placeholder': 'username'|trans ~ ' ' ~ 'or'|trans ~ ' ' ~ 'email'|trans, 'value': last_username}}) }}
         </td>
         <td width="50%">
             {{ form_widget(form.password, {'attr': {'class': 'login', 'placeholder': 'password'|trans}}) }}
         </td>
     </tr>
     {# Cookies #}
-    <tr>
+    {#<tr>
         <td colspan="2">
             {{ form_widget(form.cookies, {'attr': {'class': 'cookies'}}) }}
         </td>
-    </tr>
+    </tr>#}
     {# Envoie des données #}
     {# Data send #}
     <tr>

@@ -1,13 +1,28 @@
 security:
     # https://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    encoders:
+        App\Entity\User:
+            algorithm: plaintext
     providers:
-        in_memory: { memory: ~ }
+        data_base:
+            entity:
+                class: App\Entity\User
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            # pattern: ^/
+            # anonymous: /{_locale}/signup
             anonymous: ~
+            form_login:
+                username_parameter: 'form[username]'
+                password_parameter: 'form[password]'
+                login_path: app_login
+                check_path: app_login
+                default_target_path: app_index
+                failure_path: app_login
+            provider: data_base
 
             # activate different ways to authenticate
 
