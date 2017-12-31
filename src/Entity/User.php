@@ -55,7 +55,7 @@ class User implements UserInterface, \Serializable
      */
     private $mail_conf;
 
-    private $cookies;
+    private $rememberme;
 
     private $salt;
 
@@ -139,14 +139,14 @@ class User implements UserInterface, \Serializable
         $this->mail_conf = $mail_conf;
     }
 
-    public function getCookies()
+    public function getRememberme()
     {
-        return $this->cookies;
+        return $this->rememberme;
     }
 
-    public function setCookies($cookies)
+    public function setRememberme($rememberme)
     {
-        $this->cookies = $cookies;
+        $this->rememberme = $rememberme;
     }
 
     public function getRoles()

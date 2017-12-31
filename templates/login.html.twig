@@ -40,11 +40,11 @@
         </td>
     </tr>
     {# Cookies #}
-    {#<tr>
-        <td colspan="2">
-            {{ form_widget(form.cookies, {'attr': {'class': 'cookies'}}) }}
+    <tr>
+        <td colspan="2" class="loginRememberme">
+            <label for="form_rememberme">{{ 'rememberme'|trans }}{{ form_widget(form.rememberme) }}</label>
         </td>
-    </tr>#}
+    </tr>
     {# Envoie des données #}
     {# Data send #}
     <tr>

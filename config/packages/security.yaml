@@ -22,6 +22,18 @@ security:
                 check_path: app_login
                 default_target_path: app_index
                 failure_path: app_login
+            remember_me:
+                secret: '%kernel.secret%'
+                name: remember_me
+                lifetime: 15600000
+                remember_me_parameter: form[rememberme]
+                path: /
+            logout:
+                path: app_logout
+                target: app_login
+                delete_cookies:
+                    remember_me: { path: / }
+                invalidate_session: false
             provider: data_base
 
             # activate different ways to authenticate
