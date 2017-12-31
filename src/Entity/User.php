@@ -55,6 +55,11 @@ class User implements UserInterface, \Serializable
      */
     private $mail_conf;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Status", mappedBy="id_user")
+     */
+    private $status;
+
     private $rememberme;
 
     private $salt;
@@ -65,6 +70,7 @@ class User implements UserInterface, \Serializable
     {
         $this->date_sign = new \Datetime();
         $this->mail_conf = false;
+        $this->status = new ArrayCollection();
     }
 
     // Getters & setters
