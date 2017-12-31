@@ -448,6 +448,18 @@ body {
     background-color: #44EE88
 }
 
+.loginRememberme {
+    text-align: center;
+}
+
+.loginRememberme label {
+    display: inline-block;
+    color: white;
+    background-color: #55FF99;
+    font-family: sans-serif;
+    padding: 5px;
+}
+
 .loginError {
     border: 0px;
     background: red;
