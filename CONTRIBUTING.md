@@ -1,4 +1,4 @@
-> Code of conduct [here](https://github.com/ProjectOM/HAY/blob/master/CODE_OF_CONDUCT.md)
+> Code of conduct [here](https://github.com/TheOpenMedium/HAY/blob/master/CODE_OF_CONDUCT.md)
 # Contributing
 Anyone can contribute enven if he's not professionnal or if it's not his job.
 ### In all cases
