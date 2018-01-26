@@ -41,8 +41,7 @@ class AppController extends Controller
     public function indexAction(Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
-        //$user = $this->getUser;
-        return $this->render('home.html.twig'/*, array('firstname', $user->getFirstName)*/);
+        return $this->render('home.html.twig');
     }
 
     /**
