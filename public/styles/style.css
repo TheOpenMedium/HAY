@@ -56,6 +56,70 @@ body {
     cursor: pointer;
 }
 
+.parameter {
+    cursor: pointer;
+    float: right;
+    height: 100%;
+    display: block;
+    padding-top: 8px;
+}
+
+.parameter i {
+    margin: 0px 20px;
+    color: #b0b0b0;
+    font-size: 30px;
+}
+
+.ulParameter {
+    display: none;
+    position: fixed;
+    right: 0px;
+    top: 34px;
+    background-color: dimgrey;
+    height: 100%;
+    cursor: auto;
+    padding: 0px;
+}
+
+.parameter:hover ul.ulParameter {
+    display: block;
+}
+
+.ulParameter {
+    list-style: none;
+}
+
+.userStats {
+    display: block;
+    padding: 20px;
+    color: white;
+    font-family: sans-serif;
+    border-bottom: 1px solid #b0b0b0;
+    padding-left: 70px;
+}
+
+.userStats img {
+    height: 50px;
+    width: 50px;
+    float: left;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.logout a {
+    display: block;
+    padding: 20px;
+    color: white;
+    font-family: sans-serif;
+    text-align: center;
+    text-decoration: none;
+}
+
+.logout:hover {
+    background-color: #b0b0b0;
+}
+
 .ta {
     resize: none;
     width: 100%;

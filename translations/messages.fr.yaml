@@ -18,6 +18,7 @@ or: ou
 rememberme: Se rappeler de moi
 to_login: Se connecter
 to_signup: S'inscrire
+to_logout: Se déconnecter
 
 # Home page
 # Page d'accueil
@@ -25,3 +26,4 @@ to_signup: S'inscrire
 home: Accueil
 search: Rechercher
 write: Écrire
+hello: Bonjour

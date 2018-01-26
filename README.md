@@ -1,8 +1,8 @@
 > Work In Progress!
 # HAY Project v0.0.1 (pre-Alpha)
-> Code of conduct [here](https://github.com/ProjectOM/HAY/blob/master/CODE_OF_CONDUCT.md)
+> Code of conduct [here](https://github.com/TheOpenMedium/HAY/blob/master/CODE_OF_CONDUCT.md)
 
-> Si vous parlez français, vous pourrez visionnez ce même document en français [ici](https://github.com/ProjectOM/HAY/blob/master/READMEFR.md) !
+> Si vous parlez français, vous pourrez visionnez ce même document en français [ici](https://github.com/TheOpenMedium/HAY/blob/master/READMEFR.md) !
 
 > إن كانت لغتكم العربيّة، إعلموا أنّ ترجمة لهذا النّص ستكون متوفّرة قريبا
 
@@ -14,7 +14,7 @@ a website from the OM Project (has no relation with the soccer/football (US or U
 We're a little french and tunisian teams that suggest an alternative to other social media! We believe in Open Source and we 
 want to create a better internet for everyone.
 ## Contributing
-> More infos [here](https://github.com/ProjectOM/HAY/blob/master/CONTRIBUTING.md)
+> More infos [here](https://github.com/TheOpenMedium/HAY/blob/master/CONTRIBUTING.md)
 
 Anyone an contribute to this project by suggesting ideas or code or reporting a bug in GitHub.
 * If you know coding, you can suggest code in the pull request section

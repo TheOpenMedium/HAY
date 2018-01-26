@@ -43,13 +43,15 @@ class AppController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
         $status = new Status();
 
         $form = $this->createFormBuilder($status)
             ->add('content', TextareaType::class)
             ->add('color', RadioType::class)
             ->add('size', RadioType::class)
-            ->getForm();
+            ->getForm()
 
         return $this->render('home.html.twig');
     }
@@ -67,7 +69,7 @@ class AppController extends Controller
             ->add('username', TextType::class)
             ->add('password', PasswordType::class)
             ->add('rememberme', CheckboxType::class, array(
-                'required' => 'false'
+                'required' => false
             ))
             ->add('submit', SubmitType::class)
             ->getForm();
