@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Status;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -41,6 +44,15 @@ class AppController extends Controller
     public function indexAction(Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        $status = new Status();
+
+        $form = $this->createFormBuilder($status)
+            ->add('content', TextareaType::class)
+            ->add('color', RadioType::class)
+            ->add('size', RadioType::class)
+            ->getForm()
+
         return $this->render('home.html.twig');
     }
 
