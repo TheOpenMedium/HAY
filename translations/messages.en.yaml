@@ -17,9 +17,11 @@ or: or
 rememberme: Remember me
 to_login: Log In
 to_signup: Sign Up
+to_logout: Log Out
 
 # Home page
 
 home: Home
 search: Search
 write: Write
+hello: Hello
