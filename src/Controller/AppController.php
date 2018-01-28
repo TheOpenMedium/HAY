@@ -49,11 +49,55 @@ class AppController extends Controller
 
         $form = $this->createFormBuilder($status)
             ->add('content', TextareaType::class)
-            ->add('color', RadioType::class)
-            ->add('size', RadioType::class)
-            ->getForm()
+            ->add('color', ChoiceType::class, array(
+                'choices' => array(
+                    '000',
+                    '222',
+                    '696',
+                    '999',
+                    'DDD',
+                    'FFF',
 
-        return $this->render('home.html.twig');
+                    'E00',
+                    '72C',
+                    '008',
+                    '099',
+                    '0A0',
+                    'F91',
+
+                    'F00',
+                    'D0F',
+                    '22F',
+                    '6DF',
+                    '0F0',
+                    'FD0',
+
+                    'F44',
+                    'F2E',
+                    '08F',
+                    '0FF',
+                    'BF0',
+                    'EE0',
+
+                    'F05',
+                    'F6F',
+                    '0AE',
+                    '9FF',
+                    '5F9',
+                    'FF0'
+                ),
+                'multiple' => false,
+                'expanded' => true,
+                'attr' => array(
+                    'class' => 'colorInput'
+                )
+            ))
+            //->add('size', RadioType::class)
+            ->getForm();
+
+        return $this->render('home.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 
     /**
