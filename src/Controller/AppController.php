@@ -111,6 +111,11 @@ class AppController extends Controller
 
         $statusList = $repository->findStatus(10);
 
+        foreach ($statusList as $status) {
+            $content = $status[0]->getContent();
+            $status[0]->setContent(preg_replace('#\n#', '<br />', $content));
+        }
+
         return $this->render('home.html.twig', array(
             'form' => $form->createView(),
             'statusList' => $statusList
