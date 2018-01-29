@@ -386,13 +386,12 @@ body {
     width: 45px;
     height: 45px;
     padding: 0px;
-    background-color: lavender;
+    background-color: blue;
     border: 0px;
     color: white;
     font-size: 20px;
     position: relative;
-    right: 3px;
-    top: 27px;
+    top: 24px;
 }
 
 .sendCom:hover {
