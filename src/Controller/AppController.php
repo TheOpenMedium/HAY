@@ -88,11 +88,12 @@ class AppController extends Controller
                 ),
                 'multiple' => false,
                 'expanded' => true,
-                'attr' => array(
+                'label_attr' => array(
                     'class' => 'colorInput'
                 )
             ))
             //->add('size', RadioType::class)
+            ->add('submit', SubmitType::class)
             ->getForm();
 
         return $this->render('home.html.twig', array(

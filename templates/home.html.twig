@@ -15,15 +15,15 @@
 <script>
 
 function changeColor(e) {
-    color = "c" + e['target'].id
-    textarea = document.getElementsByClassName("textarea")
+    color = "c" + e['target'].value
+    textarea = document.getElementsByClassName('textarea')
     classes = textarea[0].className
     classes = classes.split("c")
     classes[0] += color
     textarea[0].className = classes[0]
 }
 
-document.getElementsByName('color').forEach(function(element) {
+document.getElementsByName('form[color]').forEach(function(element) {
     element.addEventListener('change', changeColor)
 })
 
