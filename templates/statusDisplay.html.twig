@@ -7,8 +7,8 @@
     <div class="infHAY c{{ status[0].color }}">
         <table style="border: 0px;">
             <tr>
-                <td style="padding-right: 15px;"><img src="/ressources/icone.png" width="40px" height="40px" alt="Image de profil" /></td>
-                <td style="border-left: 1px solid {{ status[0].color != 'FFF' ? 'white' : 'black' }}; padding-left: 15px; font-family: sans-serif; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};">{{ status.first_name }} {{ status.last_name }} {% if status.username %}alias {{ status.username }} {% endif %}a écrit :</td>
+                <td style="padding-right: 15px;"><img src="/ressources/icone.png" width="40px" height="40px" alt="{{ 'usr_img'|trans }}" /></td>
+                <td style="border-left: 1px solid {{ status[0].color != 'FFF' ? 'white' : 'black' }}; padding-left: 15px; font-family: sans-serif; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};">{{ status.first_name }} {{ status.last_name }} {% if status.username %}{{ 'alias'|trans }} {{ status.username }} {% endif %}{{ 'has_write'|trans }}</td>
             </tr>
         </table>
     </div>
@@ -16,12 +16,12 @@
     <div class="content c{{ status[0].color }} ff{{ status[0].font }} fs{{ status[0].size }}" style="border-color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};">
         {{ status[0].content }}
     </div>
-    <form action="model/new_comment.php" method="post" class="comment c{{ status[0].color }}">
+    <form action="" method="post" class="comment c{{ status[0].color }}">
         <input type="hidden" name="id" value="" />
         <table>
             <tr>
-                <td><button class="sendCom" type="submit"><img src="/ressources/send-icon.png" width="50px" height="50px" alt="Envoyer" /></button></td>
-                <td><textarea class="taCom" name="content" placeholder="Envoyer un commentaire"></textarea></td>
+                <td><button class="sendCom" type="submit"><i class="icofont icofont-comment"></i></button></td>
+                <td><textarea class="taCom" name="content" placeholder="{{ 'comment'|trans }}"></textarea></td>
             </tr>
         </table>
     </form>
