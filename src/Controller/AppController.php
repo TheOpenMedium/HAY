@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -87,14 +88,24 @@ class AppController extends Controller
                     'FF0'
                 ),
                 'multiple' => false,
-                'expanded' => true,
-                'label_attr' => array(
-                    'class' => 'colorInput'
-                )
+                'expanded' => true
             ))
             //->add('size', RadioType::class)
+            ->add('id_user', HiddenType::class)
             ->add('submit', SubmitType::class)
             ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $status = $form->getData();
+            $status->setSize('16');
+            $status->setFont('SS');
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($status);
+            $em->flush();
+        }
 
         return $this->render('home.html.twig', array(
             'form' => $form->createView()

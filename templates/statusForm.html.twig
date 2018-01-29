@@ -13,6 +13,7 @@
                 <li class="menuChoices sendStatus">
                     <label for="form_submit" class="send"><span id="sendArrow"><i class="fa fa-arrow-right fa-lg" aria-hidden="true"></i></span></label>
                     {{ form_widget(form.submit, {'attr': {'class': 'sendButton'}}) }}
+                    {{ form_widget(form.id_user, {'attr': {'value': app.user.id}}) }}
                     {{ form_end(form) }}
                 </li>
             </ul>
