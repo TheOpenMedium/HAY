@@ -295,11 +295,11 @@ body {
     cursor: pointer;
 }
 
-.colorInput {
+[name="form[color]"] {
     margin: 0px;
 }
 
-.colorInput:hover {
+[name="form[color]"]:hover {
     cursor: pointer;
 }
 
