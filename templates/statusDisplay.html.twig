@@ -14,7 +14,7 @@
     </div>
     <!-------------------------------------------->
     <div class="content c{{ status[0].color }} ff{{ status[0].font }} fs{{ status[0].size }}" style="border-color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};">
-        {{ status[0].content }}
+        {{ status[0].content|escape|replace({'&lt;br /&gt;': '<br />'})|raw }}
     </div>
     <form action="" method="post" class="comment c{{ status[0].color }}">
         <input type="hidden" name="id" value="" />
