@@ -17,14 +17,16 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_user;
-
-    /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Status", inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="id")
      */
     private $id_status;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="id")
+     */
+    private $id_user;
 
     /**
      * @ORM\Column(type="text")
@@ -50,22 +52,22 @@ class Comment
         return $this->id;
     }
 
-    public function getId_user()
+    public function getIdUser()
     {
         return $this->id_user;
     }
 
-    public function setId_user($id_user)
+    public function setIdUser($id_user)
     {
         $this->id_user = $id_user;
     }
 
-    public function getId_status()
+    public function getIdStatus()
     {
         return $this->id_status;
     }
 
-    public function setId_status($id_status)
+    public function setIdStatus($id_status)
     {
         $this->id_status = $id_status;
     }
@@ -80,7 +82,7 @@ class Comment
         $this->comment = $comment;
     }
 
-    public function getDate_send()
+    public function getDateSend()
     {
         return $this->date_send;
     }
