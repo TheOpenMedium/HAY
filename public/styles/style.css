@@ -317,14 +317,16 @@ body {
 }
 
 .send {
+    display: block;
     border: 0px;
     background-color: lavender;
     padding-left: 30px;
-    padding-right: 30px;
+    padding-right: 15px;
     margin: 0;
     height: 50px;
     transform: skewX(-45deg);
     position: relative;
+    bottom: 15px;
     right: 6px;
 }
 
@@ -335,6 +337,12 @@ body {
 #sendArrow {
     display: block;
     transform: skewX(45deg);
+    position: relative;
+    top: 15px;
+}
+
+.sendButton {
+    display: none;
 }
 
 .text {

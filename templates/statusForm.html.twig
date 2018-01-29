@@ -11,8 +11,9 @@
                 {{ include('status/statusFont.html.twig') }}
                 {{ include('status/statusAccount.html.twig') }}
                 <li class="menuChoices sendStatus">
-                {{ form_widget(form.submit, {'attr': {'class': 'send'}, 'label': '<span id="sendArrow"><i class="fa fa-arrow-right fa-lg" aria-hidden="true"></i></span>'|raw}) }}
-                {{ form_end(form) }}
+                    <label for="form_submit" class="send"><span id="sendArrow"><i class="fa fa-arrow-right fa-lg" aria-hidden="true"></i></span></label>
+                    {{ form_widget(form.submit, {'attr': {'class': 'sendButton'}}) }}
+                    {{ form_end(form) }}
                 </li>
             </ul>
         </div>
