@@ -367,7 +367,7 @@ body {
 .content {
     border-top: 2px solid;
     padding: 5px;
-    width: 590px;
+    width: 600px;
     max-height: 300px;
     word-break: break-all;
     overflow-y: auto;
@@ -385,12 +385,14 @@ body {
 .sendCom {
     width: 45px;
     height: 45px;
-    margin-top: 49px;
     padding: 0px;
     background-color: lavender;
     border: 0px;
     color: white;
     font-size: 20px;
+    position: relative;
+    right: 3px;
+    top: 27px;
 }
 
 .sendCom:hover {

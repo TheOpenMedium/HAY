@@ -107,8 +107,13 @@ class AppController extends Controller
             $em->flush();
         }
 
+        $repository = $this->getDoctrine()->getRepository(Status::class);
+
+        $statusList = $repository->findStatus(10);
+
         return $this->render('home.html.twig', array(
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'statusList' => $statusList
         ));
     }
 
