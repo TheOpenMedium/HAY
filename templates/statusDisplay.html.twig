@@ -1,3 +1,4 @@
+{% set i = 0 %}
 {% for status in statusList %}
 {# Affichage des textes #}
 {# Text display #}
@@ -12,18 +13,25 @@
             </tr>
         </table>
     </div>
-    <!-------------------------------------------->
+    {########################################}
     <div class="content c{{ status[0].color }} ff{{ status[0].font }} fs{{ status[0].size }}" style="border-color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};">
         {{ status[0].content|escape|replace({'&lt;br /&gt;': '<br />'})|raw }}
     </div>
-    <form action="" method="post" class="comment c{{ status[0].color }}">
-        <input type="hidden" name="id" value="" />
-        <table>
+    {{ render(url('app_comment', {'id': status[0].id, '_color': status[0].color})) }}
+{% if commentList[i] is not empty %}
+{% for comment in commentList[i] %}
+    <div class="com">
+        <table style="border: 0px; border-bottom: 1px solid grey; width: 550; margin-bottom: 5px;">
             <tr>
-                <td><button class="sendCom" type="submit"><i class="icofont icofont-comment"></i></button></td>
-                <td><textarea class="taCom" name="content" placeholder="{{ 'comment'|trans }}"></textarea></td>
+                <td style="padding-right: 15px;"><img src="/ressources/icone.png" width="40px" height="40px" alt="{{ 'usr_img'|trans }}" /></td>
+                <td style="border-left: 1px solid grey; padding-left: 15px; width: 100%; color: grey;">{{ comment.first_name }} {{ comment.last_name }} {% if comment.username %}{{ 'alias'|trans }} {{ comment.username }} {% endif %}{{ 'has_comment'|trans }}</td>
             </tr>
         </table>
-    </form>
+        {{ comment[0].comment|escape|replace({'&lt;br /&gt;': '<br />'})|raw }}
+    </div>
+{% endfor %}
+{% endif %}
+    <div class="end"></div>
 </div>
+{% set i = i + 1 %}
 {% endfor %}

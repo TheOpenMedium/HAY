@@ -383,6 +383,7 @@ body {
 }
 
 .sendCom {
+    display: block;
     width: 45px;
     height: 45px;
     padding: 0px;
@@ -392,6 +393,8 @@ body {
     font-size: 20px;
     position: relative;
     top: 24px;
+    text-align: center;
+    padding-top: 12px;
 }
 
 .sendCom:hover {
@@ -406,6 +409,7 @@ body {
     height: 92.5px;
     background-color: white;
     border: 1px solid white;
+    color: black;
 }
 
 .com {

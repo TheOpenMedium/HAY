@@ -29,3 +29,4 @@ usr_img: User image
 alias: alias
 has_write: 'has write:'
 comment: Comment
+has_comment: 'a comment:'
