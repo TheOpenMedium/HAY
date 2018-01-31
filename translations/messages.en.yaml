@@ -25,3 +25,8 @@ home: Home
 search: Search
 write: Write
 hello: Hello
+usr_img: User image
+alias: alias
+has_write: 'has write:'
+comment: Comment
+has_comment: 'a comment:'

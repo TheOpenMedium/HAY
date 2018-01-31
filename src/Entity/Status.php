@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\StatusRepository")
@@ -19,7 +20,7 @@ class Status
     /**
      * @ORM\Column(type="integer")
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="status")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="id")
      */
     private $id_user;
 
@@ -48,11 +49,17 @@ class Status
      */
     private $font;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="id_status")
+     */
+    private $comments;
+
     // Construct Method
 
     public function __construct()
     {
         $this->date_content = new \Datetime();
+        $this->comments = new ArrayCollection();
     }
 
     // Getters & setters
@@ -62,12 +69,12 @@ class Status
         return $this->id;
     }
 
-    public function getId_user()
+    public function getIdUser()
     {
         return $this->id_user;
     }
 
-    public function setId_user($id_user)
+    public function setIdUser($id_user)
     {
         $this->id_user = $id_user;
     }
@@ -82,7 +89,7 @@ class Status
         $this->content = $content;
     }
 
-    public function getDate_content()
+    public function getDateContent()
     {
         return $this->date_content;
     }
@@ -116,4 +123,15 @@ class Status
     {
         $this->font = $font;
     }
+
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+    }
+
 }

@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -60,6 +61,11 @@ class User implements UserInterface, \Serializable
      */
     private $status;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="id_user")
+     */
+    private $comments;
+
     private $rememberme;
 
     private $salt;
@@ -71,6 +77,7 @@ class User implements UserInterface, \Serializable
         $this->date_sign = new \Datetime();
         $this->mail_conf = false;
         $this->status = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     // Getters & setters
@@ -143,6 +150,26 @@ class User implements UserInterface, \Serializable
     public function setMailConf($mail_conf)
     {
         $this->mail_conf = $mail_conf;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
     }
 
     public function getRememberme()
