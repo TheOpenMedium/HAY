@@ -17,7 +17,6 @@ class StatusRepository extends ServiceEntityRepository
      * @param $n
      * @return Status[]
      */
-
     public function findStatus($n)
     {
         return $this->createQueryBuilder('s')

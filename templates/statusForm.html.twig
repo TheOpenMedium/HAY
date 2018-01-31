@@ -1,22 +1,21 @@
 {# Send status form #}
 <div class="write">
-    <form method="post" action="">
-        <div class="textarea fs16 c696">{{ 'write'|trans }}{{ form_widget(form.content, {'attr': {'class': 'ta fs16'}}) }}</div>
-        <div class="footer">
-            <ul class="footerMenu">
-                {{ include('status/statusOption.html.twig') }}
-                {{ include('status/statusDownload.html.twig') }}
-                {{ include('status/statusColor.html.twig') }}
-                {{ include('status/statusSize.html.twig') }}
-                {{ include('status/statusFont.html.twig') }}
-                {{ include('status/statusAccount.html.twig') }}
-                <li class="menuChoices sendStatus">
-                    <label for="form_submit" class="send"><span id="sendArrow"><i class="fa fa-arrow-right fa-lg" aria-hidden="true"></i></span></label>
-                    {{ form_widget(form.submit, {'attr': {'class': 'sendButton'}, 'label': false}) }}
-                    {{ form_widget(form.id_user, {'attr': {'value': app.user.id}}) }}
-                    {{ form_end(form) }}
-                </li>
-            </ul>
-        </div>
-    </form>
+    {{ form_start(form) }}
+    <div class="textarea fs16 c696">{{ 'write'|trans }}{{ form_widget(form.content, {'attr': {'class': 'ta fs16', 'required': false}}) }}</div>
+    <div class="footer">
+        <ul class="footerMenu">
+            {{ include('status/statusOption.html.twig') }}
+            {{ include('status/statusDownload.html.twig') }}
+            {{ include('status/statusColor.html.twig') }}
+            {{ include('status/statusSize.html.twig') }}
+            {{ include('status/statusFont.html.twig') }}
+            {{ include('status/statusAccount.html.twig') }}
+            <li class="menuChoices sendStatus">
+                <label for="form_submit" class="send"><span id="sendArrow"><i class="fa fa-arrow-right fa-lg" aria-hidden="true"></i></span></label>
+                {{ form_widget(form.submit, {'attr': {'class': 'sendButton'}, 'label': false}) }}
+                {{ form_widget(form.id_user, {'attr': {'value': app.user.id}}) }}
+                {{ form_end(form) }}
+            </li>
+        </ul>
+    </div>
 </div>

@@ -18,6 +18,7 @@ class Status
     private $id;
 
     /**
+     * @ORM\Column(type="integer")
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="status")
      * @ORM\JoinColumn(nullable=false, referencedColumnName="id")
      */

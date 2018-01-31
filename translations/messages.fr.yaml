@@ -31,3 +31,4 @@ usr_img: Image de profile
 alias: alias
 has_write: 'a écrit :'
 comment: Commenter
+has_comment: 'a commenté :'

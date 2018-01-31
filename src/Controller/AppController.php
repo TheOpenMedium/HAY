@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Status;
+use App\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -107,18 +109,64 @@ class AppController extends Controller
             $em->flush();
         }
 
-        $repository = $this->getDoctrine()->getRepository(Status::class);
-
-        $statusList = $repository->findStatus(10);
+        $statusList = $this->getDoctrine()->getRepository(Status::class)->findStatus(10);
 
         foreach ($statusList as $status) {
             $content = $status[0]->getContent();
             $status[0]->setContent(preg_replace('#\n#', '<br />', $content));
+            $commentList[] = $this->getDoctrine()->getRepository(Comment::class)->findComments(10, $status[0]->getId());
+        }
+
+        foreach ($commentList as $commentStatus) {
+            if ($commentStatus) {
+                foreach ($commentStatus as $comment) {
+                    $c = $comment[0]->getComment();
+                    $comment[0]->setComment(preg_replace('#\n#', '<br />', $c));
+                }
+            }
         }
 
         return $this->render('home.html.twig', array(
             'form' => $form->createView(),
+            'commentList' => $commentList,
             'statusList' => $statusList
+        ));
+    }
+
+    /**
+     * @Route("/{_locale}/comment/{id}/{_color}",
+     *     defaults={"_color": "696"},
+     *     name="app_comment",
+     *     requirements={"_locale": "en|fr"}
+     *     )
+     */
+    public function commentAction(Request $request, $id, $_color)
+    {
+        $com = new Comment();
+
+        $comment = $this->createFormBuilder($com)
+            ->add('comment', TextareaType::class)
+            ->add('id_user', HiddenType::class)
+            ->add('submit', SubmitType::class)
+            ->getForm();
+
+        $comment->handleRequest($request);
+
+        if ($comment->isSubmitted() && $comment->isValid()) {
+            $sendComment = $comment->getData();
+            $sendComment->setIdStatus($id);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($sendComment);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('app_index'));
+        }
+
+        return $this->render('comment.html.twig', array(
+            'comment' => $comment->createView(),
+            'color' => $_color,
+            'id' => $id
         ));
     }
 

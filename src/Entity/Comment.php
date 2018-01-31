@@ -17,12 +17,14 @@ class Comment
     private $id;
 
     /**
+     * @ORM\Column(type="integer")
      * @ORM\ManyToOne(targetEntity="App\Entity\Status", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false, referencedColumnName="id")
      */
     private $id_status;
 
     /**
+     * @ORM\Column(type="integer")
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false, referencedColumnName="id")
      */
