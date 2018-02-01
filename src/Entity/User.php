@@ -78,6 +78,7 @@ class User implements UserInterface, \Serializable
         $this->mail_conf = false;
         $this->status = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->salt = null;
     }
 
     // Getters & setters

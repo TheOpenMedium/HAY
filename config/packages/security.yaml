@@ -2,7 +2,7 @@ security:
     # https://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     encoders:
         App\Entity\User:
-            algorithm: plaintext
+            algorithm: argon2i
     providers:
         data_base:
             entity:

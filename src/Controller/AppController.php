@@ -111,18 +111,21 @@ class AppController extends Controller
         }
 
         $statusList = $this->getDoctrine()->getRepository(Status::class)->findStatus(10);
+        $commentList = array();
 
-        foreach ($statusList as $status) {
-            $content = $status[0]->getContent();
-            $status[0]->setContent(preg_replace('#\n#', '<br />', $content));
-            $commentList[] = $this->getDoctrine()->getRepository(Comment::class)->findComments(10, $status[0]->getId());
-        }
+        if ($statusList) {
+            foreach ($statusList as $status) {
+                $content = $status[0]->getContent();
+                $status[0]->setContent(preg_replace('#\n#', '<br />', $content));
+                $commentList[] = $this->getDoctrine()->getRepository(Comment::class)->findComments(10, $status[0]->getId());
+            }
 
-        foreach ($commentList as $commentStatus) {
-            if ($commentStatus) {
-                foreach ($commentStatus as $comment) {
-                    $c = $comment[0]->getComment();
-                    $comment[0]->setComment(preg_replace('#\n#', '<br />', $c));
+            foreach ($commentList as $commentStatus) {
+                if ($commentStatus) {
+                    foreach ($commentStatus as $comment) {
+                        $c = $comment[0]->getComment();
+                        $comment[0]->setComment(preg_replace('#\n#', '<br />', $c));
+                    }
                 }
             }
         }
@@ -226,21 +229,7 @@ class AppController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
-            $user->setSalt('');
-
-            /*$chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $salt = '';
-            for($i = 0; $i < 20; $i++){
-                $salt .= $chars[rand(0, strlen($chars)-1)];
-            }
-
-            $encoderFactory = $this->get('security.encoder_factory');
-            $encoder = $encoderFactory->getEncoder($user);
-
-            $password = $encoder->encodePassword('password', $salt);
-
-            $user->setSalt($salt);
-            $user->setPassword($password);*/
+            $user->setPassword(password_hash($user->getPassword(), PASSWORD_ARGON2I));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
