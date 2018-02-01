@@ -1,7 +1,8 @@
 <li class="menuChoices optSize">
     <button class="option optOther optSize cF91" type="button"><span id="optionMenu"><i class="fa fa-text-height fa-lg fa-inverse" aria-hidden="true"></i></span></button>
     <ul class="sizeUL">
-      <input min="10" max="68" step="2" value="16" class="sizeInput" name="form[size]" type="number">
-      <div class="sizeDisplay fs16">a</div>
+        {{ form_widget(form.size, {'attr': {'class': 'sizeInput', 'value': '16', 'min': '10', 'max': '68', 'step': '2', 'value': '16'}}) }}
+        {#<input min="10" max="68" step="2" value="16" class="sizeInput" name="form[size]" type="number">#}
+        <div class="sizeDisplay fs16">a</div>
     </ul>
 </li>

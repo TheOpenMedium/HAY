@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -93,7 +94,7 @@ class AppController extends Controller
                 'multiple' => false,
                 'expanded' => true
             ))
-            //->add('size', RadioType::class)
+            ->add('size', IntegerType::class)
             ->add('id_user', HiddenType::class)
             ->add('submit', SubmitType::class)
             ->getForm();
@@ -102,7 +103,6 @@ class AppController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $status = $form->getData();
-            $status->setSize('16');
             $status->setFont('SS');
 
             $em = $this->getDoctrine()->getManager();
