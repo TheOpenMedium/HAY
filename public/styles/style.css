@@ -201,85 +201,6 @@ body {
     z-index: 3;
 }
 
-.sizeUL {
-    display: none;
-    background-color: lavender;
-    list-style: none;
-    padding: 5px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    width: 345px;
-}
-
-.sizeLI {
-    margin: 5px;
-}
-
-.size {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    border-radius: 100px;
-    background-color: white;
-}
-
-.size:hover {
-    cursor: pointer;
-}
-
-.sizeInput {
-    margin: 0px;
-    position: relative;
-    top: 35px;
-    left: 35px;
-}
-
-.sizeInput:hover {
-    cursor: pointer;
-}
-
-.textSize {
-    display: table-cell;
-    vertical-align: top;
-    margin: 5px;
-    margin-top: -40px;
-    width: 40px;
-    height: 40px;
-    float: right;
-    text-align: center;
-}
-
-.t1 {
-    padding-top: 38px;
-}
-
-.t2 {
-    padding-top: 32px;
-}
-
-.t3 {
-    padding-top: 24px;
-}
-
-.t4 {
-    padding-top: 17px;
-}
-
-.t5 {
-    padding-top: 11px;
-}
-
-.t6 {
-    padding-top: 3px;
-}
-
-.optSize:hover ul.sizeUL {
-    display: block;
-    position: absolute;
-    margin-left: -150px;
-    z-index: 3;
-}
-
 .colorLI {
     margin: 5px;
 }
@@ -301,6 +222,42 @@ body {
 
 [name="form[color]"]:hover {
     cursor: pointer;
+}
+
+.sizeUL {
+    display: none;
+    background-color: lavender;
+    list-style: none;
+    padding: 5px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    width: 255px;
+    height: 215px;
+}
+
+.optSize:hover ul.sizeUL {
+    display: block;
+    position: absolute;
+    margin-left: -100px;
+    z-index: 3;
+}
+
+.sizeDisplay {
+  height: calc(100% - 34px);
+  display: block;
+  background-color: white;
+  width: 100%;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.sizeInput {
+  display: block;
+  height: 10px;
+  width: calc(100%);
+  text-align: center;
 }
 
 #optionMenu {

@@ -24,8 +24,27 @@ function changeColor(e) {
     textarea[0].className = classes[0]
 }
 
+function changeSize(e) {
+    color = "fs" + e['target'].value
+    textarea = document.getElementsByClassName('ta')
+    classes = textarea[0].className
+    classes = classes.split("fs")
+    classes[0] += color
+    textarea[0].className = classes[0]
+
+    sizeDisplay = document.getElementsByClassName('sizeDisplay')
+    classesSize = sizeDisplay[0].className
+    classesSize = classesSize.split("fs")
+    classesSize[0] += color
+    sizeDisplay[0].className = classesSize[0]
+}
+
 document.getElementsByName('form[color]').forEach(function(element) {
     element.addEventListener('change', changeColor)
+})
+
+document.getElementsByName('form[size]').forEach(function(element) {
+    element.addEventListener('change', changeSize)
 })
 
 </script>
