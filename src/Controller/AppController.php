@@ -29,14 +29,15 @@ class AppController extends Controller
      */
     public function localeAction(Request $request)
     {
-        $locale = $request->getLocale();
+        $localeList = preg_split('#[,;]#', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
-        if($locale == 'en' || 'fr') {
-            return $this->redirectToRoute('app_index', array('_locale' => $locale));
+        foreach ($localeList as $locale) {
+            if ($locale == 'en' || 'fr') {
+                return $this->redirectToRoute('app_index', array('_locale' => $locale));
+            }
         }
-        else {
-            return $this->render('locale.html.twig');
-        }
+
+        return $this->render('locale.html.twig');
     }
 
     /**
@@ -224,7 +225,22 @@ class AppController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
+
             $user->setSalt('');
+
+            /*$chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $salt = '';
+            for($i = 0; $i < 20; $i++){
+                $salt .= $chars[rand(0, strlen($chars)-1)];
+            }
+
+            $encoderFactory = $this->get('security.encoder_factory');
+            $encoder = $encoderFactory->getEncoder($user);
+
+            $password = $encoder->encodePassword('password', $salt);
+
+            $user->setSalt($salt);
+            $user->setPassword($password);*/
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
