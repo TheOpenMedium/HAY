@@ -2,16 +2,16 @@
 # HAY Project v0.0.1 (pre-Alpha)
 > Code of conduct [here](https://github.com/TheOpenMedium/HAY/blob/master/CODE_OF_CONDUCT.md)
 
-> Si vous parlez français, vous pourrez visionnez ce même document en français [ici](https://github.com/TheOpenMedium/HAY/blob/master/READMEFR.md) !
+> Si vous parlez français, vous pouvez visionnez ce même document en français [ici](https://github.com/TheOpenMedium/HAY/blob/master/READMEFR.md) !
 
 > إن كانت لغتكم العربيّة، إعلموا أنّ ترجمة لهذا النّص ستكون متوفّرة قريبا
 
 > Our mother tongue is not English. If you found a grammar mistake, please open an issue.
 ## What's HAY?
-HAY is an acronym of "How Are You". It's also an Open Source social media that respect your privacy and doesn't track you! It's 
-a website from the OM Project (has no relation with the soccer/football (US or UK? :p) club, myself don't like sport).
+HAY is an acronym of "How Are You". It's also an Open Source social media that respect your privacy and doesn't track you! It's
+a website from The Open Medium project.
 ### Who are we?
-We're a little french and tunisian teams that suggest an alternative to other social media! We believe in Open Source and we 
+We're a little french and tunisian teams that suggest an alternative to other social media! We believe in Open Source and we
 want to create a better internet for everyone.
 ## Contributing
 > More infos [here](https://github.com/TheOpenMedium/HAY/blob/master/CONTRIBUTING.md)
@@ -29,14 +29,14 @@ Anyone an contribute to this project by suggesting ideas or code or reporting a 
 * Creating blogs
 * Creating pages and group (like in Facebook)
 
-## QR
+## FAQ
 ### Why do you use Symfony for your project?
 > Because having a common convention is essential to have a clear code! And we use Symfony because it's a simple and Open Source
-> framework for php (especially Symfony 4) that have many bundles that simplify coding. It's also a framework that simplify 
+> framework for php (especially Symfony 4) that have many bundles that simplify coding. It's also a framework that simplify
 > working in group.
 
 ### HELP! I don't know how to use in Symfony!
-> If you don't know how to use Symfony you can use the documentation [here](https://symfony.com/doc/current/index.html). You'll 
+> If you don't know how to use Symfony you can use the documentation [here](https://symfony.com/doc/current/index.html). You'll
 > see it's very simple! You only have to know how to code in php! (Warning : Symfony 4 and 3 are very different, be sure that you
 > know the good one)
 
