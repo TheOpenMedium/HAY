@@ -59,6 +59,9 @@
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
+    "nikic/php-parser": {
+        "version": "v4.0.0"
+    },
     "ocramius/package-versions": {
         "version": "1.2.0"
     },
@@ -100,6 +103,9 @@
             "version": "3.3",
             "ref": "9f94d3ea453cd8a3b95db7f82592d7344fe3a76a"
         }
+    },
+    "symfony/css-selector": {
+        "version": "v4.0.6"
     },
     "symfony/debug": {
         "version": "v4.0.2"
@@ -172,6 +178,15 @@
     },
     "symfony/orm-pack": {
         "version": "v1.0.5"
+    },
+    "symfony/phpunit-bridge": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "41416370e732d1c8e7a0953a5ce815b641cfba0f"
+        }
     },
     "symfony/polyfill-intl-icu": {
         "version": "v1.6.0"
