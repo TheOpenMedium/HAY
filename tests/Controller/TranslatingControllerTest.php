@@ -8,11 +8,23 @@ class TranslatingControllerTest extends WebTestCase
 {
     public function testEnglishTranslation()
     {
-        // TODO: Testing English Translation
+        $client = static::createClient();
+
+        $client->request('GET', '/en/');
+
+        $response = $client->getResponse()->getContent();
+
+        $this->assertEquals(1, preg_match('/Write/', $response));
     }
-    
+
     public function testFrenchTranslation()
     {
-        // TODO: Testing French Translation
+        $client = static::createClient();
+
+        $client->request('GET', '/en/');
+
+        $response = $client->getResponse()->getContent();
+
+        $this->assertEquals(1, preg_match('/Écrire/', $response));
     }
 }
