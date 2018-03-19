@@ -11,9 +11,6 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        test:
-            pattern: ^/
-            security: false
         main:
             # pattern: ^/
             # anonymous: /{_locale}/signup
@@ -38,6 +35,8 @@ security:
                     remember_me: { path: / }
                 invalidate_session: false
             provider: data_base
+        test:
+            security: false
 
             # activate different ways to authenticate
 

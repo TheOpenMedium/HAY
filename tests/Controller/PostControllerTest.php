@@ -17,6 +17,8 @@ class PostControllerTest extends WebTestCase
         $this->assertEquals(1, preg_match('/Search/', $response));
     }
 
+    // TODO: Making a page to show a post individually
+    /*
     public function testShowPost()
     {
         // TODO: Testing Showing Post
@@ -26,6 +28,7 @@ class PostControllerTest extends WebTestCase
     {
         // TODO: Testing Showing Comment
     }
+    */
 
     public function testSubmitPost()
     {
