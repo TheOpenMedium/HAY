@@ -11,6 +11,9 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        test:
+            pattern: ^/
+            security: false
         main:
             # pattern: ^/
             # anonymous: /{_locale}/signup

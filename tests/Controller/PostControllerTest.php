@@ -12,7 +12,9 @@ class PostControllerTest extends WebTestCase
 
         $client->request('GET', '/en/');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $response = $client->getResponse()->getContent();
+
+        $this->assertEquals(1, preg_match('/Search/', $response));
     }
 
     public function testShowPost()

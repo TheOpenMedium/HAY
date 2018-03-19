@@ -12,7 +12,9 @@ class SignUpControllerTest extends WebTestCase
 
         $client->request('GET', '/en/signup');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $response = $client->getResponse()->getContent();
+
+        $this->assertEquals(1, preg_match('/Sign%sUp/', $response));
     }
 
     public function testSignUp()
@@ -26,7 +28,9 @@ class SignUpControllerTest extends WebTestCase
 
         $client->request('GET', '/en/login');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $response = $client->getResponse()->getContent();
+
+        $this->assertEquals(1, preg_match('/Log%sIn/', $response));
     }
 
     public function testLogIn()

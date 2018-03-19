@@ -89,6 +89,9 @@
             "ref": "aaddfdf43cdecd4cf91f992052d76c2cadc04543"
         }
     },
+    "symfony/browser-kit": {
+        "version": "v4.0.6"
+    },
     "symfony/cache": {
         "version": "v4.0.2"
     },
@@ -115,6 +118,9 @@
     },
     "symfony/doctrine-bridge": {
         "version": "v4.0.2"
+    },
+    "symfony/dom-crawler": {
+        "version": "v4.0.6"
     },
     "symfony/dotenv": {
         "version": "v4.0.2"
