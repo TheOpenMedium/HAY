@@ -30,10 +30,10 @@ class AppController extends Controller
      */
     public function localeAction(Request $request)
     {
-        $localeList = preg_split('#[,;]#', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+        $localeList = preg_split('#[,;-]#', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
         foreach ($localeList as $locale) {
-            if ($locale == 'en' || 'fr') {
+            if ($locale == 'en' || $locale == 'fr') {
                 return $this->redirectToRoute('app_index', array('_locale' => $locale));
             }
         }
