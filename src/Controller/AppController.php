@@ -142,14 +142,21 @@ class AppController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function statusDeleteAction(Request $request, Status $status)
+    public function statusDeleteAction(Request $request, Status $status, $id)
     {
         $entityManager = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository(Comment::class);
+        $comments = $repository->findBy(['id_status' => $id]);
 
         $user = $this->getUser();
 
         if ($status->getIdUser() == $user->getId()) {
             $entityManager->remove($status);
+
+            foreach ($comments as $comment) {
+                $entityManager->remove($comment);
+            }
+
             $entityManager->flush();
         }
 
