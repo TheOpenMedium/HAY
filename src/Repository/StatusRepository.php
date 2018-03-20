@@ -20,7 +20,7 @@ class StatusRepository extends ServiceEntityRepository
     public function findStatus($n)
     {
         return $this->createQueryBuilder('s')
-            ->select(array('s', 'u.first_name', 'u.last_name', 'u.username'))
+            ->select(array('s', 'u.id', 'u.first_name', 'u.last_name', 'u.username'))
             //->from('App\Entity\Status', 's')
             ->innerJoin('App\Entity\User', 'u', 'WITH', 's.id_user = u.id')
             //->where('s.something = :value')->setParameter('value', $value)

@@ -9,7 +9,16 @@
         <table style="border: 0px;">
             <tr>
                 <td style="padding-right: 15px;"><img src="/ressources/icone.png" width="40px" height="40px" alt="{{ 'usr_img'|trans }}" /></td>
-                <td style="border-left: 1px solid {{ status[0].color != 'FFF' ? 'white' : 'black' }}; padding-left: 15px; font-family: sans-serif; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};">{{ status.first_name }} {{ status.last_name }} {% if status.username %}{{ 'alias'|trans }} {{ status.username }} {% endif %}{{ 'has_write'|trans }}</td>
+                <td style="border-left: 1px solid {{ status[0].color != 'FFF' ? 'white' : 'black' }}; padding-left: 15px; font-family: sans-serif; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};">
+                    {{ status.first_name }} {{ status.last_name }} {% if status.username %}{{ 'alias'|trans }} {{ status.username }} {% endif %}{{ 'has_write'|trans }}
+                </td>
+                <span style="float: right; padding: 5px;">
+                    {% if status.id == app.user.id %}
+                        <a class="icofont icofont-ui-delete" style="margin-right: 5px; text-decoration: none; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};" href="{{ url('app_status_delete', {'id': status[0].id}) }}"></a>
+                        <i class="icofont icofont-pencil-alt-2" style="margin-right: 5px;"></i>
+                    {% endif %}
+                    <i class="icofont icofont-navigation-menu"></i>
+                </span>
             </tr>
         </table>
     </div>
@@ -24,7 +33,11 @@
         <table style="border: 0px; border-bottom: 1px solid grey; width: 550; margin-bottom: 5px;">
             <tr>
                 <td style="padding-right: 15px;"><img src="/ressources/icone.png" width="40px" height="40px" alt="{{ 'usr_img'|trans }}" /></td>
-                <td style="border-left: 1px solid grey; padding-left: 15px; width: 100%; color: grey;">{{ comment.first_name }} {{ comment.last_name }} {% if comment.username %}{{ 'alias'|trans }} {{ comment.username }} {% endif %}{{ 'has_comment'|trans }}</td>
+                <td style="border-left: 1px solid grey; padding-left: 15px; width: 100%; color: grey;">
+                    {{ comment.first_name }} {{ comment.last_name }}
+                    {% if comment.username %}{{ 'alias'|trans }} {{ comment.username }} {% endif %}
+                    {{ 'has_comment'|trans }}
+                </td>
             </tr>
         </table>
         {{ comment[0].comment|escape|replace({'&lt;br /&gt;': '<br />'})|raw }}

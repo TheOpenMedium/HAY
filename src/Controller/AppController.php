@@ -138,6 +138,25 @@ class AppController extends Controller
     }
 
     /**
+     * @Route("/{_locale}/status/delete/{id}", name="app_status_delete", requirements={
+     *     "_locale": "en|fr"
+     * })
+     */
+    public function statusDeleteAction(Request $request, Status $status)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $user = $this->getUser();
+
+        if ($status->getIdUser() == $user->getId()) {
+            $entityManager->remove($status);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_index');
+    }
+
+    /**
      * @Route("/{_locale}/comment/{id}/{_color}",
      *     defaults={"_color": "696"},
      *     name="app_comment",
