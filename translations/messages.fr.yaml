@@ -32,3 +32,8 @@ alias: alias
 has_write: 'a écrit :'
 comment: Commenter
 has_comment: 'a commenté :'
+
+# Edit pages
+# Pages de modification
+
+edit_status: Modifier le statut

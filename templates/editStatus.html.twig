@@ -1,19 +1,43 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-{{ 'home'|trans }} - HAY
+{{ 'edit_status'|trans }} - HAY
 {% endblock %}
 
 {% block body %}
 
 {{ include("menu.html.twig") }}
 {{ include("statusForm.html.twig") }}
-{{ include("statusDisplay.html.twig") }}
 
 {% endblock %}
 
 {% block js %}
 <script>
+
+function init() {
+    color = "c" + "{{ color }}"
+    textarea = document.getElementsByClassName('textarea')
+    classes = textarea[0].className
+    classes = classes.split("c")
+    classes[0] += color
+    textarea[0].className = classes[0]
+
+    size = "fs" + "{{ size }}"
+    textarea = document.getElementsByClassName('ta')
+    classes = textarea[0].className
+    classes = classes.split("fs")
+    classes[0] += size
+    textarea[0].className = classes[0]
+
+    sizeDisplay = document.getElementsByClassName('sizeDisplay')
+    classesSize = sizeDisplay[0].className
+    classesSize = classesSize.split("fs")
+    classesSize[0] += size
+    sizeDisplay[0].className = classesSize[0]
+
+    sizeValue = document.getElementsByName('form[size]')
+    sizeValue[0].value = "{{ size }}"
+}
 
 function changeColor(e) {
     color = "c" + e['target'].value
@@ -46,6 +70,8 @@ document.getElementsByName('form[color]').forEach(function(element) {
 document.getElementsByName('form[size]').forEach(function(element) {
     element.addEventListener('change', changeSize)
 })
+
+init()
 
 </script>
 {% endblock %}

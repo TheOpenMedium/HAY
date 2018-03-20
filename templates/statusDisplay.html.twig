@@ -15,7 +15,7 @@
                 <span style="float: right; padding: 5px;">
                     {% if status.id == app.user.id %}
                         <a class="icofont icofont-ui-delete" style="margin-right: 5px; text-decoration: none; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};" href="{{ url('app_status_delete', {'id': status[0].id}) }}"></a>
-                        <i class="icofont icofont-pencil-alt-2" style="margin-right: 5px;"></i>
+                        <a class="icofont icofont-pencil-alt-2" style="margin-right: 5px; text-decoration: none; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};" href="{{ url('app_status_edit', {'id': status[0].id}) }}"></a>
                     {% endif %}
                     <i class="icofont icofont-navigation-menu"></i>
                 </span>

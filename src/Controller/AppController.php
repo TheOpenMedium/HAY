@@ -138,6 +138,101 @@ class AppController extends Controller
     }
 
     /**
+     * @Route("/{_locale}/edit/status/{id}", name="app_status_edit", requirements={
+     *     "_locale": "en|fr"
+     * })
+     */
+    public function statusEditAction(Request $request, Status $statusEdit)
+    {
+        $user = $this->getUser();
+
+        if ($statusEdit->getIdUser() == $user->getId()) {
+            $status = new Status();
+
+            $status->setContent($statusEdit->getContent());
+            $status->setColor($statusEdit->getColor());
+            $status->setSize($statusEdit->getSize());
+            $status->setFont($statusEdit->getFont());
+
+            $form = $this->createFormBuilder($status)
+                ->add('content', TextareaType::class)
+                ->add('color', ChoiceType::class, array(
+                    'choices' => array(
+                        '000',
+                        '222',
+                        '696',
+                        '999',
+                        'DDD',
+                        'FFF',
+
+                        'E00',
+                        '72C',
+                        '008',
+                        '099',
+                        '0A0',
+                        'F91',
+
+                        'F00',
+                        'D0F',
+                        '22F',
+                        '6DF',
+                        '0F0',
+                        'FD0',
+
+                        'F44',
+                        'F2E',
+                        '08F',
+                        '0FF',
+                        'BF0',
+                        'EE0',
+
+                        'F05',
+                        'F6F',
+                        '0AE',
+                        '9FF',
+                        '5F9',
+                        'FF0'
+                    ),
+                    'multiple' => false,
+                    'expanded' => true
+                ))
+                ->add('size', IntegerType::class)
+                ->add('id_user', HiddenType::class)
+                ->add('submit', SubmitType::class)
+                ->getForm();
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $status = $form->getData();
+                $status->setFont('SS');
+
+                $em = $this->getDoctrine()->getManager();
+
+                $statusEdit->setContent($status->getContent());
+                $statusEdit->setColor($status->getColor());
+                $statusEdit->setSize($status->getSize());
+                $statusEdit->setFont($status->getFont());
+
+                $em->flush();
+
+                return $this->redirectToRoute('app_index');
+            }
+
+            $color = $statusEdit->getColor();
+            $size = $statusEdit->getSize();
+
+            return $this->render('editStatus.html.twig', array(
+                'form' => $form->createView(),
+                'color' => $color,
+                'size' => $size
+            ));
+        } else {
+            return $this->redirectToRoute('app_index');
+        }
+    }
+
+    /**
      * @Route("/{_locale}/delete/status/{id}", name="app_status_delete", requirements={
      *     "_locale": "en|fr"
      * })
