@@ -33,10 +33,17 @@
         <table style="border: 0px; border-bottom: 1px solid grey; width: 550; margin-bottom: 5px;">
             <tr>
                 <td style="padding-right: 15px;"><img src="/ressources/icone.png" width="40px" height="40px" alt="{{ 'usr_img'|trans }}" /></td>
-                <td style="border-left: 1px solid grey; padding-left: 15px; width: 100%; color: grey;">
+                <td style="border-left: 1px solid grey; padding-left: 15px; width: 85%; color: grey;">
                     {{ comment.first_name }} {{ comment.last_name }}
                     {% if comment.username %}{{ 'alias'|trans }} {{ comment.username }} {% endif %}
                     {{ 'has_comment'|trans }}
+                </td>
+                <td style="width: 15%;">
+                    {% if comment.id == app.user.id %}
+                        <a class="icofont icofont-ui-delete" style="margin-right: 5px; text-decoration: none; color: grey;" href="{{ url('app_comment_delete', {'id': comment[0].id}) }}"></a>
+                        <i class="icofont icofont-pencil-alt-2" style="margin-right: 5px; color: grey;"></i>
+                    {% endif %}
+                    <i class="icofont icofont-navigation-menu" style="color: grey;"></i>
                 </td>
             </tr>
         </table>

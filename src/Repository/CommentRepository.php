@@ -20,7 +20,7 @@ class CommentRepository extends ServiceEntityRepository
     public function findComments($n, $id)
     {
         return $this->createQueryBuilder('c')
-            ->select(array('c', 'u.first_name', 'u.last_name', 'u.username'))
+            ->select(array('c', 'u.id', 'u.first_name', 'u.last_name', 'u.username'))
             ->andWhere('c.id_status = :id')
             ->setParameter('id', $id)
             //->from('App\Entity\Status', 's')

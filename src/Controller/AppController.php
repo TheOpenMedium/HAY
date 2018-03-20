@@ -138,7 +138,7 @@ class AppController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/status/delete/{id}", name="app_status_delete", requirements={
+     * @Route("/{_locale}/delete/status/{id}", name="app_status_delete", requirements={
      *     "_locale": "en|fr"
      * })
      */
@@ -198,6 +198,25 @@ class AppController extends Controller
             'color' => $_color,
             'id' => $id
         ));
+    }
+
+    /**
+     * @Route("/{_locale}/delete/comment/{id}", name="app_comment_delete", requirements={
+     *     "_locale": "en|fr"
+     * })
+     */
+    public function commentDeleteAction(Request $request, Comment $comment, $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $user = $this->getUser();
+
+        if ($comment->getIdUser() == $user->getId()) {
+            $entityManager->remove($comment);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_index');
     }
 
     /**
