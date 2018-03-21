@@ -9,6 +9,11 @@ body {
     padding-bottom: 50px;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .menu {
     display: block;
     width: 100%;
@@ -550,4 +555,55 @@ body {
 .locale:hover {
     transition: 0.8s background;
     background-color: #33dd77;
+}
+
+.userMenu {
+    position: fixed;
+    top: 50px;
+    left: 0px;
+    background-color: dimgrey;
+    height: calc(100em - 10px);
+    width: 250px;
+}
+
+.userInfo {
+    background-color: #55ff99;
+    text-align: center;
+    color: #404040;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #404040
+}
+
+.userImg {
+    background-color: #999999;
+    display: block;
+    height: 250px;
+    width: 250px;
+    padding: 25px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #404040;
+}
+
+.userMenu a {
+    display: block;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-bottom: 1px solid #999999;
+    transition: 0.5s background;
+}
+
+.userMenu a:hover {
+    background-color: #999999;
+    transition: 0.5s background;
+}
+
+.userMenu a i {
+    float: right;
+}
+
+#selected {
+    background-color: #999999;
 }

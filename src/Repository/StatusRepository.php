@@ -33,7 +33,7 @@ class StatusRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param $n
+     * @param $id
      * @return Status[]
      */
     public function findStatusById($id)
@@ -43,6 +43,25 @@ class StatusRepository extends ServiceEntityRepository
             //->from('App\Entity\Status', 's')
             ->innerJoin('App\Entity\User', 'u', 'WITH', 's.id_user = u.id')
             ->where('s.id = :id')->setParameter('id', $id)
+            ->getQuery()
+            ->getResult()
+            //->execute()
+        ;
+    }
+
+    /**
+     * @param $n, $id
+     * @return Status[]
+     */
+    public function findStatusByUser($n, $id)
+    {
+        return $this->createQueryBuilder('s')
+            ->select(array('s', 'u.id', 'u.first_name', 'u.last_name', 'u.username'))
+            //->from('App\Entity\Status', 's')
+            ->innerJoin('App\Entity\User', 'u', 'WITH', 's.id_user = u.id')
+            ->where('s.id_user = :id')->setParameter('id', $id)
+            ->orderBy('s.date_content', 'DESC')
+            ->setMaxResults($n)
             ->getQuery()
             ->getResult()
             //->execute()

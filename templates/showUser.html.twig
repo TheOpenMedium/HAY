@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+{{ user.firstName }} {{ user.lastName }} - HAY
+{% endblock %}
+
+{% block css %}
+<style>
+</style>
+{% endblock %}
+
+{% block body %}
+
+{{ include("menu.html.twig") }}
+
+<div class="userMenu fs16 ffSS">
+    <div class="userInfo">
+        <img src="/ressources/icone.png" class="userImg" />
+        {{ user.firstName }} {{ user.lastName }}
+        {% if user.username %}({{ user.username }}){% endif %}
+    </div>
+    <a href="#">{{ 'about'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+    <a id="selected" href="{{ url('app_user_show', {'id': user.id}) }}">{{ 'status'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+    <a href="#">{{ 'photo'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+    <a href="#">{{ 'video'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+    <a href="#">{{ 'files'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+    <a href="#">{{ 'blog'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+</div>
+
+<div style="margin-left: 250px;">
+{{ include("statusDisplay.html.twig") }}
+</div>
+
+{% endblock %}

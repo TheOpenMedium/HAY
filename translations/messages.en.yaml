@@ -31,6 +31,15 @@ has_write: 'has write:'
 comment: Comment
 has_comment: 'has comment:'
 
+# User page
+
+about: About
+status: Status
+photo: Photos
+video: Videos
+file: Files
+blog: Blog
+
 # Show and edit pages
 
 show_status: Show status

@@ -7,10 +7,13 @@
     {# Sender informations #}
     <div class="infHAY c{{ status[0].color }}">
         <table style="border: 0px;">
+
             <tr>
-                <td style="padding-right: 15px;"><img src="/ressources/icone.png" width="40px" height="40px" alt="{{ 'usr_img'|trans }}" /></td>
+                <td style="padding-right: 15px;"><a href="{{ url('app_user_show', {'id': status.id}) }}"><img src="/ressources/icone.png" width="40px" height="40px" alt="{{ 'usr_img'|trans }}" /></a></td>
                 <td style="border-left: 1px solid {{ status[0].color != 'FFF' ? 'white' : 'black' }}; padding-left: 15px; font-family: sans-serif; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};">
-                    {{ status.first_name }} {{ status.last_name }} {% if status.username %}{{ 'alias'|trans }} {{ status.username }} {% endif %}{{ 'has_write'|trans }}
+                    <a href="{{ url('app_user_show', {'id': status.id}) }}">
+                        {{ status.first_name }} {{ status.last_name }} {% if status.username %}{{ 'alias'|trans }} {{ status.username }} {% endif %}{{ 'has_write'|trans }}
+                    </a>
                 </td>
                 <span style="float: right; padding: 5px; cursor: default;">
                     {% if status.id == app.user.id %}
@@ -32,12 +35,12 @@
     <div class="com">
         <table style="border: 0px; border-bottom: 1px solid grey; width: 550; margin-bottom: 5px;">
             <tr>
-                <td style="padding-right: 15px;"><img src="/ressources/icone.png" width="40px" height="40px" alt="{{ 'usr_img'|trans }}" /></td>
-                <td style="border-left: 1px solid grey; padding-left: 15px; width: 85%; color: grey;">
+                <td style="padding-right: 15px;"><a href="{{ url('app_user_show', {'id': comment.id}) }}"><img src="/ressources/icone.png" width="40px" height="40px" alt="{{ 'usr_img'|trans }}" /></a></td>
+                <td style="border-left: 1px solid grey; padding-left: 15px; width: 85%; color: grey;"><a href="{{ url('app_user_show', {'id': comment.id}) }}">
                     {{ comment.first_name }} {{ comment.last_name }}
                     {% if comment.username %}{{ 'alias'|trans }} {{ comment.username }} {% endif %}
                     {{ 'has_comment'|trans }}
-                </td>
+                </a></td>
                 <td style="width: 15%; cursor: default">
                     {% if comment.id == app.user.id %}
                         <a class="icofont icofont-ui-delete" style="margin-right: 5px; text-decoration: none; color: grey;" href="{{ url('app_comment_delete', {'id': comment[0].id}) }}"></a>

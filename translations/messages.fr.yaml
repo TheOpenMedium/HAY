@@ -33,6 +33,16 @@ has_write: 'a écrit :'
 comment: Commenter
 has_comment: 'a commenté :'
 
+# User page
+# Page d'utilisateur
+
+about: À propos
+status: Statuts
+photo: Photographies
+video: Vidéos
+files: Fichiers
+blog: Blog
+
 # Show and edit pages
 # Pages d'affichage et de modification
 
