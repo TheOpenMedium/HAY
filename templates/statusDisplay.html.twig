@@ -41,7 +41,7 @@
                 <td style="width: 15%;">
                     {% if comment.id == app.user.id %}
                         <a class="icofont icofont-ui-delete" style="margin-right: 5px; text-decoration: none; color: grey;" href="{{ url('app_comment_delete', {'id': comment[0].id}) }}"></a>
-                        <i class="icofont icofont-pencil-alt-2" style="margin-right: 5px; color: grey;"></i>
+                        <a class="icofont icofont-pencil-alt-2" style="margin-right: 5px; text-decoration: none; color: grey;" href="{{ url('app_comment_edit', {'id': comment[0].id}) }}"></a>
                     {% endif %}
                     <i class="icofont icofont-navigation-menu" style="color: grey;"></i>
                 </td>

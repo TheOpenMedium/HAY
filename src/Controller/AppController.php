@@ -296,6 +296,48 @@ class AppController extends Controller
     }
 
     /**
+     * @Route("/{_locale}/edit/comment/{id}", name="app_comment_edit", requirements={
+     *     "_locale": "en|fr"
+     * })
+     */
+    public function commentEditAction(Request $request, Comment $commentEdit)
+    {
+        $user = $this->getUser();
+
+        if ($commentEdit->getIdUser() == $user->getId()) {
+            $comment = new Comment();
+
+            $comment->setComment($commentEdit->getComment());
+
+            $form = $this->createFormBuilder($comment)
+                ->add('comment', TextareaType::class)
+                ->add('id_user', HiddenType::class)
+                ->add('submit', SubmitType::class)
+                ->getForm();
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $comment = $form->getData();
+
+                $em = $this->getDoctrine()->getManager();
+
+                $commentEdit->setComment($comment->getComment());
+
+                $em->flush();
+
+                return $this->redirectToRoute('app_index');
+            }
+
+            return $this->render('editComment.html.twig', array(
+                'comment' => $form->createView()
+            ));
+        } else {
+            return $this->redirectToRoute('app_index');
+        }
+    }
+
+    /**
      * @Route("/{_locale}/delete/comment/{id}", name="app_comment_delete", requirements={
      *     "_locale": "en|fr"
      * })

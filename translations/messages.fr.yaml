@@ -37,3 +37,4 @@ has_comment: 'a commenté :'
 # Pages de modification
 
 edit_status: Modifier le statut
+edit_comment: Modifier le commentaire

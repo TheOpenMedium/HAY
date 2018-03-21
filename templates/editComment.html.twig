@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+{{ 'edit_comment'|trans }} - HAY
+{% endblock %}
+
+{% block body %}
+
+{{ include("menu.html.twig") }}
+
+<div>
+    {{ form_start(comment, {'attr': {'class': 'comment', 'style': 'margin: auto;'}}) }}
+    {{ form_widget(comment.id_user, {'attr': {'value': app.user.id}}) }}
+    <table>
+        <tr>
+            <td><label for="form_submit" class="sendCom"><i class="icofont icofont-comment"></i></label>{{ form_widget(comment.submit, {'attr': {'style': 'display: none;'}}) }}</td>
+            <td>{{ form_widget(comment.comment, {'attr': {'class': 'taCom', 'placeholder': 'comment'|trans, 'required': false}}) }}</td>
+        </tr>
+    </table>
+    {{ form_end(comment) }}
+    <div class="end" style="width: 600px; margin: auto;"></div>
+</div>
+
+{% endblock %}
