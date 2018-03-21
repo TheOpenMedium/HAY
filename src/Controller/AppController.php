@@ -329,6 +329,20 @@ class AppController extends Controller
     }
 
     /**
+     * @Route("/{_locale}/show/comment/{id}", name="app_comment_show", requirements={
+     *     "_locale": "en|fr"
+     * })
+     */
+    public function commentShowAction(Request $request, $id)
+    {
+        $comment = $this->getDoctrine()->getRepository(Comment::class)->findCommentById($id);
+
+        return $this->render('showComment.html.twig', array(
+            'comment' => $comment[0]
+        ));
+    }
+
+    /**
      * @Route("/{_locale}/edit/comment/{id}", name="app_comment_edit", requirements={
      *     "_locale": "en|fr"
      * })

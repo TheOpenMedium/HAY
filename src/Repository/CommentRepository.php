@@ -34,6 +34,24 @@ class CommentRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @param $id
+     * @return Comment[]
+     */
+    public function findCommentById($id)
+    {
+        return $this->createQueryBuilder('c')
+            ->select(array('c', 'u.id', 'u.first_name', 'u.last_name', 'u.username'))
+            //->from('App\Entity\Status', 's')
+            ->innerJoin('App\Entity\User', 'u', 'WITH', 'c.id_user = u.id')
+            //->where('s.something = :value')->setParameter('value', $value)
+            ->where('c.id = :id')->setParameter('id', $id)
+            ->getQuery()
+            ->getResult()
+            //->execute()
+        ;
+    }
+
     /*
     public function findBySomething($value)
     {
