@@ -32,6 +32,23 @@ class StatusRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @param $n
+     * @return Status[]
+     */
+    public function findStatusById($id)
+    {
+        return $this->createQueryBuilder('s')
+            ->select(array('s', 'u.id', 'u.first_name', 'u.last_name', 'u.username'))
+            //->from('App\Entity\Status', 's')
+            ->innerJoin('App\Entity\User', 'u', 'WITH', 's.id_user = u.id')
+            ->where('s.id = :id')->setParameter('id', $id)
+            ->getQuery()
+            ->getResult()
+            //->execute()
+        ;
+    }
+
     /*
     public function findBySomething($value)
     {

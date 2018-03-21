@@ -12,7 +12,7 @@
                 <td style="border-left: 1px solid {{ status[0].color != 'FFF' ? 'white' : 'black' }}; padding-left: 15px; font-family: sans-serif; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};">
                     {{ status.first_name }} {{ status.last_name }} {% if status.username %}{{ 'alias'|trans }} {{ status.username }} {% endif %}{{ 'has_write'|trans }}
                 </td>
-                <span style="float: right; padding: 5px;">
+                <span style="float: right; padding: 5px; cursor: default;">
                     {% if status.id == app.user.id %}
                         <a class="icofont icofont-ui-delete" style="margin-right: 5px; text-decoration: none; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};" href="{{ url('app_status_delete', {'id': status[0].id}) }}"></a>
                         <a class="icofont icofont-pencil-alt-2" style="margin-right: 5px; text-decoration: none; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};" href="{{ url('app_status_edit', {'id': status[0].id}) }}"></a>
@@ -38,7 +38,7 @@
                     {% if comment.username %}{{ 'alias'|trans }} {{ comment.username }} {% endif %}
                     {{ 'has_comment'|trans }}
                 </td>
-                <td style="width: 15%;">
+                <td style="width: 15%; cursor: default">
                     {% if comment.id == app.user.id %}
                         <a class="icofont icofont-ui-delete" style="margin-right: 5px; text-decoration: none; color: grey;" href="{{ url('app_comment_delete', {'id': comment[0].id}) }}"></a>
                         <a class="icofont icofont-pencil-alt-2" style="margin-right: 5px; text-decoration: none; color: grey;" href="{{ url('app_comment_edit', {'id': comment[0].id}) }}"></a>
