@@ -33,8 +33,10 @@ has_write: 'a écrit :'
 comment: Commenter
 has_comment: 'a commenté :'
 
-# Edit pages
-# Pages de modification
+# Show and edit pages
+# Pages d'affichage et de modification
 
+show_status: Voir le statut
+show_comment: Voir le commentaire
 edit_status: Modifier le statut
 edit_comment: Modifier le commentaire
