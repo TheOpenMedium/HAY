@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Status;
 use App\Entity\Comment;
+use App\Entity\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -350,6 +351,17 @@ class AppController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($sendComment);
+            $em->flush();
+
+            $notification = new Notification;
+
+            $notification->setNotificationType(0);
+            $notification->setIdUser($this->getUser()->getId());
+            $notifContent = (strlen($sendComment->getComment()) > 40) ? substr($sendComment->getComment(), 0, 40) . "..." : $sendComment->getComment();
+            $notification->setContent($notifContent);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($notification);
             $em->flush();
 
             return $this->redirect($this->generateUrl('app_index'));
