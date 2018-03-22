@@ -464,6 +464,25 @@ class AppController extends Controller
     }
 
     /**
+     * @Route("/{_locale}/delete/notification/{id}", name="app_notification_delete", requirements={
+     *     "_locale": "en|fr"
+     * })
+     */
+    public function notificationDeleteAction(Request $request, Notification $notification, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $this->getUser();
+
+        if ($notification->getIdUser() == $user->getId()) {
+            $em->remove($notification);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('app_index');
+    }
+
+    /**
      * @Route("/{_locale}/login", name="app_login", requirements={
      *     "_locale": "en|fr"
      * })

@@ -31,6 +31,10 @@ has_write: 'has write:'
 comment: Comment
 has_comment: 'has comment:'
 
+# Notifications
+
+notif0: has commented one of your status
+
 # User page
 
 about: About

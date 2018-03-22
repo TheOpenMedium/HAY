@@ -33,6 +33,11 @@ has_write: 'a écrit :'
 comment: Commenter
 has_comment: 'a commenté :'
 
+# Notifications
+# Notifications
+
+notif0: a laissé un commentaire sur un de vos statuts
+
 # User page
 # Page d'utilisateur
 
