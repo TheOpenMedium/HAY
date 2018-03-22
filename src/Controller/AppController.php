@@ -450,6 +450,20 @@ class AppController extends Controller
     }
 
     /**
+     * @Route("/{_locale}/notification/{id_user}", name="app_notification", requirements={
+     *     "_locale": "en|fr"
+     * })
+     */
+    public function notificationAction(Request $request, $id_user)
+    {
+        $notifications = $this->getDoctrine()->getRepository(Notification::class)->findNotification($id_user);
+
+        return $this->render('notification.html.twig', array(
+            'notifications' => $notifications
+        ));
+    }
+
+    /**
      * @Route("/{_locale}/login", name="app_login", requirements={
      *     "_locale": "en|fr"
      * })

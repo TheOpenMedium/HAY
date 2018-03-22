@@ -23,8 +23,8 @@ class Notification
 
     /*
 
-    Please list here all notifications type by adding their number with their event type:
-    0: CommentSentEvent
+    Please list here all notifications types:
+    0: Comment send on a status
 
     */
 

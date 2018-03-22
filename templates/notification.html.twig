@@ -1,0 +1,10 @@
+<ul class="ulNotification">
+    {% for notification in notifications %}
+        <li class="notif">
+            {% if notification[0].notificationType == 0 %}
+                {{ notification.first_name }} {{ notification.last_name }} a
+                laissé un commentaire sur un de vos status "{{ notification[0].content }}".
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

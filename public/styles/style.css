@@ -82,16 +82,14 @@ a {
     top: 34px;
     background-color: dimgrey;
     height: 100%;
+    width: 183px;
     cursor: auto;
     padding: 0px;
+    list-style: none;
 }
 
 .parameter:hover ul.ulParameter {
     display: block;
-}
-
-.ulParameter {
-    list-style: none;
 }
 
 .userStats {
@@ -123,6 +121,46 @@ a {
 
 .logout:hover {
     background-color: #b0b0b0;
+}
+
+.notification {
+    cursor: pointer;
+    float: right;
+    height: 100%;
+    display: block;
+    padding-top: 8px;
+}
+
+.notification i {
+    margin: 0px 20px;
+    color: #b0b0b0;
+    font-size: 30px;
+}
+
+.ulNotification {
+    display: none;
+    position: fixed;
+    right: 0px;
+    top: 34px;
+    background-color: dimgrey;
+    height: 100%;
+    width: 183px;
+    cursor: auto;
+    padding: 0px;
+    list-style: none;
+}
+
+.notification:hover ul.ulNotification {
+    display: block;
+}
+
+.notif {
+    border-bottom: 1px solid #b0b0b0;
+    color: white;
+    font-family: sans-serif;
+    font-size: 12px;
+    padding: 15px;
+    word-wrap: break-word;
 }
 
 .ta {
@@ -331,7 +369,7 @@ a {
     padding: 5px;
     width: 600px;
     max-height: 300px;
-    word-break: break-all;
+    word-wrap: break-word;
     overflow-y: auto;
 }
 
