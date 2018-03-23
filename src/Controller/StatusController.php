@@ -17,7 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 class StatusController extends Controller
 {
     /**
-     * @Route("/{_locale}/show/status/{id}", name="app_status_show", requirements={
+     * @Route("/{_locale}/show/status/{id}", name="status_show", requirements={
      *     "_locale": "en|fr"
      * })
      */
@@ -50,7 +50,7 @@ class StatusController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/edit/status/{id}", name="app_status_edit", requirements={
+     * @Route("/{_locale}/edit/status/{id}", name="status_edit", requirements={
      *     "_locale": "en|fr"
      * })
      */
@@ -145,7 +145,7 @@ class StatusController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/delete/status/{id}", name="app_status_delete", requirements={
+     * @Route("/{_locale}/delete/status/{id}", name="status_delete", requirements={
      *     "_locale": "en|fr"
      * })
      */

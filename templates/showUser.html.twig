@@ -15,7 +15,7 @@
         {% if user.username %}({{ user.username }}){% endif %}
     </div>
     <a href="#">{{ 'about'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
-    <a id="selected" href="{{ url('app_user_show', {'id': user.id}) }}">{{ 'status'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+    <a id="selected" href="{{ url('user_show', {'id': user.id}) }}">{{ 'status'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
     <a href="#">{{ 'photo'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
     <a href="#">{{ 'video'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
     <a href="#">{{ 'files'|trans }}<i class="icofont icofont-thin-double-right"></i></a>

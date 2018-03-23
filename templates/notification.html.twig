@@ -4,7 +4,7 @@
             {% if notification[0].notificationType == 0 %}
                 <a class="icofont icofont-close-line"
                 style="float: right; position: relative; bottom: 10px; left: 10px; text-decoration: none; font-size: 24px;"
-                href="{{ url('app_notification_delete', {'id': notification[0].id}) }}"></a>
+                href="{{ url('notification_delete', {'id': notification[0].id}) }}"></a>
                 {{ notification.first_name }} {{ notification.last_name }} {{ 'notif0'|trans }} "{{ notification[0].content }}".
             {% endif %}
             {% if notification[0].url %}

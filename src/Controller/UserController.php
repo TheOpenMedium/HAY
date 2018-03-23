@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends Controller
 {
     /**
-     * @Route("/{_locale}/show/user/{id}", name="app_user_show", requirements={
+     * @Route("/{_locale}/show/user/{id}", name="user_show", requirements={
      *     "_locale": "en|fr"
      * })
      */

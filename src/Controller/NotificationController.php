@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class NotificationController extends Controller
 {
     /**
-     * @Route("/{_locale}/notification/{id_user}", name="app_notification", requirements={
+     * @Route("/{_locale}/notification/{id_user}", name="notification", requirements={
      *     "_locale": "en|fr"
      * })
      */
@@ -25,7 +25,7 @@ class NotificationController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/delete/notification/{id}", name="app_notification_delete", requirements={
+     * @Route("/{_locale}/delete/notification/{id}", name="notification_delete", requirements={
      *     "_locale": "en|fr"
      * })
      */

@@ -9,16 +9,16 @@
         <table style="border: 0px;">
 
             <tr>
-                <td style="padding-right: 15px;"><a href="{{ url('app_user_show', {'id': status.id}) }}"><img src="/ressources/icone.png" width="40px" height="40px" alt="{{ 'usr_img'|trans }}" /></a></td>
+                <td style="padding-right: 15px;"><a href="{{ url('user_show', {'id': status.id}) }}"><img src="/ressources/icone.png" width="40px" height="40px" alt="{{ 'usr_img'|trans }}" /></a></td>
                 <td style="border-left: 1px solid {{ status[0].color != 'FFF' ? 'white' : 'black' }}; padding-left: 15px; font-family: sans-serif; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};">
-                    <a href="{{ url('app_user_show', {'id': status.id}) }}">
+                    <a href="{{ url('user_show', {'id': status.id}) }}">
                         {{ status.first_name }} {{ status.last_name }} {% if status.username %}{{ 'alias'|trans }} {{ status.username }} {% endif %}{{ 'has_write'|trans }}
                     </a>
                 </td>
                 <span style="float: right; padding: 5px; cursor: default;">
                     {% if status.id == app.user.id %}
-                        <a class="icofont icofont-ui-delete" style="margin-right: 5px; text-decoration: none; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};" href="{{ url('app_status_delete', {'id': status[0].id}) }}"></a>
-                        <a class="icofont icofont-pencil-alt-2" style="margin-right: 5px; text-decoration: none; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};" href="{{ url('app_status_edit', {'id': status[0].id}) }}"></a>
+                        <a class="icofont icofont-ui-delete" style="margin-right: 5px; text-decoration: none; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};" href="{{ url('status_delete', {'id': status[0].id}) }}"></a>
+                        <a class="icofont icofont-pencil-alt-2" style="margin-right: 5px; text-decoration: none; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};" href="{{ url('status_edit', {'id': status[0].id}) }}"></a>
                     {% endif %}
                     <i class="icofont icofont-navigation-menu"></i>
                 </span>
@@ -29,22 +29,22 @@
     <div class="content c{{ status[0].color }} ff{{ status[0].font }} fs{{ status[0].size }}" style="border-color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};">
         {{ status[0].content|escape|replace({'&lt;br /&gt;': '<br />'})|raw }}
     </div>
-    {{ render(url('app_comment', {'id': status[0].id, '_color': status[0].color})) }}
+    {{ render(url('comment', {'id': status[0].id, '_color': status[0].color})) }}
 {% if commentList[i] is not empty %}
 {% for comment in commentList[i] %}
     <div class="com">
         <table style="border: 0px; border-bottom: 1px solid grey; width: 550; margin-bottom: 5px;">
             <tr>
-                <td style="padding-right: 15px;"><a href="{{ url('app_user_show', {'id': comment.id}) }}"><img src="/ressources/icone.png" width="40px" height="40px" alt="{{ 'usr_img'|trans }}" /></a></td>
-                <td style="border-left: 1px solid grey; padding-left: 15px; width: 85%; color: grey;"><a href="{{ url('app_user_show', {'id': comment.id}) }}">
+                <td style="padding-right: 15px;"><a href="{{ url('user_show', {'id': comment.id}) }}"><img src="/ressources/icone.png" width="40px" height="40px" alt="{{ 'usr_img'|trans }}" /></a></td>
+                <td style="border-left: 1px solid grey; padding-left: 15px; width: 85%; color: grey;"><a href="{{ url('user_show', {'id': comment.id}) }}">
                     {{ comment.first_name }} {{ comment.last_name }}
                     {% if comment.username %}{{ 'alias'|trans }} {{ comment.username }} {% endif %}
                     {{ 'has_comment'|trans }}
                 </a></td>
                 <td style="width: 15%; cursor: default">
                     {% if comment.id == app.user.id %}
-                        <a class="icofont icofont-ui-delete" style="margin-right: 5px; text-decoration: none; color: grey;" href="{{ url('app_comment_delete', {'id': comment[0].id}) }}"></a>
-                        <a class="icofont icofont-pencil-alt-2" style="margin-right: 5px; text-decoration: none; color: grey;" href="{{ url('app_comment_edit', {'id': comment[0].id}) }}"></a>
+                        <a class="icofont icofont-ui-delete" style="margin-right: 5px; text-decoration: none; color: grey;" href="{{ url('comment_delete', {'id': comment[0].id}) }}"></a>
+                        <a class="icofont icofont-pencil-alt-2" style="margin-right: 5px; text-decoration: none; color: grey;" href="{{ url('comment_edit', {'id': comment[0].id}) }}"></a>
                     {% endif %}
                     <i class="icofont icofont-navigation-menu" style="color: grey;"></i>
                 </td>

@@ -18,7 +18,7 @@ class CommentController extends Controller
     /**
      * @Route("/{_locale}/comment/{id}/{_color}",
      *     defaults={"_color": "696"},
-     *     name="app_comment",
+     *     name="comment",
      *     requirements={"_locale": "en|fr"}
      *     )
      */
@@ -66,7 +66,7 @@ class CommentController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/show/comment/{id}", name="app_comment_show", requirements={
+     * @Route("/{_locale}/show/comment/{id}", name="comment_show", requirements={
      *     "_locale": "en|fr"
      * })
      */
@@ -80,7 +80,7 @@ class CommentController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/edit/comment/{id}", name="app_comment_edit", requirements={
+     * @Route("/{_locale}/edit/comment/{id}", name="comment_edit", requirements={
      *     "_locale": "en|fr"
      * })
      */
@@ -122,7 +122,7 @@ class CommentController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/delete/comment/{id}", name="app_comment_delete", requirements={
+     * @Route("/{_locale}/delete/comment/{id}", name="comment_delete", requirements={
      *     "_locale": "en|fr"
      * })
      */

@@ -5,5 +5,5 @@
     <button class="confirm"><i class="icofont icofont-search-alt-2"></i></button>
     <span id="version">alpha</span>
     <span class="parameter"><i class="icofont icofont-wrench"></i>{{ include('options.html.twig') }}</span>
-    <span class="notification"><i class="icofont icofont-notification"></i>{{ render(url('app_notification', {'id_user': app.user.id})) }}</span>
+    <span class="notification"><i class="icofont icofont-notification"></i>{{ render(url('notification', {'id_user': app.user.id})) }}</span>
 </div>
