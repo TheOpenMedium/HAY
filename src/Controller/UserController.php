@@ -6,7 +6,6 @@ use App\Entity\User;
 use App\Entity\Status;
 use App\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends Controller
@@ -16,7 +15,7 @@ class UserController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function userShowAction(Request $request, User $user, $id)
+    public function userShowAction(User $user, $id)
     {
         // Fetching the status of the requested user.
         $statusList = $this->getDoctrine()->getRepository(Status::class)->findStatusByUser(10, $id);

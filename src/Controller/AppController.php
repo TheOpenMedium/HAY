@@ -25,7 +25,7 @@ class AppController extends Controller
     /**
      * @Route("/")
      */
-    public function localeAction(Request $request)
+    public function localeAction()
     {
         // Here, the controller retrieve prefered languages of the user
         // then he split the string (For example: "fr,fr-FR;q=0.8,en;q=0.5,ar;q=0.3")
@@ -154,7 +154,7 @@ class AppController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function loginAction(Request $request, AuthenticationUtils $authUtils)
+    public function loginAction(AuthenticationUtils $authUtils)
     {
         $user = new User();
 
@@ -231,7 +231,7 @@ class AppController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function logoutAction(Request $request)
+    public function logoutAction()
     {
     }
 }

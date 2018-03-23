@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class NotificationController extends Controller
@@ -15,7 +14,7 @@ class NotificationController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function notificationAction(Request $request, $id_user)
+    public function notificationAction($id_user)
     {
         // Fetching Notifications from database.
         $notifications = $this->getDoctrine()->getRepository(Notification::class)->findNotification($id_user);
@@ -31,7 +30,7 @@ class NotificationController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function notificationDeleteAction(Request $request, Notification $notification, $id)
+    public function notificationDeleteAction(Notification $notification, $id)
     {
         $em = $this->getDoctrine()->getManager();
 

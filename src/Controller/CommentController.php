@@ -76,7 +76,7 @@ class CommentController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function commentShowAction(Request $request, $id)
+    public function commentShowAction($id)
     {
         // Fetching the comment.
         $comment = $this->getDoctrine()->getRepository(Comment::class)->findCommentById($id);
@@ -141,7 +141,7 @@ class CommentController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function commentDeleteAction(Request $request, Comment $comment, $id)
+    public function commentDeleteAction(Comment $comment, $id)
     {
         $entityManager = $this->getDoctrine()->getManager();
 

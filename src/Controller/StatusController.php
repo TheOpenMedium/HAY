@@ -21,7 +21,7 @@ class StatusController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function statusShowAction(Request $request, $id)
+    public function statusShowAction($id)
     {
         // Retrieving statusList from the database.
         $statusList = $this->getDoctrine()->getRepository(Status::class)->findStatusById($id);
@@ -163,7 +163,7 @@ class StatusController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function statusDeleteAction(Request $request, Status $status, $id)
+    public function statusDeleteAction(Status $status, $id)
     {
         // Fetching the status and it's comments.
         $entityManager = $this->getDoctrine()->getManager();
