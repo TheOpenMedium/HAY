@@ -43,7 +43,7 @@ class StatusController extends Controller
             }
         }
 
-        return $this->render('showStatus.html.twig', array(
+        return $this->render('status/showStatus.html.twig', array(
             'statusList' => $statusList,
             'commentList' => $commentList
         ));
@@ -134,7 +134,7 @@ class StatusController extends Controller
             $color = $statusEdit->getColor();
             $size = $statusEdit->getSize();
 
-            return $this->render('editStatus.html.twig', array(
+            return $this->render('status/editStatus.html.twig', array(
                 'form' => $form->createView(),
                 'color' => $color,
                 'size' => $size

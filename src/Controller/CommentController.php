@@ -58,7 +58,7 @@ class CommentController extends Controller
             return $this->redirect($this->generateUrl('app_index'));
         }
 
-        return $this->render('comment.html.twig', array(
+        return $this->render('comment/comment.html.twig', array(
             'comment' => $comment->createView(),
             'color' => $_color,
             'id' => $id
@@ -74,7 +74,7 @@ class CommentController extends Controller
     {
         $comment = $this->getDoctrine()->getRepository(Comment::class)->findCommentById($id);
 
-        return $this->render('showComment.html.twig', array(
+        return $this->render('comment/showComment.html.twig', array(
             'comment' => $comment[0]
         ));
     }
@@ -113,7 +113,7 @@ class CommentController extends Controller
                 return $this->redirectToRoute('app_index');
             }
 
-            return $this->render('editComment.html.twig', array(
+            return $this->render('comment/editComment.html.twig', array(
                 'comment' => $form->createView()
             ));
         } else {

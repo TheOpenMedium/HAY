@@ -38,7 +38,7 @@ class UserController extends Controller
             }
         }
 
-        return $this->render('showUser.html.twig', array(
+        return $this->render('user/showUser.html.twig', array(
             'commentList' => $commentList,
             'statusList' => $statusList,
             'user' => $user
