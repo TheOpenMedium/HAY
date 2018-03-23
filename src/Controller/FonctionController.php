@@ -6,10 +6,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * A controller that have functions used by other actions
+ *
+ * List of functions:
+ * * styleAction() -- fonction_style
+ */
 class FonctionController extends Controller
 {
     /**
-     * @Route("/dev/styles", name="app_fonction_style")
+     * Function to retrieve the stylesheets
+     *
+     * @Route("/dev/styles", name="fonction_style")
      */
     public function styleAction()
     {

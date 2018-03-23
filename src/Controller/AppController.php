@@ -20,9 +20,21 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * A controller related to the application
+ *
+ * List of actions:
+ * * localeAction()
+ * * indexAction(Request $request)               -- app_index
+ * * loginAction(AuthenticationUtils $authUtils) -- app_login
+ * * signupAction(Request $request)              -- app_signup
+ * * logoutAction()                              -- app_logout
+ */
 class AppController extends Controller
 {
     /**
+     * Choose the user's locale
+     *
      * @Route("/")
      */
     public function localeAction()
@@ -46,6 +58,10 @@ class AppController extends Controller
     }
 
     /**
+     * Render the home page
+     *
+     * @param Request $request The HTTP request
+     *
      * @Route("/{_locale}/", name="app_index", requirements={
      *     "_locale": "en|fr"
      * })
@@ -150,6 +166,10 @@ class AppController extends Controller
     }
 
     /**
+     * Render the Log In page
+     *
+     * @param AuthenticationUtils $authUtils Extracts Security Errors from Request
+     *
      * @Route("/{_locale}/login", name="app_login", requirements={
      *     "_locale": "en|fr"
      * })
@@ -181,6 +201,10 @@ class AppController extends Controller
     }
 
     /**
+     * Render the Sign Up page
+     *
+     * @param Request $request The HTTP Request
+     *
      * @Route("/{_locale}/signup", name="app_signup", requirements={
      *     "_locale": "en|fr"
      * })
@@ -227,6 +251,11 @@ class AppController extends Controller
     }
 
     /**
+     * Log Out the user
+     *
+     * NOTE: This action don't do anything, it just define the Log Out route.
+     * It's the security bundle of symfony that log out the user.
+     *
      * @Route("/{_locale}/logout", name="app_logout", requirements={
      *     "_locale": "en|fr"
      * })

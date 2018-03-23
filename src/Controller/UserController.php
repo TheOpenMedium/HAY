@@ -8,9 +8,20 @@ use App\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * A controller related to the User entity
+ *
+ * List of actions:
+ * * userShowAction(User $user, $id) -- user_show
+ */
 class UserController extends Controller
 {
     /**
+     * Render a user page
+     *
+     * @param User $user The user to show
+     * @param int $id The user id
+     *
      * @Route("/{_locale}/show/user/{id}", name="user_show", requirements={
      *     "_locale": "en|fr"
      * })

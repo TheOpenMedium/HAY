@@ -7,9 +7,20 @@ use App\Entity\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * A controller related to the Notification entity
+ *
+ * List of actions:
+ * * notificationAction($id_user)                         -- notification
+ * * notificationDeleteAction(Notification $notification) -- notification_delete
+ */
 class NotificationController extends Controller
 {
     /**
+     * Render the notifications of a user
+     *
+     * @param int $id_user The user id
+     *
      * @Route("/{_locale}/notification/{id_user}", name="notification", requirements={
      *     "_locale": "en|fr"
      * })
@@ -26,11 +37,15 @@ class NotificationController extends Controller
     }
 
     /**
+     * Delete a notification
+     *
+     * @param Notification $notification The notification to delete
+     *
      * @Route("/{_locale}/delete/notification/{id}", name="notification_delete", requirements={
      *     "_locale": "en|fr"
      * })
      */
-    public function notificationDeleteAction(Notification $notification, $id)
+    public function notificationDeleteAction(Notification $notification)
     {
         $em = $this->getDoctrine()->getManager();
 

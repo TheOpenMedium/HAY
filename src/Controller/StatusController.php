@@ -14,9 +14,21 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
+/**
+ * A controller related to the Status entity
+ *
+ * List of actions:
+ * * statusShowAction($id)                                  -- status_show
+ * * statusEditAction(Request $request, Status $statusEdit) -- status_edit
+ * * statusDeleteAction(Status $status, $id)                -- status_delete
+ */
 class StatusController extends Controller
 {
     /**
+     * Render a single status
+     *
+     * @param int $id The status id
+     *
      * @Route("/{_locale}/show/status/{id}", name="status_show", requirements={
      *     "_locale": "en|fr"
      * })
@@ -55,6 +67,11 @@ class StatusController extends Controller
     }
 
     /**
+     * Render the status edit page
+     *
+     * @param Request $request The HTTP request
+     * @param Status $statusEdit The status to edit
+     *
      * @Route("/{_locale}/edit/status/{id}", name="status_edit", requirements={
      *     "_locale": "en|fr"
      * })
@@ -159,6 +176,11 @@ class StatusController extends Controller
     }
 
     /**
+     * Delete a status from the database
+     *
+     * @param Status $status The status to delete
+     * @param int $id The id of the status to delete
+     *
      * @Route("/{_locale}/delete/status/{id}", name="status_delete", requirements={
      *     "_locale": "en|fr"
      * })

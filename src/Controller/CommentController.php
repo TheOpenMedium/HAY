@@ -13,9 +13,24 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
+/**
+ * A controller related to the Comment entity
+ *
+ * List of action:
+ * * commentAction(Request $request, $id, $_color)             -- comment
+ * * commentShowAction($id)                                    -- comment_show
+ * * commentEditAction(Request $request, Comment $commentEdit) -- comment_edit
+ * * commentDeleteAction(Comment $comment, $id)                -- comment_delete
+ */
 class CommentController extends Controller
 {
     /**
+     * Render the comment form
+     *
+     * @param Request $request The HTTP request
+     * @param int $id The status id
+     * @param string $_color The color user for rendering the comment form
+     *
      * @Route("/{_locale}/comment/{id}/{_color}",
      *     defaults={"_color": "696"},
      *     name="comment",
@@ -72,6 +87,10 @@ class CommentController extends Controller
     }
 
     /**
+     * Render a single comment
+     *
+     * @param int $id The comment id
+     *
      * @Route("/{_locale}/show/comment/{id}", name="comment_show", requirements={
      *     "_locale": "en|fr"
      * })
@@ -88,6 +107,11 @@ class CommentController extends Controller
     }
 
     /**
+     * Render the comment edit page
+     *
+     * @param Request $request The HTTP request
+     * @param Comment $commentEdit The comment to edit
+     *
      * @Route("/{_locale}/edit/comment/{id}", name="comment_edit", requirements={
      *     "_locale": "en|fr"
      * })
@@ -137,6 +161,11 @@ class CommentController extends Controller
     }
 
     /**
+     * Delete a comment from the database
+     *
+     * @param Comment $comment The comment to delete
+     * @param int $id The id of the comment to delete
+     *
      * @Route("/{_locale}/delete/comment/{id}", name="comment_delete", requirements={
      *     "_locale": "en|fr"
      * })
