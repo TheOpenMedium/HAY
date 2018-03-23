@@ -5,6 +5,17 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Notification Entity
+ *
+ * List of column:
+ * * id
+ * * notification_type
+ * * id_user
+ * * content
+ * * date_send
+ * * url
+ * * url_id
+ *
  * @ORM\Entity(repositoryClass="App\Repository\NotificationRepository")
  */
 class Notification

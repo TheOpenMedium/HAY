@@ -5,6 +5,15 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Comment Entity
+ *
+ * List of column:
+ * * id
+ * * id_status
+ * * id_user
+ * * comment
+ * * date_send
+ *
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
  */
 class Comment

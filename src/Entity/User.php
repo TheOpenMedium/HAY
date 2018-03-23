@@ -8,6 +8,20 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
+ * User Entity
+ *
+ * List of column:
+ * * id
+ * * first_name
+ * * last_name
+ * * email
+ * * username
+ * * password
+ * * date_sign
+ * * mail_conf
+ * * status
+ * * comments
+ *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields="email", message="Email already taken")
  * @UniqueEntity(fields="username", message="Username already taken")

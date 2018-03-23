@@ -6,6 +6,18 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
+ * Status Entity
+ *
+ * List of column:
+ * * id
+ * * id_user
+ * * content
+ * * date_content
+ * * color
+ * * size
+ * * font
+ * * comments
+ *
  * @ORM\Entity(repositoryClass="App\Repository\StatusRepository")
  */
 class Status
