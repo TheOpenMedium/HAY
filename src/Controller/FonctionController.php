@@ -13,6 +13,7 @@ class FonctionController extends Controller
      */
     public function styleAction()
     {
+        // An experimental function to retrieve stylesheets.
         $return = "";
         if($handle = opendir('styles')) {
             while (false != ($entry = readdir($handle))) {

@@ -17,8 +17,10 @@ class NotificationController extends Controller
      */
     public function notificationAction(Request $request, $id_user)
     {
+        // Fetching Notifications from database.
         $notifications = $this->getDoctrine()->getRepository(Notification::class)->findNotification($id_user);
 
+        // All that is rendered with the notification template sending Notifications List.
         return $this->render('notification/notification.html.twig', array(
             'notifications' => $notifications
         ));
@@ -35,11 +37,13 @@ class NotificationController extends Controller
 
         $user = $this->getUser();
 
+        // Checking that the user's notification and the current user are the same.
         if ($notification->getIdUser() == $user->getId()) {
             $em->remove($notification);
             $em->flush();
         }
 
+        // Finally, redirecting to home page.
         return $this->redirectToRoute('app_index');
     }
 }

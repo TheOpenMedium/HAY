@@ -26,6 +26,7 @@ class CommentController extends Controller
     {
         $com = new Comment();
 
+        // Creating the Form if the user want to submit a comment.
         $comment = $this->createFormBuilder($com)
             ->add('comment', TextareaType::class)
             ->add('id_user', HiddenType::class)
@@ -34,14 +35,17 @@ class CommentController extends Controller
 
         $comment->handleRequest($request);
 
+        // If a form was submitted, the Form's data are retrieved.
         if ($comment->isSubmitted() && $comment->isValid()) {
             $sendComment = $comment->getData();
             $sendComment->setIdStatus($id);
 
+            // Saving comment in database.
             $em = $this->getDoctrine()->getManager();
             $em->persist($sendComment);
             $em->flush();
 
+            // Sending a notification (notification type '0').
             $notification = new Notification;
 
             $notification->setNotificationType(0);
@@ -55,9 +59,11 @@ class CommentController extends Controller
             $em->persist($notification);
             $em->flush();
 
+            // Finally, redirecting to home page.
             return $this->redirect($this->generateUrl('app_index'));
         }
 
+        // All that is rendered with the comment template sending a Form, Color of the status and the Status Id.
         return $this->render('comment/comment.html.twig', array(
             'comment' => $comment->createView(),
             'color' => $_color,
@@ -72,8 +78,10 @@ class CommentController extends Controller
      */
     public function commentShowAction(Request $request, $id)
     {
+        // Fetching the comment.
         $comment = $this->getDoctrine()->getRepository(Comment::class)->findCommentById($id);
 
+        // All that is rendered with the comment show template sending the Comment.
         return $this->render('comment/showComment.html.twig', array(
             'comment' => $comment[0]
         ));
@@ -88,11 +96,14 @@ class CommentController extends Controller
     {
         $user = $this->getUser();
 
+        // Checking that the author and the user are the same.
         if ($commentEdit->getIdUser() == $user->getId()) {
             $comment = new Comment();
 
+            // Adding last values as default.
             $comment->setComment($commentEdit->getComment());
 
+            // Creating a Form to edit comment.
             $form = $this->createFormBuilder($comment)
                 ->add('comment', TextareaType::class)
                 ->add('id_user', HiddenType::class)
@@ -101,11 +112,13 @@ class CommentController extends Controller
 
             $form->handleRequest($request);
 
+            // If a comment was edited, the Form's data are retrieved.
             if ($form->isSubmitted() && $form->isValid()) {
                 $comment = $form->getData();
 
                 $em = $this->getDoctrine()->getManager();
 
+                // And the comment is edited.
                 $commentEdit->setComment($comment->getComment());
 
                 $em->flush();
@@ -113,10 +126,12 @@ class CommentController extends Controller
                 return $this->redirectToRoute('app_index');
             }
 
+            // All that is rendered with the comment edit template sending a Form.
             return $this->render('comment/editComment.html.twig', array(
                 'comment' => $form->createView()
             ));
         } else {
+            //If the user is not the author, he's redirected to home page.
             return $this->redirectToRoute('app_index');
         }
     }
@@ -132,11 +147,14 @@ class CommentController extends Controller
 
         $user = $this->getUser();
 
+        // Checking that the author and the user that want to delete the comment are the same.
         if ($comment->getIdUser() == $user->getId()) {
+            // Removing the comment.
             $entityManager->remove($comment);
             $entityManager->flush();
         }
 
+        // User is redirected to home page.
         return $this->redirectToRoute('app_index');
     }
 }

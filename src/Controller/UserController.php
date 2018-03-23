@@ -18,16 +18,20 @@ class UserController extends Controller
      */
     public function userShowAction(Request $request, User $user, $id)
     {
+        // Fetching the status of the requested user.
         $statusList = $this->getDoctrine()->getRepository(Status::class)->findStatusByUser(10, $id);
         $commentList = array();
 
+        // If there is one Status or more :
         if ($statusList) {
+            // We replace new lines by the <br /> tag and we fetch from the database the 10 newer comments of each status.
             foreach ($statusList as $status) {
                 $content = $status[0]->getContent();
                 $status[0]->setContent(preg_replace('#\n#', '<br />', $content));
                 $commentList[] = $this->getDoctrine()->getRepository(Comment::class)->findComments(10, $status[0]->getId());
             }
 
+            // Then, we replace new lines by the <br /> tag.
             foreach ($commentList as $commentStatus) {
                 if ($commentStatus) {
                     foreach ($commentStatus as $comment) {
@@ -38,6 +42,7 @@ class UserController extends Controller
             }
         }
 
+        // All that is rendered with the user show template sending Status List, Comment List and User.
         return $this->render('user/showUser.html.twig', array(
             'commentList' => $commentList,
             'statusList' => $statusList,
