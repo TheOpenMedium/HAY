@@ -43,6 +43,16 @@ class Notification
      */
     private $date_send;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $url;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $url_id;
+
     // Construct Method
 
     public function __construct()
@@ -90,5 +100,29 @@ class Notification
     public function getDateSend()
     {
         return $this->date_send;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(?string $url): self
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    public function getUrlId(): ?int
+    {
+        return $this->url_id;
+    }
+
+    public function setUrlId(?int $url_id): self
+    {
+        $this->url_id = $url_id;
+
+        return $this;
     }
 }

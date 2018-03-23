@@ -359,6 +359,8 @@ class AppController extends Controller
             $notification->setIdUser($this->getUser()->getId());
             $notifContent = (strlen($sendComment->getComment()) > 40) ? substr($sendComment->getComment(), 0, 40) . "..." : $sendComment->getComment();
             $notification->setContent($notifContent);
+            $notification->setUrl('app_status_show');
+            $notification->setUrlId($sendComment->getIdStatus());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($notification);
