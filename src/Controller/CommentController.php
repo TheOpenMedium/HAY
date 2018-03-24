@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Status;
+use App\Entity\Post;
 use App\Entity\Comment;
 use App\Entity\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -28,7 +28,7 @@ class CommentController extends Controller
      * Render the comment form
      *
      * @param Request $request The HTTP request
-     * @param int $id The status id
+     * @param int $id The post id
      * @param string $_color The color user for rendering the comment form
      *
      * @Route("/{_locale}/comment/{id}/{_color}",
@@ -53,7 +53,7 @@ class CommentController extends Controller
         // If a form was submitted, the Form's data are retrieved.
         if ($comment->isSubmitted() && $comment->isValid()) {
             $sendComment = $comment->getData();
-            $sendComment->setIdStatus($id);
+            $sendComment->setIdPost($id);
 
             // Saving comment in database.
             $em = $this->getDoctrine()->getManager();
@@ -67,8 +67,8 @@ class CommentController extends Controller
             $notification->setIdUser($this->getUser()->getId());
             $notifContent = (strlen($sendComment->getComment()) > 40) ? substr($sendComment->getComment(), 0, 40) . "..." : $sendComment->getComment();
             $notification->setContent($notifContent);
-            $notification->setUrl('app_status_show');
-            $notification->setUrlId($sendComment->getIdStatus());
+            $notification->setUrl('app_post_show');
+            $notification->setUrlId($sendComment->getIdPost());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($notification);
@@ -78,7 +78,7 @@ class CommentController extends Controller
             return $this->redirect($this->generateUrl('app_index'));
         }
 
-        // All that is rendered with the comment template sending a Form, Color of the status and the Status Id.
+        // All that is rendered with the comment template sending a Form, Color of the post and the Post Id.
         return $this->render('comment/comment.html.twig', array(
             'comment' => $comment->createView(),
             'color' => $_color,

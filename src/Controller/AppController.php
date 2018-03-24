@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Status;
+use App\Entity\Post;
 use App\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,10 +71,10 @@ class AppController extends Controller
         // Making sure that he's connected.
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
 
-        $status = new Status();
+        $post = new Post();
 
-        // Creating Status submit Form in case he want to send a status.
-        $form = $this->createFormBuilder($status)
+        // Creating Post submit Form in case he want to send a post.
+        $form = $this->createFormBuilder($post)
             ->add('content', TextareaType::class)
             ->add('color', ChoiceType::class, array(
                 'choices' => array(
@@ -123,33 +123,33 @@ class AppController extends Controller
 
         $form->handleRequest($request);
 
-        // If he send a Status, the Status is saved into database.
+        // If he send a Post, the Post is saved into database.
         if ($form->isSubmitted() && $form->isValid()) {
-            $status = $form->getData();
-            $status->setFont('SS');
+            $post = $form->getData();
+            $post->setFont('SS');
 
             $em = $this->getDoctrine()->getManager();
-            $em->persist($status);
+            $em->persist($post);
             $em->flush();
         }
 
-        // Fetching Status and their comments.
-        $statusList = $this->getDoctrine()->getRepository(Status::class)->findStatus(10);
+        // Fetching Post and their comments.
+        $postList = $this->getDoctrine()->getRepository(Post::class)->findPost(10);
         $commentList = array();
 
-        // If there is one Status or more :
-        if ($statusList) {
-            // We replace new lines by the <br /> tag and we fetch from the database the 10 newer comments of each status.
-            foreach ($statusList as $status) {
-                $content = $status[0]->getContent();
-                $status[0]->setContent(preg_replace('#\n#', '<br />', $content));
-                $commentList[] = $this->getDoctrine()->getRepository(Comment::class)->findComments(10, $status[0]->getId());
+        // If there is one Post or more :
+        if ($postList) {
+            // We replace new lines by the <br /> tag and we fetch from the database the 10 newer comments of each post.
+            foreach ($postList as $post) {
+                $content = $post[0]->getContent();
+                $post[0]->setContent(preg_replace('#\n#', '<br />', $content));
+                $commentList[] = $this->getDoctrine()->getRepository(Comment::class)->findComments(10, $post[0]->getId());
             }
 
             // Then, we replace new lines by the <br /> tag.
-            foreach ($commentList as $commentStatus) {
-                if ($commentStatus) {
-                    foreach ($commentStatus as $comment) {
+            foreach ($commentList as $commentPost) {
+                if ($commentPost) {
+                    foreach ($commentPost as $comment) {
                         $c = $comment[0]->getComment();
                         $comment[0]->setComment(preg_replace('#\n#', '<br />', $c));
                     }
@@ -157,11 +157,11 @@ class AppController extends Controller
             }
         }
 
-        // All that is rendered with the home template sending a Form, Status List and Comment List.
+        // All that is rendered with the home template sending a Form, Post List and Comment List.
         return $this->render('home.html.twig', array(
             'form' => $form->createView(),
             'commentList' => $commentList,
-            'statusList' => $statusList
+            'postList' => $postList
         ));
     }
 

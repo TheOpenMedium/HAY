@@ -1,24 +1,24 @@
 {% set i = 0 %}
-{% for status in statusList %}
+{% for post in postList %}
 {# Affichage des textes #}
 {# Text display #}
 <div class="text">
     {# Informations sur l'expéditeur #}
     {# Sender informations #}
-    <div class="infHAY c{{ status[0].color }}">
+    <div class="infHAY c{{ post[0].color }}">
         <table style="border: 0px;">
 
             <tr>
-                <td style="padding-right: 15px;"><a href="{{ url('user_show', {'id': status.id}) }}"><img src="/ressources/icone.png" width="40px" height="40px" alt="{{ 'usr_img'|trans }}" /></a></td>
-                <td style="border-left: 1px solid {{ status[0].color != 'FFF' ? 'white' : 'black' }}; padding-left: 15px; font-family: sans-serif; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};">
-                    <a href="{{ url('user_show', {'id': status.id}) }}">
-                        {{ status.first_name }} {{ status.last_name }} {% if status.username %}{{ 'alias'|trans }} {{ status.username }} {% endif %}{{ 'has_write'|trans }}
+                <td style="padding-right: 15px;"><a href="{{ url('user_show', {'id': post.id}) }}"><img src="/ressources/icone.png" width="40px" height="40px" alt="{{ 'usr_img'|trans }}" /></a></td>
+                <td style="border-left: 1px solid {{ post[0].color != 'FFF' ? 'white' : 'black' }}; padding-left: 15px; font-family: sans-serif; color: {{ post[0].color != 'FFF' ? 'white' : 'black' }};">
+                    <a href="{{ url('user_show', {'id': post.id}) }}">
+                        {{ post.first_name }} {{ post.last_name }} {% if post.username %}{{ 'alias'|trans }} {{ post.username }} {% endif %}{{ 'has_write'|trans }}
                     </a>
                 </td>
                 <span style="float: right; padding: 5px; cursor: default;">
-                    {% if status.id == app.user.id %}
-                        <a class="icofont icofont-ui-delete" style="margin-right: 5px; text-decoration: none; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};" href="{{ url('status_delete', {'id': status[0].id}) }}"></a>
-                        <a class="icofont icofont-pencil-alt-2" style="margin-right: 5px; text-decoration: none; color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};" href="{{ url('status_edit', {'id': status[0].id}) }}"></a>
+                    {% if post.id == app.user.id %}
+                        <a class="icofont icofont-ui-delete" style="margin-right: 5px; text-decoration: none; color: {{ post[0].color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_delete', {'id': post[0].id}) }}"></a>
+                        <a class="icofont icofont-pencil-alt-2" style="margin-right: 5px; text-decoration: none; color: {{ post[0].color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_edit', {'id': post[0].id}) }}"></a>
                     {% endif %}
                     <i class="icofont icofont-navigation-menu"></i>
                 </span>
@@ -26,10 +26,10 @@
         </table>
     </div>
     {########################################}
-    <div class="content c{{ status[0].color }} ff{{ status[0].font }} fs{{ status[0].size }}" style="border-color: {{ status[0].color != 'FFF' ? 'white' : 'black' }};">
-        {{ status[0].content|escape|replace({'&lt;br /&gt;': '<br />'})|raw }}
+    <div class="content c{{ post[0].color }} ff{{ post[0].font }} fs{{ post[0].size }}" style="border-color: {{ post[0].color != 'FFF' ? 'white' : 'black' }};">
+        {{ post[0].content|escape|replace({'&lt;br /&gt;': '<br />'})|raw }}
     </div>
-    {{ render(url('comment', {'id': status[0].id, '_color': status[0].color})) }}
+    {{ render(url('comment', {'id': post[0].id, '_color': post[0].color})) }}
 {% if commentList[i] is not empty %}
 {% for comment in commentList[i] %}
     <div class="com">

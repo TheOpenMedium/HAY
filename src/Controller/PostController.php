@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Status;
+use App\Entity\Post;
 use App\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,43 +15,43 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 /**
- * A controller related to the Status entity
+ * A controller related to the Post entity
  *
  * List of actions:
- * * statusShowAction($id)                                  -- status_show
- * * statusEditAction(Request $request, Status $statusEdit) -- status_edit
- * * statusDeleteAction(Status $status, $id)                -- status_delete
+ * * postShowAction($id)                                  -- post_show
+ * * postEditAction(Request $request, Post $postEdit) -- post_edit
+ * * postDeleteAction(Post $post, $id)                -- post_delete
  */
-class StatusController extends Controller
+class PostController extends Controller
 {
     /**
-     * Render a single status
+     * Render a single post
      *
-     * @param int $id The status id
+     * @param int $id The post id
      *
-     * @Route("/{_locale}/show/status/{id}", name="status_show", requirements={
+     * @Route("/{_locale}/show/post/{id}", name="post_show", requirements={
      *     "_locale": "en|fr"
      * })
      */
-    public function statusShowAction($id)
+    public function postShowAction($id)
     {
-        // Retrieving statusList from the database.
-        $statusList = $this->getDoctrine()->getRepository(Status::class)->findStatusById($id);
+        // Retrieving postList from the database.
+        $postList = $this->getDoctrine()->getRepository(Post::class)->findPostById($id);
         $commentList = array();
 
-        // If there is one Status or more :
-        if ($statusList) {
-            // We replace new lines by the <br /> tag and we fetch from the database the 10 newer comments of each status.
-            foreach ($statusList as $status) {
-                $content = $status[0]->getContent();
-                $status[0]->setContent(preg_replace('#\n#', '<br />', $content));
-                $commentList[] = $this->getDoctrine()->getRepository(Comment::class)->findComments(10, $status[0]->getId());
+        // If there is one Post or more :
+        if ($postList) {
+            // We replace new lines by the <br /> tag and we fetch from the database the 10 newer comments of each post.
+            foreach ($postList as $post) {
+                $content = $post[0]->getContent();
+                $post[0]->setContent(preg_replace('#\n#', '<br />', $content));
+                $commentList[] = $this->getDoctrine()->getRepository(Comment::class)->findComments(10, $post[0]->getId());
             }
 
             // Then, we replace new lines by the <br /> tag.
-            foreach ($commentList as $commentStatus) {
-                if ($commentStatus) {
-                    foreach ($commentStatus as $comment) {
+            foreach ($commentList as $commentPost) {
+                if ($commentPost) {
+                    foreach ($commentPost as $comment) {
                         $c = $comment[0]->getComment();
                         $comment[0]->setComment(preg_replace('#\n#', '<br />', $c));
                     }
@@ -59,39 +59,39 @@ class StatusController extends Controller
             }
         }
 
-        // All that is rendered with the status show template sending Status List and Comment List.
-        return $this->render('status/showStatus.html.twig', array(
-            'statusList' => $statusList,
+        // All that is rendered with the post show template sending Post List and Comment List.
+        return $this->render('post/showPost.html.twig', array(
+            'postList' => $postList,
             'commentList' => $commentList
         ));
     }
 
     /**
-     * Render the status edit page
+     * Render the post edit page
      *
      * @param Request $request The HTTP request
-     * @param Status $statusEdit The status to edit
+     * @param Post $postEdit The post to edit
      *
-     * @Route("/{_locale}/edit/status/{id}", name="status_edit", requirements={
+     * @Route("/{_locale}/edit/post/{id}", name="post_edit", requirements={
      *     "_locale": "en|fr"
      * })
      */
-    public function statusEditAction(Request $request/*, Status $statusEdit*/)
+    public function postEditAction(Request $request/*, Post $postEdit*/)
     {
         $user = $this->getUser();
 
         // Checking that the author and the user are the same.
-        if ($statusEdit->getIdUser() == $user->getId()) {
-            $status = new Status();
+        if ($postEdit->getIdUser() == $user->getId()) {
+            $post = new Post();
 
             // Adding last values as default
-            $status->setContent($statusEdit->getContent());
-            $status->setColor($statusEdit->getColor());
-            $status->setSize($statusEdit->getSize());
-            $status->setFont($statusEdit->getFont());
+            $post->setContent($postEdit->getContent());
+            $post->setColor($postEdit->getColor());
+            $post->setSize($postEdit->getSize());
+            $post->setFont($postEdit->getFont());
 
             // Creating the form
-            $form = $this->createFormBuilder($status)
+            $form = $this->createFormBuilder($post)
                 ->add('content', TextareaType::class)
                 ->add('color', ChoiceType::class, array(
                     'choices' => array(
@@ -140,18 +140,18 @@ class StatusController extends Controller
 
             $form->handleRequest($request);
 
-            // If a status was edited, we retrieve data.
+            // If a post was edited, we retrieve data.
             if ($form->isSubmitted() && $form->isValid()) {
-                $status = $form->getData();
-                $status->setFont('SS');
+                $post = $form->getData();
+                $post->setFont('SS');
 
                 $em = $this->getDoctrine()->getManager();
 
                 // We replace old datas.
-                $statusEdit->setContent($status->getContent());
-                $statusEdit->setColor($status->getColor());
-                $statusEdit->setSize($status->getSize());
-                $statusEdit->setFont($status->getFont());
+                $postEdit->setContent($post->getContent());
+                $postEdit->setColor($post->getColor());
+                $postEdit->setSize($post->getSize());
+                $postEdit->setFont($post->getFont());
 
                 // And finaly, we save changes.
                 $em->flush();
@@ -160,45 +160,45 @@ class StatusController extends Controller
                 return $this->redirectToRoute('app_index');
             }
 
-            $color = $statusEdit->getColor();
-            $size = $statusEdit->getSize();
+            $color = $postEdit->getColor();
+            $size = $postEdit->getSize();
 
-            // All that is rendered with the status edit template sending a From and the default Color and Size.
-            return $this->render('status/editStatus.html.twig', array(
+            // All that is rendered with the post edit template sending a From and the default Color and Size.
+            return $this->render('post/editPost.html.twig', array(
                 'form' => $form->createView(),
                 'color' => $color,
                 'size' => $size
             ));
         } else {
-            // If the user can't modify the status, he's redirected to home page.
+            // If the user can't modify the post, he's redirected to home page.
             return $this->redirectToRoute('app_index');
         }
     }
 
     /**
-     * Delete a status from the database
+     * Delete a post from the database
      *
-     * @param Status $status The status to delete
-     * @param int $id The id of the status to delete
+     * @param Post $post The post to delete
+     * @param int $id The id of the post to delete
      *
-     * @Route("/{_locale}/delete/status/{id}", name="status_delete", requirements={
+     * @Route("/{_locale}/delete/post/{id}", name="post_delete", requirements={
      *     "_locale": "en|fr"
      * })
      */
-    public function statusDeleteAction(/*Status $status, */$id)
+    public function postDeleteAction(/*Post $post, */$id)
     {
-        // Fetching the status and it's comments.
+        // Fetching the post and it's comments.
         $entityManager = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository(Comment::class);
-        $comments = $repository->findBy(['id_status' => $id]);
+        $comments = $repository->findBy(['id_post' => $id]);
 
         $user = $this->getUser();
 
         // And delete it if the user and the author are the same.
-        if ($status->getIdUser() == $user->getId()) {
-            $entityManager->remove($status);
+        if ($post->getIdUser() == $user->getId()) {
+            $entityManager->remove($post);
 
-            // Then delete every comment related to the status.
+            // Then delete every comment related to the post.
             foreach ($comments as $comment) {
                 $entityManager->remove($comment);
             }

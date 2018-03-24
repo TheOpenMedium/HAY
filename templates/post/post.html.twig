@@ -1,16 +1,16 @@
-{# Send status form #}
+{# Send post form #}
 <div class="write">
     {{ form_start(form) }}
     <div class="textarea fs16 c696">{{ 'write'|trans }}{{ form_widget(form.content, {'attr': {'class': 'ta fs16', 'required': false}}) }}</div>
     <div class="footer">
         <ul class="footerMenu">
-            {{ include('status/statusOptions/statusOption.html.twig') }}
-            {{ include('status/statusOptions/statusDownload.html.twig') }}
-            {{ include('status/statusOptions/statusColor.html.twig') }}
-            {{ include('status/statusOptions/statusSize.html.twig') }}
-            {{ include('status/statusOptions/statusFont.html.twig') }}
-            {{ include('status/statusOptions/statusAccount.html.twig') }}
-            <li class="menuChoices sendStatus">
+            {{ include('post/postOptions/postOption.html.twig') }}
+            {{ include('post/postOptions/postDownload.html.twig') }}
+            {{ include('post/postOptions/postColor.html.twig') }}
+            {{ include('post/postOptions/postSize.html.twig') }}
+            {{ include('post/postOptions/postFont.html.twig') }}
+            {{ include('post/postOptions/postAccount.html.twig') }}
+            <li class="menuChoices sendPost">
                 <label for="form_submit" class="send"><span id="sendArrow"><i class="fa fa-arrow-right fa-lg" aria-hidden="true"></i></span></label>
                 {{ form_widget(form.submit, {'attr': {'class': 'sendButton'}, 'label': false}) }}
                 {{ form_widget(form.id_user, {'attr': {'value': app.user.id}}) }}
