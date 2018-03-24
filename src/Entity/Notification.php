@@ -64,6 +64,11 @@ class Notification
      */
     private $url_id;
 
+    public function __construct()
+    {
+        $this->date_send = new \Datetime();
+    }
+
     public function getId()
     {
         return $this->id;

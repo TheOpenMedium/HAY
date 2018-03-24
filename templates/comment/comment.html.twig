@@ -1,5 +1,4 @@
 {{ form_start(comment, {'attr': {'class': 'comment c' ~ color, 'action': path('comment', {'id': id})}}) }}
-{{ form_widget(comment.id_user, {'attr': {'value': app.user.id}}) }}
 <table>
     <tr>
         <td><label for="comment_submit_{{ id }}" class="sendCom"><i class="icofont icofont-comment"></i></label>{{ form_widget(comment.submit, {'attr': {'style': 'display: none;'}, 'id': 'comment_submit_' ~ id}) }}</td>

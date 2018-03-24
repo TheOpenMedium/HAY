@@ -68,7 +68,7 @@ class Post
 
     public function __construct()
     {
-        $this->date_content = new \Datetime();
+        $this->date_post = new \Datetime();
         $this->comments = new ArrayCollection();
     }
 

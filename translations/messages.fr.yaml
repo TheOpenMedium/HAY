@@ -42,7 +42,7 @@ notif0: a laissé un commentaire sur un de vos statuts
 # Page d'utilisateur
 
 about: À propos
-status: Statuts
+post: Statuts
 photo: Photographies
 video: Vidéos
 files: Fichiers
@@ -51,7 +51,7 @@ blog: Blog
 # Show and edit pages
 # Pages d'affichage et de modification
 
-show_status: Voir le statut
+show_post: Voir le statut
 show_comment: Voir le commentaire
-edit_status: Modifier le statut
+edit_post: Modifier le statut
 edit_comment: Modifier le commentaire

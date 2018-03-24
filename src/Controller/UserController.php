@@ -26,27 +26,21 @@ class UserController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function userShowAction(/*User $user, */$id)
+    public function userShowAction(User $user)
     {
-        // Fetching the post of the requested user.
-        $postList = $this->getDoctrine()->getRepository(Post::class)->findPostByUser(10, $id);
-        $commentList = array();
+        // Fetching Post.
+        $postList = $user->getPosts();;
 
-        // If there is one Post or more :
+        // If there is one Post or more:
         if ($postList) {
-            // We replace new lines by the <br /> tag and we fetch from the database the 10 newer comments of each post.
+            // We replace new lines by the <br /> tag.
             foreach ($postList as $post) {
-                $content = $post[0]->getContent();
-                $post[0]->setContent(preg_replace('#\n#', '<br />', $content));
-                $commentList[] = $this->getDoctrine()->getRepository(Comment::class)->findComments(10, $post[0]->getId());
-            }
-
-            // Then, we replace new lines by the <br /> tag.
-            foreach ($commentList as $commentPost) {
-                if ($commentPost) {
-                    foreach ($commentPost as $comment) {
-                        $c = $comment[0]->getComment();
-                        $comment[0]->setComment(preg_replace('#\n#', '<br />', $c));
+                $content = $post->getContent();
+                $post->setContent(preg_replace('#\n#', '<br />', $content));
+                if ($post->getComments()) {
+                    foreach ($post->getComments() as $comment) {
+                        $c = $comment->getComment();
+                        $comment->setComment(preg_replace('#\n#', '<br />', $c));
                     }
                 }
             }
@@ -54,7 +48,6 @@ class UserController extends Controller
 
         // All that is rendered with the user show template sending Post List, Comment List and User.
         return $this->render('user/showUser.html.twig', array(
-            'commentList' => $commentList,
             'postList' => $postList,
             'user' => $user
         ));

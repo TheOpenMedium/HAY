@@ -1,16 +1,16 @@
 <ul class="ulNotification">
     {% for notification in notifications %}
         <li class="notif">
-            {% if notification[0].notificationType == 0 %}
+            {% if notification.type == 0 %}
                 <a class="icofont icofont-close-line"
                 style="float: right; position: relative; bottom: 10px; left: 10px; text-decoration: none; font-size: 24px;"
-                href="{{ url('notification_delete', {'id': notification[0].id}) }}"></a>
-                {{ notification.first_name }} {{ notification.last_name }} {{ 'notif0'|trans }} "{{ notification[0].content }}".
+                href="{{ url('notification_delete', {'id': notification.id}) }}"></a>
+                {{ notification.user.firstName }} {{ notification.user.lastName }} {{ 'notif0'|trans }} "{{ notification.content }}".
             {% endif %}
-            {% if notification[0].url %}
+            {% if notification.url %}
                 <a class="icofont icofont-thin-double-right"
                 style="float: right; position: relative; bottom: 10px; left: 10px; text-decoration: none; font-size: 24px;"
-                href="{{ url(notification[0].url, {'id': notification[0].urlId}) }}"></a>
+                href="{{ url(notification.url, {'id': notification.urlId}) }}"></a>
             {% endif %}
         </li>
     {% endfor %}

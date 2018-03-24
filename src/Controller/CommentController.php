@@ -18,9 +18,9 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
  *
  * List of action:
  * * commentAction(Request $request, $id, $_color)             -- comment
- * * commentShowAction($id)                                    -- comment_show
+ * * commentShowAction(Comment $comment)                       -- comment_show
  * * commentEditAction(Request $request, Comment $commentEdit) -- comment_edit
- * * commentDeleteAction(Comment $comment, $id)                -- comment_delete
+ * * commentDeleteAction(Comment $comment)                     -- comment_delete
  */
 class CommentController extends Controller
 {
@@ -44,7 +44,6 @@ class CommentController extends Controller
         // Creating the Form if the user want to submit a comment.
         $comment = $this->createFormBuilder($com)
             ->add('comment', TextareaType::class)
-            ->add('id_user', HiddenType::class)
             ->add('submit', SubmitType::class)
             ->getForm();
 
@@ -53,7 +52,9 @@ class CommentController extends Controller
         // If a form was submitted, the Form's data are retrieved.
         if ($comment->isSubmitted() && $comment->isValid()) {
             $sendComment = $comment->getData();
-            $sendComment->setIdPost($id);
+            $post = $this->getDoctrine()->getRepository(Post::class)->find($id);
+            $sendComment->setPost($post);
+            $sendComment->setUser($this->getUser());
 
             // Saving comment in database.
             $em = $this->getDoctrine()->getManager();
@@ -63,12 +64,12 @@ class CommentController extends Controller
             // Sending a notification (notification type '0').
             $notification = new Notification;
 
-            $notification->setNotificationType(0);
-            $notification->setIdUser($this->getUser()->getId());
+            $notification->setType(0);
+            $notification->setUser($this->getUser());
             $notifContent = (strlen($sendComment->getComment()) > 40) ? substr($sendComment->getComment(), 0, 40) . "..." : $sendComment->getComment();
             $notification->setContent($notifContent);
-            $notification->setUrl('app_post_show');
-            $notification->setUrlId($sendComment->getIdPost());
+            $notification->setUrl('post_show');
+            $notification->setUrlId($sendComment->getPost()->getId());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($notification);
@@ -89,20 +90,17 @@ class CommentController extends Controller
     /**
      * Render a single comment
      *
-     * @param int $id The comment id
+     * @param Comment $comment The comment to render
      *
      * @Route("/{_locale}/show/comment/{id}", name="comment_show", requirements={
      *     "_locale": "en|fr"
      * })
      */
-    public function commentShowAction($id)
+    public function commentShowAction(Comment $comment)
     {
-        // Fetching the comment.
-        $comment = $this->getDoctrine()->getRepository(Comment::class)->findCommentById($id);
-
         // All that is rendered with the comment show template sending the Comment.
         return $this->render('comment/showComment.html.twig', array(
-            'comment' => $comment[0]
+            'comment' => $comment
         ));
     }
 
@@ -116,12 +114,12 @@ class CommentController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function commentEditAction(Request $request/*, Comment $commentEdit*/)
+    public function commentEditAction(Request $request, Comment $commentEdit)
     {
         $user = $this->getUser();
 
         // Checking that the author and the user are the same.
-        if ($commentEdit->getIdUser() == $user->getId()) {
+        if ($commentEdit->getUser()->getId() == $user->getId()) {
             $comment = new Comment();
 
             // Adding last values as default.
@@ -130,7 +128,6 @@ class CommentController extends Controller
             // Creating a Form to edit comment.
             $form = $this->createFormBuilder($comment)
                 ->add('comment', TextareaType::class)
-                ->add('id_user', HiddenType::class)
                 ->add('submit', SubmitType::class)
                 ->getForm();
 
@@ -164,20 +161,19 @@ class CommentController extends Controller
      * Delete a comment from the database
      *
      * @param Comment $comment The comment to delete
-     * @param int $id The id of the comment to delete
      *
      * @Route("/{_locale}/delete/comment/{id}", name="comment_delete", requirements={
      *     "_locale": "en|fr"
      * })
      */
-    public function commentDeleteAction(/*Comment $comment, */$id)
+    public function commentDeleteAction(Comment $comment)
     {
         $entityManager = $this->getDoctrine()->getManager();
 
         $user = $this->getUser();
 
         // Checking that the author and the user that want to delete the comment are the same.
-        if ($comment->getIdUser() == $user->getId()) {
+        if ($comment->getUser()->getId() == $user->getId()) {
             // Removing the comment.
             $entityManager->remove($comment);
             $entityManager->flush();

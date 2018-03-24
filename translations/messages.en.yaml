@@ -38,7 +38,7 @@ notif0: has commented one of your status
 # User page
 
 about: About
-status: Status
+post: Posts
 photo: Photos
 video: Videos
 file: Files
@@ -46,7 +46,7 @@ blog: Blog
 
 # Show and edit pages
 
-show_status: Show status
+show_post: Show post
 show_comment: Show comment
-edit_status: Edit status
+edit_post: Edit post
 edit_comment: Edit comment

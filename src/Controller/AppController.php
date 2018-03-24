@@ -117,7 +117,6 @@ class AppController extends Controller
                 'expanded' => true
             ))
             ->add('size', IntegerType::class)
-            ->add('id_user', HiddenType::class)
             ->add('submit', SubmitType::class)
             ->getForm();
 
@@ -127,31 +126,26 @@ class AppController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $post = $form->getData();
             $post->setFont('SS');
+            $post->setUser($this->getUser());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
             $em->flush();
         }
 
-        // Fetching Post and their comments.
+        // Fetching Post.
         $postList = $this->getDoctrine()->getRepository(Post::class)->findPost(10);
-        $commentList = array();
 
-        // If there is one Post or more :
+        // If there is one Post or more:
         if ($postList) {
-            // We replace new lines by the <br /> tag and we fetch from the database the 10 newer comments of each post.
+            // We replace new lines by the <br /> tag.
             foreach ($postList as $post) {
-                $content = $post[0]->getContent();
-                $post[0]->setContent(preg_replace('#\n#', '<br />', $content));
-                $commentList[] = $this->getDoctrine()->getRepository(Comment::class)->findComments(10, $post[0]->getId());
-            }
-
-            // Then, we replace new lines by the <br /> tag.
-            foreach ($commentList as $commentPost) {
-                if ($commentPost) {
-                    foreach ($commentPost as $comment) {
-                        $c = $comment[0]->getComment();
-                        $comment[0]->setComment(preg_replace('#\n#', '<br />', $c));
+                $content = $post->getContent();
+                $post->setContent(preg_replace('#\n#', '<br />', $content));
+                if ($post->getComments()) {
+                    foreach ($post->getComments() as $comment) {
+                        $c = $comment->getComment();
+                        $comment->setComment(preg_replace('#\n#', '<br />', $c));
                     }
                 }
             }
@@ -160,7 +154,6 @@ class AppController extends Controller
         // All that is rendered with the home template sending a Form, Post List and Comment List.
         return $this->render('home.html.twig', array(
             'form' => $form->createView(),
-            'commentList' => $commentList,
             'postList' => $postList
         ));
     }

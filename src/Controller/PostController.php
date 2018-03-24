@@ -18,51 +18,38 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
  * A controller related to the Post entity
  *
  * List of actions:
- * * postShowAction($id)                                  -- post_show
+ * * postShowAction($id)                              -- post_show
  * * postEditAction(Request $request, Post $postEdit) -- post_edit
- * * postDeleteAction(Post $post, $id)                -- post_delete
+ * * postDeleteAction(Post $post)                     -- post_delete
  */
 class PostController extends Controller
 {
     /**
      * Render a single post
      *
-     * @param int $id The post id
+     * @param Post $id The post to render
      *
      * @Route("/{_locale}/show/post/{id}", name="post_show", requirements={
      *     "_locale": "en|fr"
      * })
      */
-    public function postShowAction($id)
+    public function postShowAction(Post $post)
     {
-        // Retrieving postList from the database.
-        $postList = $this->getDoctrine()->getRepository(Post::class)->findPostById($id);
-        $commentList = array();
-
-        // If there is one Post or more :
-        if ($postList) {
-            // We replace new lines by the <br /> tag and we fetch from the database the 10 newer comments of each post.
-            foreach ($postList as $post) {
-                $content = $post[0]->getContent();
-                $post[0]->setContent(preg_replace('#\n#', '<br />', $content));
-                $commentList[] = $this->getDoctrine()->getRepository(Comment::class)->findComments(10, $post[0]->getId());
-            }
-
-            // Then, we replace new lines by the <br /> tag.
-            foreach ($commentList as $commentPost) {
-                if ($commentPost) {
-                    foreach ($commentPost as $comment) {
-                        $c = $comment[0]->getComment();
-                        $comment[0]->setComment(preg_replace('#\n#', '<br />', $c));
-                    }
-                }
+        // We replace new lines by the <br /> tag.
+        $content = $post->getContent();
+        $post->setContent(preg_replace('#\n#', '<br />', $content));
+        if ($post->getComments()) {
+            foreach ($post->getComments() as $comment) {
+                $c = $comment->getComment();
+                $comment->setComment(preg_replace('#\n#', '<br />', $c));
             }
         }
 
+        $postList[0] = $post;
+
         // All that is rendered with the post show template sending Post List and Comment List.
         return $this->render('post/showPost.html.twig', array(
-            'postList' => $postList,
-            'commentList' => $commentList
+            'postList' => $postList
         ));
     }
 
@@ -76,12 +63,12 @@ class PostController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function postEditAction(Request $request/*, Post $postEdit*/)
+    public function postEditAction(Request $request, Post $postEdit)
     {
         $user = $this->getUser();
 
         // Checking that the author and the user are the same.
-        if ($postEdit->getIdUser() == $user->getId()) {
+        if ($postEdit->getUser()->getId() == $user->getId()) {
             $post = new Post();
 
             // Adding last values as default
@@ -134,7 +121,6 @@ class PostController extends Controller
                     'expanded' => true
                 ))
                 ->add('size', IntegerType::class)
-                ->add('id_user', HiddenType::class)
                 ->add('submit', SubmitType::class)
                 ->getForm();
 
@@ -179,30 +165,19 @@ class PostController extends Controller
      * Delete a post from the database
      *
      * @param Post $post The post to delete
-     * @param int $id The id of the post to delete
      *
      * @Route("/{_locale}/delete/post/{id}", name="post_delete", requirements={
      *     "_locale": "en|fr"
      * })
      */
-    public function postDeleteAction(/*Post $post, */$id)
+    public function postDeleteAction(Post $post)
     {
-        // Fetching the post and it's comments.
-        $entityManager = $this->getDoctrine()->getManager();
-        $repository = $this->getDoctrine()->getRepository(Comment::class);
-        $comments = $repository->findBy(['id_post' => $id]);
-
         $user = $this->getUser();
 
         // And delete it if the user and the author are the same.
-        if ($post->getIdUser() == $user->getId()) {
+        if ($post->getUser()->getId() == $user->getId()) {
+            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($post);
-
-            // Then delete every comment related to the post.
-            foreach ($comments as $comment) {
-                $entityManager->remove($comment);
-            }
-
             $entityManager->flush();
         }
 

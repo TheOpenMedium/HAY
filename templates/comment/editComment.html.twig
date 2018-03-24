@@ -10,7 +10,6 @@
 
 <div>
     {{ form_start(comment, {'attr': {'class': 'comment', 'style': 'margin: auto;'}}) }}
-    {{ form_widget(comment.id_user, {'attr': {'value': app.user.id}}) }}
     <table>
         <tr>
             <td><label for="form_submit" class="sendCom"><i class="icofont icofont-comment"></i></label>{{ form_widget(comment.submit, {'attr': {'style': 'display: none;'}}) }}</td>
