@@ -9,40 +9,40 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * List of column:
  * * id
- * * notification_type
- * * id_user
+ * * type
+ * * user
  * * content
  * * date_send
  * * url
  * * url_id
+ *
+ * All notifications types:
+ * * 0: Comment send on a status
  *
  * @ORM\Entity(repositoryClass="App\Repository\NotificationRepository")
  */
 class Notification
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
+     * All notifications types:
+     * * 0: Comment send on a status
+     *
      * @ORM\Column(type="integer")
      */
-    private $notification_type;
-
-    /*
-
-    Please list here all notifications types:
-    0: Comment send on a status
-
-    */
+    private $type;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="notifications")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $id_user;
+    private $user;
 
     /**
      * @ORM\Column(type="text")
@@ -64,53 +64,57 @@ class Notification
      */
     private $url_id;
 
-    // Construct Method
-
-    public function __construct()
-    {
-        $this->date_send = new \Datetime();
-    }
-
-    // Getters & setters
-
     public function getId()
     {
         return $this->id;
     }
 
-    public function getNotificationType()
+    public function getType(): ?int
     {
-        return $this->notification_type;
+        return $this->type;
     }
 
-    public function setNotificationType($notification_type)
+    public function setType(int $type): self
     {
-        $this->notification_type = $notification_type;
+        $this->type = $type;
+
+        return $this;
     }
 
-    public function getIdUser()
+    public function getUser(): ?User
     {
-        return $this->id_user;
+        return $this->user;
     }
 
-    public function setIdUser($id_user)
+    public function setUser(?User $user): self
     {
-        $this->id_user = $id_user;
+        $this->user = $user;
+
+        return $this;
     }
 
-    public function getContent()
+    public function getContent(): ?string
     {
         return $this->content;
     }
 
-    public function setContent($content)
+    public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
     }
 
-    public function getDateSend()
+    public function getDateSend(): ?\DateTimeInterface
     {
         return $this->date_send;
+    }
+
+    public function setDateSend(\DateTimeInterface $date_send): self
+    {
+        $this->date_send = $date_send;
+
+        return $this;
     }
 
     public function getUrl(): ?string

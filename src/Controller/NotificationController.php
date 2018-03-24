@@ -45,7 +45,7 @@ class NotificationController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function notificationDeleteAction(Notification $notification)
+    public function notificationDeleteAction(/*Notification $notification*/)
     {
         $em = $this->getDoctrine()->getManager();
 

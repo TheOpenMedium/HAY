@@ -76,7 +76,7 @@ class StatusController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function statusEditAction(Request $request, Status $statusEdit)
+    public function statusEditAction(Request $request/*, Status $statusEdit*/)
     {
         $user = $this->getUser();
 
@@ -185,7 +185,7 @@ class StatusController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function statusDeleteAction(Status $status, $id)
+    public function statusDeleteAction(/*Status $status, */$id)
     {
         // Fetching the status and it's comments.
         $entityManager = $this->getDoctrine()->getManager();

@@ -9,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * List of column:
  * * id
- * * id_status
- * * id_user
+ * * user
+ * * post
  * * comment
  * * date_send
  *
@@ -19,25 +19,23 @@ use Doctrine\ORM\Mapping as ORM;
 class Comment
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="App\Entity\Status", inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $id_status;
+    private $user;
 
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Post", inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $id_user;
+    private $post;
 
     /**
      * @ORM\Column(type="text")
@@ -49,52 +47,61 @@ class Comment
      */
     private $date_send;
 
-    // Construct Method
-
     public function __construct()
     {
         $this->date_send = new \Datetime();
     }
-
-    // Getters & setters
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getIdUser()
+    public function getUser(): ?User
     {
-        return $this->id_user;
+        return $this->user;
     }
 
-    public function setIdUser($id_user)
+    public function setUser(?User $user): self
     {
-        $this->id_user = $id_user;
+        $this->user = $user;
+
+        return $this;
     }
 
-    public function getIdStatus()
+    public function getPost(): ?Post
     {
-        return $this->id_status;
+        return $this->post;
     }
 
-    public function setIdStatus($id_status)
+    public function setPost(?Post $post): self
     {
-        $this->id_status = $id_status;
+        $this->post = $post;
+
+        return $this;
     }
 
-    public function getComment()
+    public function getComment(): ?string
     {
         return $this->comment;
     }
 
-    public function setComment($comment)
+    public function setComment(string $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
     }
 
-    public function getDateSend()
+    public function getDateSend(): ?\DateTimeInterface
     {
         return $this->date_send;
+    }
+
+    public function setDateSend(\DateTimeInterface $date_send): self
+    {
+        $this->date_send = $date_send;
+
+        return $this;
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * User Entity
@@ -19,18 +19,17 @@ use Doctrine\Common\Collections\ArrayCollection;
  * * password
  * * date_sign
  * * mail_conf
- * * status
+ * * posts
  * * comments
+ * * notifications
  *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields="email", message="Email already taken")
- * @UniqueEntity(fields="username", message="Username already taken")
  */
 class User implements UserInterface, \Serializable
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -71,120 +70,214 @@ class User implements UserInterface, \Serializable
     private $mail_conf;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Status", mappedBy="id_user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="user", orphanRemoval=true)
      */
-    private $status;
+    private $posts;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="id_user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user", orphanRemoval=true)
      */
     private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Notification", mappedBy="user", orphanRemoval=true)
+     */
+    private $notifications;
 
     private $rememberme;
 
     private $salt;
 
-    // Construct Method
-
     public function __construct()
     {
         $this->date_sign = new \Datetime();
         $this->mail_conf = false;
-        $this->status = new ArrayCollection();
-        $this->comments = new ArrayCollection();
         $this->salt = null;
+        $this->posts = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
     }
-
-    // Getters & setters
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->first_name;
     }
 
-    public function setFirstName($first_name)
+    public function setFirstName(string $first_name): self
     {
         $this->first_name = $first_name;
+
+        return $this;
     }
 
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->last_name;
     }
 
-    public function setLastName($last_name)
+    public function setLastName(string $last_name): self
     {
         $this->last_name = $last_name;
+
+        return $this;
     }
 
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail($email)
+    public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
     }
 
-    public function getUsername()
+    public function getUsername(): ?string
     {
         return $this->username;
     }
 
-    public function setUsername($username)
+    public function setUsername(?string $username): self
     {
         $this->username = $username;
+
+        return $this;
     }
 
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function setPassword($password)
+    public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
     }
 
-    public function getDateSign()
+    public function getDateSign(): ?\DateTimeInterface
     {
         return $this->date_sign;
     }
 
-    public function getMailConf()
+    public function setDateSign(\DateTimeInterface $date_sign): self
+    {
+        $this->date_sign = $date_sign;
+
+        return $this;
+    }
+
+    public function getMailConf(): ?bool
     {
         return $this->mail_conf;
     }
 
-    public function setMailConf($mail_conf)
+    public function setMailConf(bool $mail_conf): self
     {
         $this->mail_conf = $mail_conf;
+
+        return $this;
     }
 
-    public function getStatus()
+    /**
+     * @return Collection|Post[]
+     */
+    public function getPosts(): Collection
     {
-        return $this->status;
+        return $this->posts;
     }
 
-    public function setStatus($status)
+    public function addPost(Post $post): self
     {
-        $this->status = $status;
+        if (!$this->posts->contains($post)) {
+            $this->posts[] = $post;
+            $post->setUser($this);
+        }
+
+        return $this;
     }
 
-    public function getComments()
+    public function removePost(Post $post): self
+    {
+        if ($this->posts->contains($post)) {
+            $this->posts->removeElement($post);
+            // set the owning side to null (unless already changed)
+            if ($post->getUser() === $this) {
+                $post->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
     {
         return $this->comments;
     }
 
-    public function setComments($comments)
+    public function addComment(Comment $comment): self
     {
-        $this->comments = $comments;
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Notification[]
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): self
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications[] = $notification;
+            $notification->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): self
+    {
+        if ($this->notifications->contains($notification)) {
+            $this->notifications->removeElement($notification);
+            // set the owning side to null (unless already changed)
+            if ($notification->getUser() === $this) {
+                $notification->setUser(null);
+            }
+        }
+
+        return $this;
     }
 
     public function getRememberme()

@@ -116,7 +116,7 @@ class CommentController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function commentEditAction(Request $request, Comment $commentEdit)
+    public function commentEditAction(Request $request/*, Comment $commentEdit*/)
     {
         $user = $this->getUser();
 
@@ -170,7 +170,7 @@ class CommentController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function commentDeleteAction(Comment $comment, $id)
+    public function commentDeleteAction(/*Comment $comment, */$id)
     {
         $entityManager = $this->getDoctrine()->getManager();
 

@@ -26,7 +26,7 @@ class UserController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function userShowAction(User $user, $id)
+    public function userShowAction(/*User $user, */$id)
     {
         // Fetching the status of the requested user.
         $statusList = $this->getDoctrine()->getRepository(Status::class)->findStatusByUser(10, $id);

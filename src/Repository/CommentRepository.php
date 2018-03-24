@@ -6,6 +6,12 @@ use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
+/**
+ * @method Comment|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Comment|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Comment[]    findAll()
+ * @method Comment[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ */
 class CommentRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
@@ -13,54 +19,31 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
-    /**
-     * @param $n, $id
-     * @return Comment[]
-     */
-    public function findComments($n, $id)
-    {
-        return $this->createQueryBuilder('c')
-            ->select(array('c', 'u.id', 'u.first_name', 'u.last_name', 'u.username'))
-            ->andWhere('c.id_status = :id')
-            ->setParameter('id', $id)
-            //->from('App\Entity\Status', 's')
-            ->innerJoin('App\Entity\User', 'u', 'WITH', 'c.id_user = u.id')
-            //->where('s.something = :value')->setParameter('value', $value)
-            ->orderBy('c.date_send', 'DESC')
-            ->setMaxResults($n)
-            ->getQuery()
-            ->getResult()
-            //->execute()
-        ;
-    }
-
-    /**
-     * @param $id
-     * @return Comment[]
-     */
-    public function findCommentById($id)
-    {
-        return $this->createQueryBuilder('c')
-            ->select(array('c', 'u.id', 'u.first_name', 'u.last_name', 'u.username'))
-            //->from('App\Entity\Status', 's')
-            ->innerJoin('App\Entity\User', 'u', 'WITH', 'c.id_user = u.id')
-            //->where('s.something = :value')->setParameter('value', $value)
-            ->where('c.id = :id')->setParameter('id', $id)
-            ->getQuery()
-            ->getResult()
-            //->execute()
-        ;
-    }
-
+//    /**
+//     * @return Comment[] Returns an array of Comment objects
+//     */
     /*
-    public function findBySomething($value)
+    public function findByExampleField($value)
     {
         return $this->createQueryBuilder('c')
-            ->where('c.something = :value')->setParameter('value', $value)
+            ->andWhere('c.exampleField = :val')
+            ->setParameter('val', $value)
             ->orderBy('c.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
+        ;
+    }
+    */
+
+    /*
+    public function findOneBySomeField($value): ?Comment
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.exampleField = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
     }
     */
