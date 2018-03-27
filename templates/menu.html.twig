@@ -4,6 +4,11 @@
     <input class="search" type="search" placeholder="{{ 'search'|trans }}" />
     <button class="confirm"><i class="icofont icofont-search-alt-2"></i></button>
     <span id="version">alpha</span>
+    {% if app.user %}
     <span class="parameter"><i class="icofont icofont-wrench"></i>{{ include('options.html.twig') }}</span>
     <span class="notification"><i class="icofont icofont-notification"></i>{{ render(url('notification')) }}</span>
+    {% else %}
+    <a class="loginPage" href="{{ url('app_login') }}">{{ 'login'|trans }}</a>
+    <a class="loginPage" href="{{ url('app_signup') }}">{{ 'signup'|trans }}</a>
+    {% endif %}
 </div>

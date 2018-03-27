@@ -15,9 +15,11 @@
                     </a>
                 </td>
                 <span style="float: right; padding: 5px; cursor: default;">
+                    {% if app.user %}
                     {% if post.user.id == app.user.id %}
                         <a class="icofont icofont-ui-delete" style="margin-right: 5px; text-decoration: none; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_delete', {'id': post.id}) }}"></a>
                         <a class="icofont icofont-pencil-alt-2" style="margin-right: 5px; text-decoration: none; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_edit', {'id': post.id}) }}"></a>
+                    {% endif %}
                     {% endif %}
                     <i class="icofont icofont-navigation-menu"></i>
                 </span>
@@ -41,9 +43,11 @@
                     {{ 'has_comment'|trans }}
                 </a></td>
                 <td style="width: 15%; cursor: default">
+                    {% if app.user %}
                     {% if comment.user.id == app.user.id %}
                         <a class="icofont icofont-ui-delete" style="margin-right: 5px; text-decoration: none; color: grey;" href="{{ url('comment_delete', {'id': comment.id}) }}"></a>
                         <a class="icofont icofont-pencil-alt-2" style="margin-right: 5px; text-decoration: none; color: grey;" href="{{ url('comment_edit', {'id': comment.id}) }}"></a>
+                    {% endif %}
                     {% endif %}
                     <i class="icofont icofont-navigation-menu" style="color: grey;"></i>
                 </td>

@@ -68,9 +68,6 @@ class AppController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // Making sure that he's connected.
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
-
         $post = new Post();
 
         // Creating Post submit Form in case he want to send a post.

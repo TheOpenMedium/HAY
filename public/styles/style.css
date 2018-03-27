@@ -164,6 +164,24 @@ a {
     word-wrap: break-word;
 }
 
+.loginPage {
+    display: block;
+    text-decoration: none;
+    color: white;
+    background-color: #55FF99;
+    text-align: center;
+    padding: 10px;
+    font-family: sans-serif;
+    transition: background-color 0.8s ease-in-out;
+    float: right;
+    margin: 6px;
+    border-radius: 5px;
+}
+
+.loginPage:hover {
+    background-color: #44EE88
+}
+
 .ta {
     resize: none;
     width: 100%;
