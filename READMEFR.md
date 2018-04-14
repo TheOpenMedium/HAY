@@ -40,7 +40,7 @@ Tout le monde peut contribuer à ce projet en proposant des idées ou des foncti
 > apprendre la bonne version !)
 
 ### Comment installer HAY sur mon PC ?
-> Un tutoriel sera bientôt disponible dans le wiki ;) !
+> Un tutoriel est disponible dans le wiki [ici](https://github.com/TheOpenMedium/HAY/wiki/Accueil-Fran%C3%A7ais) ;) !
 
 ### Quel est le sens de la vie ?
 > À droite !
