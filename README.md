@@ -41,7 +41,7 @@ Anyone an contribute to this project by suggesting ideas or code or reporting a 
 > know the good one)
 
 ### How can I install HAY on my PC?
-> A tutorial will be available soon in the wiki!
+> A tutorial is available [here](https://github.com/TheOpenMedium/HAY/wiki/Home-English) ;)!
 
 ### What's the meaning of life?
 > 42!
