@@ -15,9 +15,9 @@ Source et nous voulont créer un meilleur internet pour tout le monde.
 > Plus d'infos [ici](https://github.com/TheOpenMedium/HAY/blob/master/CONTRIBUTING.md) (en anglais)
 
 Tout le monde peut contribuer à ce projet en proposant des idées ou des fonctionnalités et en reportant des bugs.
-* Si vous savez programmer, vous pouvez nous proposez des modifications grâce à un "pull request"
+* Si vous savez programmer, vous pouvez nous proposez des modifications grâce à une "pull request"
 * Sinon, vous pouvez simplement ouvrir une "issue"
-> PS: Vous pouvez nous proposer du code comme des déssins ou des illustrations !
+> PS: Vous pouvez nous proposer du code comme des dessins ou des illustrations !
 ## À faire
 
 * Faire marcher Doctrine
