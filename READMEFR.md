@@ -1,8 +1,8 @@
 > Fichier en cours d'édition !
 # HAY Project v0.0.1 (pre-Alpha)
-> Vous trouverez le code de consuite [ici](https://github.com/TheOpenMedium/HAY/blob/master/CODE_OF_CONDUCT.md)
+> Vous trouverez le code de conduite [ici](https://github.com/TheOpenMedium/HAY/blob/master/CODE_OF_CONDUCT.md)
 
-> You can read this file in english [here](https://github.com/TheOpenMedium/HAY/blob/master/README.md) !
+> You can read this file in english [here](https://github.com/TheOpenMedium/HAY/blob/master/README.md)!
 
 > إن كانت لغتكم العربيّة، إعلموا أنّ ترجمة لهذا النّص ستكون متوفّرة قريبا
 ## Qu'est-ce que c'est HAY ?
