@@ -46,4 +46,4 @@ Anyone an contribute to this project by suggesting ideas or code or reporting a 
 ### What's the meaning of life?
 > 42!
 ----------
-> If you have another questions, please open an issue!
+> If you have another question, please open an issue!
