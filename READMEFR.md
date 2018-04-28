@@ -1,5 +1,5 @@
 # HAY Project v0.0.1 (pre-Alpha)
-[![Version](https://img.shields.io/badge/version-v0.0.1-red.svg?longCache=true&style=flat-square)](https://github.com/TheOpenMedium/HAY/releases) [![Release](https://img.shields.io/badge/release-pre--alpha-red.svg?longCache=true&style=flat-square)](https://github.com/TheOpenMedium/HAY/releases) [![Symfony](https://img.shields.io/badge/symfony-4.0.6-blue.svg?longCache=true&style=flat-square)](https://symfony.com/) [![PHP](https://img.shields.io/badge/php-<=_7.2.0-blue.svg?longCache=true&style=flat-square)](https://symfony.com/)
+[![Version](https://img.shields.io/badge/version-v0.0.1-red.svg?longCache=true&style=flat-square)](https://github.com/TheOpenMedium/HAY/releases) [![Release](https://img.shields.io/badge/release-pre--alpha-red.svg?longCache=true&style=flat-square)](https://github.com/TheOpenMedium/HAY/releases) [![Symfony](https://img.shields.io/badge/symfony-4.0.6-blue.svg?longCache=true&style=flat-square)](https://symfony.com/) [![PHP](https://img.shields.io/badge/php-<=_7.2.0-blue.svg?longCache=true&style=flat-square)](https://php.net/)
 > Vous trouverez le code de conduite [ici](https://github.com/TheOpenMedium/HAY/blob/master/CODE_OF_CONDUCT.md)
 
 > You can read this file in english [here](https://github.com/TheOpenMedium/HAY/blob/master/README.md)!
