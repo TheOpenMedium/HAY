@@ -9,11 +9,16 @@
 
 > Our mother tongue is not English. If you found a grammar mistake, please open an issue.
 ## What's HAY?
+![User](https://github.com/TheOpenMedium/HAY/raw/master/public/screenshots/User.png)
 HAY is an acronym of "How Are You". It's also an Open Source social media that respect your privacy and doesn't track you! It's
 a website from The Open Medium project.
 ### Who are we?
 We're a little french and tunisian teams that suggest an alternative to other social media! We believe in Open Source and we
 want to create a better internet for everyone.
+## Screenshots
+
+<img src="https://github.com/TheOpenMedium/HAY/raw/master/public/screenshots/Sign%20Up.png" width="24%" /> <img src="https://github.com/TheOpenMedium/HAY/raw/master/public/screenshots/Log%20In.png" width="24%" /> <img src="https://github.com/TheOpenMedium/HAY/raw/master/public/screenshots/Home.png" width="24%" /> <img src="https://github.com/TheOpenMedium/HAY/raw/master/public/screenshots/User.png" width="24%" />
+
 ## Contributing
 > More infos [here](https://github.com/TheOpenMedium/HAY/blob/master/CONTRIBUTING.md)
 
