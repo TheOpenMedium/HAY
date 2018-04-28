@@ -1,4 +1,5 @@
-# HAY Project v0.0.1 (pre-Alpha)
+# HAY Project <img src="https://raw.githubusercontent.com/TheOpenMedium/HAY/master/public/ressources/HAYlogo.png" width="60" />
+
 [![Version](https://img.shields.io/badge/version-v0.0.1-red.svg?longCache=true&style=flat-square)](https://github.com/TheOpenMedium/HAY/releases) [![Release](https://img.shields.io/badge/release-pre--alpha-red.svg?longCache=true&style=flat-square)](https://github.com/TheOpenMedium/HAY/releases) [![Symfony](https://img.shields.io/badge/symfony-4.0.8-blue.svg?longCache=true&style=flat-square)](https://symfony.com/) [![PHP](https://img.shields.io/badge/php-<=_7.2.0-blue.svg?longCache=true&style=flat-square)](https://php.net/)
 > Vous trouverez le code de conduite [ici](https://github.com/TheOpenMedium/HAY/blob/master/CODE_OF_CONDUCT.md)
 
@@ -6,11 +7,15 @@
 
 > إن كانت لغتكم العربيّة، إعلموا أنّ ترجمة لهذا النّص ستكون متوفّرة قريبا
 ## Qu'est-ce que c'est HAY ?
-HAY est un acronyme de "How Are You" qui signifie en français "Comment allez-vous ?". Mais c'est avant tout un réseau social
+![User](https://github.com/TheOpenMedium/HAY/raw/master/public/screenshots/User.png)HAY est un acronyme de "How Are You" qui signifie en français "Comment allez-vous ?". Mais c'est avant tout un réseau social
 libre (Open Source) qui respecte votre vie privée et qui ne vous espionne pas. Ce site web fait partie du projet The Open Medium.
 ### Qui sommes-nous ?
 Nous sommes une petite équipe franco-tunisienne qui propose une alternative aux réseaux sociaux actuel ! On croit en l'Open
 Source et nous voulont créer un meilleur internet pour tout le monde.
+## Captures d'écran
+
+<img src="https://github.com/TheOpenMedium/HAY/raw/master/public/screenshots/Sign%20Up.png" width="24%" /> <img src="https://github.com/TheOpenMedium/HAY/raw/master/public/screenshots/Log%20In.png" width="24%" /> <img src="https://github.com/TheOpenMedium/HAY/raw/master/public/screenshots/Home.png" width="24%" /> <img src="https://github.com/TheOpenMedium/HAY/raw/master/public/screenshots/User.png" width="24%" />
+
 ## Contribuer
 > Plus d'infos [ici](https://github.com/TheOpenMedium/HAY/blob/master/CONTRIBUTING.md) (en anglais)
 
