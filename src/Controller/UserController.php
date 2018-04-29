@@ -48,24 +48,26 @@ class UserController extends Controller
 
         $bool = "no";
 
-        // Does the users are already friends?
-        foreach ($this->getUser()->getFriends() as $friend) {
-            if ($friend->getId() == $user->getId()) {
-                $bool = "yes";
+        if ($this->getUser()) {
+            // Does the users are already friends?
+            foreach ($this->getUser()->getFriends() as $friend) {
+                if ($friend->getId() == $user->getId()) {
+                    $bool = "yes";
+                }
             }
-        }
 
-        // Does the user has already sent a friend request?
-        foreach ($this->getUser()->getFriendRequests() as $friendRequest) {
-            if ($friendRequest->getToUser()->getId() == $user->getId()) {
-                $bool = "requested";
+            // Does the user has already sent a friend request?
+            foreach ($this->getUser()->getFriendRequests() as $friendRequest) {
+                if ($friendRequest->getToUser()->getId() == $user->getId()) {
+                    $bool = "requested";
+                }
             }
-        }
 
-        // Does the current user has already a request to be friend with the current user?
-        foreach ($this->getUser()->getRequestedFriends() as $requestedFriend) {
-            if ($requestedFriend->getFromUser()->getId() == $user->getId()) {
-                $bool = "accept";
+            // Does the current user has already a request to be friend with the current user?
+            foreach ($this->getUser()->getRequestedFriends() as $requestedFriend) {
+                if ($requestedFriend->getFromUser()->getId() == $user->getId()) {
+                    $bool = "accept";
+                }
             }
         }
 
