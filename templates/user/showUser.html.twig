@@ -14,6 +14,19 @@
         {{ user.firstName }} {{ user.lastName }}
         {% if user.username %}({{ user.username }}){% endif %}
     </div>
+    {% if app.user %}
+    {% if app.user.id != user.id %}
+    {% if friend == "no" %}
+    <a class="friend" href="{{ url('friend_add', {'id': user.id}) }}">{{ 'add_friend'|trans }}</a>
+    {% elseif friend == "accept" %}
+    <a class="friend" href="{{ url('friend_add', {'id': user.id}) }}">{{ 'accept_friend'|trans }}</a>
+    {% elseif friend == "requested" %}
+    <a class="friend" id="fselected">{{ 'friend_requested'|trans }}</a>
+    {% elseif friend == "yes" %}
+    <a class="friend" id="fselected">{{ 'are_friend'|trans }}</a>
+    {% endif %}
+    {% endif %}
+    {% endif %}
     <a href="#">{{ 'about'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
     <a id="selected" href="{{ url('user_show', {'id': user.id}) }}">{{ 'post'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
     <a href="#">{{ 'photo'|trans }}<i class="icofont icofont-thin-double-right"></i></a>

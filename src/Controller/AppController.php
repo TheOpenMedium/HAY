@@ -45,7 +45,7 @@ class AppController extends Controller
         // 'q=0.8', 'en', 'q=0.5', 'ar', 'q=0.3']).
         $localeList = preg_split('#[,;-]#', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
-        // Here, the controller compare every locale to his list of accepted locales when
+        // Here, the controller compare every locale to his list of accepted locales. When
         // one of them match, the user is redirected to the homepage with the good locale.
         foreach ($localeList as $locale) {
             if ($locale == 'en' || $locale == 'fr') {
@@ -231,7 +231,7 @@ class AppController extends Controller
             $em->flush();
 
             // And redirecting user to the home page
-            return $this->redirectToRoute('app_index');
+            return $this->redirectToRoute('app_login');
         }
 
         // All that is rendered with the Sign Up template sending a Form.

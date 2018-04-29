@@ -47,6 +47,10 @@ photo: Photographies
 video: Vidéos
 files: Fichiers
 blog: Blog
+add_friend: Envoyer une demande d'ami
+accept_friend: Accepter la demande d'ami
+friend_requested: Vous avez déjà envoyé une demande d'ami
+are_friend: Vous êtes amis
 
 # Show and edit pages
 # Pages d'affichage et de modification

@@ -22,6 +22,8 @@ use Doctrine\ORM\Mapping as ORM;
  * * posts
  * * comments
  * * notifications
+ * * friendRequests
+ * * requestedFriends
  *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
@@ -88,6 +90,21 @@ class User implements UserInterface, \Serializable
 
     private $salt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FriendRequest", mappedBy="from_user", orphanRemoval=true)
+     */
+    private $friendRequests;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FriendRequest", mappedBy="to_user", orphanRemoval=true)
+     */
+    private $requestedFriends;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User")
+     */
+    private $friends;
+
     public function __construct()
     {
         $this->date_sign = new \Datetime();
@@ -96,6 +113,9 @@ class User implements UserInterface, \Serializable
         $this->posts = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->notifications = new ArrayCollection();
+        $this->friendRequests = new ArrayCollection();
+        $this->requestedFriends = new ArrayCollection();
+        $this->friends = new ArrayCollection();
     }
 
     public function getId()
@@ -327,5 +347,93 @@ class User implements UserInterface, \Serializable
             $this->password,
             $this->salt
         ) = unserialize($serialized);
+    }
+
+    /**
+     * @return Collection|FriendRequest[]
+     */
+    public function getFriendRequests(): Collection
+    {
+        return $this->friendRequests;
+    }
+
+    public function addFriendRequest(FriendRequest $friendRequest): self
+    {
+        if (!$this->friendRequests->contains($friendRequest)) {
+            $this->friendRequests[] = $friendRequest;
+            $friendRequest->setFromUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFriendRequest(FriendRequest $friendRequest): self
+    {
+        if ($this->friendRequests->contains($friendRequest)) {
+            $this->friendRequests->removeElement($friendRequest);
+            // set the owning side to null (unless already changed)
+            if ($friendRequest->getFromUser() === $this) {
+                $friendRequest->setFromUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FriendRequest[]
+     */
+    public function getRequestedFriends(): Collection
+    {
+        return $this->requestedFriends;
+    }
+
+    public function addRequestedFriend(FriendRequest $requestedFriend): self
+    {
+        if (!$this->requestedFriends->contains($requestedFriend)) {
+            $this->requestedFriends[] = $requestedFriend;
+            $requestedFriend->setToUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequestedFriend(FriendRequest $requestedFriend): self
+    {
+        if ($this->requestedFriends->contains($requestedFriend)) {
+            $this->requestedFriends->removeElement($requestedFriend);
+            // set the owning side to null (unless already changed)
+            if ($requestedFriend->getToUser() === $this) {
+                $requestedFriend->setToUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getFriends(): Collection
+    {
+        return $this->friends;
+    }
+
+    public function addFriend(User $friend): self
+    {
+        if (!$this->friends->contains($friend)) {
+            $this->friends[] = $friend;
+        }
+
+        return $this;
+    }
+
+    public function removeFriend(User $friend): self
+    {
+        if ($this->friends->contains($friend)) {
+            $this->friends->removeElement($friend);
+        }
+
+        return $this;
     }
 }

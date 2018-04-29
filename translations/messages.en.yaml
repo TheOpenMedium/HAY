@@ -43,6 +43,10 @@ photo: Photos
 video: Videos
 file: Files
 blog: Blog
+add_friend: Send a friend request
+accept_friend: Accept the friend request
+friend_requested: You have already sent a request
+are_friend: You are already friends
 
 # Show and edit pages
 
