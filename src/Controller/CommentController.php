@@ -64,6 +64,7 @@ class CommentController extends Controller
             // Sending a notification (notification type '0').
             $notification = new Notification;
 
+            // TODO: A better choice of notification's user
             $notification->setType(0);
             $notification->setUser($this->getUser());
             $notifContent = (strlen($sendComment->getComment()) > 40) ? substr($sendComment->getComment(), 0, 40) . "..." : $sendComment->getComment();

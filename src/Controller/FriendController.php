@@ -11,10 +11,48 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  * A controller related to the FriendRequest entity
  *
  * List of actions:
+ * * friendAction()              -- friend
  * * friendAddAction(User $user) -- friend_add
+ *
+ * List of functions:
+ * * cmp($a, $b): List sorting function for usort()
  */
 class FriendController extends Controller
 {
+    /**
+     * Render the friend list of a user
+     *
+     * @Route("/{_locale}/friend", name="friend", requirements={
+     *     "_locale": "en|fr"
+     * })
+     */
+    public function friendAction()
+    {
+        // Getting Friends of current user.
+        $friendObject = $this->getUser()->getFriends();
+
+        // "Converting" the Doctrine's array object to a PHP's array object
+        foreach ($friendObject as $key => $value) {
+            $friends[$key] = $value;
+        }
+
+        // Sorting that user's array by the first name with the "cmp" function
+        usort($friends, array('App\Controller\FriendController', 'cmp'));
+
+        // All that is rendered with the friend template sending Friend List.
+        return $this->render('users/friend.html.twig', array(
+            'friends' => $friends
+        ));
+    }
+
+    /**
+     * List sorting function for usort()
+     */
+    public function cmp($a, $b)
+    {
+        return strcmp($a->getFirstName(), $b->getFirstName());
+    }
+
     /**
      * Add a friend to the current user or send a friend request
      *
@@ -60,6 +98,8 @@ class FriendController extends Controller
                 // If it's the case, make these users friends and remove the request.
                 $user->addFriend($request);
                 $request->addFriend($user);
+
+                // TODO: Sending notifications
 
                 $request->removeFriendRequest($rf);
                 $em->flush();

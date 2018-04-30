@@ -70,7 +70,7 @@ a {
 }
 
 .parameter i {
-    margin: 0px 20px;
+    margin: 0px 10px;
     color: #b0b0b0;
     font-size: 30px;
 }
@@ -132,7 +132,7 @@ a {
 }
 
 .notification i {
-    margin: 0px 20px;
+    margin: 0px 10px;
     color: #b0b0b0;
     font-size: 30px;
 }
@@ -162,6 +162,77 @@ a {
     font-size: 12px;
     padding: 15px;
     word-wrap: break-word;
+}
+
+.users {
+    cursor: pointer;
+    float: right;
+    height: 100%;
+    display: block;
+    padding-top: 8px;
+}
+
+.users i {
+    margin: 0px 10px;
+    color: #b0b0b0;
+    font-size: 30px;
+}
+
+.ulUsers {
+    display: none;
+    position: fixed;
+    right: 0px;
+    top: 34px;
+    background-color: dimgrey;
+    height: 100%;
+    width: 183px;
+    cursor: auto;
+    padding: 0px;
+    list-style: none;
+}
+
+.users:hover ul.ulUsers {
+    display: block;
+}
+
+.usersTitle {
+    text-align: center;
+    background-color: #55ff99;
+    color: #404040;
+    font-family: sans-serif;
+    padding: 10px;
+}
+
+.liFriend {
+    display: block;
+    border-bottom: 1px solid #b0b0b0;
+    color: white;
+    font-family: sans-serif;
+    font-size: 12px;
+    padding: 15px;
+    word-wrap: break-word;
+}
+
+.liFriend {
+    display: block;
+    padding: 10px;
+    color: white;
+    font-family: sans-serif;
+    border-bottom: 1px solid #b0b0b0;
+    transition: 0.8s background;
+}
+
+.liFriend img {
+    height: 25px;
+    width: 25px;
+    float: left;
+    margin: -6.25px;
+    margin-right: 10px;
+}
+
+.liFriend:hover {
+    transition: 0.8s background;
+    background-color: #b0b0b0;
 }
 
 .loginPage {

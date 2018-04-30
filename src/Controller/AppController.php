@@ -125,6 +125,8 @@ class AppController extends Controller
             $post->setFont('SS');
             $post->setUser($this->getUser());
 
+            // TODO: Sending notifications to followers
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
             $em->flush();

@@ -35,6 +35,10 @@ has_comment: 'has comment:'
 
 notif0: has commented one of your status
 
+# Users
+
+friends: Friends
+
 # User page
 
 about: About

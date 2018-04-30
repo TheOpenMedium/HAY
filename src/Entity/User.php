@@ -24,6 +24,7 @@ use Doctrine\ORM\Mapping as ORM;
  * * notifications
  * * friendRequests
  * * requestedFriends
+ * * friends
  *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
