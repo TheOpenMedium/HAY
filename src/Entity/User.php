@@ -6,6 +6,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * User Entity
@@ -25,6 +26,14 @@ use Doctrine\ORM\Mapping as ORM;
  * * friendRequests
  * * requestedFriends
  * * friends
+ * * url
+ * * alt
+ *
+ * List of extra variables:
+ * * rememberme
+ * * salt
+ * * conf_password
+ * * file
  *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
@@ -108,6 +117,18 @@ class User implements UserInterface, \Serializable
 
     private $conf_password;
 
+    /**
+     * @ORM\Column(type="string", length=2000)
+     */
+    private $url;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $alt;
+
+    private $file;
+
     public function __construct()
     {
         $this->date_sign = new \Datetime();
@@ -119,6 +140,8 @@ class User implements UserInterface, \Serializable
         $this->friendRequests = new ArrayCollection();
         $this->requestedFriends = new ArrayCollection();
         $this->friends = new ArrayCollection();
+        $this->url = '/ressources/icone.png';
+        $this->alt = 'Profile picture';
     }
 
     public function getId()
@@ -448,5 +471,39 @@ class User implements UserInterface, \Serializable
     public function setConfPassword($conf_password)
     {
         $this->conf_password = $conf_password;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(string $url): self
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    public function getAlt(): ?string
+    {
+        return $this->alt;
+    }
+
+    public function setAlt(?string $alt): self
+    {
+        $this->alt = $alt;
+
+        return $this;
+    }
+
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function setFile(UploadedFile $file)
+    {
+        $this->file = $file;
     }
 }

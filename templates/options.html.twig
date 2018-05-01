@@ -1,7 +1,7 @@
 <ul class="ulParameter">
     <a href="{{ url('user_show', {'id': app.user.id}) }}">
         <li class="userStats">
-            <img src="/ressources/icone.png" />{{ 'hello'|trans }} {{ app.user.firstname }}
+            <img src="{{ app.user.url }}" alt="{{ app.user.alt }}" />{{ 'hello'|trans }} {{ app.user.firstname }}
         </li>
     </a>
     <li class="optionMenuChoice">

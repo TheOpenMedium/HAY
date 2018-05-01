@@ -15,6 +15,10 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 
+###> files folders ###
+/public/usr_img/
+###< files folders ###
+
 ###> other ###
 .DS_Store
 ###< other ###

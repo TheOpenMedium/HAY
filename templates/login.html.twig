@@ -7,8 +7,8 @@
 {% block body %}
 {{ form_start(form) }}
 <table class="loginBody" width="500px"  style="margin-top: 0px;">
-    {# Affichage des icônes #}
     {# Icon display #}
+    {# Affichage des icônes #}
     <tr>
         <td style="padding-bottom: 10px; border-bottom: 1px solid grey;" colspan="2">
             <img src="/ressources/icone.png" alt="Logo" width="150px" height="150px" class="loginIcones" />
@@ -19,8 +19,8 @@
             <img src="/ressources/HAYlogo.png" alt="Logo" width="200px" height="200px" class="loginIcones" />
         </td>
     </tr>
-    {# Lien vers la page de connection/inscription #}
     {# Link to log in/sign up page #}
+    {# Lien vers la page de connection/inscription #}
     <tr>
         <td>
             <a class="loginSwitch" href="{{ url('app_login') }}">{{ 'login'|trans }}</a>
@@ -29,8 +29,8 @@
             <a class="loginSwitch" href="{{ url('app_signup') }}">{{ 'signup'|trans }}</a>
         </td>
     </tr>
-    {# Formulaire de l'E-mail et du mot de passe #}
     {# E-mail and password form #}
+    {# Formulaire de l'E-mail et du mot de passe #}
     <tr>
         <td width="50%">
             {{ form_widget(form.username, {'attr': {'class': 'login', 'placeholder': 'username'|trans ~ ' ' ~ 'or'|trans ~ ' ' ~ 'email'|trans, 'value': last_username}}) }}
@@ -45,8 +45,8 @@
             <label for="form_rememberme">{{ 'rememberme'|trans }}{{ form_widget(form.rememberme) }}</label>
         </td>
     </tr>
-    {# Envoie des données #}
     {# Data send #}
+    {# Envoie des données #}
     <tr>
         <td colspan="2">
             {{ form_widget(form.submit, {'attr': {'class': 'submit'}, 'label': 'to_login'|trans}) }}

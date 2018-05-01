@@ -1,14 +1,14 @@
 {% for post in postList %}
-{# Affichage des textes #}
 {# Text display #}
+{# Affichage des textes #}
 <div class="text">
-    {# Informations sur l'expéditeur #}
     {# Sender informations #}
+    {# Informations sur l'expéditeur #}
     <div class="infHAY c{{ post.color }}">
         <table style="border: 0px;">
 
             <tr>
-                <td style="padding-right: 15px;"><a href="{{ url('user_show', {'id': post.user.id}) }}"><img src="/ressources/icone.png" width="40px" height="40px" alt="{{ 'usr_img'|trans }}" /></a></td>
+                <td style="padding-right: 15px;"><a href="{{ url('user_show', {'id': post.user.id}) }}"><img src="{{ post.user.url }}" width="40px" height="40px" alt="{{ post.user.alt }}" /></a></td>
                 <td style="border-left: 1px solid {{ post.color != 'FFF' ? 'white' : 'black' }}; padding-left: 15px; font-family: sans-serif; color: {{ post.color != 'FFF' ? 'white' : 'black' }};">
                     <a href="{{ url('user_show', {'id': post.user.id}) }}">
                         {{ post.user.firstName }} {{ post.user.lastName }} {% if post.user.username %}{{ 'alias'|trans }} {{ post.user.username }} {% endif %}{{ 'has_write'|trans }}
@@ -36,7 +36,7 @@
     <div class="com">
         <table style="border: 0px; border-bottom: 1px solid grey; width: 550; margin-bottom: 5px;">
             <tr>
-                <td style="padding-right: 15px;"><a href="{{ url('user_show', {'id': comment.user.id}) }}"><img src="/ressources/icone.png" width="40px" height="40px" alt="{{ 'usr_img'|trans }}" /></a></td>
+                <td style="padding-right: 15px;"><a href="{{ url('user_show', {'id': comment.user.id}) }}"><img src="{{ comment.user.url }}" width="40px" height="40px" alt="{{ comment.user.alt }}" /></a></td>
                 <td style="border-left: 1px solid grey; padding-left: 15px; width: 85%; color: grey;"><a href="{{ url('user_show', {'id': comment.user.id}) }}">
                     {{ comment.user.firstName }} {{ comment.user.lastName }}
                     {% if comment.user.username %}{{ 'alias'|trans }} {{ comment.user.username }} {% endif %}

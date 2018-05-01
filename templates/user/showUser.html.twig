@@ -10,7 +10,7 @@
 
 <div class="userMenu fs16 ffSS">
     <div class="userInfo">
-        <img src="/ressources/icone.png" class="userImg" />
+        <img src="{{ user.url }}" alt="{{ user.url }}" class="userImg" />
         {{ user.firstName }} {{ user.lastName }}
         {% if user.username %}({{ user.username }}){% endif %}
     </div>
