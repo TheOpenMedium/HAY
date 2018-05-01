@@ -106,20 +106,21 @@ a {
     width: 50px;
     float: left;
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: 2.5px;
+    left: 2.5px;
 }
 
-.logout a {
+.optionMenuChoice a {
     display: block;
     padding: 20px;
     color: white;
     font-family: sans-serif;
     text-align: center;
     text-decoration: none;
+    border-bottom: 1px solid #b0b0b0;
 }
 
-.logout:hover {
+.optionMenuChoice:hover {
     background-color: #b0b0b0;
 }
 

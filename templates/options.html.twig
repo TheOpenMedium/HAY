@@ -4,7 +4,10 @@
             <img src="/ressources/icone.png" />{{ 'hello'|trans }} {{ app.user.firstname }}
         </li>
     </a>
-    <li class="logout">
+    <li class="optionMenuChoice">
+        <a href="{{ path('user_edit') }}">{{ "edit_user"|trans }}</a>
+    </li>
+    <li class="optionMenuChoice">
         <a href="{{ path('app_logout') }}">{{ "to_logout"|trans }}</a>
     </li>
 </ul>
