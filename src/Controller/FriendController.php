@@ -20,7 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class FriendController extends Controller
 {
     /**
-     * Render the friend list of a user
+     * Render the friend list of an user
      *
      * @Route("/{_locale}/friend", name="friend", requirements={
      *     "_locale": "en|fr"

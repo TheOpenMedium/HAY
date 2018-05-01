@@ -71,51 +71,22 @@ class PostController extends Controller
         if ($postEdit->getUser()->getId() == $user->getId()) {
             $post = new Post();
 
-            // Adding last values as default
+            // Adding last values as default.
             $post->setContent($postEdit->getContent());
             $post->setColor($postEdit->getColor());
             $post->setSize($postEdit->getSize());
             $post->setFont($postEdit->getFont());
 
-            // Creating the form
+            // Creating the form.
             $form = $this->createFormBuilder($post)
                 ->add('content', TextareaType::class)
                 ->add('color', ChoiceType::class, array(
                     'choices' => array(
-                        '000',
-                        '222',
-                        '696',
-                        '999',
-                        'DDD',
-                        'FFF',
-
-                        'E00',
-                        '72C',
-                        '008',
-                        '099',
-                        '0A0',
-                        'F91',
-
-                        'F00',
-                        'D0F',
-                        '22F',
-                        '6DF',
-                        '0F0',
-                        'FD0',
-
-                        'F44',
-                        'F2E',
-                        '08F',
-                        '0FF',
-                        'BF0',
-                        'EE0',
-
-                        'F05',
-                        'F6F',
-                        '0AE',
-                        '9FF',
-                        '5F9',
-                        'FF0'
+                        '000', '222', '696', '999', 'DDD', 'FFF',
+                        'E00', '72C', '008', '099', '0A0', 'F91',
+                        'F00', 'D0F', '22F', '6DF', '0F0', 'FD0',
+                        'F44', 'F2E', '08F', '0FF', 'BF0', 'EE0',
+                        'F05', 'F6F', '0AE', '9FF', '5F9', 'FF0'
                     ),
                     'multiple' => false,
                     'expanded' => true

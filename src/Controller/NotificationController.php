@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class NotificationController extends Controller
 {
     /**
-     * Render the notifications of a user
+     * Render the notifications of an user
      *
      * @Route("/{_locale}/notification", name="notification", requirements={
      *     "_locale": "en|fr"

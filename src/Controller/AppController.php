@@ -75,40 +75,11 @@ class AppController extends Controller
             ->add('content', TextareaType::class)
             ->add('color', ChoiceType::class, array(
                 'choices' => array(
-                    '000',
-                    '222',
-                    '696',
-                    '999',
-                    'DDD',
-                    'FFF',
-
-                    'E00',
-                    '72C',
-                    '008',
-                    '099',
-                    '0A0',
-                    'F91',
-
-                    'F00',
-                    'D0F',
-                    '22F',
-                    '6DF',
-                    '0F0',
-                    'FD0',
-
-                    'F44',
-                    'F2E',
-                    '08F',
-                    '0FF',
-                    'BF0',
-                    'EE0',
-
-                    'F05',
-                    'F6F',
-                    '0AE',
-                    '9FF',
-                    '5F9',
-                    'FF0'
+                    '000', '222', '696', '999', 'DDD', 'FFF',
+                    'E00', '72C', '008', '099', '0A0', 'F91',
+                    'F00', 'D0F', '22F', '6DF', '0F0', 'FD0',
+                    'F44', 'F2E', '08F', '0FF', 'BF0', 'EE0',
+                    'F05', 'F6F', '0AE', '9FF', '5F9', 'FF0'
                 ),
                 'multiple' => false,
                 'expanded' => true
@@ -232,7 +203,7 @@ class AppController extends Controller
             $em->persist($user);
             $em->flush();
 
-            // And redirecting user to the home page
+            // And redirecting user to the home page.
             return $this->redirectToRoute('app_login');
         }
 

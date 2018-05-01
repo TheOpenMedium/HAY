@@ -62,5 +62,14 @@ are_friend: Vous êtes amis
 
 show_post: Voir le statut
 show_comment: Voir le commentaire
+edit: Modifier
 edit_post: Modifier le statut
 edit_comment: Modifier le commentaire
+edit_user: Modifier l'utilisateur
+cancel: Annuler
+conf_password: Votre ancient mot de passe
+
+# Errors
+# Erreurs
+
+error_password: Mauvais mot de passe

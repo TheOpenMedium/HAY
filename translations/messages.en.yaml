@@ -56,5 +56,13 @@ are_friend: You are already friends
 
 show_post: Show post
 show_comment: Show comment
+edit: Edit
 edit_post: Edit post
 edit_comment: Edit comment
+edit_user: Edit user
+cancel: Cancel
+conf_password: Your previous password
+
+# Errors
+
+error_password: Wrong password

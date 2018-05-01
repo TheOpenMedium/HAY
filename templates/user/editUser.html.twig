@@ -1,0 +1,90 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+{{ 'edit_user'|trans }} "{{ app.user.firstName }} {{ app.user.lastName }}" - HAY
+{% endblock %}
+
+{% block body %}
+{{ form_start(form) }}
+<table class="loginBody" width="500px"  style="margin-top: 0px;">
+    <tr style="font-size: 40px; color: white; font-family: sans-serif;">
+        <td style="border-bottom: 5px solid #55ff99" colspan="2">
+            {{ 'edit_user'|trans }}
+        </td>
+    </tr>
+    {# First/last name form #}
+    {# Formulaire du nom/prénom #}
+    <tr>
+        <td width="50%">
+            {{ form_widget(form.first_name, {'attr': {'class': 'login', 'placeholder': 'first_name'|trans, 'required': 'false'}}) }}
+        </td>
+        <td width="50%">
+            {{ form_widget(form.last_name, {'attr': {'class': 'login', 'placeholder': 'last_name'|trans, 'required': 'false'}}) }}
+        </td>
+    </tr>
+    {# Pseudo form #}
+    {# Formulaire du pseudo #}
+    <tr>
+        <td colspan="2">
+            {{ form_widget(form.username, {'attr': {'class': 'login loginLarge', 'placeholder': 'username'|trans, 'required': 'false'}}) }}
+        </td>
+    </tr>
+    {# E-mail form #}
+    {# Formulaire de l'E-mail #}
+    <tr>
+        <td width="50%">
+            {{ form_widget(form.email.first, {'attr': {'class': 'login', 'placeholder': 'email'|trans, 'required': 'false'}}) }}
+        </td>
+        <td width="50%">
+            {{ form_widget(form.email.second, {'attr': {'class': 'login', 'placeholder': 'repeat'|trans, 'required': 'false'}}) }}
+        </td>
+    </tr>
+    {# Password form #}
+    {# Formulaire du mot de passe #}
+    <tr>
+        <td width="50%">
+            {{ form_widget(form.password.first, {'attr': {'class': 'login', 'placeholder': 'password'|trans, 'autocomplete': 'off', 'required': 'false'}}) }}
+        </td>
+        <td width="50%">
+            {{ form_widget(form.password.second, {'attr': {'class': 'login', 'placeholder': 'repeat'|trans, 'autocomplete': 'off', 'required': 'false'}}) }}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            {{ form_widget(form.conf_password, {'attr': {'class': 'login loginLarge', 'placeholder': 'conf_password'|trans, 'required': 'false'}}) }}
+        </td>
+    </tr>
+    {# Data send #}
+    {# Envoie des données #}
+    <tr>
+        <td>
+            <button class="submit" type="button" onclick="window.location='{{ url('app_index') }}';">{{ 'cancel'|trans }}</button>
+        </td>
+        <td>
+            {{ form_widget(form.submit, {'attr': {'class': 'submit'}, 'label': 'edit'|trans}) }}
+        </td>
+    </tr>
+</table>
+{{ form_end(form) }}
+
+{% if error is defined %}
+<div class="loginError" id="Error">
+{{ error|trans }}
+    <span id="closeError" onclick="parentNode.">
+        <i class="icofont icofont-close-line"></i>
+    </span>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block js %}
+<script>
+function closeError(e) {
+    var error = document.getElementById("Error")
+    error.parentNode.removeChild(error)
+}
+
+var closeButton = document.getElementById('closeError')
+closeButton.addEventListener('click', closeError)
+</script>
+{% endblock %}

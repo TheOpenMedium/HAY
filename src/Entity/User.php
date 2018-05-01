@@ -106,6 +106,8 @@ class User implements UserInterface, \Serializable
      */
     private $friends;
 
+    private $conf_password;
+
     public function __construct()
     {
         $this->date_sign = new \Datetime();
@@ -436,5 +438,15 @@ class User implements UserInterface, \Serializable
         }
 
         return $this;
+    }
+
+    public function getConfPassword()
+    {
+        return $this->conf_password;
+    }
+
+    public function setConfPassword($conf_password)
+    {
+        $this->conf_password = $conf_password;
     }
 }

@@ -6,21 +6,27 @@ use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * A controller related to the User entity
  *
  * List of actions:
- * * userShowAction(User $user, $id) -- user_show
+ * * userShowAction(User $user) -- user_show
+ * * userEditAction(Request $request) -- user_edit
  */
 class UserController extends Controller
 {
     /**
-     * Render a user page
+     * Render an user page
      *
      * @param User $user The user to show
-     * @param int $id The user id
      *
      * @Route("/{_locale}/show/user/{id}", name="user_show", requirements={
      *     "_locale": "en|fr"
@@ -76,6 +82,80 @@ class UserController extends Controller
             'postList' => $postList,
             'user' => $user,
             'friend' => $bool
+        ));
+    }
+
+    /**
+     * Edit an user
+     *
+     * @Route("/{_locale}/edit/user", name="user_edit", requirements={
+     *     "_locale": "en|fr"
+     * })
+     */
+    public function userEditAction(Request $request)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        $user = new User;
+
+        // Retrieving previous parameters.
+        $user->setFirstName($this->getUser()->getFirstName());
+        $user->setLastName($this->getUser()->getLastName());
+        $user->setEmail($this->getUser()->getEmail());
+        $user->setUsername($this->getUser()->getUsername());
+
+        // Creating the form.
+        $form = $this->createFormBuilder($user)
+            ->add('first_name', TextType::class)
+            ->add('last_name', TextType::class)
+            ->add('username', TextType::class, array('required' => false))
+            ->add('email', RepeatedType::class, array(
+                'type' => EmailType::class
+            ))
+            ->add('password', RepeatedType::class, array(
+                'type' => PasswordType::class
+            ))
+            ->add('conf_password', PasswordType::class)
+            ->add('submit', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        // If an user was edited, we retrieve data.
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+
+            // We verify that the user submitted a correct password.
+            if (password_verify($user->getConfPassword(), $this->getUser()->getPassword())) {
+                $em = $this->getDoctrine()->getManager();
+
+                // Then, we replace old datas.
+                $this->getUser()->setFirstName($user->getFirstName());
+                $this->getUser()->setLastName($user->getLastName());
+                $this->getUser()->setEmail($user->getEmail());
+                $this->getUser()->setUsername($user->getUsername());
+                if (!password_verify($user->getConfPassword(), $this->getUser()->getPassword())) {
+                    $this->getUser()->setPassword(password_hash($user->getPassword(), PASSWORD_ARGON2I));
+                }
+
+                // And finaly, we save changes.
+                $em->flush();
+
+                // And we redirect user to home page.
+                return $this->redirectToRoute('app_index');
+            }
+            else {
+                // All that is rendered with the user edit template sending a From and the Error.
+                return $this->render('user/editUser.html.twig', array(
+                    'form' => $form->createView(),
+                    'error' => 'error_password'
+                ));
+            }
+        }
+
+        // All that is rendered with the user edit template sending a From.
+        return $this->render('user/editUser.html.twig', array(
+            'form' => $form->createView()
         ));
     }
 }
