@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 /**
  * A controller related to the User entity
@@ -103,9 +104,12 @@ class UserController extends Controller
         $user->setLastName($this->getUser()->getLastName());
         $user->setEmail($this->getUser()->getEmail());
         $user->setUsername($this->getUser()->getUsername());
+        $user->setAlt($this->getUser()->getAlt());
 
         // Creating the form.
         $form = $this->createFormBuilder($user)
+            ->add('file', FileType::class)
+            ->add('alt', TextType::class)
             ->add('first_name', TextType::class)
             ->add('last_name', TextType::class)
             ->add('username', TextType::class, array('required' => false))
@@ -134,8 +138,28 @@ class UserController extends Controller
                 $this->getUser()->setLastName($user->getLastName());
                 $this->getUser()->setEmail($user->getEmail());
                 $this->getUser()->setUsername($user->getUsername());
+                $this->getUser()->setAlt($user->getAlt());
                 if (!password_verify($user->getConfPassword(), $this->getUser()->getPassword())) {
                     $this->getUser()->setPassword(password_hash($user->getPassword(), PASSWORD_ARGON2I));
+                }
+
+                // We see if he didn't upload an image.
+                if ($user->getFile() !== null) {
+                    // If it's the case, we verify that the user hasn't already an image.
+                    if ($this->getUser()->getUrl() != '/ressources/icone.png') {
+                        // If it's the case, we remove it.
+                        unlink(__dir__.'/../../public'.$this->getUser()->getUrl());
+                    }
+
+                    // Then, we upload the file.
+                    $extension = $user->getFile()->guessExtension();
+                    if (!$extension) {
+                        $extension = 'png';
+                    }
+                    $user->getFile()->move(__dir__.'/../../public/usr_img/', $this->getUser()->getId().'.'.$extension);
+
+                    // And, we add the url.
+                    $this->getUser()->setUrl('/usr_img/'.$this->getUser()->getId().'.'.$extension);
                 }
 
                 // And finaly, we save changes.

@@ -62,6 +62,7 @@ edit_comment: Edit comment
 edit_user: Edit user
 cancel: Cancel
 conf_password: Your previous password
+alt: Brief description of user's picture
 
 # Errors
 
