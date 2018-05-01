@@ -12,7 +12,11 @@
     <div class="com" style="background-image: url('/ressources/anti-coin.png'); background-size: 50px; width: 600px; margin: auto;">
         <table style="border: 0px; border-bottom: 1px solid grey; width: 550; margin-bottom: 5px;">
             <tr>
-                <td style="padding-right: 15px;"><a href="{{ url('user_show', {'id': comment.user.id}) }}"><img src="{{ comment.user.url }}" width="40px" height="40px" alt="{{ comment.user.alt }}" /></a></td>
+                <td style="padding-right: 2.5px;">
+                    <a href="{{ url('user_show', {'id': comment.user.id}) }}">
+                        <img src="{{ comment.user.url }}" width="40px" height="40px" alt="{{ comment.user.alt }}" style="position: relative; top: 2px;" />
+                    </a>
+                </td>
                 <td style="border-left: 1px solid grey; padding-left: 15px; width: 85%; color: grey;"><a href="{{ url('user_show', {'id': comment.user.id}) }}">
                     {{ comment.user.firstName }} {{ comment.user.lastName }}
                     {% if comment.user.username %}{{ 'alias'|trans }} {{ comment.user.username }} {% endif %}
