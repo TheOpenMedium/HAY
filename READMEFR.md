@@ -40,8 +40,8 @@ Tout le monde peut contribuer à ce projet en proposant des idées ou des foncti
 
 ### Au secours ! Je ne sais pas comment utiliser Symfony !
 > Si vous ne savez pas comment utiliser Symfony, consulter la documentation [ici](https://symfony.com/doc/current/index.html)
-> qui est organisé sous forme de tutoriel, allez voir, c'est très simple, vous n'avez besoin que de connaitre le php ! (PS : seul
-> bémol, c'est uniquement en anglais pour l'instant) (PS2: Attention, Symfony 4 est vachement différent de Symfony 3, veuillez
+> qui est organisé sous forme de tutoriel, allez voir, c'est très simple, vous n'avez besoin que de connaitre le PHP ! (PS : Seul
+> bémol, c'est uniquement en anglais pour l'instant) (PS2 : Attention, Symfony 4 est vachement différent de Symfony 3, veuillez
 > apprendre la bonne version !)
 
 ### Comment installer HAY sur mon PC ?

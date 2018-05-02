@@ -45,6 +45,7 @@ a {
     border: 1px solid grey;
     padding-left: 5px;
     color: white;
+    -webkit-appearance: none; /* NOTE: Without this line, Safari display the search input weirdly */
 }
 
 .confirm {

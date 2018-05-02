@@ -41,9 +41,9 @@ Anyone an contribute to this project by suggesting ideas or code or reporting a 
 > framework for php (especially Symfony 4) that have many bundles that simplify coding. It's also a framework that simplify
 > working in group.
 
-### HELP! I don't know how to use in Symfony!
+### HELP! I don't know how to use Symfony!
 > If you don't know how to use Symfony you can use the documentation [here](https://symfony.com/doc/current/index.html). You'll
-> see it's very simple! You only have to know how to code in php! (Warning : Symfony 4 and 3 are very different, be sure that you
+> see it's very simple! You only have to know how to code in PHP! (Warning: Symfony 4 and 3 are very different, be sure that you
 > know the good one)
 
 ### How can I install HAY on my PC?
