@@ -10,14 +10,15 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  * List of tests:
  * * testTemplate(): A test template => app_index
  */
-class CommentControllerTest extends WebTestCase
-{
+/*class CommentControllerTest extends WebTestCase
+{*/
     /**
      * A test template
      *
      * @param int $param Parameter example
      */
+    /*
     public function testTemplate($param = 0)
     {
     }
-}
+}*/
