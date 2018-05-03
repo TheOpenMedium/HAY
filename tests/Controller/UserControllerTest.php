@@ -5,12 +5,12 @@ namespace App\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Tests related to the Post controller
+ * Tests related to the User controller
  *
  * List of tests:
  * * testTemplate(): A test template => app_index
  */
-class PostControllerTest extends WebTestCase
+class UserControllerTest extends WebTestCase
 {
     /**
      * A test template

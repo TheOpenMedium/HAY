@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * List of functions:
  * * styleAction() -- fonction_style
  */
-class FonctionController extends Controller
+class FunctionController extends Controller
 {
     /**
      * Function to retrieve the stylesheets

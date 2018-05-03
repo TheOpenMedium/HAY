@@ -35,7 +35,7 @@ class AppController extends Controller
     /**
      * Choose the user's locale
      *
-     * @Route("/")
+     * @Route("/", name="app_locale")
      */
     public function localeAction()
     {
