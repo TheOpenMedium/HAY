@@ -1,8 +1,10 @@
 <div class="usersTitle">{{ 'friends'|trans }}</div>
-{% for friend in friends %}
-    <a href="{{ url('user_show', {'id': friend.id}) }}">
-        <li class="liFriend">
-            <img src="{{ friend.url }}" alt="{{ friend.alt }}" />{{ friend.firstname }} {{ friend.lastname }}
-        </li>
-    </a>
-{% endfor %}
+{% if friends is not null %}
+    {% for friend in friends %}
+        <a href="{{ url('user_show', {'id': friend.id}) }}">
+            <li class="liFriend">
+                <img src="{{ friend.url }}" alt="{{ friend.alt }}" />{{ friend.firstname }} {{ friend.lastname }}
+            </li>
+        </a>
+    {% endfor %}
+{% endif %}

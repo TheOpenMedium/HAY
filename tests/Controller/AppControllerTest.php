@@ -3,6 +3,7 @@
 namespace App\Tests\Controller;
 
 use App\Entity\User;
+use App\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
@@ -16,6 +17,27 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class AppControllerTest extends WebTestCase
 {
+    private $doctrine;
+    private $c_user;
+
+    public function setUp()
+    {
+        $client = static::createClient();
+        $this->doctrine = $client
+            ->getContainer()
+            ->get('doctrine');
+
+        if (null === $token = $client->getContainer()->get('security.token_storage')->getToken()) {
+            $this->c_user = NULL;
+        }
+        elseif (!is_object($user = $token->getUser())) {
+            $this->c_user = NULL;
+        }
+        else {
+            $this->c_user = $user;
+        }
+    }
+
     // TESTING: app_locale
 
     /**
@@ -93,14 +115,13 @@ class AppControllerTest extends WebTestCase
     /**
      * Test the submitting of posts
      */
-    /*
     public function testPostSubmit()
     {
         $client = static::createClient();
 
-        $repository = $this->getDoctrine()->getRepository(User::class);
+        $repository = $this->doctrine->getRepository(User::class);
 
-        if (!$this->getUser()) {
+        if (!$this->c_user) {
             if (!$repository->find(1)) {
                 $user = new User;
 
@@ -110,23 +131,40 @@ class AppControllerTest extends WebTestCase
                 $user->setEmail('root@root.root');
                 $user->setPassword(password_hash('root', PASSWORD_ARGON2I));
 
-                $em = $this->getDoctrine()->getManager();
+                $em = $this->doctrine->getManager();
                 $em->persist($user);
                 $em->flush();
             }
-
-            $loginpage = $client->request('GET', '/en/login');
-            $form = $loginpage->selectButton('submit')->form();
-            $form['username'] = 'root';
-            $form['password'] = 'root';
-            $client->submit($form);
         }
 
         // We request the app_index controller.
-        $crawler = $client->request('GET', '/en/');
+        $crawler = $client->request('GET', '/en/', array(), array(), array(
+            'PHP_AUTH_USER' => 'root',
+            'PHP_AUTH_PW'   => 'root',
+        ));
 
-        // We verify that we have a 200 status code.
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        // We retrieve the form.
+        $buttonCrawlerNode = $crawler->selectButton('form_submit');
+
+        // And we insert our values.
+        $form = $buttonCrawlerNode->form(array(
+            'form[content]' => 'This is an automatic functionnal test post. [TYPE=1]',
+            'form[color]' => 'DDD',
+            'form[size]' => '24'
+        ));
+
+        // Then we submit it.
+        $client->submit($form);
+
+        $postRepository = $this->doctrine->getRepository(Post::class);
+
+        // Fetching the last post.
+        $lastPost = $postRepository->findLastPost();
+
+        // And verifying that it match with what we sent.
+        $this->assertEquals(
+            array('This is an automatic functionnal test post. [TYPE=1]', 'DDD', '24'),
+            array($lastPost[0]->getContent(), $lastPost[0]->getColor(), $lastPost[0]->getSize())
+        );
     }
-    */
 }

@@ -7,7 +7,7 @@
 {% block body %}
 
 {{ include("menu.html.twig") }}
-{{ include("post/postForm.html.twig") }}
+{% if app.user %}{{ include("post/postForm.html.twig") }}{% endif %}
 {{ include("post/postDisplay.html.twig") }}
 
 {% endblock %}

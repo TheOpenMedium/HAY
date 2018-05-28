@@ -28,6 +28,8 @@ class FriendController extends Controller
      */
     public function friendAction()
     {
+        $friends = null;
+
         // Getting Friends of current user.
         $friendObject = $this->getUser()->getFriends();
 
@@ -37,7 +39,9 @@ class FriendController extends Controller
         }
 
         // Sorting that user's array by the first name with the "cmp" function
-        usort($friends, array('App\Controller\FriendController', 'cmp'));
+        if ($friends) {
+            usort($friends, array('App\Controller\FriendController', 'cmp'));
+        }
 
         // All that is rendered with the friend template sending Friend List.
         return $this->render('users/friend.html.twig', array(
