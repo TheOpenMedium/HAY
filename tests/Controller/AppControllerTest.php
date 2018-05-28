@@ -14,7 +14,9 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  * * testLocaleEnglishRedirect() -- app_locale
  * * testLocaleFrenchRedirect()  -- app_locale
  * * testIndexPage()             -- app_index
+ * * testPostSubmit()            -- app_index
  */
+
 class AppControllerTest extends WebTestCase
 {
     private $doctrine;
