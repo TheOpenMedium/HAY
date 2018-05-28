@@ -1,0 +1,19 @@
+language: php
+php:
+    - '7.2'
+before_install:
+    - sudo apt-get update -qq
+    - sudo apt-get install build-essential git -y
+    - git clone -b stable https://github.com/jedisct1/libsodium.git
+    - cd libsodium && sudo ./configure && sudo make check && sudo make install && cd ..
+    - '[[ "$TRAVIS_PHP_VERSION" == "nightly" ]] || phpenv config-rm xdebug.ini'
+    - composer self-update
+    - pecl install libsodium
+    - echo "extension=sodium.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - composer install -n
+install:
+    - echo "DATABASE_URL=mysql://root:@127.0.0.1:3306/haytest" > .env
+    - php bin/console doctrine:database:create --env=test -n
+    - php bin/console doctrine:migrations:migrate --env=test -n
+services: mysql
+sudo: enabled

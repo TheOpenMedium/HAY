@@ -15,7 +15,7 @@
         <env name="APP_DEBUG" value="1" />
         <env name="APP_SECRET" value="s$cretf0rt3st" />
         <env name="SHELL_VERBOSITY" value="-1" />
-        <env name="DATABASE_URL" value="mysql://user:password@127.0.0.1:3306/haytest" />
+        <env name="DATABASE_URL" value="mysql://root:@127.0.0.1:3306/haytest" />
         <!-- define your env variables for the test env here -->
     </php>
 
