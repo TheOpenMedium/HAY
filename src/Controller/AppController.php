@@ -24,7 +24,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
  * A controller related to the application
  *
  * List of actions:
- * * localeAction()
+ * * localeAction()                              -- app_locale
  * * indexAction(Request $request)               -- app_index
  * * loginAction(AuthenticationUtils $authUtils) -- app_login
  * * signupAction(Request $request)              -- app_signup

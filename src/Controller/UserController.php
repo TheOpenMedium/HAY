@@ -146,7 +146,7 @@ class UserController extends Controller
                 // We see if he didn't upload an image.
                 if ($user->getFile() !== null) {
                     // If it's the case, we verify that the user hasn't already an image.
-                    if ($this->getUser()->getUrl() != '/ressources/icone.png') {
+                    if ($this->getUser()->getUrl() != '/ressources/icon.png') {
                         // If it's the case, we remove it.
                         unlink(__dir__.'/../../public'.$this->getUser()->getUrl());
                     }
