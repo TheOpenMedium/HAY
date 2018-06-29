@@ -1,0 +1,67 @@
+/* User Page */
+
+.userMenu {
+    position: fixed;
+    top: 50px;
+    left: 0px;
+    background-color: dimgrey;
+    height: calc(100vh - 50px);
+    overflow-y: auto;
+    width: 250px;
+}
+
+.userInfo {
+    background-color: var(--hay-color);
+    text-align: center;
+    color: var(--bg-light);
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--bg-light);
+}
+
+.userImg {
+    background-color: var(--gray-color);
+    display: block;
+    height: 250px;
+    width: 250px;
+    padding: 25px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--bg-light);
+}
+
+.userMenu a {
+    display: block;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-bottom: 1px solid var(--gray-color);
+    transition: 0.5s background;
+}
+
+.userMenu a:hover {
+    background-color: var(--gray-color);
+    transition: 0.5s background;
+}
+
+.userMenu a i {
+    float: right;
+}
+
+.friend {
+    background-color: var(--blue-color);
+    border-bottom: 2px solid var(--bg-light)!important;
+}
+
+.friend:hover, #fselected {
+    background-color: var(--blue-light)!important;
+    border-bottom: 2px solid var(--bg-light)!important;
+}
+
+#fselected {
+    cursor: default;
+}
+
+#selected {
+    background-color: var(--gray-color);
+}

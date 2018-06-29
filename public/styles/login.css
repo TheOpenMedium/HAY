@@ -1,0 +1,107 @@
+/* Login Page */
+
+.loginBody {
+    margin: auto;
+}
+
+.loginIcons {
+    display: block;
+    margin: auto;
+}
+
+.login {
+    display: block;
+    background-color: var(--bg-light);
+    border: 0px;
+    border-bottom: 2px solid var(--hay-color);
+    color: white;
+    padding: 5px;
+    width: 96px;
+    transition: width var(--transition-default-duration) ease-in-out;
+    margin: auto;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.login:focus {
+    width: calc(100% - 10px);
+    text-align: left;
+}
+
+.loginLarge {
+    width: 130px;
+    transition: width var(--transition-default-duration) ease-in-out;
+}
+
+.loginLarge:focus {
+    width: calc(100% - 10px);
+    text-align: left;
+}
+
+.submit {
+    display: block;
+    color: white;
+    background-color: var(--hay-color);
+    margin: auto;
+    margin-top: 10px;
+    border: 0px;
+    padding: 7px;
+    transition: background-color var(--transition-default-duration) ease-in-out;
+}
+
+.submit:hover {
+    cursor: pointer;
+    background-color: var(--hay-dark);
+}
+
+.loginSwitch {
+    display: block;
+    width: calc(100%-20px);
+    text-decoration: none;
+    color: white;
+    background-color: var(--hay-color);
+    text-align: center;
+    padding: 10px;
+    font-family: sans-serif;
+    transition: background-color var(--transition-default-duration) ease-in-out;
+}
+
+.loginSwitch:hover {
+    background-color: var(--hay-dark);
+}
+
+.loginRememberme {
+    text-align: center;
+}
+
+.loginRememberme label {
+    display: inline-block;
+    color: white;
+    background-color: var(--hay-color);
+    font-family: sans-serif;
+    padding: 5px;
+    transition: background-color var(--transition-default-duration) ease-in-out;
+    cursor: pointer;
+}
+
+.loginRememberme label:hover {
+    background-color: var(--hay-dark);
+}
+
+.loginError {
+    border: 0px;
+    background: red;
+    color: white;
+    padding: 5px;
+    display: block;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    font-family: sans-serif;
+}
+
+#closeError {
+    float: right;
+    cursor: pointer;
+}

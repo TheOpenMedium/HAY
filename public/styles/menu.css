@@ -1,0 +1,242 @@
+/* Menu */
+
+.menu {
+    display: block;
+    width: 100%;
+    height: 50px;
+    background-color: dimgrey;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+
+#version {
+    color: white;
+    background-color: rgb(255, 0, 0);
+    font-size: 13px;
+    font-family: monospace;
+    position: absolute;
+    left: 4px;
+    top: 28px;
+    z-index: 11;
+}
+
+.search {
+    margin: 10px;
+    float: left;
+    margin-left: 0px;
+    height: calc(100% - 20px);
+    width: 500px;
+    background-color: var(--bg-light);
+    border: 1px solid grey;
+    padding-left: 5px;
+    color: white;
+    -webkit-appearance: none; /* NOTE: Without this line, Safari display the search input weirdly */
+}
+
+.confirm {
+    border: 1px solid grey;
+    margin: 10px;
+    margin-left: 0px;
+    height: calc(100% - 20px);
+    background-color: var(--bg-light);
+    color: var(--font-color-grey);
+}
+
+.confirm:hover {
+    background-color: var(--bg-dark);
+    cursor: pointer;
+}
+
+.parameter {
+    cursor: pointer;
+    float: right;
+    height: 100%;
+    display: block;
+    padding-top: 8px;
+}
+
+.parameter i {
+    margin: 0px 10px;
+    color: var(--font-color-grey);
+    font-size: 30px;
+}
+
+.ulParameter {
+    display: none;
+    position: fixed;
+    right: 0px;
+    top: 34px;
+    background-color: dimgrey;
+    height: 100%;
+    width: 183px;
+    cursor: auto;
+    padding: 0px;
+    list-style: none;
+}
+
+.parameter:hover ul.ulParameter {
+    display: block;
+}
+
+.userStats {
+    display: block;
+    padding: 20px;
+    color: white;
+    font-family: sans-serif;
+    border-bottom: 1px solid var(--font-color-grey);
+    padding-left: 70px;
+}
+
+.userStats img {
+    height: 50px;
+    width: 50px;
+    float: left;
+    position: absolute;
+    top: 2.5px;
+    left: 2.5px;
+}
+
+.optionMenuChoice a {
+    display: block;
+    padding: 20px;
+    color: white;
+    font-family: sans-serif;
+    text-align: center;
+    text-decoration: none;
+    border-bottom: 1px solid var(--font-color-grey);
+}
+
+.optionMenuChoice:hover {
+    background-color: var(--font-color-grey);
+}
+
+.notification {
+    cursor: pointer;
+    float: right;
+    height: 100%;
+    display: block;
+    padding-top: 8px;
+}
+
+.notification i {
+    margin: 0px 10px;
+    color: var(--font-color-grey);
+    font-size: 30px;
+}
+
+.ulNotification {
+    display: none;
+    position: fixed;
+    right: 0px;
+    top: 34px;
+    background-color: dimgrey;
+    height: 100%;
+    width: 183px;
+    cursor: auto;
+    padding: 0px;
+    list-style: none;
+}
+
+.notification:hover ul.ulNotification {
+    display: block;
+}
+
+.notif {
+    display: block;
+    border-bottom: 1px solid var(--font-color-grey);
+    color: white;
+    font-family: sans-serif;
+    font-size: 12px;
+    padding: 15px;
+    word-wrap: break-word;
+}
+
+.users {
+    cursor: pointer;
+    float: right;
+    height: 100%;
+    display: block;
+    padding-top: 8px;
+}
+
+.users i {
+    margin: 0px 10px;
+    color: var(--font-color-grey);
+    font-size: 30px;
+}
+
+.ulUsers {
+    display: none;
+    position: fixed;
+    right: 0px;
+    top: 34px;
+    background-color: dimgrey;
+    height: 100%;
+    width: 183px;
+    cursor: auto;
+    padding: 0px;
+    list-style: none;
+}
+
+.users:hover ul.ulUsers {
+    display: block;
+}
+
+.usersTitle {
+    text-align: center;
+    background-color: var(--hay-color);
+    color: var(--bg-light);
+    font-family: sans-serif;
+    padding: 10px;
+}
+
+.liFriend {
+    display: block;
+    border-bottom: 1px solid var(--font-color-grey);
+    color: white;
+    font-family: sans-serif;
+    font-size: 12px;
+    padding: 15px;
+    word-wrap: break-word;
+}
+
+.liFriend {
+    display: block;
+    padding: 10px;
+    color: white;
+    font-family: sans-serif;
+    border-bottom: 1px solid var(--font-color-grey);
+    transition: var(--transition-default-duration) background;
+}
+
+.liFriend img {
+    height: 25px;
+    width: 25px;
+    float: left;
+    margin: -6.25px;
+    margin-right: 10px;
+}
+
+.liFriend:hover {
+    transition: var(--transition-default-duration) background;
+    background-color: var(--font-color-grey);
+}
+
+.loginPage {
+    display: block;
+    text-decoration: none;
+    color: white;
+    background-color: var(--hay-color);
+    text-align: center;
+    padding: 10px;
+    font-family: sans-serif;
+    transition: background-color var(--transition-default-duration) ease-in-out;
+    float: right;
+    margin: 6px;
+    border-radius: 5px;
+}
+
+.loginPage:hover {
+    background-color: var(--hay-dark);
+}

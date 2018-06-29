@@ -1,0 +1,224 @@
+/* Send Post Area */
+
+.write {
+    width: 600px;
+    height: 360px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.ta {
+    resize: none;
+    width: 100%;
+    height: calc(100% - 20px);
+    background-color: inherit;
+    border: 1px solid grey;
+    color: inherit;
+    font-family: sans-serif;
+}
+
+.textarea {
+    padding: 5px;
+    color: lavender;
+    height: 300px;
+    display: block;
+    background-color: dimgrey;
+    font-family: sans-serif;
+}
+
+/* Send Post Options */
+
+.footer {
+    background-image: url('../ressources/corner.png');
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    background-size: 50px;
+    width: 100%;
+}
+
+.footerMenu {
+    margin: 0;
+    margin-left: -15px;
+}
+
+.menuChoices {
+    list-style: none;
+    display: inline-block;
+    width: 85.7px;
+    margin-right: -14px;
+}
+
+.option {
+    border: 0px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin: 0;
+    margin-right: -15px;
+    height: 50px;
+    transform: skewX(-45deg);
+}
+
+.option:hover {
+    cursor: pointer;
+}
+
+/* General Options */
+
+.optPref {
+    margin-right: -9px!important;
+}
+
+#optionMenu {
+    display: block;
+    transform: skewX(45deg);
+}
+
+/* Color Options */
+
+.colorUL {
+    display: none;
+    background-color: lavender;
+    list-style: none;
+    padding: 5px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    width: 255px;
+}
+
+.optColor:hover ul.colorUL {
+    display: block;
+    position: absolute;
+    margin-left: -100px;
+    z-index: 3;
+}
+
+.colorLI {
+    margin: 5px;
+}
+
+.color {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    border-radius: 100px;
+}
+
+.color:hover {
+    cursor: pointer;
+}
+
+[name="form[color]"] {
+    margin: 0px;
+}
+
+[name="form[color]"]:hover {
+    cursor: pointer;
+}
+
+/* Size Options */
+
+.sizeUL {
+    display: none;
+    background-color: lavender;
+    list-style: none;
+    padding: 5px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    width: 255px;
+    height: 215px;
+}
+
+.optSize:hover ul.sizeUL {
+    display: block;
+    position: absolute;
+    margin-left: -100px;
+    z-index: 3;
+}
+
+.sizeDisplay {
+  height: calc(100% - 34px);
+  display: block;
+  background-color: white;
+  width: 100%;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  text-align: center;
+}
+
+.sizeInput {
+  display: block;
+  height: 34px;
+  width: calc(100%);
+  text-align: center;
+}
+
+/* Account Options */
+
+.optAccount {
+    margin-left: -1px;
+}
+
+/* Send Post Buttons */
+
+.sendPost {
+    margin-left: 3px;
+}
+
+.send {
+    display: block;
+    border: 0px;
+    background-color: lavender;
+    padding-left: 30px;
+    padding-right: 15px;
+    margin: 0;
+    height: 50px;
+    transform: skewX(-45deg);
+    position: relative;
+    bottom: 15px;
+    right: 6px;
+}
+
+.send:hover {
+    cursor: pointer;
+}
+
+#sendArrow {
+    display: block;
+    transform: skewX(45deg);
+    position: relative;
+    top: 15px;
+}
+
+.sendButton {
+    display: none;
+}
+
+/* Posts */
+
+.text {
+    width: 600px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.infHAY {
+    width: 600px;
+    height: 50px;
+    background-image: url('../ressources/anti-corner.png');
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    background-size: 50px;
+    padding-left: 50px;
+    font-family: sans-serif;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.content {
+    border-top: 2px solid;
+    padding: 5px;
+    width: 600px;
+    max-height: 300px;
+    word-wrap: break-word;
+    overflow-y: auto;
+}

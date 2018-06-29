@@ -1,0 +1,61 @@
+/* Send Comment Area */
+
+.comment {
+    width: 600px;
+    height: 100px;
+    background-image: url('../ressources/comment.png');
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    margin-bottom: 0px;
+}
+
+.sendCom {
+    display: block;
+    width: 45px;
+    height: 45px;
+    padding: 0px;
+    background-color: blue;
+    border: 0px;
+    color: white;
+    font-size: 20px;
+    position: relative;
+    top: 24px;
+    text-align: center;
+    padding-top: 12px;
+}
+
+.sendCom:hover {
+    cursor: pointer;
+}
+
+.taCom {
+    resize: none;
+    font-family: sans-serif;
+    font-size: 16px;
+    width: 545px;
+    height: 92.5px;
+    background-color: white;
+    border: 1px solid white;
+    color: black;
+}
+
+/* Comments */
+
+.com {
+    background-color: lavender;
+    background-image: url('../ressources/comment-corner.png');
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    min-height: 50px;
+    padding: 5px;
+    padding-left: 50px;
+    font-family: sans-serif;
+    color: black;
+}
+
+.end {
+    height: 50px;
+    background-image: url('../ressources/comment-corner.png');
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+}

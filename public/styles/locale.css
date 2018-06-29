@@ -1,0 +1,41 @@
+/* Locale Page */
+
+.localeHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    text-align: center;
+    background-color: var(--om-color);
+    background-image: url('../ressources/icon.png');
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    background-size: 130px;
+    color: white;
+    font-family: sans-serif;
+}
+
+.localeContent {
+    padding: 15px;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.locale {
+    margin: 15px auto;
+    padding: 10px;
+    background-color: var(--hay-color);
+    border-radius: 7px;
+    width: 110px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: var(--transition-default-duration) background;
+    display: block;
+    color: white;
+    text-decoration: none;
+}
+
+.locale:hover {
+    transition: var(--transition-default-duration) background;
+    background-color: var(--hay-dark);
+}

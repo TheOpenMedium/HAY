@@ -16,7 +16,7 @@
 ###< symfony/phpunit-bridge ###
 
 ###> files folders ###
-/public/usr_img/
+/public/usr_img/*
 ###< files folders ###
 
 ###> other ###

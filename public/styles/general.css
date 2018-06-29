@@ -1,0 +1,33 @@
+/* General */
+
+:root {
+    /* Colors */
+    --om-color: #00ffff;
+    --hay-color: #55ff99;
+    --hay-dark: #33dd77;
+    --bg-light : #404040;
+    --bg-dark : #303030;
+    --font-color-grey: #b0b0b0;
+    --gray-color: #999999;
+    --blue-color: #0000ff;
+    --blue-light: #5555ff;
+
+    /* Animations & Transitions */
+    --transition-default-duration: 0.4s;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    margin-top: 80px;
+    background-color: var(--bg-light);
+    padding-bottom: 50px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
