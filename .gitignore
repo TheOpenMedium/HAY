@@ -21,4 +21,5 @@
 
 ###> other ###
 .DS_Store
+.vscode
 ###< other ###

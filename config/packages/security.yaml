@@ -35,8 +35,6 @@ security:
                     remember_me: { path: / }
                 invalidate_session: false
             provider: data_base
-        test:
-            security: false
 
             # activate different ways to authenticate
 
