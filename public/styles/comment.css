@@ -1,27 +1,28 @@
 /* Send Comment Area */
 
 .comment {
-    width: 600px;
-    height: 100px;
+    width: calc(600px * var(--length-multiplication));
+    height: calc(100px * var(--length-multiplication));
     background-image: url('../ressources/comment.png');
     background-position: 0px 0px;
     background-repeat: no-repeat;
+    background-size: calc(600px * var(--length-multiplication));
     margin-bottom: 0px;
 }
 
 .sendCom {
     display: block;
-    width: 45px;
-    height: 45px;
+    width: calc(45px * var(--length-multiplication));
+    height: calc(45px * var(--length-multiplication));
     padding: 0px;
     background-color: blue;
     border: 0px;
     color: white;
-    font-size: 20px;
+    font-size: calc(20px * var(--length-multiplication));
     position: relative;
-    top: 24px;
+    top: calc(24px * var(--length-multiplication));
     text-align: center;
-    padding-top: 12px;
+    padding-top: calc(12px * var(--length-multiplication));
 }
 
 .sendCom:hover {
@@ -31,9 +32,9 @@
 .taCom {
     resize: none;
     font-family: sans-serif;
-    font-size: 16px;
-    width: 545px;
-    height: 92.5px;
+    font-size: calc(16px * var(--length-multiplication));
+    width: calc(545px * var(--length-multiplication));
+    height: calc(92.5px * var(--length-multiplication));
     background-color: white;
     border: 1px solid white;
     color: black;
@@ -46,16 +47,18 @@
     background-image: url('../ressources/comment-corner.png');
     background-repeat: no-repeat;
     background-position: 0px 0px;
-    min-height: 50px;
-    padding: 5px;
-    padding-left: 50px;
+    background-size: calc(600px * var(--length-multiplication));
+    min-height: calc(50px * var(--length-multiplication));
+    padding: calc(5px * var(--length-multiplication));
+    padding-left: calc(50px * var(--length-multiplication));
     font-family: sans-serif;
     color: black;
 }
 
 .end {
-    height: 50px;
+    height: calc(50px * var(--length-multiplication));
     background-image: url('../ressources/comment-corner.png');
     background-repeat: no-repeat;
     background-position: 0px 0px;
+    background-size: calc(600px * var(--length-multiplication));
 }

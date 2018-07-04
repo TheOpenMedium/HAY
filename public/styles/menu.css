@@ -1,5 +1,35 @@
 /* Menu */
 
+@media screen and (min-width: 850px)
+{
+    :root {
+        --search-bar-width: 500px;
+    }
+}
+
+@media screen and (max-width: 850px) and (min-width: 600px)
+{
+    :root {
+        --search-bar-width: 250px;
+    }
+}
+
+@media screen and (max-width: 600px)
+{
+    :root {
+        --is-search-bar-not-displayed: none;
+        --is-confirm-has-no-bg: dimgrey;
+        --is-confirm-float-right: right;
+    }
+
+    @media screen  and (max-width: 350px)
+    {
+        :root {
+            --is-login-page-displayed: none;
+        }
+    }
+}
+
 .menu {
     display: block;
     width: 100%;
@@ -22,11 +52,11 @@
 }
 
 .search {
-    margin: 10px;
+    display: var(--is-search-bar-not-displayed, block);
+    margin: 10px 0px;
     float: left;
-    margin-left: 0px;
     height: calc(100% - 20px);
-    width: 500px;
+    width: var(--search-bar-width);
     background-color: var(--bg-light);
     border: 1px solid grey;
     padding-left: 5px;
@@ -35,16 +65,19 @@
 }
 
 .confirm {
-    border: 1px solid grey;
+    border: 1px solid var(--is-confirm-has-no-bg, grey);
     margin: 10px;
     margin-left: 0px;
     height: calc(100% - 20px);
-    background-color: var(--bg-light);
+    background-color: var(--is-confirm-has-no-bg, grey);
     color: var(--font-color-grey);
+    width: 43px;
+    transition: var(--transition-default-duration) background;
+    float: var(--is-confirm-float-right, initial);
 }
 
 .confirm:hover {
-    background-color: var(--bg-dark);
+    background-color: var(--is-confirm-has-no-bg, --grey-dark);
     cursor: pointer;
 }
 
@@ -224,7 +257,7 @@
 }
 
 .loginPage {
-    display: block;
+    display: var(--is-login-page-displayed, block);
     text-decoration: none;
     color: white;
     background-color: var(--hay-color);

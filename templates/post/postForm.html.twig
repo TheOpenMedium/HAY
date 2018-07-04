@@ -11,7 +11,7 @@
             {{ include('post/postOptions/postFont.html.twig') }}
             {{ include('post/postOptions/postAccount.html.twig') }}
             <li class="menuChoices sendPost">
-                <label for="form_submit" class="send"><span id="sendArrow"><i class="fa fa-arrow-right fa-lg" aria-hidden="true"></i></span></label>
+                <label for="form_submit" class="send fs16"><span id="sendArrow"><i class="icofont icofont-arrow-right" aria-hidden="true"></i></span></label>
                 {{ form_widget(form.submit, {'attr': {'class': 'sendButton'}, 'label': false}) }}
                 {{ form_end(form) }}
             </li>

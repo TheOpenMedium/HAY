@@ -138,97 +138,97 @@
 
 /* FONT 10->19 */
 .fs10 {
-    font-size: 10px;
+    font-size: calc(10px * var(--length-multiplication));
 }
 .fs12 {
-    font-size: 12px;
+    font-size: calc(12px * var(--length-multiplication));
 }
 .fs14 {
-    font-size: 14px;
+    font-size: calc(14px * var(--length-multiplication));
 }
 .fs16 {
-    font-size: 16px;
+    font-size: calc(16px * var(--length-multiplication));
 }
 .fs18 {
-    font-size: 18px;
+    font-size: calc(18px * var(--length-multiplication));
 }
 /* FONT 20->29 */
 .fs20 {
-    font-size: 20px;
+    font-size: calc(20px * var(--length-multiplication));
 }
 .fs22 {
-    font-size: 22px;
+    font-size: calc(22px * var(--length-multiplication));
 }
 .fs24 {
-    font-size: 24px;
+    font-size: calc(24px * var(--length-multiplication));
 }
 .fs26 {
-    font-size: 26px;
+    font-size: calc(26px * var(--length-multiplication));
 }
 .fs28 {
-    font-size: 28px;
+    font-size: calc(28px * var(--length-multiplication));
 }
 /* FONT 30->39 */
 .fs30 {
-    font-size: 30px;
+    font-size: calc(30px * var(--length-multiplication));
 }
 .fs32 {
-    font-size: 32px;
+    font-size: calc(32px * var(--length-multiplication));
 }
 .fs34 {
-    font-size: 34px;
+    font-size: calc(34px * var(--length-multiplication));
 }
 .fs36 {
-    font-size: 36px;
+    font-size: calc(36px * var(--length-multiplication));
 }
 .fs38 {
-    font-size: 38px;
+    font-size: calc(38px * var(--length-multiplication));
 }
 /* FONT 40->49 */
 .fs40 {
-    font-size: 40px;
+    font-size: calc(40px * var(--length-multiplication));
 }
 .fs42 {
-    font-size: 42px;
+    font-size: calc(42px * var(--length-multiplication));
 }
 .fs44 {
-    font-size: 44px;
+    font-size: calc(44px * var(--length-multiplication));
 }
 .fs46 {
-    font-size: 46px;
+    font-size: calc(46px * var(--length-multiplication));
 }
 .fs48 {
-    font-size: 48px;
+    font-size: calc(48px * var(--length-multiplication));
 }
 /* FONT 50->59 */
 .fs50 {
-    font-size: 50px;
+    font-size: calc(50px * var(--length-multiplication));
 }
 .fs52 {
-    font-size: 52px;
+    font-size: calc(52px * var(--length-multiplication));
 }
 .fs54 {
-    font-size: 54px;
+    font-size: calc(54px * var(--length-multiplication));
 }
 .fs56 {
-    font-size: 56px;
+    font-size: calc(56px * var(--length-multiplication));
 }
 .fs58 {
-    font-size: 58px;
+    font-size: calc(58px * var(--length-multiplication));
 }
 /* FONT 60->69 */
 .fs60 {
-    font-size: 60px;
+    font-size: calc(60px * var(--length-multiplication));
 }
 .fs62 {
-    font-size: 62px;
+    font-size: calc(62px * var(--length-multiplication));
 }
 .fs64 {
-    font-size: 64px;
+    font-size: calc(64px * var(--length-multiplication));
 }
 .fs66 {
-    font-size: 66px;
+    font-size: calc(66px * var(--length-multiplication));
 }
 .fs68 {
-    font-size: 68px;
+    font-size: calc(68px * var(--length-multiplication));
 }
