@@ -10,11 +10,11 @@
             {{ include('post/postOptions/postSize.html.twig') }}
             {{ include('post/postOptions/postFont.html.twig') }}
             {{ include('post/postOptions/postAccount.html.twig') }}
-            <li class="menuChoices sendPost send fs16">
-                <label for="form_submit" class="optionMenu"><i class="icofont icofont-arrow-right" aria-hidden="true"></i></label>
+            <label for="form_submit"><li class="menuChoices sendPost send fs16">
+                <i class="icofont icofont-arrow-right optionMenu" aria-hidden="true"></i>
                 {{ form_widget(form.submit, {'attr': {'class': 'sendButton'}, 'label': false}) }}
                 {{ form_end(form) }}
-            </li>
+            </li></label>
         </ul>
         <script>
         re = new RegExp("^\\s+$")
