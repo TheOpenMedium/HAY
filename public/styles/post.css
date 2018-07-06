@@ -87,6 +87,7 @@
     cursor: pointer;
     border: 0px;
     padding: calc(17px * var(--length-multiplication)) calc(31.27px * var(--length-multiplication));
+    z-index: 3; /* Because those who created z-index stacking context are weird persons */
 }
 
 .option {
@@ -130,7 +131,6 @@
 
 .optColor:hover .colorUL {
     display: flex;
-    z-index: 3;
 }
 
 .color {
