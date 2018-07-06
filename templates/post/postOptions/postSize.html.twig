@@ -1,7 +1,7 @@
-<li class="menuChoices optSize">
-    <button class="option optOther optSize cF91 fs16" type="button"><span id="optionMenu"><i class="icofont icofont-text-height" aria-hidden="true"></i></span></button>
-    <ul class="sizeUL">
-        {{ form_widget(form.size, {'attr': {'class': 'sizeInput', 'value': '16', 'min': '10', 'max': '68', 'step': '2', 'value': '16'}}) }}
+<li class="menuChoices optSize cF91 fs16">
+    <span class="optionMenu"><i class="icofont icofont-text-height" aria-hidden="true"></i></span>
+    <div class="sizeUL">
+        {{ form_widget(form.size, {'attr': {'class': 'sizeInput fs16', 'value': '16', 'min': '10', 'max': '68', 'step': '2', 'value': '16'}}) }}
         <div class="sizeDisplay fs16">a</div>
-    </ul>
+    </div>
 </li>

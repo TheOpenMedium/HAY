@@ -12,7 +12,7 @@
                         <img src="{{ post.user.url }}" alt="{{ post.user.alt }}" style="position: relative; top: 2px; width: calc(40px * var(--length-multiplication)); height: calc(40px * var(--length-multiplication));" />
                     </a>
                 </td>
-                <td style="border-left: 1px solid {{ post.color != 'FFF' ? 'white' : 'black' }}; padding-left: calc(15px * var(--length-multiplication)); font-family: sans-serif; color: {{ post.color != 'FFF' ? 'white' : 'black' }};">
+                <td style="border-left: calc(1px * var(--length-multiplication)) solid {{ post.color != 'FFF' ? 'white' : 'black' }}; padding-left: calc(15px * var(--length-multiplication)); font-family: sans-serif; color: {{ post.color != 'FFF' ? 'white' : 'black' }};">
                     <a href="{{ url('user_show', {'id': post.user.id}) }}" class="fs16">
                         {{ post.user.firstName }} {{ post.user.lastName }} {% if post.user.username %}{{ 'alias'|trans }} {{ post.user.username }} {% endif %}{{ 'has_write'|trans }}
                     </a>
@@ -37,14 +37,14 @@
 {% if post.comments is not empty %}
 {% for comment in post.comments %}
     <div class="com fs16">
-        <table style="border: 0px; border-bottom: 1px solid grey; width: calc(550px * var(--length-multiplication)); margin-bottom: calc(5px * var(--length-multiplication));">
+        <table style="border: 0px; border-bottom: calc(1px * var(--length-multiplication)) solid grey; width: calc(550px * var(--length-multiplication)); margin-bottom: calc(5px * var(--length-multiplication));">
             <tr>
                 <td style="padding-right: 2.5px;">
                     <a href="{{ url('user_show', {'id': comment.user.id}) }}">
                         <img src="{{ comment.user.url }}" alt="{{ comment.user.alt }}" style="position: relative; top: calc(5px * var(--length-multiplication)); width: calc(40px * var(--length-multiplication)); height: calc(40px * var(--length-multiplication));" />
                     </a>
                 </td>
-                <td style="border-left: 1px solid grey; padding-left: calc(15px * var(--length-multiplication)); width: 85%; color: grey;" class="fs16"><a href="{{ url('user_show', {'id': comment.user.id}) }}">
+                <td style="border-left: calc(1px * var(--length-multiplication)) solid grey; padding-left: calc(15px * var(--length-multiplication)); width: 85%; color: grey;" class="fs16"><a href="{{ url('user_show', {'id': comment.user.id}) }}">
                     {{ comment.user.firstName }} {{ comment.user.lastName }}
                     {% if comment.user.username %}{{ 'alias'|trans }} {{ comment.user.username }} {% endif %}
                     {{ 'has_comment'|trans }}

@@ -2,7 +2,6 @@
 {
     :root {
         --length-multiplication: 2;
-        --footer-margin-left: 10px;
     }
 }
 
@@ -10,7 +9,6 @@
 {
     :root {
         --length-multiplication: 1;
-        --footer-margin-left: -15px;
     }
 }
 
@@ -18,7 +16,6 @@
 {
     :root {
         --length-multiplication: 0.5;
-        --footer-margin-left: -27.5px;
     }
 }
 
@@ -26,7 +23,6 @@
 {
     :root {
         --length-multiplication: 0.25;
-        --footer-margin-left: -34px;
     }
 }
 
@@ -34,7 +30,6 @@
 {
     :root {
         --length-multiplication: 0.125;
-        --footer-margin-left: -36.75px;
     }
 }
 
@@ -52,7 +47,7 @@
     width: 100%;
     height: calc(100% - calc(20px * var(--length-multiplication)));
     background-color: inherit;
-    border: 1px solid grey;
+    border: calc(1px * var(--length-multiplication)) solid grey;
     color: inherit;
     font-family: sans-serif;
 }
@@ -78,14 +73,20 @@
 
 .footerMenu {
     margin: 0;
-    margin-left: var(--footer-margin-left);
+    margin-left: calc(25px * var(--length-multiplication));
+    height: calc(50px * var(--length-multiplication));
+    padding: 0;
+    line-height: 0px;
 }
 
 .menuChoices {
     list-style: none;
     display: inline-block;
-    width: calc(85.7px * var(--length-multiplication));
-    margin-right: calc(-14px * var(--length-multiplication));
+    margin: 0px;
+    transform: skewX(-45deg);
+    cursor: pointer;
+    border: 0px;
+    padding: calc(17px * var(--length-multiplication)) calc(31.27px * var(--length-multiplication));
 }
 
 .option {
@@ -104,12 +105,8 @@
 
 /* General Options */
 
-.optPref {
-    margin-right: calc(-9px * var(--length-multiplication))!important;
-}
-
-#optionMenu {
-    display: block;
+.optionMenu {
+    display: inline-block;
     transform: skewX(45deg);
 }
 
@@ -118,22 +115,22 @@
 .colorUL {
     display: none;
     background-color: lavender;
-    list-style: none;
     padding: calc(5px * var(--length-multiplication));
     border-bottom-left-radius: calc(10px * var(--length-multiplication));
     border-bottom-right-radius: calc(10px * var(--length-multiplication));
     width: calc(255px * var(--length-multiplication));
-}
-
-.optColor:hover ul.colorUL {
-    display: block;
+    transform: skewX(45deg);
+    margin-top: calc(17px * var(--length-multiplication));
+    cursor: auto;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
     position: absolute;
-    margin-left: calc(-100px * var(--length-multiplication));
-    z-index: 3;
 }
 
-.colorLI {
-    margin: calc(5px * var(--length-multiplication));
+.optColor:hover .colorUL {
+    display: flex;
+    z-index: 3;
 }
 
 .color {
@@ -141,6 +138,7 @@
     width: calc(35px * var(--length-multiplication));
     height: calc(35px * var(--length-multiplication));
     border-radius: calc(100px * var(--length-multiplication));
+    margin: calc(2.5px * var(--length-multiplication));
 }
 
 .color:hover {
@@ -160,65 +158,45 @@
 .sizeUL {
     display: none;
     background-color: lavender;
-    list-style: none;
     padding: calc(5px * var(--length-multiplication));
     border-bottom-left-radius: calc(10px * var(--length-multiplication));
     border-bottom-right-radius: calc(10px * var(--length-multiplication));
     width: calc(255px * var(--length-multiplication));
     height: calc(215px * var(--length-multiplication));
+    transform: skewX(45deg);
+    margin-top: calc(17px * var(--length-multiplication));
+    color: black;
 }
 
-.optSize:hover ul.sizeUL {
+.optSize:hover .sizeUL {
     display: block;
     position: absolute;
-    margin-left: calc(-100px * var(--length-multiplication));
     z-index: 3;
 }
 
 .sizeDisplay {
-  height: calc(100% - calc(34px * var(--length-multiplication)));
-  display: block;
-  background-color: white;
-  width: 100%;
-  border-bottom-left-radius: calc(5px * var(--length-multiplication));
-  border-bottom-right-radius: calc(5px * var(--length-multiplication));
-  text-align: center;
+    height: calc(100% - calc(34px * var(--length-multiplication)));
+    display: block;
+    background-color: white;
+    width: 100%;
+    border-bottom-left-radius: calc(5px * var(--length-multiplication));
+    border-bottom-right-radius: calc(5px * var(--length-multiplication));
+    text-align: center;
+    line-height: normal;
+    cursor: auto;
 }
 
 .sizeInput {
-  display: block;
-  height: calc(34px * var(--length-multiplication));
-  width: calc(100%);
-  text-align: center;
-}
-
-/* Account Options */
-
-.optAccount {
-    margin-left: calc(-1px * var(--length-multiplication));
+    display: block;
+    height: calc(34px * var(--length-multiplication));
+    width: calc(100%);
+    text-align: center;
 }
 
 /* Send Post Buttons */
 
-.sendPost {
-    margin-left: calc(3px * var(--length-multiplication));
-}
-
 .send {
-    display: block;
-    border: 0px;
     background-color: lavender;
-    padding-left: calc(30px * var(--length-multiplication));
-    padding-right: calc(15px * var(--length-multiplication));
-    margin: 0;
-    height: calc(50px * var(--length-multiplication));
-    transform: skewX(-45deg);
-    position: relative;
-    bottom: calc(15px * var(--length-multiplication));
-    right: calc(6px * var(--length-multiplication));
-}
-
-.send:hover {
     cursor: pointer;
 }
 
@@ -255,7 +233,7 @@
 }
 
 .content {
-    border-top: 2px solid;
+    border-top: calc(2px * var(--length-multiplication)) solid;
     padding: calc(5px * var(--length-multiplication));
     width: calc(600px * var(--length-multiplication));
     max-height: calc(300px * var(--length-multiplication));

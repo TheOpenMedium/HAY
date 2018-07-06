@@ -113,21 +113,25 @@
 }
 
 .userStats {
-    display: block;
-    padding: 20px;
+    display: flex;
+    padding: 10px;
     color: white;
     font-family: sans-serif;
     border-bottom: 1px solid var(--font-color-grey);
-    padding-left: 70px;
+    min-height: 70px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 .userStats img {
     height: 50px;
     width: 50px;
-    float: left;
-    position: absolute;
-    top: 2.5px;
-    left: 2.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-right: 10px;
 }
 
 .optionMenuChoice a {
