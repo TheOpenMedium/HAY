@@ -3,11 +3,12 @@
 .comment {
     width: calc(600px * var(--length-multiplication));
     height: calc(100px * var(--length-multiplication));
-    background-image: url('../ressources/comment.png');
-    background-position: 0px 0px;
-    background-repeat: no-repeat;
-    background-size: calc(600px * var(--length-multiplication));
     margin-bottom: 0px;
+}
+
+.comment table {
+    position: relative;
+    bottom: calc(100px * var(--length-multiplication));
 }
 
 .sendCom {
@@ -36,7 +37,7 @@
     width: calc(545px * var(--length-multiplication));
     height: calc(92.5px * var(--length-multiplication));
     background-color: white;
-    border: 1px solid white;
+    border: calc(1px * var(--length-multiplication)) solid white;
     color: black;
 }
 
@@ -44,21 +45,32 @@
 
 .com {
     background-color: lavender;
-    background-image: url('../ressources/comment-corner.png');
-    background-repeat: no-repeat;
-    background-position: 0px 0px;
-    background-size: calc(600px * var(--length-multiplication));
     min-height: calc(50px * var(--length-multiplication));
-    padding: calc(5px * var(--length-multiplication));
     padding-left: calc(50px * var(--length-multiplication));
     font-family: sans-serif;
     color: black;
 }
 
+.commentContent {
+    padding: calc(5px * var(--length-multiplication));
+    padding-left: 0px;
+    margin-top: calc(-50px * var(--length-multiplication));
+    z-index: 2;
+    position: relative;
+}
+
+.comment-corner {
+    width: calc(550px * var(--length-multiplication));
+    height: calc(50px * var(--length-multiplication));
+    transform: skewX(-45deg);
+    margin-left: calc(25px * var(--length-multiplication));
+    border-left: calc(1px * var(--length-multiplication)) solid grey;
+    border-top: calc(1px * var(--length-multiplication)) solid grey;
+    position: relative;
+}
+
 .end {
     height: calc(50px * var(--length-multiplication));
-    background-image: url('../ressources/comment-corner.png');
-    background-repeat: no-repeat;
-    background-position: 0px 0px;
-    background-size: calc(600px * var(--length-multiplication));
+    width: calc(50px * var(--length-multiplication));
+    background-color: lavender;
 }

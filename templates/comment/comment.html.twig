@@ -1,4 +1,8 @@
 {{ form_start(comment, {'attr': {'class': 'comment c' ~ color, 'action': path('comment', {'id': id})}}) }}
+<div class="end c{{ color }}" style="float: left; position: relative;"></div>
+<div class="end" style="float: right; position: relative;"></div>
+<div class="end" style="float: left; position: relative; width: calc(600px * var(--length-multiplication))"></div>
+<div class="comment-corner" style="background-color: lavender;"></div>
 <table>
     <tr>
         <td><label for="comment_submit_{{ id }}" class="sendCom"><i class="icofont icofont-comment"></i></label>{{ form_widget(comment.submit, {'attr': {'style': 'display: none;'}, 'id': 'comment_submit_' ~ id}) }}</td>
