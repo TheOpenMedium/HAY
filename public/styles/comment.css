@@ -52,6 +52,18 @@
     color: black;
 }
 
+.comInf {
+    display: grid;
+    grid-template-columns: calc(45px * var(--length-multiplication)) auto min-content;
+    grid-template-rows: calc(45px * var(--length-multiplication));
+    padding-bottom: calc(2.5px * var(--length-multiplication));
+}
+
+.comInf > a {
+    display: inline-flex;
+    align-items: center;
+}
+
 .commentContent {
     padding: calc(5px * var(--length-multiplication));
     padding-left: 0px;

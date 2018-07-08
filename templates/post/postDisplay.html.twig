@@ -5,13 +5,13 @@
     {# Sender informations #}
     {# Informations sur l'expéditeur #}
     <div class="infHAY c{{ post.color }}">
-        <a href="{{ url('user_show', {'id': post.user.id}) }}">
-            <img src="{{ post.user.url }}" alt="{{ post.user.alt }}" style="width: calc(40px * var(--length-multiplication)); height: calc(40px * var(--length-multiplication)); justify-content: center;" />
+        <a style="justify-content: center;" href="{{ url('user_show', {'id': post.user.id}) }}">
+            <img src="{{ post.user.url }}" alt="{{ post.user.alt }}" style="width: calc(40px * var(--length-multiplication)); height: calc(40px * var(--length-multiplication));" />
         </a>
         <a href="{{ url('user_show', {'id': post.user.id}) }}" style="border-left: calc(1px * var(--length-multiplication)) solid {{ post.color != 'FFF' ? 'white' : 'black' }}; padding-left: calc(15px * var(--length-multiplication)); font-family: sans-serif; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" class="fs16">
             {{ post.user.firstName }} {{ post.user.lastName }} {% if post.user.username %}{{ 'alias'|trans }} {{ post.user.username }} {% endif %}{{ 'has_write'|trans }}
         </a>
-        <div style="display: flex; float: right; padding: calc(5px * var(--length-multiplication)); cursor: default; padding-top: calc(2.5px * var(--length-multiplication));">
+        <div style="display: flex; padding: calc(5px * var(--length-multiplication)); cursor: default; padding-top: calc(2.5px * var(--length-multiplication));">
             {% if app.user %}
             {% if post.user.id == app.user.id %}
                 <a class="icofont icofont-ui-delete fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_delete', {'id': post.id}) }}"></a>
@@ -31,29 +31,25 @@
     <div class="com fs16">
         <div class="comment-corner" style="background-color: lavender; right: calc(50px * var(--length-multiplication)); z-index: 0;"></div>
         <div class="commentContent">
-            <table style="border: 0px; border-bottom: calc(1px * var(--length-multiplication)) solid grey; width: calc(550px * var(--length-multiplication)); margin-bottom: calc(5px * var(--length-multiplication));">
-                <tr>
-                    <td style="padding-right: 2.5px;">
-                        <a href="{{ url('user_show', {'id': comment.user.id}) }}">
-                            <img src="{{ comment.user.url }}" alt="{{ comment.user.alt }}" style="position: relative; top: calc(5px * var(--length-multiplication)); width: calc(40px * var(--length-multiplication)); height: calc(40px * var(--length-multiplication));" />
-                        </a>
-                    </td>
-                    <td style="border-left: calc(1px * var(--length-multiplication)) solid grey; padding-left: calc(15px * var(--length-multiplication)); width: 85%; color: grey;" class="fs16"><a href="{{ url('user_show', {'id': comment.user.id}) }}">
-                        {{ comment.user.firstName }} {{ comment.user.lastName }}
-                        {% if comment.user.username %}{{ 'alias'|trans }} {{ comment.user.username }} {% endif %}
-                        {{ 'has_comment'|trans }}
-                    </a></td>
-                    <td style="width: 15%; cursor: default">
-                        {% if app.user %}
-                        {% if comment.user.id == app.user.id %}
-                            <a class="icofont icofont-ui-delete fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: grey;" href="{{ url('comment_delete', {'id': comment.id}) }}"></a>
-                            <a class="icofont icofont-pencil-alt-2 fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: grey;" href="{{ url('comment_edit', {'id': comment.id}) }}"></a>
-                        {% endif %}
-                        {% endif %}
-                        <i class="icofont icofont-navigation-menu fs16" style="color: grey;"></i>
-                    </td>
-                </tr>
-            </table>
+            <div class="comInf" style="border: 0px; border-bottom: calc(1px * var(--length-multiplication)) solid grey; width: calc(550px * var(--length-multiplication)); margin-bottom: calc(5px * var(--length-multiplication));">
+                <a style="justify-content: center;" href="{{ url('user_show', {'id': comment.user.id}) }}">
+                    <img src="{{ comment.user.url }}" alt="{{ comment.user.alt }}" style="width: calc(40px * var(--length-multiplication)); height: calc(40px * var(--length-multiplication));" />
+                </a>
+                <a href="{{ url('user_show', {'id': comment.user.id}) }}" class="fs16" style="border-left: calc(1px * var(--length-multiplication)) solid grey; padding-left: calc(15px * var(--length-multiplication)); width: 85%; color: grey;">
+                    {{ comment.user.firstName }} {{ comment.user.lastName }}
+                    {% if comment.user.username %}{{ 'alias'|trans }} {{ comment.user.username }} {% endif %}
+                    {{ 'has_comment'|trans }}
+                </a>
+                <div style="display: flex; padding: calc(5px * var(--length-multiplication)); cursor: default; padding-top: calc(2.5px * var(--length-multiplication));">
+                    {% if app.user %}
+                    {% if comment.user.id == app.user.id %}
+                        <a class="icofont icofont-ui-delete fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: grey;" href="{{ url('comment_delete', {'id': comment.id}) }}"></a>
+                        <a class="icofont icofont-pencil-alt-2 fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: grey;" href="{{ url('comment_edit', {'id': comment.id}) }}"></a>
+                    {% endif %}
+                    {% endif %}
+                    <i class="icofont icofont-navigation-menu fs16" style="color: grey;"></i>
+                </div>
+            </div>
             {{ comment.comment|escape|replace({'&lt;br /&gt;': '<br />'})|raw }}
         </div>
     </div>
