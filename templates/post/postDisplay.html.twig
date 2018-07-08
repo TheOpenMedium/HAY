@@ -5,29 +5,21 @@
     {# Sender informations #}
     {# Informations sur l'expéditeur #}
     <div class="infHAY c{{ post.color }}">
-        <table style="border: 0px;">
-            <tr>
-                <td style="padding-right: calc(2.5px * var(--length-multiplication));">
-                    <a href="{{ url('user_show', {'id': post.user.id}) }}">
-                        <img src="{{ post.user.url }}" alt="{{ post.user.alt }}" style="position: relative; top: 2px; width: calc(40px * var(--length-multiplication)); height: calc(40px * var(--length-multiplication));" />
-                    </a>
-                </td>
-                <td style="border-left: calc(1px * var(--length-multiplication)) solid {{ post.color != 'FFF' ? 'white' : 'black' }}; padding-left: calc(15px * var(--length-multiplication)); font-family: sans-serif; color: {{ post.color != 'FFF' ? 'white' : 'black' }};">
-                    <a href="{{ url('user_show', {'id': post.user.id}) }}" class="fs16">
-                        {{ post.user.firstName }} {{ post.user.lastName }} {% if post.user.username %}{{ 'alias'|trans }} {{ post.user.username }} {% endif %}{{ 'has_write'|trans }}
-                    </a>
-                </td>
-                <span style="float: right; padding: calc(5px * var(--length-multiplication)); cursor: default;">
-                    {% if app.user %}
-                    {% if post.user.id == app.user.id %}
-                        <a class="icofont icofont-ui-delete fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_delete', {'id': post.id}) }}"></a>
-                        <a class="icofont icofont-pencil-alt-2 fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_edit', {'id': post.id}) }}"></a>
-                    {% endif %}
-                    {% endif %}
-                    <i class="icofont icofont-navigation-menu fs16"></i>
-                </span>
-            </tr>
-        </table>
+        <a href="{{ url('user_show', {'id': post.user.id}) }}">
+            <img src="{{ post.user.url }}" alt="{{ post.user.alt }}" style="width: calc(40px * var(--length-multiplication)); height: calc(40px * var(--length-multiplication)); justify-content: center;" />
+        </a>
+        <a href="{{ url('user_show', {'id': post.user.id}) }}" style="border-left: calc(1px * var(--length-multiplication)) solid {{ post.color != 'FFF' ? 'white' : 'black' }}; padding-left: calc(15px * var(--length-multiplication)); font-family: sans-serif; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" class="fs16">
+            {{ post.user.firstName }} {{ post.user.lastName }} {% if post.user.username %}{{ 'alias'|trans }} {{ post.user.username }} {% endif %}{{ 'has_write'|trans }}
+        </a>
+        <div style="display: flex; float: right; padding: calc(5px * var(--length-multiplication)); cursor: default; padding-top: calc(2.5px * var(--length-multiplication));">
+            {% if app.user %}
+            {% if post.user.id == app.user.id %}
+                <a class="icofont icofont-ui-delete fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_delete', {'id': post.id}) }}"></a>
+                <a class="icofont icofont-pencil-alt-2 fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_edit', {'id': post.id}) }}"></a>
+            {% endif %}
+            {% endif %}
+            <i class="icofont icofont-navigation-menu fs16"></i>
+        </div>
     </div>
     {########################################}
     <div class="content c{{ post.color }} ff{{ post.font }} fs{{ post.size }}" style="border-color: {{ post.color != 'FFF' ? 'white' : 'black' }};">
