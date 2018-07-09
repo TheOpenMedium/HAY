@@ -230,6 +230,8 @@
     font-family: sans-serif;
     display: grid;
     grid-template-columns: calc(45px * var(--length-multiplication)) auto min-content;
+    -ms-display: grid;
+    -ms-grid-template-columns: calc(45px * var(--length-multiplication)) auto min-content;
     padding-top: calc(2.5px * var(--length-multiplication));
     padding-bottom: calc(2.5px * var(--length-multiplication));
 }

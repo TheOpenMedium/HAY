@@ -10,11 +10,15 @@
     position: relative;
     bottom: calc(100px * var(--length-multiplication));
     height: calc(95px * var(--length-multiplication));
+    padding: calc(2.5px * var(--length-multiplication));
     display: grid;
     grid-template-columns: calc(45px * var(--length-multiplication)) calc(545px * var(--length-multiplication));
     grid-gap: calc(5px * var(--length-multiplication));
-    padding: calc(2.5px * var(--length-multiplication));
     grid-template-rows: calc(45px * var(--length-multiplication)) calc(45px * var(--length-multiplication));
+    -ms-display: grid;
+    -ms-grid-template-columns: calc(45px * var(--length-multiplication)) calc(545px * var(--length-multiplication));
+    -ms-grid-gap: calc(5px * var(--length-multiplication));
+    -ms-grid-template-rows: calc(45px * var(--length-multiplication)) calc(45px * var(--length-multiplication));
 }
 
 .sendCom {
@@ -28,6 +32,8 @@
     cursor: pointer;
     grid-row: 2;
     grid-column: 1;
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
 }
 
 .taCom {
@@ -39,6 +45,8 @@
     color: black;
     grid-column: 2;
     grid-row: 1/3;
+    -ms-grid-column: 2;
+    -ms-grid-row: 1/3;
     margin: 0;
 }
 
@@ -56,6 +64,8 @@
     display: grid;
     grid-template-columns: calc(45px * var(--length-multiplication)) auto min-content;
     grid-template-rows: calc(45px * var(--length-multiplication));
+    -ms-grid-template-columns: calc(45px * var(--length-multiplication)) auto min-content;
+    -ms-grid-template-rows: calc(45px * var(--length-multiplication));
     padding-bottom: calc(2.5px * var(--length-multiplication));
 }
 
