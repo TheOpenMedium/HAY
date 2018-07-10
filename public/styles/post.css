@@ -235,6 +235,7 @@
     width: calc(600px * var(--length-multiplication));
     margin: auto;
     margin-top: calc(10px * var(--length-multiplication));
+    margin-bottom: calc(-50px * var(--length-multiplication));
 }
 
 .infHAY {
