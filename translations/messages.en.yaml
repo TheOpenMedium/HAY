@@ -26,6 +26,7 @@ alias: alias
 has_write: 'has write:'
 comment: Comment
 has_comment: 'has comment:'
+new_posts: 'new post(s) have been sent'
 
 # Notifications
 

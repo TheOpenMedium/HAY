@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * A controller related to the Post entity
@@ -23,7 +24,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * * postEditAction(Request $request, Post $postEdit)                                                                 -- post_edit
  * * postDeleteAction(Post $post)                                                                                     -- post_delete
  * * postGenerateAction($scope = "all", $order = "DESC", $limit = 10, $date = NULL, $from_id = NULL, $user_id = NULL) -- post_gen
- * * isNewPostsSended(int $last_id, string $scope = "all", int $user_id = NULL)                                       -- post_sended
+ * * isNewPostsSendedAction(int $last_id, string $scope = "all", int $user_id = NULL)                                 -- post_sended
+ * * newPostsRenderedAction(int $last_id, string $scope = "all", int $user_id = NULL)                                 -- post_rendered
+ * * postRenderingAction($postList)
  */
 class PostController extends Controller
 {
@@ -179,7 +182,7 @@ class PostController extends Controller
      * 
      * @todo Creating the scopes values : "friends", "frd_and_frd", "subscribed", "sub_user", "sub_pages", "sub_groups", "moderation", "my_posts"
      * 
-     * @return string $html The html used for rendering the post
+     * @return Post[] $postList The post list
      * 
      * @Route("/{_locale}/generate/post/{scope}/{order}/{limit}/{date}/{from_id}/{user_id}", name="post_gen", requirements={
      *     "_locale": "%app.locales%"
@@ -230,17 +233,48 @@ class PostController extends Controller
      * @param string $scope The post scope, @see above (postGenerateAction) for information about the scope parameter
      * @param int|null $user_id For the "user" scope
      * 
-     * @example Use this function for Ajax with JavaScript
+     * @example Use this function for Ajax with JavaScript (because NULL type, can't be passed with url, it detect it as a string)
      * 
-     * @return int|false $response The number of new posts sended or false if no post was sended
+     * @return Response The response to a http request so JavaScript can understand it !
      * 
      * @Route("/{_locale}/new/post/{last_id}/{scope}/{user_id}", name="post_sended", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
-    public function isNewPostsSended(int $last_id, string $scope = "all", int $user_id = NULL)
+    public function isNewPostsSendedAction(int $last_id, string $scope = "all", int $user_id = NULL)
     {
         $post = $this->postGenerateAction($scope, "DESC", NULL, NULL, $last_id, NULL);
-        return (sizeof($post) > 0 ? sizeof($post) : false);
+        return new Response(sizeof($post));
+    }
+
+    /**
+     * Rendering post list to html
+     * 
+     * @param Post[] $postList The post list to render
+     * 
+     * @example Use this function for Ajax with Javascript
+     * 
+     * @return string $html The html code with rendered post list
+     * 
+     * NOTE : CAN'T BE ACCESSED BY URL
+     */
+    public function postRenderingAction($postList)
+    {
+        return $this->render('post/postDisplay.html.twig', array('postList' => $postList));
+    }
+
+    /**
+     * Rendering new posts @see isNewPostsSendedAction for more information on how to use this function
+     * 
+     * @return string $html The html code with rendered post list
+     * 
+     * @Route("/{_locale}/html/new/post/{last_id}/{scope}/{user_id}", name="post_rendered", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function newPostsRenderedAction(int $last_id, string $scope = "all", int $user_id = NULL)
+    {
+        $postList = $this->postGenerateAction($scope, "DESC", NULL, NULL, $last_id, NULL);
+        return $this->postRenderingAction($postList);
     }
 }

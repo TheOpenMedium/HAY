@@ -28,6 +28,7 @@ alias: alias
 has_write: 'a écrit :'
 comment: Commenter
 has_comment: 'a commenté :'
+new_posts: 'nouveau(x) post(s) a/ont été envoyé(s)'
 
 # Notifications
 # Notifications

@@ -1,0 +1,22 @@
+<div class="newPosts fs16 ffSS">
+    <span id="nbNewPosts">0</span>&nbsp;{{ 'new_posts'|trans }}
+</div>
+<script>
+function getNbNewPosts() {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("nbNewPosts").innerHTML = this.responseText;
+                if (Number(this.responseText) > 0) {
+                    document.getElementsByClassName("newPosts")[0].style.display = "flex";
+                } else {
+                    document.getElementsByClassName("newPosts")[0].style.display = "none";
+                }
+            }
+        };
+        xmlhttp.open("GET", "{{ url('post_sended', {'last_id': postList[0].id}) }}", true);
+        xmlhttp.send();
+}
+
+setInterval(getNbNewPosts, 10000);
+</script>

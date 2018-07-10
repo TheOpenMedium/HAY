@@ -213,6 +213,24 @@
 
 /* Posts */
 
+.newPosts {
+    width: calc(600px * var(--length-multiplication));
+    height: calc(50px * var(--length-multiplication));
+    margin: calc(10px * var(--length-multiplication)) auto;
+    border-radius: calc(5px * var(--length-multiplication));
+    cursor: pointer;
+    background-color: var(--gray-dark);
+    transition: background-color var(--transition-default-duration) ease-in-out;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.newPosts:hover {
+    background-color: var(--gray-color);
+}
+
 .text {
     width: calc(600px * var(--length-multiplication));
     margin: auto;
