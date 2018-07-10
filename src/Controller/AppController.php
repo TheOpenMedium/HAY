@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
+use App\Controller\PostController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -66,7 +67,7 @@ class AppController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, PostController $postController)
     {
         $post = new Post();
 
@@ -104,22 +105,7 @@ class AppController extends Controller
         }
 
         // Fetching Post.
-        $postList = $this->getDoctrine()->getRepository(Post::class)->findPost(10);
-
-        // If there is one Post or more:
-        if ($postList) {
-            // We replace new lines by the <br /> tag.
-            foreach ($postList as $post) {
-                $content = $post->getContent();
-                $post->setContent(preg_replace('#\n#', '<br />', $content));
-                if ($post->getComments()) {
-                    foreach ($post->getComments() as $comment) {
-                        $c = $comment->getComment();
-                        $comment->setComment(preg_replace('#\n#', '<br />', $c));
-                    }
-                }
-            }
-        }
+        $postList = $postController->postGenerateAction();
 
         // All that is rendered with the home template sending a Form, Post List and Comment List.
         return $this->render('home.html.twig', array(

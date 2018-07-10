@@ -13,17 +13,24 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * A controller related to the Post entity
  *
  * List of actions:
- * * postShowAction($id)                              -- post_show
- * * postEditAction(Request $request, Post $postEdit) -- post_edit
- * * postDeleteAction(Post $post)                     -- post_delete
+ * * postShowAction($id)                                                                                              -- post_show
+ * * postEditAction(Request $request, Post $postEdit)                                                                 -- post_edit
+ * * postDeleteAction(Post $post)                                                                                     -- post_delete
+ * * postGenerateAction($scope = "all", $order = "DESC", $limit = 10, $date = NULL, $from_id = NULL, $user_id = NULL) -- post_gen
  */
 class PostController extends Controller
 {
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
     /**
      * Render a single post
      *
@@ -154,5 +161,58 @@ class PostController extends Controller
 
         // Finally the user is redirected to home page.
         return $this->redirectToRoute('app_index');
+    }
+
+    /**
+     * Generate a (group of) post(s)
+     * 
+     * @param string $scope The scope for fetching posts / available values : "all", "user" (id specified by $user_id)
+     * @param string $order The order for fetching posts / available values : "DESC", "ASC"
+     * @param int $limit The limit for fetching posts / available values : int, NULL (VERY DANGEROUS, USE AJAX INSTEAD!)
+     * @param string $date The date interval for fetching posts / available values : string (see the examples), NULL
+     * @param int $from_id The id from where we begin fetching (used mainly for ajax) (the specified id is included) / available values : int, NULL
+     * @param int $user_id The user's id for fetching only his posts (only with $scope "user") / available values : int, NULL
+     * 
+     * @example Date Interval string : "$HERE THE BEGING DATE$ ^HERE THE END DATE^" // Date can be in form of DATE or DATE TIME (use the sql syntax)
+     * @example "$2018-8-28$ ^2018-12-5 8:00:30^" if you don't want to specify one of the two dates replace it by NULL "$2018-8-28$ ^NULL^"
+     * 
+     * @todo Creating the scopes values : "friends", "frd_and_frd", "subscribed", "sub_user", "sub_pages", "sub_groups", "moderation", "my_posts"
+     * 
+     * @return string $html The html used for rendering the post
+     * 
+     * @Route("/{_locale}/generate/post/{scope}/{order}/{limit}/{date}/{from_id}/{user_id}", name="post_gen", requirements={
+     *     "_locale": "en|fr"
+     * })
+     */
+    public function postGenerateAction(string $scope = "all", string $order = "DESC", int $limit = 10, string $date = NULL, int $from_id = NULL, int $user_id = NULL)
+    {
+        // Fetching Post.
+
+        if ($scope == "all")
+        {
+            $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPost($order, $limit);
+        }
+
+        else if ($scope == "user")
+        {
+            $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByUser($user_id, $order, $limit);
+        }
+    
+        // If there is one Post or more:
+        if ($postList) {
+            // We replace new lines by the <br /> tag.
+            foreach ($postList as $post) {
+                $content = $post->getContent();
+                $post->setContent(preg_replace('#\n#', '<br />', $content));
+                if ($post->getComments()) {
+                    foreach ($post->getComments() as $comment) {
+                        $c = $comment->getComment();
+                        $comment->setComment(preg_replace('#\n#', '<br />', $c));
+                    }
+                }
+            }
+        }
+        
+        return $postList;
     }
 }

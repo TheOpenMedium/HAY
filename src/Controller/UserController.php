@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
+use App\Controller\PostController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,25 +34,10 @@ class UserController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function userShowAction(User $user)
+    public function userShowAction(User $user, PostController $postController)
     {
         // Fetching Post.
-        $postList = $user->getPosts();;
-
-        // If there is one Post or more:
-        if ($postList) {
-            // We replace new lines by the <br /> tag.
-            foreach ($postList as $post) {
-                $content = $post->getContent();
-                $post->setContent(preg_replace('#\n#', '<br />', $content));
-                if ($post->getComments()) {
-                    foreach ($post->getComments() as $comment) {
-                        $c = $comment->getComment();
-                        $comment->setComment(preg_replace('#\n#', '<br />', $c));
-                    }
-                }
-            }
-        }
+        $postList = $postController->postGenerateAction("user", "DESC", 10, NULL, NULL, $user->getId());
 
         $bool = "no";
 

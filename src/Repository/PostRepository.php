@@ -20,14 +20,34 @@ class PostRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param $o The results order
      * @param $n The number of max results
      * @return Post[] Returns an array of Post objects
      */
-    public function findPost($n)
+    public function findPost($o, $n)
     {
         return $this->createQueryBuilder('p')
             ->select(array('p'))
-            ->orderBy('p.date_post', 'DESC')
+            ->orderBy('p.date_post', $o)
+            ->setMaxResults($n)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @param $u The user's post
+     * @param $o The results order
+     * @param $n The number of max results
+     * @return Post[] Returns an array of Post objects
+     */
+    public function findPostByUser($u, $o, $n)
+    {
+        return $this->createQueryBuilder('p')
+            ->select(array('p'))
+            ->andWhere('p.user = :user_id')
+            ->setParameter('user_id', $u)
+            ->orderBy('p.date_post', $o)
             ->setMaxResults($n)
             ->getQuery()
             ->getResult()
