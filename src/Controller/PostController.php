@@ -23,6 +23,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * * postEditAction(Request $request, Post $postEdit)                                                                 -- post_edit
  * * postDeleteAction(Post $post)                                                                                     -- post_delete
  * * postGenerateAction($scope = "all", $order = "DESC", $limit = 10, $date = NULL, $from_id = NULL, $user_id = NULL) -- post_gen
+ * * isNewPostsSended(int $last_id, string $scope = "all", int $user_id = NULL)                                       -- post_sended
  */
 class PostController extends Controller
 {
@@ -168,10 +169,10 @@ class PostController extends Controller
      * 
      * @param string $scope The scope for fetching posts / available values : "all", "user" (id specified by $user_id)
      * @param string $order The order for fetching posts / available values : "DESC", "ASC"
-     * @param int $limit The limit for fetching posts / available values : int, NULL (VERY DANGEROUS, USE AJAX INSTEAD!)
+     * @param int|null $limit The limit for fetching posts / available values : int, NULL (VERY DANGEROUS, USE AJAX INSTEAD!)
      * @param string $date The date interval for fetching posts / available values : string (see the examples), NULL
-     * @param int $from_id The id from where we begin fetching (used mainly for ajax) (the specified id is included) / available values : int, NULL
-     * @param int $user_id The user's id for fetching only his posts (only with $scope "user") / available values : int, NULL
+     * @param int|null $from_id The id from where we begin fetching (used mainly for ajax) (the specified id is included) / available values : int, NULL
+     * @param int|null $user_id The user's id for fetching only his posts (only with $scope "user") / available values : int, NULL
      * 
      * @example Date Interval string : "$HERE THE BEGING DATE$ ^HERE THE END DATE^" // Date can be in form of DATE or DATE TIME (use the sql syntax)
      * @example "$2018-8-28$ ^2018-12-5 8:00:30^" if you don't want to specify one of the two dates replace it by NULL "$2018-8-28$ ^NULL^"
@@ -184,13 +185,19 @@ class PostController extends Controller
      *     "_locale": "en|fr"
      * })
      */
-    public function postGenerateAction(string $scope = "all", string $order = "DESC", int $limit = 10, string $date = NULL, int $from_id = NULL, int $user_id = NULL)
+    public function postGenerateAction(string $scope = "all", string $order = "DESC", ?int $limit = 10, string $date = NULL, ?int $from_id = NULL, ?int $user_id = NULL)
     {
         // Fetching Post.
 
         if ($scope == "all")
         {
-            $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPost($order, $limit);
+            if ($limit) {
+                $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPost($order, $limit);
+            }
+
+            else if (!$limit && $from_id) {
+                $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostWithNoLimitAndFromId($order, $from_id);
+            }
         }
 
         else if ($scope == "user")
@@ -214,5 +221,26 @@ class PostController extends Controller
         }
         
         return $postList;
+    }
+
+    /**
+     * Verifying if new posts have been sended
+     * 
+     * @param int $last_id The last post id sended
+     * @param string $scope The post scope, @see above (postGenerateAction) for information about the scope parameter
+     * @param int|null $user_id For the "user" scope
+     * 
+     * @example Use this function for Ajax with JavaScript
+     * 
+     * @return int|false $response The number of new posts sended or false if no post was sended
+     * 
+     * @Route("/{_locale}/new/post/{last_id}/{scope}/{user_id}", name="post_sended", requirements={
+     *     "_locale": "en|fr"
+     * })
+     */
+    public function isNewPostsSended(int $last_id, string $scope = "all", int $user_id = NULL)
+    {
+        $post = $this->postGenerateAction($scope, "DESC", NULL, NULL, $last_id, NULL);
+        return (sizeof($post) > 0 ? sizeof($post) : false);
     }
 }
