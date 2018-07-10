@@ -34,7 +34,7 @@ class CommentController extends Controller
      * @Route("/{_locale}/comment/{id}/{_color}",
      *     defaults={"_color": "696"},
      *     name="comment",
-     *     requirements={"_locale": "en|fr"}
+     *     requirements={"_locale": "%app.locales%"}
      *     )
      */
     public function commentAction(Request $request, $id, $_color)
@@ -94,7 +94,7 @@ class CommentController extends Controller
      * @param Comment $comment The comment to render
      *
      * @Route("/{_locale}/show/comment/{id}", name="comment_show", requirements={
-     *     "_locale": "en|fr"
+     *     "_locale": "%app.locales%"
      * })
      */
     public function commentShowAction(Comment $comment)
@@ -112,7 +112,7 @@ class CommentController extends Controller
      * @param Comment $commentEdit The comment to edit
      *
      * @Route("/{_locale}/edit/comment/{id}", name="comment_edit", requirements={
-     *     "_locale": "en|fr"
+     *     "_locale": "%app.locales%"
      * })
      */
     public function commentEditAction(Request $request, Comment $commentEdit)
@@ -164,7 +164,7 @@ class CommentController extends Controller
      * @param Comment $comment The comment to delete
      *
      * @Route("/{_locale}/delete/comment/{id}", name="comment_delete", requirements={
-     *     "_locale": "en|fr"
+     *     "_locale": "%app.locales%"
      * })
      */
     public function commentDeleteAction(Comment $comment)

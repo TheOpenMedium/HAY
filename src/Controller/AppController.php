@@ -64,7 +64,7 @@ class AppController extends Controller
      * @param Request $request The HTTP request
      *
      * @Route("/{_locale}/", name="app_index", requirements={
-     *     "_locale": "en|fr"
+     *     "_locale": "%app.locales%"
      * })
      */
     public function indexAction(Request $request, PostController $postController)
@@ -120,7 +120,7 @@ class AppController extends Controller
      * @param AuthenticationUtils $authUtils Extracts Security Errors from Request
      *
      * @Route("/{_locale}/login", name="app_login", requirements={
-     *     "_locale": "en|fr"
+     *     "_locale": "%app.locales%"
      * })
      */
     public function loginAction(AuthenticationUtils $authUtils)
@@ -155,7 +155,7 @@ class AppController extends Controller
      * @param Request $request The HTTP Request
      *
      * @Route("/{_locale}/signup", name="app_signup", requirements={
-     *     "_locale": "en|fr"
+     *     "_locale": "%app.locales%"
      * })
      */
     public function signupAction(Request $request)
@@ -206,7 +206,7 @@ class AppController extends Controller
      * It's the security bundle of symfony that log out the user.
      *
      * @Route("/{_locale}/logout", name="app_logout", requirements={
-     *     "_locale": "en|fr"
+     *     "_locale": "%app.locales%"
      * })
      */
     public function logoutAction()

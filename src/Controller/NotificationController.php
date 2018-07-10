@@ -19,7 +19,7 @@ class NotificationController extends Controller
      * Render the notifications of an user
      *
      * @Route("/{_locale}/notification", name="notification", requirements={
-     *     "_locale": "en|fr"
+     *     "_locale": "%app.locales%"
      * })
      */
     public function notificationAction()
@@ -39,7 +39,7 @@ class NotificationController extends Controller
      * @param Notification $notification The notification to delete
      *
      * @Route("/{_locale}/delete/notification/{id}", name="notification_delete", requirements={
-     *     "_locale": "en|fr"
+     *     "_locale": "%app.locales%"
      * })
      */
     public function notificationDeleteAction(Notification $notification)

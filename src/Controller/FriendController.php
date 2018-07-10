@@ -23,7 +23,7 @@ class FriendController extends Controller
      * Render the friend list of an user
      *
      * @Route("/{_locale}/friend", name="friend", requirements={
-     *     "_locale": "en|fr"
+     *     "_locale": "%app.locales%"
      * })
      */
     public function friendAction()
@@ -63,7 +63,7 @@ class FriendController extends Controller
      * @param User $user The user's to add as a friend
      *
      * @Route("/{_locale}/add/friend/{id}", name="friend_add", requirements={
-     *     "_locale": "en|fr"
+     *     "_locale": "%app.locales%"
      * })
      */
     public function friendAddAction(User $request, $id)

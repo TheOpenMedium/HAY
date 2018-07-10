@@ -38,7 +38,7 @@ class PostController extends Controller
      * @param Post $id The post to render
      *
      * @Route("/{_locale}/show/post/{id}", name="post_show", requirements={
-     *     "_locale": "en|fr"
+     *     "_locale": "%app.locales%"
      * })
      */
     public function postShowAction(Post $post)
@@ -68,7 +68,7 @@ class PostController extends Controller
      * @param Post $postEdit The post to edit
      *
      * @Route("/{_locale}/edit/post/{id}", name="post_edit", requirements={
-     *     "_locale": "en|fr"
+     *     "_locale": "%app.locales%"
      * })
      */
     public function postEditAction(Request $request, Post $postEdit)
@@ -146,7 +146,7 @@ class PostController extends Controller
      * @param Post $post The post to delete
      *
      * @Route("/{_locale}/delete/post/{id}", name="post_delete", requirements={
-     *     "_locale": "en|fr"
+     *     "_locale": "%app.locales%"
      * })
      */
     public function postDeleteAction(Post $post)
@@ -182,7 +182,7 @@ class PostController extends Controller
      * @return string $html The html used for rendering the post
      * 
      * @Route("/{_locale}/generate/post/{scope}/{order}/{limit}/{date}/{from_id}/{user_id}", name="post_gen", requirements={
-     *     "_locale": "en|fr"
+     *     "_locale": "%app.locales%"
      * })
      */
     public function postGenerateAction(string $scope = "all", string $order = "DESC", ?int $limit = 10, string $date = NULL, ?int $from_id = NULL, ?int $user_id = NULL)
@@ -235,7 +235,7 @@ class PostController extends Controller
      * @return int|false $response The number of new posts sended or false if no post was sended
      * 
      * @Route("/{_locale}/new/post/{last_id}/{scope}/{user_id}", name="post_sended", requirements={
-     *     "_locale": "en|fr"
+     *     "_locale": "%app.locales%"
      * })
      */
     public function isNewPostsSended(int $last_id, string $scope = "all", int $user_id = NULL)

@@ -31,7 +31,7 @@ class UserController extends Controller
      * @param User $user The user to show
      *
      * @Route("/{_locale}/show/user/{id}", name="user_show", requirements={
-     *     "_locale": "en|fr"
+     *     "_locale": "%app.locales%"
      * })
      */
     public function userShowAction(User $user, PostController $postController)
@@ -76,7 +76,7 @@ class UserController extends Controller
      * Edit an user
      *
      * @Route("/{_locale}/edit/user", name="user_edit", requirements={
-     *     "_locale": "en|fr"
+     *     "_locale": "%app.locales%"
      * })
      */
     public function userEditAction(Request $request)
