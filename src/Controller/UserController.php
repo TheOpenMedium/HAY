@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
-use App\Controller\PostController;
+use App\Controller\AjaxController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,10 +34,10 @@ class UserController extends Controller
      *     "_locale": "%app.locales%"
      * })
      */
-    public function userShowAction(User $user, PostController $postController)
+    public function userShowAction(User $user, AjaxController $ajaxController)
     {
         // Fetching Post.
-        $postList = $postController->postGenerateAction("user", "DESC", 10, NULL, NULL, $user->getId());
+        $postList = $ajaxController->postGenerateAction("user", "DESC", 10, NULL, NULL, $user->getId());
 
         $bool = "no";
 

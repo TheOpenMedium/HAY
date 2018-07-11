@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
-use App\Controller\PostController;
+use App\Controller\AjaxController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -67,7 +67,7 @@ class AppController extends Controller
      *     "_locale": "%app.locales%"
      * })
      */
-    public function indexAction(Request $request, PostController $postController)
+    public function indexAction(Request $request, AjaxController $ajaxController)
     {
         $post = new Post();
 
@@ -105,7 +105,7 @@ class AppController extends Controller
         }
 
         // Fetching Post.
-        $postList = $postController->postGenerateAction();
+        $postList = $ajaxController->postGenerateAction();
 
         // All that is rendered with the home template sending a Form, Post List and Comment List.
         return $this->render('home.html.twig', array(
