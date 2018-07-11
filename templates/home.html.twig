@@ -8,6 +8,7 @@
 
 {{ include("menu.html.twig") }}
 {% if app.user %}{{ include("post/postForm.html.twig") }}{% endif %}
+{{ include("post/newPosts.html.twig") }}
 {{ include("post/postDisplay.html.twig") }}
 
 {% endblock %}

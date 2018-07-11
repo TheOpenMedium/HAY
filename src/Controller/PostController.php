@@ -7,6 +7,7 @@ use App\Entity\Post;
 use App\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -14,7 +15,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * A controller related to the Post entity
@@ -275,6 +275,6 @@ class PostController extends Controller
     public function newPostsRenderedAction(int $last_id, string $scope = "all", int $user_id = NULL)
     {
         $postList = $this->postGenerateAction($scope, "DESC", NULL, NULL, $last_id, NULL);
-        return $this->postRenderingAction($postList);
+        return new Response($postList[0]->getId() . '/' . $this->postRenderingAction($postList)->getContent());
     }
 }

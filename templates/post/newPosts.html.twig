@@ -1,21 +1,48 @@
-<div class="newPosts fs16 ffSS">
+<div class="newPosts fs16 ffSS" onclick="getNewPosts()">
     <span id="nbNewPosts">0</span>&nbsp;{{ 'new_posts'|trans }}
 </div>
 <script>
+var url = "{{ url('post_sended', {'last_id': postList[0].id}) }}";
+var url_r = "{{ url('post_rendered', {'last_id': postList[0].id}) }}";
+
 function getNbNewPosts() {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("nbNewPosts").innerHTML = this.responseText;
-                if (Number(this.responseText) > 0) {
-                    document.getElementsByClassName("newPosts")[0].style.display = "flex";
-                } else {
-                    document.getElementsByClassName("newPosts")[0].style.display = "none";
-                }
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("nbNewPosts").innerHTML = this.responseText;
+            if (Number(this.responseText) > 0) {
+                document.getElementsByClassName("newPosts")[0].style.display = "flex";
+            } else {
+                document.getElementsByClassName("newPosts")[0].style.display = "none";
             }
-        };
-        xmlhttp.open("GET", "{{ url('post_sended', {'last_id': postList[0].id}) }}", true);
-        xmlhttp.send();
+        }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+}
+
+function getNewPosts() {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            newPosts = this.responseText;
+            splited_posts = newPosts.split('/');
+            splited_url = url.split('/');
+            i = splited_url.indexOf("post") + 1;
+            splited_url[i] = splited_posts[0];
+            url = splited_url.join('/');
+            splited_url = url_r.split('/');
+            i = splited_url.indexOf("post") + 1;
+            splited_url[i] = splited_posts[0];
+            url_r = splited_url.join('/');
+            splited_posts.splice(0, 1);
+            newPosts = splited_posts.join('/');
+            document.getElementsByClassName("text")[0].insertAdjacentHTML('beforebegin', newPosts);
+            getNbNewPosts();
+        }
+    };
+    xmlhttp.open("GET", url_r, true);
+    xmlhttp.send();
 }
 
 setInterval(getNbNewPosts, 10000);
