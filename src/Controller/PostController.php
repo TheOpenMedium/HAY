@@ -205,7 +205,13 @@ class PostController extends Controller
 
         else if ($scope == "user")
         {
-            $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByUser($user_id, $order, $limit);
+            if ($limit) {
+                $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByUser($user_id, $order, $limit);
+            }
+
+            else if (!$limit && $from_id) {
+                $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByUserWithNoLimitAndFromId($user_id, $order, $from_id);
+            }
         }
     
         // If there is one Post or more:
@@ -243,7 +249,7 @@ class PostController extends Controller
      */
     public function isNewPostsSendedAction(int $last_id, string $scope = "all", int $user_id = NULL)
     {
-        $post = $this->postGenerateAction($scope, "DESC", NULL, NULL, $last_id, NULL);
+        $post = $this->postGenerateAction($scope, "DESC", NULL, NULL, $last_id, $user_id);
         return new Response(sizeof($post));
     }
 
@@ -274,7 +280,7 @@ class PostController extends Controller
      */
     public function newPostsRenderedAction(int $last_id, string $scope = "all", int $user_id = NULL)
     {
-        $postList = $this->postGenerateAction($scope, "DESC", NULL, NULL, $last_id, NULL);
+        $postList = $this->postGenerateAction($scope, "DESC", NULL, NULL, $last_id, $user_id);
         return new Response($postList[0]->getId() . '/' . $this->postRenderingAction($postList)->getContent());
     }
 }

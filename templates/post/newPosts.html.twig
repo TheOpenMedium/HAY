@@ -2,8 +2,8 @@
     <span id="nbNewPosts">0</span>&nbsp;{{ 'new_posts'|trans }}
 </div>
 <script>
-var url = "{{ url('post_sended', {'last_id': postList[0].id}) }}";
-var url_r = "{{ url('post_rendered', {'last_id': postList[0].id}) }}";
+var url = "{{ url('post_sended', {'last_id': postList[0].id, 'scope': scope, 'user_id': user.id ?? null}) }}";
+var url_r = "{{ url('post_rendered', {'last_id': postList[0].id, 'scope': scope, 'user_id': user.id ?? null}) }}";
 
 function getNbNewPosts() {
     var xmlhttp = new XMLHttpRequest();

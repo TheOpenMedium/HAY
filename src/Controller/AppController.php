@@ -110,7 +110,8 @@ class AppController extends Controller
         // All that is rendered with the home template sending a Form, Post List and Comment List.
         return $this->render('home.html.twig', array(
             'form' => $form->createView(),
-            'postList' => $postList
+            'postList' => $postList,
+            'scope' => 'all'
         ));
     }
 

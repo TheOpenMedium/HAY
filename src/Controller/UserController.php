@@ -68,7 +68,8 @@ class UserController extends Controller
         return $this->render('user/showUser.html.twig', array(
             'postList' => $postList,
             'user' => $user,
-            'friend' => $bool
+            'friend' => $bool,
+            'scope' => 'user'
         ));
     }
 

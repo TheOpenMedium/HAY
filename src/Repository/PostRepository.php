@@ -70,6 +70,24 @@ class PostRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @param $o The results order
+     * @return Post[] Returns an array of Post objects
+     */
+    public function findPostByUserWithNoLimitAndFromId($u, $o, $id)
+    {
+        return $this->createQueryBuilder('p')
+            ->select(array('p'))
+            ->andWhere('p.user = :user_id')
+            ->setParameter('user_id', $u)
+            ->andWhere('p.id > :id')
+            ->setParameter('id', $id)
+            ->orderBy('p.date_post', $o)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function findLastPost()
     {
         return $this->createQueryBuilder('p')
