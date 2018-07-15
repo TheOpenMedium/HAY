@@ -20,7 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
  * A controller related to the User entity
  *
  * List of actions:
- * * userShowAction(User $user) -- user_show
+ * * userShowAction(User $user)       -- user_show
  * * userEditAction(Request $request) -- user_edit
  */
 class UserController extends Controller
@@ -69,7 +69,8 @@ class UserController extends Controller
             'postList' => $postList,
             'user' => $user,
             'friend' => $bool,
-            'scope' => 'user'
+            'scope' => 'user',
+            'order' => 'DESC'
         ));
     }
 
@@ -153,7 +154,7 @@ class UserController extends Controller
                 $em->flush();
 
                 // And we redirect user to home page.
-                return $this->redirectToRoute('app_index');
+                return $this->redirectToRoute('app_home');
             }
             else {
                 // All that is rendered with the user edit template sending a From and the Error.

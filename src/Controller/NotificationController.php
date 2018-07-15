@@ -55,6 +55,6 @@ class NotificationController extends Controller
         }
 
         // Finally, redirecting to home page.
-        return $this->redirectToRoute('app_index');
+        return $this->redirectToRoute('app_home');
     }
 }

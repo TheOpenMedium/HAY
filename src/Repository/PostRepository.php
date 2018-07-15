@@ -36,16 +36,15 @@ class PostRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param $o The results order
+     * @param $id The last ID
      * @return Post[] Returns an array of Post objects
      */
-    public function findPostWithNoLimitAndFromId($o, $id)
+    public function findPostWithNoLimitAndFromId($id)
     {
         return $this->createQueryBuilder('p')
             ->select(array('p'))
             ->andWhere('p.id > :id')
             ->setParameter('id', $id)
-            ->orderBy('p.date_post', $o)
             ->getQuery()
             ->getResult()
         ;
@@ -71,10 +70,11 @@ class PostRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param $o The results order
+     * @param $u The user's post
+     * @param $id The last ID
      * @return Post[] Returns an array of Post objects
      */
-    public function findPostByUserWithNoLimitAndFromId($u, $o, $id)
+    public function findPostByUserWithNoLimitAndFromId($u, $id)
     {
         return $this->createQueryBuilder('p')
             ->select(array('p'))
@@ -82,7 +82,6 @@ class PostRepository extends ServiceEntityRepository
             ->setParameter('user_id', $u)
             ->andWhere('p.id > :id')
             ->setParameter('id', $id)
-            ->orderBy('p.date_post', $o)
             ->getQuery()
             ->getResult()
         ;

@@ -77,7 +77,7 @@ class CommentController extends Controller
             $em->flush();
 
             // Finally, redirecting to home page.
-            return $this->redirect($this->generateUrl('app_index'));
+            return $this->redirect($this->generateUrl('app_home'));
         }
 
         // All that is rendered with the comment template sending a Form, Color of the post and the Post Id.
@@ -145,7 +145,7 @@ class CommentController extends Controller
 
                 $em->flush();
 
-                return $this->redirectToRoute('app_index');
+                return $this->redirectToRoute('app_home');
             }
 
             // All that is rendered with the comment edit template sending a Form.
@@ -154,7 +154,7 @@ class CommentController extends Controller
             ));
         } else {
             //If the user is not the author, he's redirected to home page.
-            return $this->redirectToRoute('app_index');
+            return $this->redirectToRoute('app_home');
         }
     }
 
@@ -181,6 +181,6 @@ class CommentController extends Controller
         }
 
         // User is redirected to home page.
-        return $this->redirectToRoute('app_index');
+        return $this->redirectToRoute('app_home');
     }
 }

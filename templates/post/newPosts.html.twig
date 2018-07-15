@@ -1,10 +1,11 @@
+{% if order == "DESC" %}
 <div class="newPosts fs16 ffSS" onclick="getNewPosts()">
     <span id="nbNewPosts">0</span>&nbsp;{{ 'new_posts'|trans }}
 </div>
 <script>
 // Creating the request URLs.
-var url = "{{ url('post_sended', {'last_id': postList[0].id, 'scope': scope, 'user_id': user.id ?? null}) }}";
-var url_r = "{{ url('post_rendered', {'last_id': postList[0].id, 'scope': scope, 'user_id': user.id ?? null}) }}";
+var url = "{{ url('post_sended', {'last_id': postList[0].id, 'scope': scope, 'user_id': user.id ?? null, 'order': order}) }}";
+var url_r = "{{ url('post_rendered', {'last_id': postList[0].id, 'scope': scope, 'user_id': user.id ?? null, 'order': order}) }}";
 
 /**
  * Getting the number of new posts
@@ -77,3 +78,4 @@ function getNewPosts() {
 // Adding an interval of 10 seconds between each request.
 setInterval(getNbNewPosts, 10000);
 </script>
+{% endif %}

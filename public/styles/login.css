@@ -87,21 +87,3 @@
 .loginRememberme label:hover {
     background-color: var(--hay-dark);
 }
-
-.loginError {
-    border: 0px;
-    background: red;
-    color: white;
-    padding: 5px;
-    display: block;
-    text-align: center;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    font-family: sans-serif;
-}
-
-#closeError {
-    float: right;
-    cursor: pointer;
-}

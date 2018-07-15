@@ -28,6 +28,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * * friends
  * * url
  * * alt
+ * * settings
  *
  * List of extra variables:
  * * rememberme
@@ -128,6 +129,11 @@ class User implements UserInterface, \Serializable
     private $alt;
 
     private $file;
+
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $settings;
 
     public function __construct()
     {
@@ -505,5 +511,17 @@ class User implements UserInterface, \Serializable
     public function setFile(UploadedFile $file)
     {
         $this->file = $file;
+    }
+
+    public function getSettings()
+    {
+        return $this->settings;
+    }
+
+    public function setSettings($settings): self
+    {
+        $this->settings = $settings;
+
+        return $this;
     }
 }

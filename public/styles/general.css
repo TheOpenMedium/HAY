@@ -32,3 +32,21 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+.warning {
+    border: 0px;
+    color: white;
+    padding: 5px;
+    display: block;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    font-family: sans-serif;
+    z-index: 100000; /* So the Symfony toolbar became below the warning */
+}
+
+.warning > span {
+    float: right;
+    cursor: pointer;
+}

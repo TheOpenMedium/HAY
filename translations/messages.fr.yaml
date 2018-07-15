@@ -29,6 +29,23 @@ has_write: 'a écrit :'
 comment: Commenter
 has_comment: 'a commenté :'
 new_posts: 'nouveau(x) post(s) a/ont été envoyé(s)'
+scope: 'Portée des posts : '
+scope_world: Monde
+scope_friends: Amis
+scope_frd_and_frd: 'Amis et leurs amis'
+scope_sub: Abonnements
+scope_sub_users: Abonnements Utilisateur
+scope_sub_pages: Abonnements Page
+scope_sub_groups: Abonnements Groupe
+scope_mod: Modération
+scope_my_posts: Mes posts
+limit: "Nombre de posts : "
+order: "Ordre d'affichage : "
+order_desc: Les plus récent
+order_asc: Les plus anciens
+record: Enregistrer ces paramètres comme étant par défaut
+filterReady: C'est fait !
+filterError: Une erreur s'est produite !
 
 # Notifications
 # Notifications
@@ -71,3 +88,8 @@ alt: Courte description de la photo de profile
 # Erreurs
 
 error_password: Mauvais mot de passe
+
+# Others
+# Autres
+
+date_format: 'd/m/Y H:i:s' # allez voir https://secure.php.net/manual/fr/function.date.php

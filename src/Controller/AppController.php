@@ -50,7 +50,7 @@ class AppController extends Controller
         // one of them match, the user is redirected to the homepage with the good locale.
         foreach ($localeList as $locale) {
             if ($locale == 'en' || $locale == 'fr') {
-                return $this->redirectToRoute('app_index', array('_locale' => $locale));
+                return $this->redirectToRoute('app_home', array('_locale' => $locale));
             }
         }
 
@@ -59,16 +59,45 @@ class AppController extends Controller
     }
 
     /**
-     * Render the home page
-     *
-     * @param Request $request The HTTP request
-     *
+     * Redirect to home page
+     * 
      * @Route("/{_locale}/", name="app_index", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
-    public function indexAction(Request $request, AjaxController $ajaxController)
+    public function indexAction()
     {
+        return $this->redirectToRoute('app_home');
+    }
+
+    /**
+     * Render the home page
+     *
+     * @param Request $request The HTTP request
+     * @param AjaxController $ajaxController The Ajax controller
+     *
+     * @Route("/{_locale}/home/{filter<filter>?}/{scope}/{limit}/{order}/{date}", name="app_home", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function homeAction(Request $request, AjaxController $ajaxController, ?string $filter = NULL, string $scope = "all", int $limit = 10, string $order = "DESC", ?string $date = NULL)
+    {
+        if (!$filter) {
+            $securityContext =  $this->container->get('security.authorization_checker');
+            if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+                $settings = $this->getUser()->getSettings();
+                if ($settings['default_home_scope_filter']) {
+                    $scope = $settings['default_home_scope_filter'];
+                }
+                if ($settings['default_home_limit_filter']) {
+                    $limit = $settings['default_home_limit_filter'];
+                }
+                if ($settings['default_home_order_filter']) {
+                    $order = $settings['default_home_order_filter'];
+                }
+            }
+        }
+
         $post = new Post();
 
         // Creating Post submit Form in case he want to send a post.
@@ -105,13 +134,14 @@ class AppController extends Controller
         }
 
         // Fetching Post.
-        $postList = $ajaxController->postGenerateAction();
+        $postList = $ajaxController->postGenerateAction($scope, $order, $limit, $date);
 
         // All that is rendered with the home template sending a Form, Post List and Comment List.
         return $this->render('home.html.twig', array(
             'form' => $form->createView(),
             'postList' => $postList,
-            'scope' => 'all'
+            'scope' => $scope,
+            'order' => $order
         ));
     }
 

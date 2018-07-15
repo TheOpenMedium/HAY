@@ -83,7 +83,7 @@
 {{ form_end(form) }}
 
 {% if error is defined %}
-<div class="loginError" id="Error">
+<div class="warning" id="Error" style="background: red;">
 {{ error|trans }}
     <span id="closeError" onclick="parentNode.">
         <i class="icofont icofont-close-line"></i>

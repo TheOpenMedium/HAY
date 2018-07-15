@@ -35,11 +35,96 @@
 
 /* Send Post Area */
 
+.filter {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 50px;
+    left: 0px;
+    background-color: dimgrey;
+    width: 50px;
+    height: calc(100vh - 50px);
+    z-index: 4;
+}
+
+.filter > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin: 5px;
+    border-radius: 20px;
+    background-color: var(--hay-color);
+    z-index: 3;
+}
+
+.filter > * > i {
+    display: inline;
+    background-color: var(--hay-color);
+    color: white;
+}
+
+.filter > *:hover + span, .filter > * + span:hover {
+    display: flex;
+    align-items: center;
+    padding-left: 47.5px;
+    background-color: var(--hay-dark);
+    position: absolute;
+    left: 0px;
+    height: 45px;
+    width: 500px;
+    margin: 2.5px;
+    border-radius: 22.5px;
+    z-index: 2;
+}
+
+.filter > span {
+    display: none;
+    color: white;
+    font-family: sans-serif;
+}
+
+.filter > span > *:not(label) {
+    margin: 5px;
+    background-color: var(--hay-color);
+    height: 40px;
+    width: auto;
+    border-radius: 20px;
+    border: 0;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    text-align: center;
+    font-family: sans-serif;
+    color: white;
+    border: 1px solid var(--hay-dark);
+    position: relative;
+    z-index: 4;
+}
+
+.filter > span > label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    width: 80px;
+    padding-left: 40px;
+    border-radius: 20px;
+    background-color: var(--hay-color);
+    position: relative;
+    right: 50px;
+}
+
+#limit {
+    padding-right: 20px;
+}
+
 .write {
     width: calc(600px * var(--length-multiplication));
     height: calc(360px * var(--length-multiplication));
     margin: auto;
-    margin-top: calc(20px * var(--length-multiplication));
+    position: relative;
+    z-index: 3; /* Because those who created z-index stacking context are weird persons */
 }
 
 .ta {
@@ -87,7 +172,6 @@
     cursor: pointer;
     border: 0px;
     padding: calc(17px * var(--length-multiplication)) calc(31.27px * var(--length-multiplication));
-    z-index: 3; /* Because those who created z-index stacking context are weird persons */
 }
 
 .option {
@@ -249,8 +333,10 @@
     font-family: sans-serif;
     display: grid;
     grid-template-columns: calc(45px * var(--length-multiplication)) auto min-content;
+    grid-template-rows: auto min-content;
     -ms-display: grid;
     -ms-grid-template-columns: calc(45px * var(--length-multiplication)) auto min-content;
+    -ms-grid-template-rows: auto min-content;
     padding-top: calc(2.5px * var(--length-multiplication));
     padding-bottom: calc(2.5px * var(--length-multiplication));
 }
@@ -258,6 +344,8 @@
 .infHAY > a {
     display: inline-flex;
     align-items: center;
+    grid-row: 1/3;
+    -ms-grid-row: 1/3;
 }
 
 .content {

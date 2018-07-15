@@ -62,7 +62,7 @@ class AjaxController extends Controller
      * @example Date Interval string : "^HERE THE BEGING DATE^ $HERE THE END DATE$" // Date can be in form of DATE or DATE TIME (use the sql syntax)
      * @example "^2018-8-28^ $2018-12-5 8:00:30$" if you don't want to specify one of the two dates replace it by NULL "^2018-8-28^ $NULL$"
      * 
-     * @todo Creating the scopes values : "friends", "frd_and_frd", "subscribed", "sub_user", "sub_pages", "sub_groups", "moderation", "my_posts"
+     * @todo Creating the scopes values : "friends", "frd_and_frd", "subscribed", "sub_users", "sub_pages", "sub_groups", "moderation", "my_posts"
      * @todo Configuring the $date propertie
      * 
      * @return Post[] $postList The post list
@@ -83,7 +83,10 @@ class AjaxController extends Controller
 
             // Mainly for Ajax
             else if (!$limit && $from_id) {
-                $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostWithNoLimitAndFromId($order, $from_id);
+                // Ajax CAN'T work with an ASC order... for obvious reasons... (You can't send posts back in time)
+                if ($order == "DESC") {
+                    $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostWithNoLimitAndFromId($from_id);
+                }
             }
         }
 
@@ -95,7 +98,10 @@ class AjaxController extends Controller
 
             // Mainly for Ajax
             else if (!$limit && $from_id) {
-                $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByUserWithNoLimitAndFromId($user_id, $order, $from_id);
+                // Ajax CAN'T work with an ASC order... for obvious reasons... (You can't send posts back in time)
+                if ($order == "DESC") {
+                    $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByUserWithNoLimitAndFromId($user_id, $from_id);
+                }
             }
         }
     
@@ -138,19 +144,20 @@ class AjaxController extends Controller
      * 
      * @param int $last_id The last post id sended
      * @param string $scope The post scope, @see above (postGenerateAction) for information about the scope parameter
+     * @param string $order The order for fetching posts / available values : "DESC", "ASC"
      * @param int|null $user_id For the "user" scope
      * 
      * @example Use this function for Ajax with JavaScript (because NULL type, can't be passed with url, it detect it as a string, @see the class documentation)
      * 
      * @return Response The response to a http request so JavaScript can understand it !
      * 
-     * @Route("/{_locale}/new/post/{last_id}/{scope}/{user_id}", name="post_sended", requirements={
+     * @Route("/{_locale}/new/post/{last_id}/{scope}/{order}/{user_id}", name="post_sended", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
-    public function isNewPostsSendedAction(int $last_id, string $scope = "all", int $user_id = NULL)
+    public function isNewPostsSendedAction(int $last_id, string $scope = "all", string $order = "DESC", ?int $user_id = NULL)
     {
-        $post = $this->postGenerateAction($scope, "DESC", NULL, NULL, $last_id, $user_id);
+        $post = $this->postGenerateAction($scope, $order, NULL, NULL, $last_id, $user_id);
         return new Response(sizeof($post));
     }
 
@@ -159,13 +166,13 @@ class AjaxController extends Controller
      * 
      * @return string $html The html code with rendered post list
      * 
-     * @Route("/{_locale}/html/new/post/{last_id}/{scope}/{user_id}", name="post_rendered", requirements={
+     * @Route("/{_locale}/html/new/post/{last_id}/{scope}/{order}/{user_id}", name="post_rendered", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
-    public function newPostsRenderedAction(int $last_id, string $scope = "all", int $user_id = NULL)
+    public function newPostsRenderedAction(int $last_id, string $scope = "all", string $order = "DESC", ?int $user_id = NULL)
     {
-        $postList = $this->postGenerateAction($scope, "DESC", NULL, NULL, $last_id, $user_id);
+        $postList = $this->postGenerateAction($scope, $order, NULL, NULL, $last_id, $user_id);
         return new Response($postList[0]->getId() . '/' . $this->postRenderingAction($postList)->getContent());
     }
 }

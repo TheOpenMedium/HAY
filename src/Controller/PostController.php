@@ -114,7 +114,7 @@ class PostController extends Controller
                 $em->flush();
 
                 // And we redirect user to home page.
-                return $this->redirectToRoute('app_index');
+                return $this->redirectToRoute('app_home');
             }
 
             $color = $postEdit->getColor();
@@ -128,7 +128,7 @@ class PostController extends Controller
             ));
         } else {
             // If the user can't modify the post, he's redirected to home page.
-            return $this->redirectToRoute('app_index');
+            return $this->redirectToRoute('app_home');
         }
     }
 
@@ -153,6 +153,6 @@ class PostController extends Controller
         }
 
         // Finally the user is redirected to home page.
-        return $this->redirectToRoute('app_index');
+        return $this->redirectToRoute('app_home');
     }
 }

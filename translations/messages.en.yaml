@@ -27,6 +27,23 @@ has_write: 'has write:'
 comment: Comment
 has_comment: 'has comment:'
 new_posts: 'new post(s) have been sent'
+scope: "Post's scope: "
+scope_world: World
+scope_friends: Friends
+scope_frd_and_frd: 'Friends and their friends'
+scope_sub: Subscribtion
+scope_sub_users: Subscribtion users
+scope_sub_pages: Subscribtion pages
+scope_sub_groups: Subscribtion groups
+scope_mod: Moderation
+scope_my_posts: My posts
+limit: "Post's number: "
+order: "Post's order: "
+order_desc: The most recent
+order_asc: The oldest
+record: Record these filters as default
+filterReady: Done!
+filterError: Failed!
 
 # Notifications
 
@@ -64,3 +81,7 @@ alt: Brief description of user's picture
 # Errors
 
 error_password: Wrong password
+
+# Others
+
+date_format: 'm/d/Y h:i:s a' # see https://secure.php.net/manual/en/function.date.php
