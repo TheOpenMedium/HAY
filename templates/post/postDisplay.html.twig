@@ -43,7 +43,7 @@
                     {% if comment.user.username %}{{ 'alias'|trans }} {{ comment.user.username }} {% endif %}
                     {{ 'has_comment'|trans }}
                 </a>
-                <div style="display: flex; padding: calc(5px * var(--length-multiplication)); cursor: default; padding-top: calc(2.5px * var(--length-multiplication)); grid-row: 1; -ms-grid-row: 1;">
+                <div style="display: flex; padding: calc(5px * var(--length-multiplication)); cursor: default; padding-top: calc(2.5px * var(--length-multiplication)); grid-row: 1; -ms-grid-row: 1; justify-content: center;">
                     {% if app.user %}
                     {% if comment.user.id == app.user.id %}
                         <a class="icofont icofont-ui-delete fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: grey;" href="{{ url('comment_delete', {'id': comment.id}) }}"></a>
@@ -52,7 +52,7 @@
                     {% endif %}
                     <i class="icofont icofont-navigation-menu fs16" style="color: grey;"></i>
                 </div>
-                <div style="text-align: center; grid-row: 2; -ms-grid-row: 2; font-size: calc(8px * var(--length-multiplication)); color: grey;">
+                <div style="text-align: center; grid-row: 2; -ms-grid-row: 2; font-size: calc(8px * var(--length-multiplication)); color: grey; margin: 0px calc(5px * var(--length-multiplication));">
                     {{ comment.dateSend|date('date_format'|trans) }}
                 </div>
             </div>
