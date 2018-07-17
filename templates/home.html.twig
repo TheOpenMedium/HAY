@@ -13,19 +13,21 @@
     </div>
     <span style="top: 0px;">{{ 'scope'|trans }}
         <select id="scope">
-            <option value="all" selected>{{ 'scope_world'|trans }}</option>{#
+            <option value="all" selected>{{ 'scope_world'|trans }}</option>
+            {% if app.user %}
             <optgroup label="{{ 'scope_friends'|trans }}">
                 <option value="friends">{{ 'scope_friends'|trans }}</option>
                 <option value="frd_and_frd">{{ 'scope_frd_and_frd'|trans }}</option>
             </optgroup>
+            {% endif %}{#
             <optgroup label="{{ 'scope_sub'|trans }}">
             <option value="subscribed">{{ 'scope_sub'|trans }}</option>
             <option value="sub_users">{{ 'scope_sub_users'|trans }}</option>
             <option value="sub_pages">{{ 'scope_sub_pages'|trans }}</option>
             <option value="sub_groups">{{ 'scope_sub_groups'|trans }}</option>
             </optgroup>
-            <option value="moderation">{{ 'scope_mod'|trans }}</option>
-            <option value="my_posts">{{ 'scope_my_posts'|trans }}</option>#}
+            <option value="moderation">{{ 'scope_mod'|trans }}</option>#}
+            {% if app.user %}<option value="my_posts">{{ 'scope_my_posts'|trans }}</option>{% endif %}
         </select>
         <label for="scope"><i class="icofont icofont-caret-down fs16"></i></label>
     </span>

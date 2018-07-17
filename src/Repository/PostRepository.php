@@ -87,6 +87,43 @@ class PostRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @param $u The users' post
+     * @param $o The results order
+     * @param $n The number of max results
+     * @return Post[] Returns an array of Post objects
+     */
+    public function findPostByFriends($u, $o, $n)
+    {
+        return $this->createQueryBuilder('p')
+            ->select(array('p'))
+            ->andWhere('p.user IN (:users_ids)')
+            ->setParameter('users_ids', $u)
+            ->orderBy('p.date_post', $o)
+            ->setMaxResults($n)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @param $u The users' post
+     * @param $id The last ID
+     * @return Post[] Returns an array of Post objects
+     */
+    public function findPostByFriendsWithNoLimitAndFromId($u, $id)
+    {
+        return $this->createQueryBuilder('p')
+            ->select(array('p'))
+            ->andWhere('p.user IN (:users_ids)')
+            ->setParameter('users_ids', $u)
+            ->andWhere('p.id > :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function findLastPost()
     {
         return $this->createQueryBuilder('p')

@@ -11,7 +11,7 @@
         <a href="{{ url('user_show', {'id': post.user.id}) }}" style="border-left: calc(1px * var(--length-multiplication)) solid {{ post.color != 'FFF' ? 'white' : 'black' }}; padding-left: calc(15px * var(--length-multiplication)); font-family: sans-serif; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" class="fs16">
             {{ post.user.firstName }} {{ post.user.lastName }} {% if post.user.username %}{{ 'alias'|trans }} {{ post.user.username }} {% endif %}{{ 'has_write'|trans }}
         </a>
-        <div style="display: flex; padding: calc(5px * var(--length-multiplication)); cursor: default; padding-top: calc(2.5px * var(--length-multiplication)); grid-row: 1; -ms-grid-row: 1;">
+        <div style="display: flex; padding: calc(5px * var(--length-multiplication)); cursor: default; padding-top: calc(2.5px * var(--length-multiplication)); grid-row: 1; -ms-grid-row: 1; justify-content: center;">
             {% if app.user %}
             {% if post.user.id == app.user.id %}
                 <a class="icofont icofont-ui-delete fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_delete', {'id': post.id}) }}"></a>
@@ -20,7 +20,7 @@
             {% endif %}
             <i class="icofont icofont-navigation-menu fs16"></i>
         </div>
-        <div style="text-align: center; grid-row: 2; -ms-grid-row: 2; font-size: calc(8px * var(--length-multiplication));">
+        <div style="text-align: center; grid-row: 2; -ms-grid-row: 2; font-size: calc(8px * var(--length-multiplication)); margin: 0px calc(5px * var(--length-multiplication));">
             {{ post.datePost|date('date_format'|trans) }}
         </div>
     </div>

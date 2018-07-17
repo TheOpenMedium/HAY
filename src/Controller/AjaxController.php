@@ -52,7 +52,7 @@ class AjaxController extends Controller
     /**
      * Generate a (group of) post(s)
      * 
-     * @param string $scope The scope for fetching posts / available values : "all", "user" (id specified by $user_id)
+     * @param string $scope The scope for fetching posts / available values : "all", "user" (id specified by $user_id), "friends", "frd_and_frd", "my_posts"
      * @param string $order The order for fetching posts / available values : "DESC", "ASC"
      * @param int|null $limit The limit for fetching posts / available values : int, NULL (VERY DANGEROUS, USE AJAX INSTEAD!)
      * @param string $date The date interval for fetching posts / available values : string (see the examples), NULL
@@ -62,7 +62,7 @@ class AjaxController extends Controller
      * @example Date Interval string : "^HERE THE BEGING DATE^ $HERE THE END DATE$" // Date can be in form of DATE or DATE TIME (use the sql syntax)
      * @example "^2018-8-28^ $2018-12-5 8:00:30$" if you don't want to specify one of the two dates replace it by NULL "^2018-8-28^ $NULL$"
      * 
-     * @todo Creating the scopes values : "friends", "frd_and_frd", "subscribed", "sub_users", "sub_pages", "sub_groups", "moderation", "my_posts"
+     * @todo Creating the scopes values : "subscribed", "sub_users", "sub_pages", "sub_groups", "moderation"
      * @todo Configuring the $date propertie
      * 
      * @return Post[] $postList The post list
@@ -101,6 +101,82 @@ class AjaxController extends Controller
                 // Ajax CAN'T work with an ASC order... for obvious reasons... (You can't send posts back in time)
                 if ($order == "DESC") {
                     $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByUserWithNoLimitAndFromId($user_id, $from_id);
+                }
+            }
+        }
+
+        else if ($scope == "friends")
+        {
+            // Fetching users' IDs
+            $friends = $this->getUser()->getFriends();
+
+            // "Converting" the Doctrine's array object to a PHP's array object
+            foreach ($friends as $friend) {
+                $ids[] = $friend->getId();
+            }
+
+            $ids[] = $this->getUser()->getId();
+
+            if ($limit) {
+                $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByFriends($ids, $order, $limit);
+            }
+
+            // Mainly for Ajax
+            else if (!$limit && $from_id) {
+                // Ajax CAN'T work with an ASC order... for obvious reasons... (You can't send posts back in time)
+                if ($order == "DESC") {
+                    $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByFriendsWithNoLimitAndFromId($ids, $from_id);
+                }
+            }
+        }
+
+        else if ($scope == "frd_and_frd")
+        {
+            // Fetching users' IDs
+            $friends = $this->getUser()->getFriends();
+
+            // We add the user's ID before any ID, because, if the user haven't any friend, we add it,
+            // and if he have friends, his ID is not duplicated when fetching friends' friends,
+            // but if we add this line after fetching IDs, there's a chance to duplicate the ID.
+            // We can, of course, verifying that by using an in_array() and an if statement that we don't
+            // duplicate the user ID, but this will take 3 lines instead of 1...
+            // Wait a second, with all these explanations, it take me 7 lines... OHH FUCK ! XDDD
+            $ids[] = $this->getUser()->getId();
+
+            // "Converting" the Doctrine's array object to a PHP's array object
+            foreach ($friends as $friend) {
+                $ids[] = $friend->getId();
+                foreach ($friend->getFriends() as $subfriend) {
+                    if (!in_array($subfriend->getId(), $ids)) {
+                        $ids[] = $subfriend->getId();
+                    }
+                }
+            }
+
+            if ($limit) {
+                $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByFriends($ids, $order, $limit);
+            }
+
+            // Mainly for Ajax
+            else if (!$limit && $from_id) {
+                // Ajax CAN'T work with an ASC order... for obvious reasons... (You can't send posts back in time)
+                if ($order == "DESC") {
+                    $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByFriendsWithNoLimitAndFromId($ids, $from_id);
+                }
+            }
+        }
+
+        else if ($scope == "my_posts")
+        {
+            if ($limit) {
+                $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByUser($this->getUser()->getId(), $order, $limit);
+            }
+
+            // Mainly for Ajax
+            else if (!$limit && $from_id) {
+                // Ajax CAN'T work with an ASC order... for obvious reasons... (You can't send posts back in time)
+                if ($order == "DESC") {
+                    $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByUserWithNoLimitAndFromId($this->getUser()->getId(), $from_id);
                 }
             }
         }
