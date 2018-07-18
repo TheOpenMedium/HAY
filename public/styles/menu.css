@@ -101,11 +101,12 @@
     right: 0px;
     top: 34px;
     background-color: dimgrey;
-    height: 100%;
+    height: calc(100% - 50px);
     width: 183px;
     cursor: auto;
     padding: 0px;
     list-style: none;
+    overflow-y: auto;
 }
 
 .parameter:hover ul.ulParameter {
@@ -146,6 +147,34 @@
 
 .optionMenuChoice:hover {
     background-color: var(--font-color-grey);
+}
+
+#helper:hover {
+    background-color: green;
+}
+
+#dev:hover {
+    background-color: yellowgreen;
+}
+
+#design:hover {
+    background-color : dodgerblue;
+}
+
+#trans:hover {
+    background-color: magenta;
+}
+
+#mod:hover {
+    background-color: orange;
+}
+
+#admin:hover {
+    background-color: red;
+}
+
+#root:hover {
+    background-color: blueviolet;
 }
 
 .notification {

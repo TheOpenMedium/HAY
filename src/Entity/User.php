@@ -135,6 +135,11 @@ class User implements UserInterface, \Serializable
      */
     private $settings;
 
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $roles;
+
     public function __construct()
     {
         $this->date_sign = new \Datetime();
@@ -148,6 +153,7 @@ class User implements UserInterface, \Serializable
         $this->friends = new ArrayCollection();
         $this->url = '/ressources/icon.png';
         $this->alt = 'Profile picture';
+        $this->roles = array('ROLE_USER');
     }
 
     public function getId()
@@ -342,11 +348,6 @@ class User implements UserInterface, \Serializable
         $this->rememberme = $rememberme;
     }
 
-    public function getRoles()
-    {
-        return array('ROLE_USER');
-    }
-
     public function getSalt()
     {
         return $this->salt;
@@ -521,6 +522,40 @@ class User implements UserInterface, \Serializable
     public function setSettings($settings): self
     {
         $this->settings = $settings;
+
+        return $this;
+    }
+
+    public function getRoles()
+    {
+        // I have absolutely no idea why, but it works only if we do this... ¯\_(ツ)_/¯
+
+        foreach ($this->roles as $role) {
+            $rolesList[] = $role;
+        }
+
+        return $rolesList;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function addRole(string $newRole): self
+    {
+        $this->roles[] = $newRole;
+
+        return $this;
+    }
+
+    public function removeRole(string $role): self
+    {
+        if (in_array($role, $this->roles)) {
+            array_splice($this->roles, array_search($role, $this->roles), 1);
+        }
 
         return $this;
     }

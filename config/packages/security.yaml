@@ -7,6 +7,14 @@ security:
         data_base:
             entity:
                 class: App\Entity\User
+    role_hierarchy:
+        ROLE_HELPER: ROLE_USER
+        ROLE_MOD: ROLE_HELPER # For Moderators
+        ROLE_DEV: ROLE_HELPER # For Developpers Contributors
+        ROLE_DESIGN: ROLE_HELPER # For Designers Contributors
+        ROLE_TRANS: ROLE_TRANS # For Translators Contributors
+        ROLE_ADMIN: [ROLE_MOD, ROLE_DEV, ROLE_DESIGN, ROLE_TRANS] # For Administrators
+        ROLE_ROOT: ROLE_ADMIN # For Super Users
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

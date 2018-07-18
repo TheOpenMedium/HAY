@@ -84,6 +84,33 @@ cancel: Annuler
 conf_password: Votre ancient mot de passe
 alt: Courte description de la photo de profile
 
+################################################################################
+
+# Security Areas
+
+# Helper Area
+helper_area: Zone Assistance
+
+# Developer Area
+dev_area: Zone Développeur
+
+# Designer Area
+design_area: Zone Designer
+
+# Translator Area
+trans_area: Zone Traducteur
+
+# Moderator Area
+mod_area: Zone Modérateur
+
+# Administrator Area
+admin_area: Zone Administrateur
+
+# Root Area
+root_area: Zone Super Utilisateur
+
+################################################################################
+
 # Errors
 # Erreurs
 

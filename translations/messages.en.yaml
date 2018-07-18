@@ -78,6 +78,33 @@ cancel: Cancel
 conf_password: Your previous password
 alt: Brief description of user's picture
 
+################################################################################
+
+# Security Areas
+
+# Helper Area
+helper_area: Helper Area
+
+# Developer Area
+dev_area: Developer Area
+
+# Designer Area
+design_area: Designer Area
+
+# Translator Area
+trans_area: Translator Area
+
+# Moderator Area
+mod_area: Moderator Area
+
+# Administrator Area
+admin_area: Administrator Area
+
+# Root Area
+root_area: Super User Area
+
+################################################################################
+
 # Errors
 
 error_password: Wrong password
