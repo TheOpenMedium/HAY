@@ -83,6 +83,7 @@ edit_user: Modifier l'utilisateur
 cancel: Annuler
 conf_password: Votre ancient mot de passe
 alt: Courte description de la photo de profile
+choose: Choisir
 
 ################################################################################
 
@@ -115,6 +116,7 @@ root_area: Zone Super Utilisateur
 # Erreurs
 
 error_password: Mauvais mot de passe
+error_password_or_no_image: Mauvais mot de passe ou vous n'avez envoyé aucun mot de passe
 
 # Others
 # Autres

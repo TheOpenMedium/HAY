@@ -5,82 +5,55 @@
 {% endblock %}
 
 {% block body %}
-{{ form_start(form) }}
-<table class="loginBody" width="500px"  style="margin-top: 0px;">
-    <tr style="font-size: 40px; color: white; font-family: sans-serif;">
-        <td style="border-bottom: 5px solid #55ff99" colspan="2">
-            {{ 'edit_user'|trans }}
-        </td>
-    </tr>
-    <tr>
-        <td style="padding-top: 10px;" colspan="2">
-            <img src="{{ app.user.url }}" alt="{{ app.user.alt }}" width="200px" height="200px" class="loginIcons" />
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2" style="margin: auto; text-align: center; font-family: sans-serif; color: white;">
-            {{ form_widget(form.file, {'attr': {'accept': 'image/*'}, 'required': false}) }}
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            {{ form_widget(form.alt, {'attr': {'class': 'login loginLarge', 'placeholder': 'alt'|trans}, 'required': false}) }}
-        </td>
-    </tr>
-    {# First/last name form #}
-    {# Formulaire du nom/prénom #}
-    <tr>
-        <td width="50%">
-            {{ form_widget(form.first_name, {'attr': {'class': 'login', 'placeholder': 'first_name'|trans}, 'required': false}) }}
-        </td>
-        <td width="50%">
-            {{ form_widget(form.last_name, {'attr': {'class': 'login', 'placeholder': 'last_name'|trans}, 'required': false}) }}
-        </td>
-    </tr>
-    {# Pseudo form #}
-    {# Formulaire du pseudo #}
-    <tr>
-        <td colspan="2">
-            {{ form_widget(form.username, {'attr': {'class': 'login loginLarge', 'placeholder': 'username'|trans}, 'required': false}) }}
-        </td>
-    </tr>
+<div class="userEdit">
+    <span class="userEditTitle fs40">{{ 'edit_user'|trans }}</span>
+    <img src="{{ app.user.url }}" alt="{{ app.user.alt }}" />
+    <div class="userEditUserInfo">
+        {# First/last name form #}
+        {# Formulaire du nom/prénom #}
+        {{ form_start(form_name, {'attr': {'class': 'userEditName'}}) }}
+        {{ form_widget(form_name.first_name, {'attr': {'class': 'login', 'placeholder': 'first_name'|trans}, 'required': false}) }}
+        {{ form_widget(form_name.last_name, {'attr': {'class': 'login', 'placeholder': 'last_name'|trans}, 'required': false}) }}
+        {{ form_widget(form_name.conf_password, {'attr': {'class': 'login loginLarge', 'placeholder': 'conf_password'|trans}}) }}
+        {{ form_widget(form_name.submit, {'attr': {'class': 'submit'}, 'label': 'edit'|trans}) }}
+        {{ form_end(form_name) }}
+        {# Username form #}
+        {# Formulaire du pseudo #}
+        {{ form_start(form_username, {'attr': {'class': 'userEditUserName'}}) }}
+        {{ form_widget(form_username.username, {'attr': {'class': 'login loginLarge', 'placeholder': 'username'|trans}, 'required': false}) }}
+        {{ form_widget(form_username.conf_password, {'attr': {'class': 'login loginLarge', 'placeholder': 'conf_password'|trans}}) }}
+        {{ form_widget(form_username.submit, {'attr': {'class': 'submit'}, 'label': 'edit'|trans}) }}
+        {{ form_end(form_username) }}
+        {# Image form #}
+        {# Formulaire de l'Avatar #}
+        {{ form_start(form_image, {'attr': {'class': 'userEditImage'}}) }}
+        {{ form_widget(form_image.file, {'attr': {'accept': 'image/*', 'style': 'display: none;'}, 'required': false}) }}
+        <label for="form_file" class="submit">{{ 'choose'|trans }}...</label>
+        {{ form_widget(form_image.alt, {'attr': {'class': 'login', 'placeholder': 'alt'|trans}, 'required': false}) }}
+        {{ form_widget(form_image.conf_password, {'attr': {'class': 'login loginLarge', 'placeholder': 'conf_password'|trans}}) }}
+        {{ form_widget(form_image.submit, {'attr': {'class': 'submit'}, 'label': 'edit'|trans}) }}
+        {{ form_end(form_image) }}
+    </div>
     {# E-mail form #}
     {# Formulaire de l'E-mail #}
-    <tr>
-        <td width="50%">
-            {{ form_widget(form.email.first, {'attr': {'class': 'login', 'placeholder': 'email'|trans}, 'required': false}) }}
-        </td>
-        <td width="50%">
-            {{ form_widget(form.email.second, {'attr': {'class': 'login', 'placeholder': 'repeat'|trans}, 'required': false}) }}
-        </td>
-    </tr>
+    {{ form_start(form_email) }}
+    {{ form_widget(form_email.email.first, {'attr': {'class': 'login', 'placeholder': 'email'|trans}, 'required': false}) }}
+    {{ form_widget(form_email.email.second, {'attr': {'class': 'login', 'placeholder': 'repeat'|trans}, 'required': false}) }}
+    {{ form_widget(form_email.conf_password, {'attr': {'class': 'login loginLarge', 'placeholder': 'conf_password'|trans}}) }}
+    {{ form_widget(form_email.submit, {'attr': {'class': 'submit'}, 'label': 'edit'|trans}) }}
+    {{ form_end(form_email) }}
     {# Password form #}
     {# Formulaire du mot de passe #}
-    <tr>
-        <td width="50%">
-            {{ form_widget(form.password.first, {'attr': {'class': 'login', 'placeholder': 'password'|trans, 'autocomplete': 'off'}, 'required': false}) }}
-        </td>
-        <td width="50%">
-            {{ form_widget(form.password.second, {'attr': {'class': 'login', 'placeholder': 'repeat'|trans, 'autocomplete': 'off'}, 'required': false}) }}
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            {{ form_widget(form.conf_password, {'attr': {'class': 'login loginLarge', 'placeholder': 'conf_password'|trans}}) }}
-        </td>
-    </tr>
-    {# Data send #}
-    {# Envoie des données #}
-    <tr>
-        <td>
-            <button class="submit" type="button" onclick="window.location='{{ url('app_index') }}';">{{ 'cancel'|trans }}</button>
-        </td>
-        <td>
-            {{ form_widget(form.submit, {'attr': {'class': 'submit'}, 'label': 'edit'|trans}) }}
-        </td>
-    </tr>
-</table>
-{{ form_end(form) }}
+    {{ form_start(form_password) }}
+    {{ form_widget(form_password.password.first, {'attr': {'class': 'login', 'placeholder': 'password'|trans, 'autocomplete': 'off'}, 'required': false}) }}
+    {{ form_widget(form_password.password.second, {'attr': {'class': 'login', 'placeholder': 'repeat'|trans, 'autocomplete': 'off'}, 'required': false}) }}
+    {{ form_widget(form_password.conf_password, {'attr': {'class': 'login loginLarge', 'placeholder': 'conf_password'|trans}}) }}
+    {{ form_widget(form_password.submit, {'attr': {'class': 'submit'}, 'label': 'edit'|trans}) }}
+    {{ form_end(form_password) }}
+</div>
+{# Data send #}
+{# Envoie des données #}
+<button class="submit" type="button" onclick="window.location='{{ url('app_index') }}';">{{ 'cancel'|trans }}</button>
 
 {% if error is defined %}
 <div class="warning" id="Error" style="background: red;">
