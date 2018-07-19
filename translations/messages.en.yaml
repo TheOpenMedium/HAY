@@ -85,24 +85,47 @@ choose: Choose
 
 # Helper Area
 helper_area: Helper Area
+questions_office: Questions office
+ideas_office: Ideas office
+manage_doc: Manage documentation
+submit_modif: Submit a modification
 
 # Developer Area
 dev_area: Developer Area
+manage_profiler: Manage the profiler
+source_code: See the source code
+dev_tools: Developement tools
+gitlab_interface: GitLab interface
 
 # Designer Area
 design_area: Designer Area
+manage_themes: Manage themes
+manage_css: Manage the CSS
 
 # Translator Area
 trans_area: Translator Area
+manage_translations: Manage translations
 
 # Moderator Area
 mod_area: Moderator Area
+complaints_office: Complaints office
+investigations: Investigations
+false_accounts: False accounts
+manage_community: Manage the community
+manage_laws: Manage laws
+contact_administration: Contact the administration
 
 # Administrator Area
 admin_area: Administrator Area
+manage_roles: Manage roles
+manage_authorization: Manage authorization
 
 # Root Area
 root_area: Super User Area
+edit_website: Edit website
+statistics: Statistics
+phpmyadmin_interface: phpMyAdmin interface
+manage_policy: Manage policy
 
 ################################################################################
 

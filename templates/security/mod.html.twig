@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+{{ 'mod_area'|trans }} - HAY
+{% endblock %}
+
+{% block body %}
+{{ include("menu.html.twig") }}
+<div class="userMenu fs16 ffSS">
+    <a href="#">{{ 'complaints_office'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+    <a href="#">{{ 'investigations'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+    <a href="#">{{ 'false_accounts'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+    <a href="#">{{ 'manage_community'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+    <a href="#">{{ 'manage_laws'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+    <a href="#">{{ 'contact_administration'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+</div>
+{% endblock %}

@@ -12,9 +12,17 @@ security:
         ROLE_MOD: ROLE_HELPER # For Moderators
         ROLE_DEV: ROLE_HELPER # For Developpers Contributors
         ROLE_DESIGN: ROLE_HELPER # For Designers Contributors
-        ROLE_TRANS: ROLE_TRANS # For Translators Contributors
+        ROLE_TRANS: ROLE_HELPER # For Translators Contributors
         ROLE_ADMIN: [ROLE_MOD, ROLE_DEV, ROLE_DESIGN, ROLE_TRANS] # For Administrators
         ROLE_ROOT: ROLE_ADMIN # For Super Users
+    access_control:
+        - { path: '^/[a-z]{2}(_[A-Z]{2})?/helper', roles: ROLE_HELPER }
+        - { path: '^/[a-z]{2}(_[A-Z]{2})?/mod', roles: ROLE_MOD }
+        - { path: '^/[a-z]{2}(_[A-Z]{2})?/dev', roles: ROLE_DEV }
+        - { path: '^/[a-z]{2}(_[A-Z]{2})?/design', roles: ROLE_DESIGN }
+        - { path: '^/[a-z]{2}(_[A-Z]{2})?/trans', roles: ROLE_TRANS }
+        - { path: '^/[a-z]{2}(_[A-Z]{2})?/admin', roles: ROLE_ADMIN }
+        - { path: '^/[a-z]{2}(_[A-Z]{2})?/root', roles: ROLE_ROOT }
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

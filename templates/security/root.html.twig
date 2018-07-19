@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+{{ 'root_area'|trans }} - HAY
+{% endblock %}
+
+{% block body %}
+{{ include("menu.html.twig") }}
+<div class="userMenu fs16 ffSS">
+    <a href="#">{{ 'edit_website'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+    <a href="#">{{ 'statistics'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+    <a href="#">{{ 'manage_roles'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+    <a href="#">{{ 'manage_authorization'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+    <a href="#">{{ 'manage_laws'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+    <a href="#">{{ 'phpmyadmin_interface'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+    <a href="#">{{ 'manage_policy'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+</div>
+{% endblock %}

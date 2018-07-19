@@ -88,27 +88,58 @@ choose: Choisir
 ################################################################################
 
 # Security Areas
+# Zone de Securité
 
 # Helper Area
+# Zone Assistance
 helper_area: Zone Assistance
+questions_office: Bureau des questions
+ideas_office: Bureau des idées
+manage_doc: Gérer la documentation
+submit_modif: Soumettre une modification
 
 # Developer Area
+# Zone Développeur
 dev_area: Zone Développeur
+manage_profiler: Gérer le profiler
+source_code: Voir le code source
+dev_tools: Outils de développement
+gitlab_interface: Interface GitLab
 
 # Designer Area
+# Zone Designer
 design_area: Zone Designer
+manage_themes: Gérer les thèmes
+manage_css: Gérer le CSS
 
 # Translator Area
+# Zone Traducteur
 trans_area: Zone Traducteur
+manage_translations: Gérer les traductions
 
 # Moderator Area
+# Zone Modérateur
 mod_area: Zone Modérateur
+complaints_office: Bureau des plaintes
+investigations: Investigations
+false_accounts: Faux comptes
+manage_community: Gérer la communauté
+manage_laws: Gérer les lois
+contact_administration: Contacter l'administration
 
 # Administrator Area
+# Zone Administrateur
 admin_area: Zone Administrateur
+manage_roles: Gérer les roles
+manage_authorization: Gérer les autorisations
 
 # Root Area
+# Zone Super Utilisateur
 root_area: Zone Super Utilisateur
+edit_website: Modifier le site web
+statistics: Statistiques
+phpmyadmin_interface: Interface phpMyAdmin
+manage_policy: Gérer la politique
 
 ################################################################################
 
