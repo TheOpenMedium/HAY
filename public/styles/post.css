@@ -149,16 +149,25 @@
 /* Send Post Options */
 
 .footer {
-    background-image: url('../ressources/corner.png');
     background-position: 0px 0px;
     background-repeat: no-repeat;
     background-size: calc(50px * var(--length-multiplication));
     width: 100%;
 }
 
+.footer-corner {
+    float: left;
+    width: 0;
+    height: 0;
+    border-top: calc(50px * var(--length-multiplication)) solid dimgrey;
+    border-right: calc(50px * var(--length-multiplication)) solid transparent;
+    margin-left: calc(-25px * var(--length-multiplication));
+    position: relative;
+    left: calc(25px * var(--length-multiplication));
+}
+
 .footerMenu {
     margin: 0;
-    margin-left: calc(25px * var(--length-multiplication));
     height: calc(50px * var(--length-multiplication));
     padding: 0;
     line-height: 0px;
@@ -325,7 +334,6 @@
 .infHAY {
     width: calc(600px * var(--length-multiplication));
     height: calc(50px * var(--length-multiplication));
-    background-image: url('../ressources/anti-corner.png');
     background-position: 0px 0px;
     background-repeat: no-repeat;
     background-size: calc(50px * var(--length-multiplication));
@@ -339,6 +347,18 @@
     -ms-grid-template-rows: auto min-content;
     padding-top: calc(2.5px * var(--length-multiplication));
     padding-bottom: calc(2.5px * var(--length-multiplication));
+}
+
+.infHAY-corner {
+    float: left;
+    width: 0;
+    height: 0;
+    border-top: calc(50px * var(--length-multiplication)) solid var(--bg-light);
+    border-right: calc(50px * var(--length-multiplication)) solid transparent;
+    margin-left: calc(-25px * var(--length-multiplication));
+    position: relative;
+    right: calc(25px * var(--length-multiplication));
+    bottom: calc(45px * var(--length-multiplication));
 }
 
 .infHAY > a {

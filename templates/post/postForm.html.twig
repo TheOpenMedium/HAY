@@ -3,6 +3,7 @@
     {{ form_start(form) }}
     <div class="textarea fs16 c696">{{ 'write'|trans }}{{ form_widget(form.content, {'attr': {'class': 'ta fs16', 'required': false}}) }}</div>
     <div class="footer">
+        <div class="footer-corner"></div>
         <ul class="footerMenu">
             {{ include('post/postOptions/postOption.html.twig') }}
             {{ include('post/postOptions/postDownload.html.twig') }}

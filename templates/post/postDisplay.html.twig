@@ -5,6 +5,7 @@
     {# Sender informations #}
     {# Informations sur l'expéditeur #}
     <div class="infHAY c{{ post.color }}">
+        <div class="infHAY-corner"></div>
         <a style="justify-content: center;" href="{{ url('user_show', {'id': post.user.id}) }}">
             <img src="{{ post.user.url }}" alt="{{ post.user.alt }}" style="width: calc(40px * var(--length-multiplication)); height: calc(40px * var(--length-multiplication));" />
         </a>
