@@ -136,7 +136,7 @@ statistics: Statistics
 sql_interface: SQL interface
 manage_policy: Manage policy
 show_version: Show version
-image_type_png: 'Image of type png:'
+image_type_svg: 'Image of type svg:'
 logo: Logo
 default_profile_picture: Default profile picture
 visits: Visitors

@@ -187,7 +187,7 @@ class UserController extends Controller
                 $this->getUser()->setAlt($user->getAlt());
 
                 // We verify that the user hasn't already an image.
-                if ($this->getUser()->getUrl() != '/ressources/icon.png') {
+                if ($this->getUser()->getUrl() != '/ressources/icon.svg') {
                     // If it's the case, we remove it.
                     unlink(__dir__.'/../../public'.$this->getUser()->getUrl());
                 }

@@ -150,7 +150,7 @@ statistics: Statistiques
 sql_interface: Interface SQL
 manage_policy: Gérer la politique
 show_version: Afficher la version
-image_type_png: 'Image de type png :'
+image_type_svg: 'Image de type svg :'
 logo: Logo
 default_profile_picture: Photo de profile par défaut
 visits: Visiteurs

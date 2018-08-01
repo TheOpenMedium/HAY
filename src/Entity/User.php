@@ -151,7 +151,7 @@ class User implements UserInterface, \Serializable
         $this->friendRequests = new ArrayCollection();
         $this->requestedFriends = new ArrayCollection();
         $this->friends = new ArrayCollection();
-        $this->url = '/ressources/icon.png';
+        $this->url = '/ressources/icon.svg';
         $this->alt = 'Profile picture';
         $this->roles = array('ROLE_USER');
     }

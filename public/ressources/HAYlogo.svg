@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="1024"
+   width="1024"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="HAYlogotest.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <metadata
+     id="metadata12">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs10" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="2880"
+     inkscape:window-height="1671"
+     id="namedview8"
+     showgrid="false"
+     inkscape:zoom="0.921875"
+     inkscape:cx="676.98756"
+     inkscape:cy="487.90244"
+     inkscape:window-x="0"
+     inkscape:window-y="55"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6" />
+  <path
+     style="fill: #55FF99;"
+     d="M 102.40039 102.40039 L 102.40039 921.59961 L 921.59961 921.59961 L 921.59961 102.40039 L 102.40039 102.40039 z M 232.4375 294.27148 L 261.89648 294.27148 L 261.89648 383.52148 L 368.9375 383.52148 L 368.9375 294.27148 L 398.39648 294.27148 L 398.39648 512 L 368.9375 512 L 368.9375 408.3125 L 261.89648 408.3125 L 261.89648 512 L 232.4375 512 L 232.4375 294.27148 z M 513.16797 294.27148 L 546.5625 294.27148 L 629.54297 512 L 598.91797 512 L 579.08398 456.14648 L 480.9375 456.14648 L 461.10547 512 L 430.04297 512 L 513.16797 294.27148 z M 607.95898 294.27148 L 639.60547 294.27148 L 699.98047 383.8125 L 759.91797 294.27148 L 791.5625 294.27148 L 714.5625 408.3125 L 714.5625 512 L 684.95898 512 L 684.95898 408.3125 L 607.95898 294.27148 z M 529.79297 323.29102 L 489.83398 431.64648 L 569.89648 431.64648 L 529.79297 323.29102 z "
+     id="rect2" />
+  <!-- To avoid having a gap between the square and the triangle, polyline points are 920 for y value instead of 921.6 -->
+  <polyline
+     points="102.4,920 204.8,920 102.4,1024"
+     style="fill: #55FF99;"
+     id="polyline4" />
+</svg>

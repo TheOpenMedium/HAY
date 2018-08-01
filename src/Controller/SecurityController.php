@@ -74,18 +74,18 @@ class SecurityController extends Controller
             $datas = $form->getData();
 
             if ($datas['HAYlogo'] !== NULL) {
-                if ($datas['HAYlogo']->guessExtension() == 'png' || $datas['HAYlogo']->guessExtension() == 'PNG') {
-                    $datas['HAYlogo']->move(__dir__.'/../../public/ressources/', 'HAYlogo.png');
+                if ($datas['HAYlogo']->guessExtension() == 'svg' || $datas['HAYlogo']->guessExtension() == 'svgz') {
+                    $datas['HAYlogo']->move(__dir__.'/../../public/ressources/', 'HAYlogo.svg');
                 } else {
-                    throw new \Exception('The image has to be of type PNG.');
+                    throw new \Exception('The image has to be of type SVG.');
                 }
             }
 
             if ($datas['icon'] !== NULL) {
-                if ($datas['icon']->guessExtension() == 'png' || $datas['icon']->guessExtension() == 'PNG') {
-                    $datas['icon']->move(__dir__.'/../../public/ressources/', 'icon.png');
+                if ($datas['icon']->guessExtension() == 'svg' || $datas['icon']->guessExtension() == 'svgz') {
+                    $datas['icon']->move(__dir__.'/../../public/ressources/', 'icon.svg');
                 } else {
-                    throw new \Exception('The image has to be of type PNG.');
+                    throw new \Exception('The image has to be of type SVG.');
                 }
             }
 
