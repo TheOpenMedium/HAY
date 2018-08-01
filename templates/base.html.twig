@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <link rel="icon" href="/ressources/HAYlogo.ico" />
+        <link rel="icon" href="/ressources/HAYlogo.png" />
         <link rel="stylesheet" href="/fonts/icofont/css/icofont.css" type="text/css" />
         <link rel="stylesheet" href="/styles/general.css" type="text/css" />
         <link rel="stylesheet" href="/styles/locale.css" type="text/css" />
@@ -26,5 +26,10 @@
         {% endblock %}
         {% block js %}
         {% endblock %}
+        <script>
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", "{{ url('statistics_record_visits') }}", true);
+            xmlhttp.send();
+        </script>
     </body>
 </html>

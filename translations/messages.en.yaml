@@ -26,7 +26,7 @@ alias: alias
 has_write: 'has write:'
 comment: Comment
 has_comment: 'has comment:'
-new_posts: 'new post(s) have been sent'
+new_posts_sent: 'new post(s) have been sent'
 scope: "Post's scope: "
 scope_world: World
 scope_friends: Friends
@@ -55,6 +55,7 @@ friends: Friends
 
 # User page
 
+user: User
 about: About
 post: Posts
 photo: Photos
@@ -84,6 +85,7 @@ choose: Choose
 # Security Areas
 
 # Helper Area
+helper: Helper
 helper_area: Helper Area
 questions_office: Questions office
 ideas_office: Ideas office
@@ -91,6 +93,7 @@ manage_doc: Manage documentation
 submit_modif: Submit a modification
 
 # Developer Area
+dev: Developer
 dev_area: Developer Area
 manage_profiler: Manage the profiler
 source_code: See the source code
@@ -98,15 +101,18 @@ dev_tools: Developement tools
 gitlab_interface: GitLab interface
 
 # Designer Area
+design: Designer
 design_area: Designer Area
 manage_themes: Manage themes
 manage_css: Manage the CSS
 
 # Translator Area
+trans: Translator
 trans_area: Translator Area
 manage_translations: Manage translations
 
 # Moderator Area
+mod: Moderator
 mod_area: Moderator Area
 complaints_office: Complaints office
 investigations: Investigations
@@ -116,16 +122,37 @@ manage_laws: Manage laws
 contact_administration: Contact the administration
 
 # Administrator Area
+admin: Administrator
 admin_area: Administrator Area
 manage_roles: Manage roles
 manage_authorization: Manage authorization
 
 # Root Area
+root: Super User
+owner: Owner
 root_area: Super User Area
 edit_website: Edit website
 statistics: Statistics
-phpmyadmin_interface: phpMyAdmin interface
+sql_interface: SQL interface
 manage_policy: Manage policy
+show_version: Show version
+image_type_png: 'Image of type png:'
+logo: Logo
+default_profile_picture: Default profile picture
+visits: Visitors
+requests: Requests
+new_users: New Users
+new_posts: New Posts
+new_comments: New Comments
+day: Day
+month: Month
+year: Year
+user_id: User's ID
+his_roles: His role
+number_of_posts: Number of Posts
+number_of_comments: Number of Comments
+number_of_friends: Number of Friends
+date_sign_up: Date of sign up
 
 ################################################################################
 

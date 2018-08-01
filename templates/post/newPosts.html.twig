@@ -1,6 +1,6 @@
 {% if order == "DESC" %}
 <div class="newPosts fs16 ffSS" onclick="getNewPosts()">
-    <span id="nbNewPosts">0</span>&nbsp;{{ 'new_posts'|trans }}
+    <span id="nbNewPosts">0</span>&nbsp;{{ 'new_posts_sent'|trans }}
 </div>
 <script>
 // Creating the request URLs.
@@ -16,7 +16,7 @@ function getNbNewPosts() {
         if (this.readyState == 4 && this.status == 200) {
             // Inserting the response text inside the #nbNewPosts Element.
             document.getElementById("nbNewPosts").innerHTML = this.responseText;
-            
+
             // Deciding if the .newPosts Element is displayed.
             if (Number(this.responseText) > 0) {
                 document.getElementsByClassName("newPosts")[0].style.display = "flex";

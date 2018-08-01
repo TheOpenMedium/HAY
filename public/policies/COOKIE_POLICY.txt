@@ -1,0 +1,11 @@
+HAY can use two cookies :
+
+_ PHPSESSID :
+    This cookie is used for security and statistics reasons.
+    You can't disable it for security reasons.
+
+_ remember_me :
+    This cookie is used for remembering the user for his next connection.
+    It remember the user for 6 months.
+    It's the user, and only him that decide if he want to use this cookie
+    by checking the "Remember me" option when logging in.

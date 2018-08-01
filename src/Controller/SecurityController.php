@@ -2,8 +2,18 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Yaml\Yaml;
 
 class SecurityController extends Controller
 {
@@ -12,9 +22,95 @@ class SecurityController extends Controller
      *     "_locale": "%app.locales%"
      * })
      */
-    public function rootAction()
+    public function rootAction(Request $request)
     {
-        return $this->render('security/root.html.twig');
+        $yaml = Yaml::parseFile(__dir__.'/../../config/packages/twig.yaml');
+
+        $license = \fopen(__dir__.'/../../LICENSE', 'r');
+        $privacy_policy = \fopen(__dir__.'/../../public/policies/PRIVACY_POLICY.txt', 'r');
+        $cookie_policy = \fopen(__dir__.'/../../public/policies/COOKIE_POLICY.txt', 'r');
+        $code_of_conduct = \fopen(__dir__.'/../../public/policies/CODE_OF_CONDUCT.txt', 'r');
+
+        if (filesize(__dir__.'/../../LICENSE')) {
+            $license = \fread($license, filesize(__dir__.'/../../LICENSE'));
+        } else {
+            $license = "";
+        } if (filesize(__dir__.'/../../public/policies/PRIVACY_POLICY.txt')) {
+            $privacy_policy = \fread($privacy_policy, filesize(__dir__.'/../../public/policies/PRIVACY_POLICY.txt'));
+        } else {
+            $privacy_policy = "";
+        } if (filesize(__dir__.'/../../public/policies/COOKIE_POLICY.txt')) {
+            $cookie_policy = \fread($cookie_policy, filesize(__dir__.'/../../public/policies/COOKIE_POLICY.txt'));
+        } else {
+            $cookie_policy = "";
+        } if (filesize(__dir__.'/../../public/policies/CODE_OF_CONDUCT.txt')) {
+            $code_of_conduct = \fread($code_of_conduct, filesize(__dir__.'/../../public/policies/CODE_OF_CONDUCT.txt'));
+        } else {
+            $code_of_conduct = "";
+        }
+
+        $datas = array(
+            'version' => $yaml['twig']['globals']['is_version_displayed'],
+            'license' => $license,
+            'privacy_policy' => $privacy_policy,
+            'cookie_policy' => $cookie_policy,
+            'code_of_conduct' => $code_of_conduct
+        );
+
+        $form = $this->createFormBuilder($datas)
+            ->add('HAYlogo', FileType::class, array('required' => false))
+            ->add('icon', FileType::class, array('required' => false))
+            ->add('version', CheckboxType::class, array('required' => false))
+            ->add('license', TextareaType::class, array('required' => false))
+            ->add('privacy_policy', TextareaType::class, array('required' => false))
+            ->add('cookie_policy', TextareaType::class, array('required' => false))
+            ->add('code_of_conduct', TextareaType::class, array('required' => false))
+            ->add('submit', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $datas = $form->getData();
+
+            if ($datas['HAYlogo'] !== NULL) {
+                if ($datas['HAYlogo']->guessExtension() == 'png' || $datas['HAYlogo']->guessExtension() == 'PNG') {
+                    $datas['HAYlogo']->move(__dir__.'/../../public/ressources/', 'HAYlogo.png');
+                } else {
+                    throw new \Exception('The image has to be of type PNG.');
+                }
+            }
+
+            if ($datas['icon'] !== NULL) {
+                if ($datas['icon']->guessExtension() == 'png' || $datas['icon']->guessExtension() == 'PNG') {
+                    $datas['icon']->move(__dir__.'/../../public/ressources/', 'icon.png');
+                } else {
+                    throw new \Exception('The image has to be of type PNG.');
+                }
+            }
+
+            if ($datas['license'] != $license) {
+                $license = \fopen(__dir__.'/../../LICENSE', 'w');
+                \fwrite($license, $datas['license']);
+            } if ($datas['privacy_policy'] != $privacy_policy) {
+                $privacy_policy = \fopen(__dir__.'/../../public/policies/PRIVACY_POLICY.txt', 'w');
+                \fwrite($privacy_policy, $datas['privacy_policy']);
+            } if ($datas['cookie_policy'] != $cookie_policy) {
+                $cookie_policy = \fopen(__dir__.'/../../public/policies/COOKIE_POLICY.txt', 'w');
+                \fwrite($cookie_policy, $datas['cookie_policy']);
+            } if ($datas['code_of_conduct'] != $code_of_conduct) {
+                $code_of_conduct = \fopen(__dir__.'/../../public/policies/CODE_OF_CONDUCT.txt', 'w');
+                \fwrite($code_of_conduct, $datas['code_of_conduct']);
+            }
+
+            $yaml['twig']['globals']['is_version_displayed'] = $datas['version'];
+            $fp = \fopen(__dir__.'/../../config/packages/twig.yaml', 'w');
+            \fwrite($fp, Yaml::dump($yaml, 2));
+        }
+
+        return $this->render('security/root.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 
     /**
@@ -25,6 +121,63 @@ class SecurityController extends Controller
     public function adminAction()
     {
         return $this->render('security/admin.html.twig');
+    }
+
+    /**
+     * @Route("/{_locale}/admin/get_roles/{user}", name="security_admin_get_roles", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function getUserRolesAction(User $user)
+    {
+        header('Content-Type: text/json');
+
+        $array = array(
+            'name' => $user->getFirstName()." ".$user->getLastName(),
+            'username' => $user->getUsername(),
+            'img' => $user->getUrl(),
+            'nbPosts' => \count($user->getPosts()),
+            'nbComments' => \count($user->getComments()),
+            'nbFriends' => \count($user->getFriends()),
+            'dateSignUp' => \date_format($user->getDateSign(), 'Y-m-d'),
+            'roles' => $user->getRoles()
+        );
+
+        return new Response(\json_encode($array), 200, array('Content-Type' => 'text/json'));
+    }
+
+    /**
+     * @Route("/{_locale}/admin/manage_roles/{new_role}/{user}", name="security_admin_manage_roles", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function manageUserRolesAction(string $new_role, User $user)
+    {
+        // We verify that what the user want to do isn't illegal.
+        if (\strtolower($new_role) == "admin" || $user->getRoles()[0] == "ROLE_ADMIN") {
+            $this->denyAccessUnlessGranted('ROLE_ROOT');
+        } else if (\strtolower($new_role) == "root" || $user->getRoles()[0] == "ROLE_ROOT") {
+            $this->denyAccessUnlessGranted('ROLE_OWNER');
+        } else if ($user->getRoles()[0] == "ROLE_OWNER") {
+            throw new AccessDeniedHttpException('Roles of ROLE_OWNER users CAN\'T be modified!');
+        } else if (\strtolower($new_role) == "owner") {
+            throw new AccessDeniedHttpException('You CAN\'T assign ROLE_OWNER to someone!');
+        }
+
+        if (!(\strtolower($new_role) == "user" || \strtolower($new_role) == "helper" || \strtolower($new_role) == "dev" || \strtolower($new_role) == "design" || \strtolower($new_role) == "trans" || \strtolower($new_role) == "mod" || \strtolower($new_role) == "admin" || \strtolower($new_role) == "root")) {
+            throw new NotFoundHttpException('Ehh, this role doesn\'t exist!');
+        }
+
+        // Converting root to ROLE_ROOT for example.
+        // We didn't pass ROLE_ROOT directly to router, for ergonomic reasons (it's easier to write).
+        $new_role = "ROLE_" . \strtoupper($new_role);
+
+        $user->setRoles(array($new_role));
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        return new Response('true');
     }
 
     /**

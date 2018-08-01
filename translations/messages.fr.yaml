@@ -28,7 +28,7 @@ alias: alias
 has_write: 'a écrit :'
 comment: Commenter
 has_comment: 'a commenté :'
-new_posts: 'nouveau(x) post(s) a/ont été envoyé(s)'
+new_posts_sent: 'nouveau(x) post(s) a/ont été envoyé(s)'
 scope: 'Portée des posts : '
 scope_world: Monde
 scope_friends: Amis
@@ -60,8 +60,9 @@ friends: Amis
 # User page
 # Page d'utilisateur
 
+user: Utilisateur
 about: À propos
-post: Statuts
+post: Posts
 photo: Photographies
 video: Vidéos
 files: Fichiers
@@ -74,10 +75,10 @@ are_friend: Vous êtes amis
 # Show and edit pages
 # Pages d'affichage et de modification
 
-show_post: Voir le statut
+show_post: Voir le post
 show_comment: Voir le commentaire
 edit: Modifier
-edit_post: Modifier le statut
+edit_post: Modifier le post
 edit_comment: Modifier le commentaire
 edit_user: Modifier l'utilisateur
 cancel: Annuler
@@ -92,6 +93,7 @@ choose: Choisir
 
 # Helper Area
 # Zone Assistance
+helper: Assistance
 helper_area: Zone Assistance
 questions_office: Bureau des questions
 ideas_office: Bureau des idées
@@ -100,6 +102,7 @@ submit_modif: Soumettre une modification
 
 # Developer Area
 # Zone Développeur
+dev: Développeur
 dev_area: Zone Développeur
 manage_profiler: Gérer le profiler
 source_code: Voir le code source
@@ -108,17 +111,20 @@ gitlab_interface: Interface GitLab
 
 # Designer Area
 # Zone Designer
+design: Designer
 design_area: Zone Designer
 manage_themes: Gérer les thèmes
 manage_css: Gérer le CSS
 
 # Translator Area
 # Zone Traducteur
+trans: Traducteur
 trans_area: Zone Traducteur
 manage_translations: Gérer les traductions
 
 # Moderator Area
 # Zone Modérateur
+mod: Modérateur
 mod_area: Zone Modérateur
 complaints_office: Bureau des plaintes
 investigations: Investigations
@@ -129,17 +135,38 @@ contact_administration: Contacter l'administration
 
 # Administrator Area
 # Zone Administrateur
+admin: Administrateur
 admin_area: Zone Administrateur
 manage_roles: Gérer les roles
 manage_authorization: Gérer les autorisations
 
 # Root Area
 # Zone Super Utilisateur
+root: Super Utilisateur
+owner: Propriétaire
 root_area: Zone Super Utilisateur
 edit_website: Modifier le site web
 statistics: Statistiques
-phpmyadmin_interface: Interface phpMyAdmin
+sql_interface: Interface SQL
 manage_policy: Gérer la politique
+show_version: Afficher la version
+image_type_png: 'Image de type png :'
+logo: Logo
+default_profile_picture: Photo de profile par défaut
+visits: Visiteurs
+requests: Requètes
+new_users: Nouveaux Utilisateurs
+new_posts: Nouveaux Posts
+new_comments: Nouveaux Commentaires
+day: Jour
+month: Mois
+year: Année
+user_id: L'ID de l'utilisateur
+his_roles: Son role
+number_of_posts: Nombre de Posts
+number_of_comments: Nombre de Commentaires
+number_of_friends: Nombre d'Amis
+date_sign_up: Date d'inscription
 
 ################################################################################
 

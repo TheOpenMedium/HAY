@@ -91,6 +91,9 @@ function filterPosts() {
     window.location = url
 }
 
+/**
+ * NOTE: There's a bug in this function, if you discovered the origin of the bug, please inform us (@see commented lines at the end)
+ */
 function recordAsDefault() {
     url_scope = "{{ url('settings_edit', {'setting': 'default_home_scope_filter', 'value': 'aaa'}) }}"
     url_scope = url_scope.replace("aaa", document.getElementById("scope").value)

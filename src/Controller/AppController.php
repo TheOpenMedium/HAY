@@ -60,7 +60,7 @@ class AppController extends Controller
 
     /**
      * Redirect to home page
-     * 
+     *
      * @Route("/{_locale}/", name="app_index", requirements={
      *     "_locale": "%app.locales%"
      * })

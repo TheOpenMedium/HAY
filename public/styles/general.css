@@ -50,3 +50,111 @@ a {
     float: right;
     cursor: pointer;
 }
+
+.tabContent {
+    display: none;
+    margin-left: 250px;
+    margin-top: -30px;
+    width: calc(100% - 250px);
+    padding: 50px;
+    color: white;
+    font-family: sans-serif;
+    grid-template-columns: 50% 50%;
+}
+
+.tabContent h1 {
+    border-bottom: 5px solid var(--hay-color);
+    grid-column: 1/3;
+}
+
+.tabContent h2 {
+    border-bottom: 5px solid var(--hay-color);
+}
+
+.tabContent textarea {
+    resize: none;
+    background-color: var(--gray-dark);
+    border: 1px solid var(--gray-color);
+    color: white;
+}
+
+.tabContent label {
+    text-align: center;
+    cursor: pointer;
+}
+
+.tabContent label input {
+    cursor: pointer;
+}
+
+.criteria {
+    background-color: var(--hay-color);
+    color: white;
+    font-family: sans-serif;
+    grid-column: 1/3;
+    padding: 5px;
+}
+
+#manage_authorization .criteria a {
+    flex-grow: 1;
+    text-align: center;
+}
+
+#stat_img {
+    grid-column: 1/3;
+    margin: auto;
+    height: 55vh;
+}
+
+.userRolesShow {
+    display: grid;
+    grid-template-columns: 150px auto;
+    grid-gap: 10px
+}
+
+.user#userRoles, .criteria .user {
+    background-color: var(--hay-color);
+}
+
+.helper#userRoles, .criteria .helper {
+    background-color: green;
+}
+
+.dev#userRoles, .criteria .dev {
+    background-color: yellowgreen;
+}
+
+.design#userRoles, .criteria .design {
+    background-color: dodgerblue;
+}
+
+.trans#userRoles, .criteria .trans {
+    background-color: magenta;
+}
+
+.mod#userRoles, .criteria .mod {
+    background-color: orange;
+}
+
+.admin#userRoles, .criteria .admin {
+    background-color: red;
+}
+
+.root#userRoles, .criteria .root {
+    background-color: blueviolet;
+}
+
+.owner#userRoles {
+    background-color: black;
+}
+
+.criteria a[onclick^="openSubTab('"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.subTabContent {
+    display: none;
+    grid-column: 1/3;
+}
