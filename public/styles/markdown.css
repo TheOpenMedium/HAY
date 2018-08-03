@@ -1,0 +1,8 @@
+.markdown {
+    color: white;
+    font-family: sans-serif;
+}
+
+.markdown h1 {
+    border-bottom: 5px solid var(--hay-color);
+}

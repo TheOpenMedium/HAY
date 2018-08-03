@@ -140,6 +140,11 @@ class User implements UserInterface, \Serializable
      */
     private $roles;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Laws", mappedBy="user")
+     */
+    private $laws;
+
     public function __construct()
     {
         $this->date_sign = new \Datetime();
@@ -154,6 +159,7 @@ class User implements UserInterface, \Serializable
         $this->url = '/ressources/icon.svg';
         $this->alt = 'Profile picture';
         $this->roles = array('ROLE_USER');
+        $this->laws = new ArrayCollection();
     }
 
     public function getId()
@@ -555,6 +561,37 @@ class User implements UserInterface, \Serializable
     {
         if (in_array($role, $this->roles)) {
             array_splice($this->roles, array_search($role, $this->roles), 1);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Laws[]
+     */
+    public function getLaws(): Collection
+    {
+        return $this->laws;
+    }
+
+    public function addLaw(Laws $law): self
+    {
+        if (!$this->laws->contains($law)) {
+            $this->laws[] = $law;
+            $law->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLaw(Laws $law): self
+    {
+        if ($this->laws->contains($law)) {
+            $this->laws->removeElement($law);
+            // set the owning side to null (unless already changed)
+            if ($law->getUser() === $this) {
+                $law->setUser(null);
+            }
         }
 
         return $this;

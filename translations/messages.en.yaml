@@ -80,6 +80,12 @@ conf_password: Your previous password
 alt: Brief description of user's picture
 choose: Choose
 
+# Laws
+
+preview: Preview
+title: Title
+new_laws: New laws
+
 ################################################################################
 
 # Security Areas

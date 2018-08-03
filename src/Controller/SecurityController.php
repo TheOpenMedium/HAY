@@ -105,7 +105,7 @@ class SecurityController extends Controller
 
             $yaml['twig']['globals']['is_version_displayed'] = $datas['version'];
             $fp = \fopen(__dir__.'/../../config/packages/twig.yaml', 'w');
-            \fwrite($fp, Yaml::dump($yaml, 2));
+            \fwrite($fp, Yaml::dump($yaml));
         }
 
         return $this->render('security/root.html.twig', array(

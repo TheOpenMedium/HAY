@@ -86,6 +86,13 @@ conf_password: Votre ancient mot de passe
 alt: Courte description de la photo de profile
 choose: Choisir
 
+# Laws
+# Lois
+
+preview: Aperçu
+title: Titre
+new_laws: Nouvelles lois
+
 ################################################################################
 
 # Security Areas
