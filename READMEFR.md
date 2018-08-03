@@ -6,6 +6,7 @@
 > You can read this file in english [here](https://github.com/TheOpenMedium/HAY/blob/master/README.md)!
 
 > إن كانت لغتكم العربيّة، إعلموا أنّ ترجمة لهذا النّص ستكون متوفّرة قريبا
+
 ## Qu'est-ce que c'est HAY ?
 ![User](https://github.com/TheOpenMedium/HAY/raw/master/public/screenshots/User.png)HAY est un acronyme de "How Are You" qui signifie en français "Comment allez-vous ?". Mais c'est avant tout un réseau social
 libre (Open Source) qui respecte votre vie privée et qui ne vous espionne pas. Ce site web fait partie du projet The Open Medium.
@@ -22,7 +23,9 @@ Source et nous voulont créer un meilleur internet pour tout le monde.
 Tout le monde peut contribuer à ce projet en proposant des idées ou des fonctionnalités et en reportant des bugs.
 * Si vous savez programmer, vous pouvez nous proposez des modifications grâce à une "pull request"
 * Sinon, vous pouvez simplement ouvrir une "issue"
+
 > PS: Vous pouvez nous proposer du code comme des dessins ou des illustrations !
+
 ## À faire
 
 * Faire marcher Doctrine
@@ -49,5 +52,6 @@ Tout le monde peut contribuer à ce projet en proposant des idées ou des foncti
 
 ### Quel est le sens de la vie ?
 > À droite !
+
 ----------
 > Si vous avez d'autres questions, posez-les dans la section "issue"

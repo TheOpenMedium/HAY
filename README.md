@@ -8,6 +8,7 @@
 > إن كانت لغتكم العربيّة، إعلموا أنّ ترجمة لهذا النّص ستكون متوفّرة قريبا
 
 > Our mother tongue is not English. If you found a grammar mistake, please open an issue.
+
 ## What's HAY?
 ![User](https://github.com/TheOpenMedium/HAY/raw/master/public/screenshots/User.png)
 HAY is an acronym of "How Are You". It's also an Open Source social media that respect your privacy and doesn't track you! It's
@@ -25,7 +26,9 @@ want to create a better internet for everyone.
 Anyone an contribute to this project by suggesting ideas or code or reporting a bug in GitHub.
 * If you know coding, you can suggest code in the pull request section
 * Else, you can simply open an issue
+
 > Note: You can suggest code or picture/draws
+
 ## To Do
 
 * Making Doctrine works
@@ -51,5 +54,6 @@ Anyone an contribute to this project by suggesting ideas or code or reporting a 
 
 ### What's the meaning of life?
 > 42!
+
 ----------
 > If you have another question, please open an issue!
