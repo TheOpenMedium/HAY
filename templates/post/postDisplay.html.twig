@@ -15,11 +15,11 @@
         <div style="display: flex; padding: calc(5px * var(--length-multiplication)); cursor: default; padding-top: calc(2.5px * var(--length-multiplication)); grid-row: 1; -ms-grid-row: 1; justify-content: center;">
             {% if app.user %}
             {% if post.user.id == app.user.id %}
-                <a class="icofont icofont-ui-delete fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_delete', {'id': post.id}) }}"></a>
-                <a class="icofont icofont-pencil-alt-2 fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_edit', {'id': post.id}) }}"></a>
+                <a class="icofont fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_delete', {'id': post.id}) }}">ui_delete</a>
+                <a class="icofont fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_edit', {'id': post.id}) }}">pencil_alt_2</a>
             {% endif %}
             {% endif %}
-            <i class="icofont icofont-navigation-menu fs16"></i>
+            <i class="icofont fs16">navigation_menu</i>
         </div>
         <div style="text-align: center; grid-row: 2; -ms-grid-row: 2; font-size: calc(8px * var(--length-multiplication)); margin: 0px calc(5px * var(--length-multiplication));">
             {{ post.datePost|date('date_format'|trans) }}
@@ -47,11 +47,11 @@
                 <div style="display: flex; padding: calc(5px * var(--length-multiplication)); cursor: default; padding-top: calc(2.5px * var(--length-multiplication)); grid-row: 1; -ms-grid-row: 1; justify-content: center;">
                     {% if app.user %}
                     {% if comment.user.id == app.user.id %}
-                        <a class="icofont icofont-ui-delete fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: grey;" href="{{ url('comment_delete', {'id': comment.id}) }}"></a>
-                        <a class="icofont icofont-pencil-alt-2 fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: grey;" href="{{ url('comment_edit', {'id': comment.id}) }}"></a>
+                        <a class="icofont fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: grey;" href="{{ url('comment_delete', {'id': comment.id}) }}">ui_delete</a>
+                        <a class="icofont fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: grey;" href="{{ url('comment_edit', {'id': comment.id}) }}">pencil_alt_2</a>
                     {% endif %}
                     {% endif %}
-                    <i class="icofont icofont-navigation-menu fs16" style="color: grey;"></i>
+                    <i class="icofont fs16" style="color: grey;">navigation_menu</i>
                 </div>
                 <div style="text-align: center; grid-row: 2; -ms-grid-row: 2; font-size: calc(8px * var(--length-multiplication)); color: grey; margin: 0px calc(5px * var(--length-multiplication));">
                     {{ comment.dateSend|date('date_format'|trans) }}

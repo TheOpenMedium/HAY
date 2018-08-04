@@ -12,7 +12,7 @@
     {{ form_start(comment, {'attr': {'class': 'comment', 'style': 'margin: auto;'}}) }}
     <table>
         <tr>
-            <td><label for="form_submit" class="sendCom"><i class="icofont icofont-comment"></i></label>{{ form_widget(comment.submit, {'attr': {'style': 'display: none;'}}) }}</td>
+            <td><label for="form_submit" class="sendCom"><i class="icofont">comment</i></label>{{ form_widget(comment.submit, {'attr': {'style': 'display: none;'}}) }}</td>
             <td>{{ form_widget(comment.comment, {'attr': {'class': 'taCom', 'placeholder': 'comment'|trans, 'required': false}}) }}</td>
         </tr>
     </table>

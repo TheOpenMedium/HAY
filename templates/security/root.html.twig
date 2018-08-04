@@ -7,13 +7,13 @@
 {% block body %}
 {{ include("menu.html.twig") }}
 <div class="userMenu fs16 ffSS">
-    <a href="#" onclick="openTab('edit_website')">{{ 'edit_website'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
-    <a href="#" onclick="openTab('statistics')">{{ 'statistics'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
-    <a href="#" onclick="openTab('manage_roles')">{{ 'manage_roles'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
-    <a href="#" onclick="openTab('manage_authorization')" style="background-color: yellow; color: black;">{{ 'manage_authorization'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
-    <a href="#" onclick="openTab('manage_laws')" style="background-color: yellow; color: black;">{{ 'manage_laws'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
-    <a href="#" onclick="openTab('sql_interface')" style="background-color: yellow; color: black;">{{ 'sql_interface'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
-    <a href="#" onclick="openTab('manage_policy')">{{ 'manage_policy'|trans }}<i class="icofont icofont-thin-double-right"></i></a>
+    <a href="#" onclick="openTab('edit_website')">{{ 'edit_website'|trans }}<i class="icofont">thin_double_right</i></a>
+    <a href="#" onclick="openTab('statistics')">{{ 'statistics'|trans }}<i class="icofont">thin_double_right</i></a>
+    <a href="#" onclick="openTab('manage_roles')">{{ 'manage_roles'|trans }}<i class="icofont">thin_double_right</i></a>
+    <a href="#" onclick="openTab('manage_authorization')" style="background-color: yellow; color: black;">{{ 'manage_authorization'|trans }}<i class="icofont">thin_double_right</i></a>
+    <a href="#" onclick="openTab('manage_laws')">{{ 'manage_laws'|trans }}<i class="icofont">thin_double_right</i></a>
+    <a href="#" onclick="openTab('sql_interface')" style="background-color: yellow; color: black;">{{ 'sql_interface'|trans }}<i class="icofont">thin_double_right</i></a>
+    <a href="#" onclick="openTab('manage_policy')">{{ 'manage_policy'|trans }}<i class="icofont">thin_double_right</i></a>
 </div>
 
 {{ form_start(form) }}
@@ -66,7 +66,7 @@
     <div>
         <div style="height: 50px;">
             <input class="search" style="width: calc(100% - 53px);" type="search" placeholder="{{ 'user_id'|trans }}" id="userSearch" />
-            <button class="confirm" type="button" onclick="searchUserById()"><i class="icofont icofont-search-alt-2"></i></button>
+            <button class="confirm" type="button" onclick="searchUserById()"><i class="icofont">search</i></button>
         </div>
         <div class="userRolesShow fs20">
             <img id="userImg" src="/ressources/icon.svg" height="150px" width="150px" />
@@ -91,7 +91,7 @@
                 {% if is_granted('ROLE_ROOT') %}<option value="admin">{{ 'admin'|trans }}</option>{% endif %}
                 {% if is_granted('ROLE_OWNER') %}<option value="root">{{ 'root'|trans }}</option>{% endif %}
             </select>
-            <button type="button" style="border: 0; background-color: blue; color: white; cursor: pointer;" onclick="changeUserRole()"><i class="icofont icofont-arrow-right"></i></button>
+            <button type="button" style="border: 0; background-color: blue; color: white; cursor: pointer;" onclick="changeUserRole()"><i class="icofont">arrow_right</i></button>
         </div>
     </div>
     <script>
@@ -247,6 +247,9 @@
 </div>
 <div class="tabContent" id="manage_laws">
     <h1>{{ 'manage_laws'|trans }}</h1>
+    <div>
+        //
+    </div>
 </div>
 <div class="tabContent" id="sql_interface">
     <h1>{{ 'phpmyadmin_interface'|trans }}</h1>
