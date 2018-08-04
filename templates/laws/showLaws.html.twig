@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'see_laws'|trans }}{% endblock %}
+
+{% block body %}
+{{ include("menu.html.twig") }}
+
+<span style="color: white; font-family: sans-serif; margin: 0px 50px; display: grid; grid-template-columns: auto fit-content(100%); grid-gap: 30px;">
+    <h1 style="border-bottom: 5px solid var(--hay-color);">{{ 'see_laws'|trans }}</h1>
+    {% if is_granted('ROLE_ADMIN') %}<a class="icofont" href="{{ url('laws_new') }}" style="display: flex; font-size: 2em; justify-content: center; align-items: center;">ui_add</a>{% endif %}
+</span>
+
+<div class="lawsList">
+    {% for laws in lawsList %}
+        <div class="laws">
+            <div class="lawsName">
+                <span>{{ laws.id }}- {{ laws.date|date('Y-m-d') }} {{ laws.title }}</span>
+                <span>{% if is_granted('ROLE_ADMIN') %}<i class="icofont">ui_delete</i> <i class="icofont">pencil_alt_2</i> {% endif %}<i class="icofont" onclick="showLaws(this, {{ laws.id }});" style="cursor: pointer;">thin_right</i></span>
+            </div>
+            <div class="markdown" id="{{ laws.id }}" style="display: none; padding: 10px;">
+                {{ laws.content|raw }}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<script>
+    function showLaws(e, id) {
+        markdown = document.getElementById(id)
+
+        if (markdown.style.display == "none") {
+            markdown.style.display = "block"
+            e.className = "icofont icofont-rotate-90"
+        } else {
+            markdown.style.display = "none"
+            e.className = "icofont"
+        }
+    }
+</script>
+{% endblock %}

@@ -32,7 +32,7 @@ class Laws
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="laws")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="laws")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

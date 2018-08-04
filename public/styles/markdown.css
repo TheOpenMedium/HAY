@@ -1,6 +1,7 @@
 .markdown {
     color: white;
     font-family: sans-serif;
+    word-wrap: break-word;
 }
 
 .markdown h1 {

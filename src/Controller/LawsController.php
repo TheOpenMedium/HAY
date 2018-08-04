@@ -13,6 +13,29 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class LawsController extends Controller
 {
     /**
+     * Show all laws
+     *
+     * @Route("/{_locale}/show/laws", name="laws", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function showLawsAction()
+    {
+        $parsedown = new \Parsedown();
+        $parsedown->setSafeMode(true);
+
+        $lawsList = $this->getDoctrine()->getRepository(Laws::class)->findAll();
+
+        foreach ($lawsList as $laws) {
+            $laws->setContent($parsedown->text($laws->getContent()));
+        }
+
+        return $this->render('laws/showLaws.html.twig', array(
+            'lawsList' => $lawsList
+        ));
+    }
+
+    /**
      * Create new laws
      *
      * @Route("/{_locale}/admin/new/laws", name="laws_new", requirements={

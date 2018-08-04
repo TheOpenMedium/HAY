@@ -158,3 +158,23 @@ a {
     display: none;
     grid-column: 1/3;
 }
+
+.lawsList {
+    margin: 50px;
+}
+
+.laws {
+    margin: 10px;
+    color: white;
+    font-family: sans-serif;
+    border-radius: 5px;
+    background-color: var(--gray-color);
+}
+
+.lawsName {
+    display: grid;
+    grid-template-columns: auto fit-content(100%);
+    border-radius: 5px;
+    background-color: dimgrey;
+    padding: 25px;
+}
