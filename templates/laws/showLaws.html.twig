@@ -15,7 +15,13 @@
         <div class="laws">
             <div class="lawsName">
                 <span>{{ laws.id }}- {{ laws.date|date('Y-m-d') }} {{ laws.title }}</span>
-                <span>{% if is_granted('ROLE_ADMIN') %}<i class="icofont">ui_delete</i> <i class="icofont">pencil_alt_2</i> {% endif %}<i class="icofont" onclick="showLaws(this, {{ laws.id }});" style="cursor: pointer;">thin_right</i></span>
+                <span>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a class="icofont" href="{{ url('laws_delete', {'laws': laws.id}) }}">ui_delete</a>
+                    <a class="icofont" href="{{ url('laws_edit', {'laws': laws.id}) }}">pencil_alt_2</a>
+                    {% endif %}
+                    <i class="icofont" onclick="showLaws(this, {{ laws.id }});" style="cursor: pointer;">thin_right</i>
+                </span>
             </div>
             <div class="markdown" id="{{ laws.id }}" style="display: none; padding: 10px;">
                 {{ laws.content|raw }}

@@ -63,20 +63,12 @@ class PostController extends Controller
      *     "_locale": "%app.locales%"
      * })
      */
-    public function postEditAction(Request $request, Post $postEdit)
+    public function postEditAction(Request $request, Post $post)
     {
         $user = $this->getUser();
 
         // Checking that the author and the user are the same.
-        if ($postEdit->getUser()->getId() == $user->getId()) {
-            $post = new Post();
-
-            // Adding last values as default.
-            $post->setContent($postEdit->getContent());
-            $post->setColor($postEdit->getColor());
-            $post->setSize($postEdit->getSize());
-            $post->setFont($postEdit->getFont());
-
+        if ($post->getUser()->getId() == $user->getId()) {
             // Creating the form.
             $form = $this->createFormBuilder($post)
                 ->add('content', TextareaType::class)
@@ -100,15 +92,8 @@ class PostController extends Controller
             // If a post was edited, we retrieve data.
             if ($form->isSubmitted() && $form->isValid()) {
                 $post = $form->getData();
-                $post->setFont('SS');
 
                 $em = $this->getDoctrine()->getManager();
-
-                // We replace old datas.
-                $postEdit->setContent($post->getContent());
-                $postEdit->setColor($post->getColor());
-                $postEdit->setSize($post->getSize());
-                $postEdit->setFont($post->getFont());
 
                 // And finaly, we save changes.
                 $em->flush();
@@ -117,8 +102,8 @@ class PostController extends Controller
                 return $this->redirectToRoute('app_home');
             }
 
-            $color = $postEdit->getColor();
-            $size = $postEdit->getSize();
+            $color = $post->getColor();
+            $size = $post->getSize();
 
             // All that is rendered with the post edit template sending a From and the default Color and Size.
             return $this->render('post/editPost.html.twig', array(

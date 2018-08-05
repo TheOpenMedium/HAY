@@ -63,11 +63,59 @@ class LawsController extends Controller
             $em->persist($laws);
             $em->flush();
 
-            return $this->redirectToRoute('app_index');
+            return $this->redirectToRoute('laws');
         }
 
         return $this->render('laws/newLaws.html.twig', array(
             'form' => $form->createView()
         ));
+    }
+
+    /**
+     * Edit laws
+     *
+     * @Route("/{_locale}/admin/edit/laws/{laws}", name="laws_edit", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function editLawsAction(Request $request, Laws $laws)
+    {
+        $form = $this->createFormBuilder($laws)
+        ->add('title', TextType::class)
+        ->add('content', TextareaType::class)
+        ->add('submit', SubmitType::class)
+        ->getForm();
+
+        $form->handleRequest($request);
+
+        // If he send Laws, the Laws are saved into database.
+        if ($form->isSubmitted() && $form->isValid()) {
+            $laws = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirectToRoute('laws');
+        }
+
+        return $this->render('laws/newLaws.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * Delete laws
+     *
+     * @Route("/{_locale}/admin/delete/laws/{laws}", name="laws_delete", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function deleteLawsAction(Laws $laws)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($laws);
+        $em->flush();
+
+        return $this->redirectToRoute('laws');
     }
 }

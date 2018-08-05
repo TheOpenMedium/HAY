@@ -115,17 +115,12 @@ class CommentController extends Controller
      *     "_locale": "%app.locales%"
      * })
      */
-    public function commentEditAction(Request $request, Comment $commentEdit)
+    public function commentEditAction(Request $request, Comment $comment)
     {
         $user = $this->getUser();
 
         // Checking that the author and the user are the same.
-        if ($commentEdit->getUser()->getId() == $user->getId()) {
-            $comment = new Comment();
-
-            // Adding last values as default.
-            $comment->setComment($commentEdit->getComment());
-
+        if ($comment->getUser()->getId() == $user->getId()) {
             // Creating a Form to edit comment.
             $form = $this->createFormBuilder($comment)
                 ->add('comment', TextareaType::class)
@@ -139,9 +134,6 @@ class CommentController extends Controller
                 $comment = $form->getData();
 
                 $em = $this->getDoctrine()->getManager();
-
-                // And the comment is edited.
-                $commentEdit->setComment($comment->getComment());
 
                 $em->flush();
 
