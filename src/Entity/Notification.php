@@ -69,6 +69,25 @@ class Notification
         $this->date_send = new \Datetime();
     }
 
+    public function __toString() {
+        return 'Notification: '.$this->id.' | ['.$this->user.'] '.$this->type;
+    }
+
+    public function browse()
+    {
+        $result = array();
+
+        foreach ($this as $key => $value) {
+            if ($value) {
+                $result[$key] = $value;
+            } else {
+                $result[$key] = 'NULL';
+            }
+        }
+
+        return $result;
+    }
+
     public function getId()
     {
         return $this->id;

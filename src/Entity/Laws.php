@@ -5,6 +5,15 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Laws Entity
+ *
+ * List of column:
+ * * id
+ * * date
+ * * title
+ * * content
+ * * user
+ *
  * @ORM\Entity(repositoryClass="App\Repository\LawsRepository")
  */
 class Laws
@@ -40,6 +49,29 @@ class Laws
     public function __construct()
     {
         $this->date = new \Datetime();
+    }
+
+    public function __toString() {
+        $temp = $this->title;
+        if (strlen($temp) > 10) {
+            $temp = substr($temp, 0, 7) . '...';
+        }
+        return 'Laws: '.$this->id.' | ['.$this->user.'] '.$temp;
+    }
+
+    public function browse()
+    {
+        $result = array();
+
+        foreach ($this as $key => $value) {
+            if ($value) {
+                $result[$key] = $value;
+            } else {
+                $result[$key] = 'NULL';
+            }
+        }
+
+        return $result;
     }
 
     public function getId()

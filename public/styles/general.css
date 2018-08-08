@@ -178,3 +178,10 @@ a {
     background-color: dimgrey;
     padding: 25px;
 }
+
+a[id^="sql_"] {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

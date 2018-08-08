@@ -12,7 +12,7 @@
     <a href="#" onclick="openTab('manage_roles')">{{ 'manage_roles'|trans }}<i class="icofont">thin_double_right</i></a>
     <a href="#" onclick="openTab('manage_authorization')" style="background-color: yellow; color: black;">{{ 'manage_authorization'|trans }}<i class="icofont">thin_double_right</i></a>
     <a href="#" onclick="openTab('manage_laws')">{{ 'manage_laws'|trans }}<i class="icofont">thin_double_right</i></a>
-    <a href="#" onclick="openTab('sql_interface')" style="background-color: yellow; color: black;">{{ 'sql_interface'|trans }}<i class="icofont">thin_double_right</i></a>
+    <a href="#" onclick="openTab('sql_interface')">{{ 'sql_interface'|trans }}<i class="icofont">thin_double_right</i></a>
     <a href="#" onclick="openTab('manage_policy')">{{ 'manage_policy'|trans }}<i class="icofont">thin_double_right</i></a>
 </div>
 
@@ -247,12 +247,17 @@
 </div>
 <div class="tabContent" id="manage_laws">
     <h1>{{ 'manage_laws'|trans }}</h1>
-    <div>
-        //
+    <div style="display: flex; height: 50vh; width: 100%; grid-column: 1/3;">
+        <a class="fs40" style="margin: auto; background-color: var(--hay-color); border-radius: 50px; padding: 20px;" href="{{ url('laws') }}">{{ 'see_laws'|trans }}</a>
     </div>
 </div>
 <div class="tabContent" id="sql_interface">
-    <h1>{{ 'phpmyadmin_interface'|trans }}</h1>
+    <h1 style="margin-bottom: 0;">{{ 'sql_interface'|trans }}</h1>
+    <div class="criteria" style="display: flex; padding: 0px; height: 40px;">
+        {% for entity in entities %}
+            <a href="#" id="sql_{{ entity|lower }}" onclick="showSQLTable('{{ entity|lower }}')"><span>{{ entity }}</span></a>
+        {% endfor %}
+    </div>
 </div>
 <div class="tabContent" id="manage_policy" style="grid-template-rows: auto auto 500px auto 500px auto;">
     <h1>{{ 'manage_policy'|trans }}</h1>

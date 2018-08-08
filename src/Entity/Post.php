@@ -72,6 +72,29 @@ class Post
         $this->comments = new ArrayCollection();
     }
 
+    public function __toString() {
+        $temp = $this->content;
+        if (strlen($temp) > 10) {
+            $temp = substr($temp, 0, 7) . '...';
+        }
+        return 'Post: '.$this->id.' | ['.$this->user.'] '.$temp;
+    }
+
+    public function browse()
+    {
+        $result = array();
+
+        foreach ($this as $key => $value) {
+            if ($value) {
+                $result[$key] = $value;
+            } else {
+                $result[$key] = 'NULL';
+            }
+        }
+
+        return $result;
+    }
+
     public function getId()
     {
         return $this->id;

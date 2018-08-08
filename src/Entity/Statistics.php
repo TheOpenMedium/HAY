@@ -5,6 +5,17 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Statistics Entity
+ *
+ * List of column:
+ * * id
+ * * date
+ * * visits
+ * * requests
+ * * new_users
+ * * new_posts
+ * * new_comments
+ *
  * @ORM\Entity(repositoryClass="App\Repository\StatisticsRepository")
  */
 class Statistics
@@ -54,6 +65,25 @@ class Statistics
         $this->new_users = 0;
         $this->new_posts = 0;
         $this->new_comments = 0;
+    }
+
+    public function __toString() {
+        return 'Statistics: '.$this->id.' | '.date_format($this->date, 'Y-m-d');
+    }
+
+    public function browse()
+    {
+        $result = array();
+
+        foreach ($this as $key => $value) {
+            if ($value) {
+                $result[$key] = $value;
+            } else {
+                $result[$key] = 'NULL';
+            }
+        }
+
+        return $result;
     }
 
     public function getId()

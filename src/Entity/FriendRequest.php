@@ -35,6 +35,25 @@ class FriendRequest
      */
     private $to_user;
 
+    public function __toString() {
+        return 'FriendRequest: '.$this->id.' | ['.$this->from_user.'] => ['.$this->to_user.']';
+    }
+
+    public function browse()
+    {
+        $result = array();
+
+        foreach ($this as $key => $value) {
+            if ($value) {
+                $result[$key] = $value;
+            } else {
+                $result[$key] = 'NULL';
+            }
+        }
+
+        return $result;
+    }
+
     public function getId()
     {
         return $this->id;

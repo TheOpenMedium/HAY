@@ -3,6 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Post;
+use App\Entity\Comment;
+use App\Entity\Notification;
+use App\Entity\FriendRequest;
+use App\Entity\Statistics;
+use App\Entity\Laws;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,6 +31,26 @@ class SecurityController extends Controller
     public function rootAction(Request $request)
     {
         $yaml = Yaml::parseFile(__dir__.'/../../config/packages/twig.yaml');
+
+        // If you found another file that should be excluded, please open an issue
+        $entities = array_diff(
+            scandir(__dir__.'/../Entity'),
+            array(
+                '..',
+                '.',
+                '.gitignore',
+                '.DS_Store',
+                '.DS_Store?',
+                '.Spotlight-V100',
+                '.Trashes',
+                'ehthumbs.db',
+                'Thumbs.db'
+            )
+        );
+
+        foreach ($entities as $entitykey => $entity) {
+            $entities[$entitykey] = substr($entity, 0, -4);
+        }
 
         $license = \fopen(__dir__.'/../../LICENSE', 'r');
         $privacy_policy = \fopen(__dir__.'/../../public/policies/PRIVACY_POLICY.txt', 'r');
@@ -109,8 +135,111 @@ class SecurityController extends Controller
         }
 
         return $this->render('security/root.html.twig', array(
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'entities' => $entities
         ));
+    }
+
+    /**
+     * @Route("/{_locale}/root/sql/{entity}/{max}/{page}", name="security_root_sql", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function sqlAction(string $entity, int $max = 10, int $page = 1)
+    {
+        if ($entity == "user") {
+            $entities = $this->getDoctrine()->getRepository(User::class)->findBy(
+                array(),
+                array(),
+                $max,
+                0
+            );
+        } elseif ($entity == "post") {
+            $entities = $this->getDoctrine()->getRepository(Post::class)->findBy(
+                array(),
+                array(),
+                $max,
+                0
+            );
+        } elseif ($entity == "comment") {
+            $entities = $this->getDoctrine()->getRepository(Comment::class)->findBy(
+                array(),
+                array(),
+                $max,
+                0
+            );
+        } elseif ($entity == "notification") {
+            $entities = $this->getDoctrine()->getRepository(Notification::class)->findBy(
+                array(),
+                array(),
+                $max,
+                0
+            );
+        } elseif ($entity == "friendrequest") {
+            $entities = $this->getDoctrine()->getRepository(FriendRequest::class)->findBy(
+                array(),
+                array(),
+                $max,
+                0
+            );
+        } elseif ($entity == "statistics") {
+            $entities = $this->getDoctrine()->getRepository(Statistics::class)->findBy(
+                array(),
+                array(),
+                $max,
+                0
+            );
+        } elseif ($entity == "laws") {
+            $entities = $this->getDoctrine()->getRepository(Laws::class)->findBy(
+                array(),
+                array(),
+                $max,
+                0
+            );
+        } else {
+            throw new \Exception('Sorry, but this entity doesn\'t exist.');
+        }
+
+        $response = 'There is no entity.';
+
+        if ($entities) {
+            $response = '<table>';
+            // Table Head
+            $response .= '<tr>';
+            foreach ($entities[0]->browse() as $entitykey => $entityvalue) {
+                $response .= '<th>' . $entitykey . '</th>';
+            }
+            $response .= '</tr>';
+            // Entities
+            foreach ($entities as $entityvalue) {
+                $response .= '<tr>';
+                    foreach ($entityvalue->browse() as $value) {
+                        if ($value instanceof \DateTime) {
+                            $response .= '<td>' . \date_format($value, 'Y-m-d') . '</td>';
+                        } elseif ($value instanceof \Doctrine\ORM\PersistentCollection || is_array($value)) {
+                            $notempty = false;
+                            $response .= '<td>[';
+                            foreach ($value as $subvalue) {
+                                $response .= '\'' . $subvalue . '\', ';
+                                $notempty = true;
+                            }
+                            if ($notempty) {
+                                $response = substr($response, 0, -2);
+                                $response .= ']</td>';
+                            } else {
+                                $response = substr($response, 0, -1);
+                                $response .= 'NULL</td>';
+                            }
+                        } else {
+                            $response .= '<td>' . $value . '</td>';
+                        }
+                    }
+                $response .= '</tr>';
+            }
+            $response .= '</table>';
+        }
+
+        return new Response($response);
     }
 
     /**

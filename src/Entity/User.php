@@ -29,6 +29,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * * url
  * * alt
  * * settings
+ * * roles
+ * * laws
  *
  * List of extra variables:
  * * rememberme
@@ -160,6 +162,27 @@ class User implements UserInterface, \Serializable
         $this->alt = 'Profile picture';
         $this->roles = array('ROLE_USER');
         $this->laws = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return 'User: '.$this->id.' | '.$this->first_name.' '.$this->last_name;
+    }
+
+    public function browse()
+    {
+        $result = array();
+
+        foreach ($this as $key => $value) {
+            if ($key != 'password' && $key != 'rememberme' && $key != 'salt' && $key != 'conf_password' && $key != 'file') {
+                if ($value) {
+                    $result[$key] = $value;
+                } else {
+                    $result[$key] = 'NULL';
+                }
+            }
+        }
+
+        return $result;
     }
 
     public function getId()
