@@ -85,7 +85,7 @@ class Post
         $result = array();
 
         foreach ($this as $key => $value) {
-            if ($value) {
+            if ($value !== NULL) {
                 $result[$key] = $value;
             } else {
                 $result[$key] = 'NULL';

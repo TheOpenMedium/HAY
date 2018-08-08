@@ -174,8 +174,14 @@ class User implements UserInterface, \Serializable
 
         foreach ($this as $key => $value) {
             if ($key != 'password' && $key != 'rememberme' && $key != 'salt' && $key != 'conf_password' && $key != 'file') {
-                if ($value) {
+                if ($value !== NULL && $key != 'mail_conf') {
                     $result[$key] = $value;
+                } elseif ($key == 'mail_conf') {
+                    if ($value) {
+                        $result[$key] = 'true';
+                    } else {
+                        $result[$key] = 'false';
+                    }
                 } else {
                     $result[$key] = 'NULL';
                 }

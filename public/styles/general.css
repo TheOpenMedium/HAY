@@ -185,3 +185,20 @@ a[id^="sql_"] {
     justify-content: center;
     align-items: center;
 }
+
+#sql_table {
+    margin-top: 5px;
+}
+
+#sql_table th {
+    background-color: #55FF99;
+}
+
+#sql_table table, #sql_table td {
+    border: 1px solid #55FF99;
+    border-collapse: collapse;
+}
+
+#sql_table th {
+    border: 1px solid white;
+}
