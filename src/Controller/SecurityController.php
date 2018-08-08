@@ -215,23 +215,23 @@ class SecurityController extends Controller
                 $response .= '<tr>';
                     foreach ($entityvalue->browse() as $value) {
                         if ($value instanceof \DateTime) {
-                            $response .= '<td>' . \date_format($value, 'Y-m-d') . '</td>';
+                            $response .= '<td><div>' . \date_format($value, 'Y-m-d') . '</div></td>';
                         } elseif ($value instanceof \Doctrine\ORM\PersistentCollection || is_array($value)) {
                             $notempty = false;
-                            $response .= '<td>[';
+                            $response .= '<td><div>[';
                             foreach ($value as $subvalue) {
                                 $response .= '\'' . $subvalue . '\', ';
                                 $notempty = true;
                             }
                             if ($notempty) {
                                 $response = substr($response, 0, -2);
-                                $response .= ']</td>';
+                                $response .= ']</div></td>';
                             } else {
                                 $response = substr($response, 0, -1);
-                                $response .= 'NULL</td>';
+                                $response .= 'NULL</div></td>';
                             }
                         } else {
-                            $response .= '<td>' . $value . '</td>';
+                            $response .= '<td><div>' . $value . '</div></td>';
                         }
                     }
                 $response .= '</tr>';

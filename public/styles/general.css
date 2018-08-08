@@ -202,3 +202,8 @@ a[id^="sql_"] {
 #sql_table th {
     border: 1px solid white;
 }
+
+#sql_table td div {
+    max-width: 500px;
+    overflow-x: auto;
+}
