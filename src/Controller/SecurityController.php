@@ -9,6 +9,7 @@ use App\Entity\Notification;
 use App\Entity\FriendRequest;
 use App\Entity\Statistics;
 use App\Entity\Laws;
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -141,64 +142,35 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/root/sql/{entity}/{max}/{page}", name="security_root_sql", requirements={
+     * @Route("/{_locale}/root/sql/{entity}/{max}/{first}", name="security_root_sql", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
-    public function sqlAction(string $entity, int $max = 10, int $page = 1)
+    public function sqlAction(string $entity, int $max = 10, int $first = 1)
     {
         if ($entity == "user") {
-            $entities = $this->getDoctrine()->getRepository(User::class)->findBy(
-                array(),
-                array(),
-                $max,
-                0
-            );
+            $repo = $this->getDoctrine()->getRepository(User::class);
         } elseif ($entity == "post") {
-            $entities = $this->getDoctrine()->getRepository(Post::class)->findBy(
-                array(),
-                array(),
-                $max,
-                0
-            );
+            $repo = $this->getDoctrine()->getRepository(Post::class);
         } elseif ($entity == "comment") {
-            $entities = $this->getDoctrine()->getRepository(Comment::class)->findBy(
-                array(),
-                array(),
-                $max,
-                0
-            );
+            $repo = $this->getDoctrine()->getRepository(Comment::class);
         } elseif ($entity == "notification") {
-            $entities = $this->getDoctrine()->getRepository(Notification::class)->findBy(
-                array(),
-                array(),
-                $max,
-                0
-            );
+            $repo = $this->getDoctrine()->getRepository(Notification::class);
         } elseif ($entity == "friendrequest") {
-            $entities = $this->getDoctrine()->getRepository(FriendRequest::class)->findBy(
-                array(),
-                array(),
-                $max,
-                0
-            );
+            $repo = $this->getDoctrine()->getRepository(FriendRequest::class);
         } elseif ($entity == "statistics") {
-            $entities = $this->getDoctrine()->getRepository(Statistics::class)->findBy(
-                array(),
-                array(),
-                $max,
-                0
-            );
+            $repo = $this->getDoctrine()->getRepository(Statistics::class);
         } elseif ($entity == "laws") {
-            $entities = $this->getDoctrine()->getRepository(Laws::class)->findBy(
-                array(),
-                array(),
-                $max,
-                0
-            );
+            $repo = $this->getDoctrine()->getRepository(Laws::class);
         } else {
             throw new \Exception('Sorry, but this entity doesn\'t exist.');
         }
+
+        $criteria = new Criteria;
+        $criteria->where($criteria->expr()->gte('id', $first));
+        $criteria->setMaxResults($max);
+
+        $entities = $repo->matching($criteria);
 
         $response = 'There is no entity.';
 
