@@ -4,7 +4,7 @@
 <div class="end" style="float: left; position: relative; width: calc(600px * var(--length-multiplication))"></div>
 <div class="comment-corner" style="background-color: lavender;"></div>
 <div class="commentForm">
-    <label for="comment_submit_{{ id }}" class="sendCom"><i class="icofont">comment</i></label>{{ form_widget(comment.submit, {'attr': {'style': 'display: none;'}, 'id': 'comment_submit_' ~ id}) }}
+    <label for="comment_submit_{{ id }}" class="sendCom"><i class="icofont-comment"></i></label>{{ form_widget(comment.submit, {'attr': {'style': 'display: none;'}, 'id': 'comment_submit_' ~ id}) }}
     {{ form_widget(comment.comment, {'attr': {'class': 'taCom', 'placeholder': 'comment'|trans, 'required': false}}) }}
 </div>
 {{ form_end(comment) }}

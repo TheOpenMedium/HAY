@@ -7,13 +7,13 @@
 {% block body %}
 {{ include("menu.html.twig") }}
 <div class="userMenu fs16 ffSS">
-    <a href="#" onclick="openTab('edit_website')">{{ 'edit_website'|trans }}<i class="icofont">thin_double_right</i></a>
-    <a href="#" onclick="openTab('statistics')">{{ 'statistics'|trans }}<i class="icofont">thin_double_right</i></a>
-    <a href="#" onclick="openTab('manage_roles')">{{ 'manage_roles'|trans }}<i class="icofont">thin_double_right</i></a>
-    <a href="#" onclick="openTab('manage_authorization')" style="background-color: yellow; color: black;">{{ 'manage_authorization'|trans }}<i class="icofont">thin_double_right</i></a>
-    <a href="#" onclick="openTab('manage_laws')">{{ 'manage_laws'|trans }}<i class="icofont">thin_double_right</i></a>
-    <a href="#" onclick="openTab('sql_interface')">{{ 'sql_interface'|trans }}<i class="icofont">thin_double_right</i></a>
-    <a href="#" onclick="openTab('manage_policy')">{{ 'manage_policy'|trans }}<i class="icofont">thin_double_right</i></a>
+    <a href="#" onclick="openTab('edit_website')">{{ 'edit_website'|trans }}<i class="icofont-thin-double-right"></i></a>
+    <a href="#" onclick="openTab('statistics')">{{ 'statistics'|trans }}<i class="icofont-thin-double-right"></i></a>
+    <a href="#" onclick="openTab('manage_roles')">{{ 'manage_roles'|trans }}<i class="icofont-thin-double-right"></i></a>
+    <a href="#" onclick="openTab('manage_authorization')" style="background-color: yellow; color: black;">{{ 'manage_authorization'|trans }}<i class="icofont-thin-double-right"></i></a>
+    <a href="#" onclick="openTab('manage_laws')">{{ 'manage_laws'|trans }}<i class="icofont-thin-double-right"></i></a>
+    <a href="#" onclick="openTab('sql_interface')">{{ 'sql_interface'|trans }}<i class="icofont-thin-double-right"></i></a>
+    <a href="#" onclick="openTab('manage_policy')">{{ 'manage_policy'|trans }}<i class="icofont-thin-double-right"></i></a>
 </div>
 
 {{ form_start(form) }}
@@ -66,7 +66,7 @@
     <div>
         <div style="height: 50px;">
             <input class="search" style="width: calc(100% - 53px);" type="search" placeholder="{{ 'user_id'|trans }}" id="userSearch" />
-            <button class="confirm" type="button" onclick="searchUserById()"><i class="icofont">search</i></button>
+            <button class="confirm" type="button" onclick="searchUserById()"><i class="icofont-search"></i></button>
         </div>
         <div class="userRolesShow fs20">
             <img id="userImg" src="/ressources/icon.svg" height="150px" width="150px" />
@@ -91,7 +91,7 @@
                 {% if is_granted('ROLE_ROOT') %}<option value="admin">{{ 'admin'|trans }}</option>{% endif %}
                 {% if is_granted('ROLE_OWNER') %}<option value="root">{{ 'root'|trans }}</option>{% endif %}
             </select>
-            <button type="button" style="border: 0; background-color: blue; color: white; cursor: pointer;" onclick="changeUserRole()"><i class="icofont">arrow_right</i></button>
+            <button type="button" style="border: 0; background-color: blue; color: white; cursor: pointer;" onclick="changeUserRole()"><i class="icofont-arrow-right"></i></button>
         </div>
     </div>
     <script>
@@ -260,8 +260,6 @@
     </div>
     <div id="sql_table" style="grid-column: 1/3; white-space: nowrap; overflow-x: scroll;">
     </div>
-    <span>{{ 'max_results'|trans }} <input type="number" id="sql_max" min="1" max="500" value="10" onchange="showSQLEntity(last_entity)" /></span>
-    <span>{{ 'first_result'|trans }} <input type="number" id="sql_first" min="1" value="1" onchange="showSQLEntity(last_entity)" /></span>
     <script>
         var last_entity = 'NULL'
 

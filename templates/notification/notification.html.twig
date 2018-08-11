@@ -2,15 +2,15 @@
     {% for notification in notifications %}
         <li class="notif">
             {% if notification.type == 0 %}
-                <a class="icofont"
+                <a class="icofont-close-line"
                 style="float: right; position: relative; bottom: 10px; left: 10px; text-decoration: none; font-size: 24px;"
-                href="{{ url('notification_delete', {'id': notification.id}) }}">close_line</a>
+                href="{{ url('notification_delete', {'id': notification.id}) }}"></a>
                 {{ notification.user.firstName }} {{ notification.user.lastName }} {{ 'notif0'|trans }} "{{ notification.content }}".
             {% endif %}
             {% if notification.url %}
-                <a class="icofont"
+                <a class="icofont-thin-double-right"
                 style="float: right; position: relative; bottom: 10px; left: 10px; text-decoration: none; font-size: 24px;"
-                href="{{ url(notification.url, {'id': notification.urlId}) }}">thin_double_right</a>
+                href="{{ url(notification.url, {'id': notification.urlId}) }}"></a>
             {% endif %}
         </li>
     {% endfor %}

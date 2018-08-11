@@ -1,8 +1,10 @@
 {
+    "name": "theopenmedium/hay",
+    "description": "An Open Source social media",
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
     "require": {
-        "php": "^7.1.3",
+        "php": "^7.2.0",
         "ext-iconv": "*",
         "erusev/parsedown": "^1.7",
         "sensio/framework-extra-bundle": "^5.1",

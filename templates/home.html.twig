@@ -9,7 +9,7 @@
 {{ include("menu.html.twig") }}
 <div class="filter">
     <div>
-        <i class="icofont fs26">world</i>
+        <i class="icofont-world fs26"></i>
     </div>
     <span style="top: 0px;">{{ 'scope'|trans }}
         <select id="scope">
@@ -29,29 +29,29 @@
             <option value="moderation">{{ 'scope_mod'|trans }}</option>#}
             {% if app.user %}<option value="my_posts">{{ 'scope_my_posts'|trans }}</option>{% endif %}
         </select>
-        <label for="scope"><i class="icofont fs16">caret_down</i></label>
+        <label for="scope"><i class="icofont-caret-down fs16"></i></label>
     </span>
     <div>
-        <i class="icofont fs26">ui_messaging</i>
+        <i class="icofont-ui-messaging fs26"></i>
     </div>
     <span style="top: 50px;">{{ 'limit'|trans }}<input id="limit" type="number" min="1" max="100" value="10" /></span>
     <div>
-        <i class="icofont fs26">loop</i>
+        <i class="icofont-loop fs26"></i>
     </div>
     <span style="top: 100px;">{{ 'order'|trans }}<select id="order">
         <option value="DESC" selected>{{ 'order_desc'|trans }}</option>
         <option value="ASC">{{ 'order_asc'|trans }}</option>
-    </select><label for="scope"><i class="icofont fs16">caret_down</i></label></span>{#
+    </select><label for="scope"><i class="icofont-caret-down fs16"></i></label></span>{#
     <div>
-        <i class="icofont fs26">clock_time</i>
+        <i class="icofont-clock-time fs26"></i>
     </div>
     <span style="top: 150px;"><input id="date_begin" type="date" /><input id="date_end" type="date" /></span>#}
     <div style="cursor: pointer;" onclick="filterPosts();">
-        <i class="icofont fs26">arrow_right</i>
+        <i class="icofont-arrow-right fs26"></i>
     </div>
     {% if app.user %}
     <div>
-        <i class="icofont fs26">diskette</i>
+        <i class="icofont-diskette fs26"></i>
     </div>
     <span style="top: {#250px#}200px;">
         <button style="cursor: pointer;" onclick="recordAsDefault();">{{ 'record'|trans }}</button>
@@ -65,14 +65,14 @@
 <div class="warning" id="filterReady" style="background: green; display: none">
     {{ 'filterReady'|trans }}
     <span id="closeFilterReady" onclick="parentNode.">
-        <i class="icofont">close_line</i>
+        <i class="icofont-close-line"></i>
     </span>
 </div>
 
 <div class="warning" id="filterError" style="background: red; display: none">
     {{ 'filterError'|trans }}
     <span id="closeFilterError" onclick="parentNode.">
-        <i class="icofont">close_line</i>
+        <i class="icofont-close-line"></i>
     </span>
 </div>
 

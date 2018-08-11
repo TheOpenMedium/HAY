@@ -2,12 +2,12 @@
 <div class="menu">
     <a href="{{ url('app_index') }}"><img src="/ressources/HAYlogo.svg" style="float: left; width: 50px; height: 50px" /></a>
     <input class="search" type="search" placeholder="{{ 'search'|trans }}" />
-    <button class="confirm"><i class="icofont">search</i></button>
+    <button class="confirm"><i class="icofont-search"></i></button>
     {% if is_version_displayed %}<span id="version">alpha</span>{% endif %}
     {% if app.user %}
-    <span class="parameter"><i class="icofont">wrench</i>{{ include('options.html.twig') }}</span>
-    <span class="notification"><i class="icofont">notification</i>{{ render(url('notification')) }}</span>
-    <span class="users"><i class="icofont">users</i>{{ include('users/users.html.twig') }}</span>
+    <span class="parameter"><i class="icofont-wrench"></i>{{ include('options.html.twig') }}</span>
+    <span class="notification"><i class="icofont-notification"></i>{{ render(url('notification')) }}</span>
+    <span class="users"><i class="icofont-users"></i>{{ include('users/users.html.twig') }}</span>
     {% else %}
     <a class="loginPage" href="{{ url('app_login') }}">{{ 'login'|trans }}</a>
     <a class="loginPage" href="{{ url('app_signup') }}">{{ 'signup'|trans }}</a>

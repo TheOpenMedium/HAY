@@ -7,7 +7,7 @@
 
 <span style="color: white; font-family: sans-serif; margin: 0px 50px; display: grid; grid-template-columns: auto fit-content(100%); grid-gap: 30px;">
     <h1 style="border-bottom: 5px solid var(--hay-color);">{{ 'see_laws'|trans }}</h1>
-    {% if is_granted('ROLE_ADMIN') %}<a class="icofont" href="{{ url('laws_new') }}" style="display: flex; font-size: 2em; justify-content: center; align-items: center;">ui_add</a>{% endif %}
+    {% if is_granted('ROLE_ADMIN') %}<a class="icofont-ui-add" href="{{ url('laws_new') }}" style="display: flex; font-size: 2em; justify-content: center; align-items: center;"></a>{% endif %}
 </span>
 
 <div class="lawsList">
@@ -17,10 +17,10 @@
                 <span>{{ laws.id }}- {{ laws.date|date('Y-m-d') }} {{ laws.title }}</span>
                 <span>
                     {% if is_granted('ROLE_ADMIN') %}
-                    <a class="icofont" href="{{ url('laws_delete', {'laws': laws.id}) }}">ui_delete</a>
-                    <a class="icofont" href="{{ url('laws_edit', {'laws': laws.id}) }}">pencil_alt_2</a>
+                    <a class="icofont-ui-delete" href="{{ url('laws_delete', {'laws': laws.id}) }}"></a>
+                    <a class="icofont-pencil-alt-2" href="{{ url('laws_edit', {'laws': laws.id}) }}"></a>
                     {% endif %}
-                    <i class="icofont" onclick="showLaws(this, {{ laws.id }});" style="cursor: pointer;">thin_right</i>
+                    <i class="icofont-thin-right" onclick="showLaws(this, {{ laws.id }});" style="cursor: pointer;"></i>
                 </span>
             </div>
             <div class="markdown" id="{{ laws.id }}" style="display: none; padding: 10px;">
@@ -35,10 +35,10 @@
 
         if (markdown.style.display == "none") {
             markdown.style.display = "block"
-            e.className = "icofont icofont-rotate-90"
+            e.className = "icofont-thin-right icofont-rotate-90"
         } else {
             markdown.style.display = "none"
-            e.className = "icofont"
+            e.className = "icofont-thin-right"
         }
     }
 </script>
