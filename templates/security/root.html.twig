@@ -260,10 +260,21 @@
     </div>
     <div id="sql_table" style="grid-column: 1/3; white-space: nowrap; overflow-x: scroll;">
     </div>
-    <span>{{ 'max_results'|trans }} <input type="number" id="sql_max" min="1" max="500" value="10" onchange="showSQLEntity(last_entity)" /></span>
-    <span>{{ 'first_result'|trans }} <input type="number" id="sql_first" min="1" value="1" onchange="showSQLEntity(last_entity)" /></span>
+    <label style="grid-column: 1/3; border-bottom: 2px solid var(--hay-color); margin: 15px 0;"><input type="radio" name="filter" id="filter_simple" onclick="changeFilter()" checked />Filtres Simples</label>
+    <div style="grid-column: 1/3; display: grid; grid-template-columns: 50% 50%;">
+        <span>{{ 'max_results'|trans }} <input type="number" id="sql_max" min="1" max="500" value="10" onchange="showSQLEntity(last_entity)" /></span>
+        <span>{{ 'first_result'|trans }} <input type="number" id="sql_first" min="1" value="1" onchange="showSQLEntity(last_entity)" /></span>
+    </div>
+    <label style="grid-column: 1/3; border-bottom: 2px solid red; margin-top: 15px;"><input type="radio" name="filter" id="filter_advanced" onclick="changeFilter()" />Filtres Avancés</label>
+    <span style="grid-column: 1/3; background-color: red; padding: 15px; text-align: center; margin-bottom: 15px;">{{ 'DANGER'|trans }}</span>
+    <div class="sql_advanced">
+        <span id="sql_1_operation" class="sql_1" style="grid-column: 1; grid-row: 1;">SELECT</span>
+        <span id="sql_1_column" class="sql_1" style="grid-column: 2; grid-row: 1;">*</span>
+        <span style="grid-column: 6; grid-row: 99;"><button type="button" style="float: right; background-color: green; border: 0; padding: 10px; grid-column: 7; cursor: pointer;" onclick="addSQLQuery(2);"><i class="icofont-ui-add"></i></button></span>
+    </div>
     <script>
         var last_entity = 'NULL'
+        var filter_nb = 1
 
         function showSQLEntity(entity) {
             if (entity !== 'NULL') {
@@ -280,6 +291,39 @@
                 };
                 xmlhttp.open("GET", url, true);
                 xmlhttp.send();
+            }
+        }
+
+        function changeFilter() {
+            value_simple = !document.getElementById('filter_simple').checked
+            document.getElementById('sql_max').disabled = value_simple
+            document.getElementById('sql_first').disabled = value_simple
+
+            value_advanced = !document.getElementById('filter_advanced').checked
+        }
+
+        function addSQLQuery() {
+            filter_nb++;
+
+            sql_html = `
+                <span id="sql_` + filter_nb + `_operation" class="sql_` + filter_nb + `" style="grid-column: 1; grid-row: ` + filter_nb + `;">SELECT</span>
+                <span id="sql_` + filter_nb + `_column" class="sql_` + filter_nb + `" style="grid-column: 2; grid-row: ` + filter_nb + `;">*</span>
+                <span id="sql_` + filter_nb + `_comparison" class="sql_` + filter_nb + `" style="grid-column: 3; grid-row: ` + filter_nb + `;">=</span>
+                <span id="sql_` + filter_nb + `_data" class="sql_` + filter_nb + `" style="grid-column: 4; grid-row: ` + filter_nb + `;">data</span>
+                <span id="sql_` + filter_nb + `_order" class="sql_` + filter_nb + `" style="grid-column: 5; grid-row: ` + filter_nb + `;">DESC</span>
+                <span class="sql_` + filter_nb + `" style="grid-column: 6; grid-row: ` + filter_nb + `;"><button type="button" style="float: right; background-color: red; border: 0; padding: 10px; cursor: pointer;" onclick="deleteSQLQuery(` + filter_nb + `);"><i class="icofont-ui-remove"></i></button></span>
+            `;
+
+            sql_adv = document.getElementsByClassName("sql_advanced")[0];
+
+            sql_adv.innerHTML = sql_html + sql_adv.innerHTML;
+        }
+
+        function deleteSQLQuery(nb) {
+            sql_elt = document.getElementsByClassName("sql_" + nb)
+
+            for (i = 0; i < 6; i++) {
+                sql_elt[0].parentNode.removeChild(sql_elt[0])
             }
         }
     </script>
