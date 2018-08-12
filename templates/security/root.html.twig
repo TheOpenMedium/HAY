@@ -300,6 +300,12 @@
             document.getElementById('sql_first').disabled = value_simple
 
             value_advanced = !document.getElementById('filter_advanced').checked
+            sql_adv = document.getElementsByClassName("sql_advanced")[0]
+            sql_adv.childNodes.forEach(function(elt) {
+                elt.childNodes.forEach(function(elt2) {
+                    elt2.disabled = value_advanced
+                })
+            })
         }
 
         function addSQLQuery() {
@@ -326,6 +332,8 @@
                 sql_elt[0].parentNode.removeChild(sql_elt[0])
             }
         }
+
+        changeFilter()
     </script>
 </div>
 <div class="tabContent" id="manage_policy" style="grid-template-rows: auto auto 500px auto 500px auto;">
