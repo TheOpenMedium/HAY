@@ -270,27 +270,43 @@
     <div class="sql_advanced">
         <span id="sql_1_operation" class="sql_1" style="grid-column: 1; grid-row: 1;">SELECT</span>
         <span id="sql_1_column" class="sql_1" style="grid-column: 2; grid-row: 1;"><select></select></span>
-        <span style="grid-column: 6; grid-row: 99;"><button type="button" style="float: right; background-color: green; border: 0; padding: 10px; grid-column: 7; cursor: pointer;" onclick="addSQLQuery(2);"><i class="icofont-ui-add"></i></button></span>
+        <span style="grid-column: 1; grid-row: 99;"><button type="button" style="float: left; background-color: blue; border: 0; padding: 10px; grid-column: 7; cursor: pointer;" onclick="showSQLEntity(last_entity, true);"><i class="icofont-arrow-right"></i></button></span>
+        <span style="grid-column: 6; grid-row: 99;"><button type="button" style="float: right; background-color: green; border: 0; padding: 10px; grid-column: 7; cursor: pointer;" onclick="addSQLQuery();"><i class="icofont-ui-add"></i></button></span>
     </div>
     <script>
         var last_entity = 'NULL'
         var filter_nb = 1
 
-        function showSQLEntity(entity) {
+        function showSQLEntity(entity, adv = false) {
             if (entity !== 'NULL') {
                 last_entity = entity
 
-                url = "{{ url('security_root_sql', {'entity': 'aaa', 'max': 'bbb', 'first': 'ccc'}) }}"
-                url = url.replace('aaa', entity)
-                url = url.replace('bbb', document.getElementById('sql_max').value)
-                url = url.replace('ccc', document.getElementById('sql_first').value)
+                if (!adv) {
+                    url = "{{ url('security_root_sql', {'entity': 'aaa', 'max': 'bbb', 'first': 'ccc'}) }}"
+                    url = url.replace('aaa', entity)
+                    url = url.replace('bbb', document.getElementById('sql_max').value)
+                    url = url.replace('ccc', document.getElementById('sql_first').value)
 
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function() {
-                    document.getElementById("sql_table").innerHTML = this.responseText;
-                };
-                xmlhttp.open("GET", url, true);
-                xmlhttp.send();
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                        document.getElementById("sql_table").innerHTML = this.responseText;
+                    };
+                    xmlhttp.open("GET", url, true);
+                    xmlhttp.send();
+                } else {
+                    url = "{{ url('security_root_sql', {'entity': 'aaa'}) }}"
+                    url = url.replace('aaa', entity)
+
+                    param = getAdvParam()
+
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("POST", url, true);
+                    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                    xmlhttp.onreadystatechange = function() {
+                        document.getElementById("sql_table").innerHTML = this.responseText;
+                    };
+                    xmlhttp.send(param);
+                }
 
                 getColumn()
             }
@@ -315,10 +331,10 @@
             sql_html = `
                 <span id="sql_` + filter_nb + `_operation" class="sql_` + filter_nb + `" style="grid-column: 1; grid-row: ` + filter_nb + `;">
                     <select onchange="changeSQLQuery(` + filter_nb + `);">
-                        <option>SELECT</option>
-                        <option>WHERE</option>
-                        <option>ORDER BY</option>
-                        <option>LIMIT</option>
+                        <option value="SELECT">SELECT</option>
+                        <option value="WHERE">WHERE</option>
+                        <option value="ORDER BY">ORDER BY</option>
+                        <option value="LIMIT">LIMIT</option>
                     </select>
                 </span>
                 <span id="sql_` + filter_nb + `_column" class="sql_` + filter_nb + `" style="grid-column: 2; grid-row: ` + filter_nb + `;"><select></select></span>
@@ -326,8 +342,8 @@
                 <span id="sql_` + filter_nb + `_data" class="sql_` + filter_nb + `" style="grid-column: 4; grid-row: ` + filter_nb + `;"><input type="text" /></span>
                 <span id="sql_` + filter_nb + `_order" class="sql_` + filter_nb + `" style="grid-column: 5; grid-row: ` + filter_nb + `;">
                     <select>
-                        <option>DESC</option>
-                        <option>ASC</option>
+                        <option value="DESC">DESC</option>
+                        <option value="ASC">ASC</option>
                     </select>
                 </span>
                 <span class="sql_` + filter_nb + `" style="grid-column: 6; grid-row: ` + filter_nb + `;"><button type="button" style="float: right; background-color: red; border: 0; padding: 10px; cursor: pointer;" onclick="deleteSQLQuery(` + filter_nb + `);"><i class="icofont-ui-remove"></i></button></span>
@@ -362,11 +378,12 @@
 
                 document.getElementById('sql_' + nb + '_comparison').innerHTML = `
                     <select>
-                        <option>=</option>
-                        <option>&lt;</option>
-                        <option>&gt;</option>
-                        <option>&lt;=</option>
-                        <option>&gt;=</option>
+                        <option value="=">=</option>
+                        <option value="!=">!=</option>
+                        <option value="<">&lt;</option>
+                        <option value=">">&gt;</option>
+                        <option value="<=">&lt;=</option>
+                        <option value=">=">&gt;=</option>
                     </select>
                 `;
                 document.getElementById('sql_' + nb + '_data').children[0].type = "text";
@@ -411,6 +428,40 @@
             for (var i = 1; i <= filter_nb; i++) {
                 document.getElementById('sql_' + i + '_column').children[0].innerHTML = result
             }
+        }
+
+        function getAdvParam() {
+            param = {}
+            param.select = []
+            param.where = []
+            param.orderby = {}
+            param.limit = null
+
+            for (var i = 1; i <= filter_nb; i++) {
+                if (i == 1) {
+                    param.select.push(document.getElementById('sql_1_column').children[0].value)
+                } else {
+                    operation = document.getElementById('sql_' + i + '_operation').children[0].value
+                    if (operation == "SELECT") {
+                        param.select.push(document.getElementById('sql_' + i + '_column').children[0].value)
+                    } else if (operation == "WHERE") {
+                        param.where.push(
+                            {
+                                column: document.getElementById('sql_' + i + '_column').children[0].value,
+                                comparison: document.getElementById('sql_' + i + '_comparison').children[0].value,
+                                data: document.getElementById('sql_' + i + '_data').children[0].value
+                            }
+                        );
+                    } else if (operation == "ORDER BY") {
+                        param.orderby.column = document.getElementById('sql_' + i + '_column').children[0].value
+                        param.orderby.order = document.getElementById('sql_' + i + '_order').children[0].value
+                    } else if (operation == "LIMIT") {
+                        param.limit = document.getElementById('sql_' + i + '_data').children[0].value
+                    }
+                }
+            }
+
+            return "q=" + encodeURI(JSON.stringify(param))
         }
 
         changeFilter()

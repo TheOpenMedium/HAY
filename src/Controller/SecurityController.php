@@ -146,7 +146,7 @@ class SecurityController extends Controller
      *     "_locale": "%app.locales%"
      * })
      */
-    public function sqlAction(string $entity, int $max = 10, int $first = 1)
+    public function sqlAction(Request $request, string $entity, int $max = 10, int $first = 1)
     {
         if ($entity == "user") {
             $repo = $this->getDoctrine()->getRepository(User::class);
@@ -167,8 +167,14 @@ class SecurityController extends Controller
         }
 
         $criteria = new Criteria;
-        $criteria->where($criteria->expr()->gte('id', $first));
-        $criteria->setMaxResults($max);
+
+        if ($request->isMethod('GET')) {
+            $criteria->where($criteria->expr()->gte('id', $first));
+            $criteria->setMaxResults($max);
+        } else if ($request->isMethod('POST')) {
+            $query = \json_decode($_POST["q"], true);
+            // var_dump($query);
+        }
 
         $entities = $repo->matching($criteria);
 
@@ -219,38 +225,38 @@ class SecurityController extends Controller
      *     "_locale": "%app.locales%"
      * })
      */
-     public function getSQLEntityColumnsAction(string $entity)
-     {
-         header('Content-Type: text/json');
+    public function getSQLEntityColumnsAction(string $entity)
+    {
+        header('Content-Type: text/json');
 
-         if ($entity == "user") {
-             $repo = $this->getDoctrine()->getRepository(User::class);
-         } elseif ($entity == "post") {
-             $repo = $this->getDoctrine()->getRepository(Post::class);
-         } elseif ($entity == "comment") {
-             $repo = $this->getDoctrine()->getRepository(Comment::class);
-         } elseif ($entity == "notification") {
-             $repo = $this->getDoctrine()->getRepository(Notification::class);
-         } elseif ($entity == "friendrequest") {
-             $repo = $this->getDoctrine()->getRepository(FriendRequest::class);
-         } elseif ($entity == "statistics") {
-             $repo = $this->getDoctrine()->getRepository(Statistics::class);
-         } elseif ($entity == "laws") {
-             $repo = $this->getDoctrine()->getRepository(Laws::class);
-         } else {
-             throw new \Exception('Sorry, but this entity doesn\'t exist.');
-         }
+        if ($entity == "user") {
+            $repo = $this->getDoctrine()->getRepository(User::class);
+        } elseif ($entity == "post") {
+            $repo = $this->getDoctrine()->getRepository(Post::class);
+        } elseif ($entity == "comment") {
+            $repo = $this->getDoctrine()->getRepository(Comment::class);
+        } elseif ($entity == "notification") {
+            $repo = $this->getDoctrine()->getRepository(Notification::class);
+        } elseif ($entity == "friendrequest") {
+            $repo = $this->getDoctrine()->getRepository(FriendRequest::class);
+        } elseif ($entity == "statistics") {
+            $repo = $this->getDoctrine()->getRepository(Statistics::class);
+        } elseif ($entity == "laws") {
+            $repo = $this->getDoctrine()->getRepository(Laws::class);
+        } else {
+            throw new \Exception('Sorry, but this entity doesn\'t exist.');
+        }
 
-         $browsed = $repo->findOneBy([])->browse();
+        $browsed = $repo->findOneBy([])->browse();
 
-         $columns = ['*'];
+        $columns = ['*'];
 
-         foreach ($browsed as $column => $value) {
-             $columns[] = $column;
-         }
+        foreach ($browsed as $column => $value) {
+            $columns[] = $column;
+        }
 
-         return new Response(\json_encode($columns), 200, array('Content-Type' => 'text/json'));
-     }
+        return new Response(\json_encode($columns), 200, array('Content-Type' => 'text/json'));
+    }
 
     /**
      * @Route("/{_locale}/admin", name="security_admin", requirements={
