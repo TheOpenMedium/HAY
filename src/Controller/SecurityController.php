@@ -215,6 +215,44 @@ class SecurityController extends Controller
     }
 
     /**
+     * @Route("/{_locale}/root/get_sql_entity_columns/{entity}", name="security_root_get_sql_entity_columns", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+     public function getSQLEntityColumnsAction(string $entity)
+     {
+         header('Content-Type: text/json');
+
+         if ($entity == "user") {
+             $repo = $this->getDoctrine()->getRepository(User::class);
+         } elseif ($entity == "post") {
+             $repo = $this->getDoctrine()->getRepository(Post::class);
+         } elseif ($entity == "comment") {
+             $repo = $this->getDoctrine()->getRepository(Comment::class);
+         } elseif ($entity == "notification") {
+             $repo = $this->getDoctrine()->getRepository(Notification::class);
+         } elseif ($entity == "friendrequest") {
+             $repo = $this->getDoctrine()->getRepository(FriendRequest::class);
+         } elseif ($entity == "statistics") {
+             $repo = $this->getDoctrine()->getRepository(Statistics::class);
+         } elseif ($entity == "laws") {
+             $repo = $this->getDoctrine()->getRepository(Laws::class);
+         } else {
+             throw new \Exception('Sorry, but this entity doesn\'t exist.');
+         }
+
+         $browsed = $repo->findOneBy([])->browse();
+
+         $columns = ['*'];
+
+         foreach ($browsed as $column => $value) {
+             $columns[] = $column;
+         }
+
+         return new Response(\json_encode($columns), 200, array('Content-Type' => 'text/json'));
+     }
+
+    /**
      * @Route("/{_locale}/admin", name="security_admin", requirements={
      *     "_locale": "%app.locales%"
      * })

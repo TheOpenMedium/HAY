@@ -269,7 +269,7 @@
     <span style="grid-column: 1/3; background-color: red; padding: 15px; text-align: center; margin-bottom: 15px;">{{ 'DANGER'|trans }}</span>
     <div class="sql_advanced">
         <span id="sql_1_operation" class="sql_1" style="grid-column: 1; grid-row: 1;">SELECT</span>
-        <span id="sql_1_column" class="sql_1" style="grid-column: 2; grid-row: 1;">*</span>
+        <span id="sql_1_column" class="sql_1" style="grid-column: 2; grid-row: 1;"><select></select></span>
         <span style="grid-column: 6; grid-row: 99;"><button type="button" style="float: right; background-color: green; border: 0; padding: 10px; grid-column: 7; cursor: pointer;" onclick="addSQLQuery(2);"><i class="icofont-ui-add"></i></button></span>
     </div>
     <script>
@@ -291,6 +291,8 @@
                 };
                 xmlhttp.open("GET", url, true);
                 xmlhttp.send();
+
+                getColumn()
             }
         }
 
@@ -310,19 +312,30 @@
 
         function addSQLQuery() {
             filter_nb++;
-
             sql_html = `
-                <span id="sql_` + filter_nb + `_operation" class="sql_` + filter_nb + `" style="grid-column: 1; grid-row: ` + filter_nb + `;">SELECT</span>
-                <span id="sql_` + filter_nb + `_column" class="sql_` + filter_nb + `" style="grid-column: 2; grid-row: ` + filter_nb + `;">*</span>
-                <span id="sql_` + filter_nb + `_comparison" class="sql_` + filter_nb + `" style="grid-column: 3; grid-row: ` + filter_nb + `;">=</span>
-                <span id="sql_` + filter_nb + `_data" class="sql_` + filter_nb + `" style="grid-column: 4; grid-row: ` + filter_nb + `;">data</span>
-                <span id="sql_` + filter_nb + `_order" class="sql_` + filter_nb + `" style="grid-column: 5; grid-row: ` + filter_nb + `;">DESC</span>
+                <span id="sql_` + filter_nb + `_operation" class="sql_` + filter_nb + `" style="grid-column: 1; grid-row: ` + filter_nb + `;">
+                    <select onchange="changeSQLQuery(` + filter_nb + `);">
+                        <option>SELECT</option>
+                        <option>WHERE</option>
+                        <option>ORDER BY</option>
+                        <option>LIMIT</option>
+                    </select>
+                </span>
+                <span id="sql_` + filter_nb + `_column" class="sql_` + filter_nb + `" style="grid-column: 2; grid-row: ` + filter_nb + `;"><select></select></span>
+                <span id="sql_` + filter_nb + `_comparison" class="sql_` + filter_nb + `" style="grid-column: 3; grid-row: ` + filter_nb + `;"></span>
+                <span id="sql_` + filter_nb + `_data" class="sql_` + filter_nb + `" style="grid-column: 4; grid-row: ` + filter_nb + `;"><input type="text" /></span>
+                <span id="sql_` + filter_nb + `_order" class="sql_` + filter_nb + `" style="grid-column: 5; grid-row: ` + filter_nb + `;">
+                    <select>
+                        <option>DESC</option>
+                        <option>ASC</option>
+                    </select>
+                </span>
                 <span class="sql_` + filter_nb + `" style="grid-column: 6; grid-row: ` + filter_nb + `;"><button type="button" style="float: right; background-color: red; border: 0; padding: 10px; cursor: pointer;" onclick="deleteSQLQuery(` + filter_nb + `);"><i class="icofont-ui-remove"></i></button></span>
             `;
-
             sql_adv = document.getElementsByClassName("sql_advanced")[0];
-
             sql_adv.innerHTML = sql_html + sql_adv.innerHTML;
+            changeSQLQuery(filter_nb);
+            getColumn();
         }
 
         function deleteSQLQuery(nb) {
@@ -333,7 +346,75 @@
             }
         }
 
+        function changeSQLQuery(nb) {
+            value = document.getElementById('sql_' + nb + '_operation').children[0].value
+
+            if (value == "SELECT") {
+                document.getElementById('sql_' + nb + '_column').style.display = "grid";
+                document.getElementById('sql_' + nb + '_comparison').style.display = "none";
+                document.getElementById('sql_' + nb + '_data').style.display = "none";
+                document.getElementById('sql_' + nb + '_order').style.display = "none";
+            } else if (value == "WHERE") {
+                document.getElementById('sql_' + nb + '_column').style.display = "grid";
+                document.getElementById('sql_' + nb + '_comparison').style.display = "grid";
+                document.getElementById('sql_' + nb + '_data').style.display = "grid";
+                document.getElementById('sql_' + nb + '_order').style.display = "none";
+
+                document.getElementById('sql_' + nb + '_comparison').innerHTML = `
+                    <select>
+                        <option>=</option>
+                        <option>&lt;</option>
+                        <option>&gt;</option>
+                        <option>&lt;=</option>
+                        <option>&gt;=</option>
+                    </select>
+                `;
+                document.getElementById('sql_' + nb + '_data').children[0].type = "text";
+            } else if (value == "ORDER BY") {
+                document.getElementById('sql_' + nb + '_column').style.display = "grid";
+                document.getElementById('sql_' + nb + '_comparison').style.display = "none";
+                document.getElementById('sql_' + nb + '_data').style.display = "none";
+                document.getElementById('sql_' + nb + '_order').style.display = "grid";
+            } else if (value == "LIMIT") {
+                document.getElementById('sql_' + nb + '_column').style.display = "none";
+                document.getElementById('sql_' + nb + '_comparison').style.display = "grid";
+                document.getElementById('sql_' + nb + '_data').style.display = "grid";
+                document.getElementById('sql_' + nb + '_order').style.display = "none";
+
+                document.getElementById('sql_' + nb + '_comparison').innerHTML = "=";
+                document.getElementById('sql_' + nb + '_data').children[0].type = "number";
+            }
+        }
+
+        function getColumn() {
+            var response = null;
+
+            if (last_entity !== 'NULL') {
+                url = "{{ url('security_root_get_sql_entity_columns', {'entity': 'aaa'}) }}"
+                url = url.replace('aaa', last_entity.toLowerCase())
+
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("GET", url, false);
+                xmlhttp.send();
+
+                response = JSON.parse(xmlhttp.response)
+            } else {
+                response = ["SELECT ENTITY"];
+            }
+
+            result = '';
+
+            response.forEach(function(elt) {
+                result += "<option>" + elt + "</option>"
+            })
+
+            for (var i = 1; i <= filter_nb; i++) {
+                document.getElementById('sql_' + i + '_column').children[0].innerHTML = result
+            }
+        }
+
         changeFilter()
+        getColumn()
     </script>
 </div>
 <div class="tabContent" id="manage_policy" style="grid-template-rows: auto auto 500px auto 500px auto;">
