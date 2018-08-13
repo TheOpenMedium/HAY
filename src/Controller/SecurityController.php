@@ -166,17 +166,74 @@ class SecurityController extends Controller
             throw new \Exception('Sorry, but this entity doesn\'t exist.');
         }
 
-        $criteria = new Criteria;
+        $getArray = false;
 
         if ($request->isMethod('GET')) {
+            $criteria = new Criteria;
+
             $criteria->where($criteria->expr()->gte('id', $first));
             $criteria->setMaxResults($max);
+
+            $entities = $repo->matching($criteria);
         } else if ($request->isMethod('POST')) {
             $query = \json_decode($_POST["q"], true);
-            // var_dump($query);
-        }
 
-        $entities = $repo->matching($criteria);
+            $select = '';
+            foreach ($query["select"] as $value) {
+                $select .= 't.' . $value . ', ';
+                $getArray = true;
+                if ($value == "*") {
+                    $select = substr($select, 0, -5) . 't, ';
+                }
+            }
+            $select = substr($select, 0, -2);
+
+            if ($select == "t") {
+                $getArray = false;
+            }
+
+            $where = '';
+            if ($query["where"]) {
+                foreach ($query["where"] as $value) {
+                    $where .= 't.' . $value["column"] . ' ' . $value["comparison"] . ' ' . $value["data"] . ' OR ';
+                }
+                $where = substr($where, 0, -4);
+            }
+
+            if ($where) {
+                if (isset($query["orderby"]["order"])) {
+                    $entities = $repo->createQueryBuilder('t')
+                        ->select($select)
+                        ->where($where)
+                        ->orderBy('t.' . $query["orderby"]["column"], $query["orderby"]["order"])
+                        ->setMaxResults($query["limit"])
+                        ->getQuery()
+                        ->getResult();
+                } else {
+                    $entities = $repo->createQueryBuilder('t')
+                        ->select($select)
+                        ->where($where)
+                        ->setMaxResults($query["limit"])
+                        ->getQuery()
+                        ->getResult();
+                }
+            } else {
+                if (isset($query["orderby"]["order"])) {
+                    $entities = $repo->createQueryBuilder('t')
+                        ->select($select)
+                        ->orderBy('t.' . $query["orderby"]["column"], $query["orderby"]["order"])
+                        ->setMaxResults($query["limit"])
+                        ->getQuery()
+                        ->getResult();
+                } else {
+                    $entities = $repo->createQueryBuilder('t')
+                        ->select($select)
+                        ->setMaxResults($query["limit"])
+                        ->getQuery()
+                        ->getResult();
+                }
+            }
+        }
 
         $response = 'There is no entity.';
 
@@ -184,34 +241,44 @@ class SecurityController extends Controller
             $response = '<table>';
             // Table Head
             $response .= '<tr>';
-            foreach ($entities[0]->browse() as $entitykey => $entityvalue) {
+            if (!$getArray) {
+                $browsed = $entities[0]->browse();
+            } else {
+                $browsed = $entities[0];
+            }
+            foreach ($browsed as $entitykey => $entityvalue) {
                 $response .= '<th>' . $entitykey . '</th>';
             }
             $response .= '</tr>';
             // Entities
             foreach ($entities as $entityvalue) {
                 $response .= '<tr>';
-                    foreach ($entityvalue->browse() as $value) {
-                        if ($value instanceof \DateTime) {
-                            $response .= '<td><div>' . \date_format($value, 'Y-m-d') . '</div></td>';
-                        } elseif ($value instanceof \Doctrine\ORM\PersistentCollection || is_array($value)) {
-                            $notempty = false;
-                            $response .= '<td><div>[';
-                            foreach ($value as $subvalue) {
-                                $response .= '\'' . $subvalue . '\', ';
-                                $notempty = true;
-                            }
-                            if ($notempty) {
-                                $response = substr($response, 0, -2);
-                                $response .= ']</div></td>';
-                            } else {
-                                $response = substr($response, 0, -1);
-                                $response .= 'NULL</div></td>';
-                            }
-                        } else {
-                            $response .= '<td><div>' . $value . '</div></td>';
+                if (!$getArray) {
+                    $browsedEntity = $entityvalue->browse();
+                } else {
+                    $browsedEntity = $entityvalue;
+                }
+                foreach ($browsedEntity as $value) {
+                    if ($value instanceof \DateTime) {
+                        $response .= '<td><div>' . \date_format($value, 'Y-m-d') . '</div></td>';
+                    } elseif ($value instanceof \Doctrine\ORM\PersistentCollection || is_array($value)) {
+                        $notempty = false;
+                        $response .= '<td><div>[';
+                        foreach ($value as $subvalue) {
+                            $response .= '\'' . $subvalue . '\', ';
+                            $notempty = true;
                         }
+                        if ($notempty) {
+                            $response = substr($response, 0, -2);
+                            $response .= ']</div></td>';
+                        } else {
+                            $response = substr($response, 0, -1);
+                            $response .= 'NULL</div></td>';
+                        }
+                    } else {
+                        $response .= '<td><div>' . $value . '</div></td>';
                     }
+                }
                 $response .= '</tr>';
             }
             $response .= '</table>';

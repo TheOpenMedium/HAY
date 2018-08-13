@@ -293,6 +293,8 @@
                     };
                     xmlhttp.open("GET", url, true);
                     xmlhttp.send();
+
+                    getColumn()
                 } else {
                     url = "{{ url('security_root_sql', {'entity': 'aaa'}) }}"
                     url = url.replace('aaa', entity)
@@ -307,8 +309,6 @@
                     };
                     xmlhttp.send(param);
                 }
-
-                getColumn()
             }
         }
 
@@ -422,7 +422,7 @@
             result = '';
 
             response.forEach(function(elt) {
-                result += "<option>" + elt + "</option>"
+                result += '<option value="' + elt + '">' + elt + '</option>'
             })
 
             for (var i = 1; i <= filter_nb; i++) {
@@ -441,22 +441,24 @@
                 if (i == 1) {
                     param.select.push(document.getElementById('sql_1_column').children[0].value)
                 } else {
-                    operation = document.getElementById('sql_' + i + '_operation').children[0].value
-                    if (operation == "SELECT") {
-                        param.select.push(document.getElementById('sql_' + i + '_column').children[0].value)
-                    } else if (operation == "WHERE") {
-                        param.where.push(
-                            {
-                                column: document.getElementById('sql_' + i + '_column').children[0].value,
-                                comparison: document.getElementById('sql_' + i + '_comparison').children[0].value,
-                                data: document.getElementById('sql_' + i + '_data').children[0].value
-                            }
-                        );
-                    } else if (operation == "ORDER BY") {
-                        param.orderby.column = document.getElementById('sql_' + i + '_column').children[0].value
-                        param.orderby.order = document.getElementById('sql_' + i + '_order').children[0].value
-                    } else if (operation == "LIMIT") {
-                        param.limit = document.getElementById('sql_' + i + '_data').children[0].value
+                    if (document.getElementById('sql_' + i + '_operation') !== null) {
+                        operation = document.getElementById('sql_' + i + '_operation').children[0].value
+                        if (operation == "SELECT") {
+                            param.select.push(document.getElementById('sql_' + i + '_column').children[0].value)
+                        } else if (operation == "WHERE") {
+                            param.where.push(
+                                {
+                                    column: document.getElementById('sql_' + i + '_column').children[0].value,
+                                    comparison: document.getElementById('sql_' + i + '_comparison').children[0].value,
+                                    data: document.getElementById('sql_' + i + '_data').children[0].value
+                                }
+                            );
+                        } else if (operation == "ORDER BY") {
+                            param.orderby.column = document.getElementById('sql_' + i + '_column').children[0].value
+                            param.orderby.order = document.getElementById('sql_' + i + '_order').children[0].value
+                        } else if (operation == "LIMIT") {
+                            param.limit = document.getElementById('sql_' + i + '_data').children[0].value
+                        }
                     }
                 }
             }
