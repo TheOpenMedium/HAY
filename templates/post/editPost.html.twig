@@ -14,55 +14,6 @@
 {% block js %}
 <script>
 
-function init() {
-    color = "c" + "{{ color }}"
-    textarea = document.getElementsByClassName('textarea')
-    classes = textarea[0].className
-    classes = classes.split("c")
-    classes[0] += color
-    textarea[0].className = classes[0]
-
-    size = "fs" + "{{ size }}"
-    textarea = document.getElementsByClassName('ta')
-    classes = textarea[0].className
-    classes = classes.split("fs")
-    classes[0] += size
-    textarea[0].className = classes[0]
-
-    sizeDisplay = document.getElementsByClassName('sizeDisplay')
-    classesSize = sizeDisplay[0].className
-    classesSize = classesSize.split("fs")
-    classesSize[0] += size
-    sizeDisplay[0].className = classesSize[0]
-
-    sizeValue = document.getElementsByName('form[size]')
-    sizeValue[0].value = "{{ size }}"
-}
-
-function changeColor(e) {
-    color = "c" + e['target'].value
-    textarea = document.getElementsByClassName('textarea')
-    classes = textarea[0].className
-    classes = classes.split("c")
-    classes[0] += color
-    textarea[0].className = classes[0]
-}
-
-function changeSize(e) {
-    size = "fs" + e['target'].value
-    textarea = document.getElementsByClassName('ta')
-    classes = textarea[0].className
-    classes = classes.split("fs")
-    classes[0] += size
-    textarea[0].className = classes[0]
-
-    sizeDisplay = document.getElementsByClassName('sizeDisplay')
-    classesSize = sizeDisplay[0].className
-    classesSize = classesSize.split("fs")
-    classesSize[0] += size
-    sizeDisplay[0].className = classesSize[0]
-}
-
 document.getElementsByName('form[color]').forEach(function(element) {
     element.addEventListener('change', changeColor)
 })

@@ -18,9 +18,9 @@
             </li></label>
         </ul>
         <script>
-        re = new RegExp("^\\s+$")
+            re = new RegExp("^\\s+$")
 
-        document.getElementsByClassName("footerMenu")[0].childNodes.forEach(function (elt) {if (re.test(elt.data)) {elt.parentNode.removeChild(elt);}})
+            document.getElementsByClassName("footerMenu")[0].childNodes.forEach(function (elt) {if (re.test(elt.data)) {elt.parentNode.removeChild(elt);}})
         </script>
     </div>
 </div>

@@ -64,14 +64,14 @@
 
 <div class="warning" id="filterReady" style="background: green; display: none">
     {{ 'filterReady'|trans }}
-    <span id="closeFilterReady" onclick="parentNode.">
+    <span id="closeFilterReady" onclick="closeMsg('closeFilterReady');">
         <i class="icofont-close-line"></i>
     </span>
 </div>
 
-<div class="warning" id="filterError" style="background: red; display: none">
+<div class="warning" id="filterError" onclick="closeFilterError()" style="background: red; display: none">
     {{ 'filterError'|trans }}
-    <span id="closeFilterError" onclick="parentNode.">
+    <span id="closeFilterError" onclick="closeMsg('closeFilterError');">
         <i class="icofont-close-line"></i>
     </span>
 </div>
@@ -80,117 +80,6 @@
 
 {% block js %}
 <script>
-
-function filterPosts() {
-    scope = document.getElementById("scope").value
-    limit = document.getElementById("limit").value
-    order = document.getElementById("order").value
-
-    url = "{{ url('app_home') }}" + "/filter/" + scope + "/" + limit + "/" + order
-
-    window.location = url
-}
-
-/**
- * NOTE: There's a bug in this function, if you discovered the origin of the bug, please inform us (@see commented lines at the end)
- */
-function recordAsDefault() {
-    url_scope = "{{ url('settings_edit', {'setting': 'default_home_scope_filter', 'value': 'aaa'}) }}"
-    url_scope = url_scope.replace("aaa", document.getElementById("scope").value)
-
-    url_limit = "{{ url('settings_edit', {'setting': 'default_home_limit_filter', 'value': 'aaa'}) }}"
-    url_limit = url_limit.replace("aaa", document.getElementById("limit").value)
-
-    url_order = "{{ url('settings_edit', {'setting': 'default_home_order_filter', 'value': 'aaa'}) }}"
-    url_order = url_order.replace("aaa", document.getElementById("order").value)
-
-    success = false
-
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            if (this.responseText === "true") {
-                success = true
-            } else {
-                success = false
-            }
-        }
-    };
-    xmlhttp.open("GET", url_scope, true);
-    xmlhttp.send();
-
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            if (this.responseText === "true") {
-                success = true
-            } else {
-                success = false
-            }
-        }
-    };
-    xmlhttp.open("GET", url_limit, true);
-    xmlhttp.send();
-
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            if (this.responseText === "true") {
-                success = true
-            } else {
-                success = false
-            }
-        }
-    };
-    xmlhttp.open("GET", url_order, true);
-    xmlhttp.send();
-
-    //if (success === true) {
-        document.getElementById("filterReady").style.display = "block";
-    //} else {
-    //    document.getElementById("filterError").style.display = "block";
-    //}
-}
-
-function closeFilterReady() {
-    var close = document.getElementById("filterReady");
-    close.style.display = "none";
-}
-
-var closeButton = document.getElementById("closeFilterReady")
-closeButton.addEventListener('click', closeFilterReady)
-
-function closeFilterError() {
-    var close = document.getElementById("filterError");
-    close.style.display = "none";
-}
-
-var closeButtonError = document.getElementById("closeFilterError")
-closeButtonError.addEventListener('click', closeFilterError)
-
-function changeColor(e) {
-    color = "c" + e['target'].value
-    textarea = document.getElementsByClassName('textarea')
-    classes = textarea[0].className
-    classes = classes.split("c")
-    classes[0] += color
-    textarea[0].className = classes[0]
-}
-
-function changeSize(e) {
-    size = "fs" + e['target'].value
-    textarea = document.getElementsByClassName('ta')
-    classes = textarea[0].className
-    classes = classes.split("fs")
-    classes[0] += size
-    textarea[0].className = classes[0]
-
-    sizeDisplay = document.getElementsByClassName('sizeDisplay')
-    classesSize = sizeDisplay[0].className
-    classesSize = classesSize.split("fs")
-    classesSize[0] += size
-    sizeDisplay[0].className = classesSize[0]
-}
 
 document.getElementsByName('form[color]').forEach(function(element) {
     element.addEventListener('change', changeColor)

@@ -57,22 +57,10 @@
 
 {% if error is defined %}
 <div class="warning" id="Error" style="background: red;">
-{{ error|trans }}
-    <span id="closeError" onclick="parentNode.">
+    {{ error|trans }}
+    <span id="closeError" onclick="closeMsg('closeError');">
         <i class="icofont-close-line"></i>
     </span>
 </div>
 {% endif %}
-{% endblock %}
-
-{% block js %}
-<script>
-function closeError(e) {
-    var error = document.getElementById("Error")
-    error.parentNode.removeChild(error)
-}
-
-var closeButton = document.getElementById('closeError')
-closeButton.addEventListener('click', closeError)
-</script>
 {% endblock %}

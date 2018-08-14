@@ -12,7 +12,7 @@
     <a href="#" onclick="openTab('false_accounts')" style="background-color: yellow; color: black;">{{ 'false_accounts'|trans }}<i class="icofont-thin-double-right"></i></a>
     <a href="#" onclick="openTab('manage_roles')">{{ 'manage_roles'|trans }}<i class="icofont-thin-double-right"></i></a>
     <a href="#" onclick="openTab('manage_laws')">{{ 'manage_laws'|trans }}<i class="icofont-thin-double-right"></i></a>
-    <a href="#" onclick="openTab('manage_authorization')">{{ 'manage_authorization'|trans }}<i class="icofont-thin-double-right"></i></a>
+    <a href="#" onclick="openTab('manage_authorization')" style="background-color: yellow; color: black;">{{ 'manage_authorization'|trans }}<i class="icofont-thin-double-right"></i></a>
 </div>
 
 <div class="tabContent" id="complaints_office">
@@ -27,27 +27,4 @@
 {% include 'security/admin/manage_roles.html.twig' %}
 {% include 'security/mod/manage_laws.html.twig' %}
 {% include 'security/admin/manage_authorization.html.twig' %}
-{% endblock %}
-
-{% block js %}
-<script>
-    function openTab(tabName) {
-        tabcontent = document.getElementsByClassName("tabContent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-
-        document.getElementById(tabName).style.display = "grid";
-    }
-
-    function openSubTab(subTabName) {
-        tabcontent = document.getElementsByClassName("subTabContent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-
-        document.getElementById(subTabName).style.display = "grid";
-        document.getElementById('submit_authorization').style.display = "block";
-    }
-</script>
 {% endblock %}

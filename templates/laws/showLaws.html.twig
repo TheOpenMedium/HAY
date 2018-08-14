@@ -29,17 +29,4 @@
         </div>
     {% endfor %}
 </div>
-<script>
-    function showLaws(e, id) {
-        markdown = document.getElementById(id)
-
-        if (markdown.style.display == "none") {
-            markdown.style.display = "block"
-            e.className = "icofont-thin-right icofont-rotate-90"
-        } else {
-            markdown.style.display = "none"
-            e.className = "icofont-thin-right"
-        }
-    }
-</script>
 {% endblock %}

@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script>
+            // Put here JS variables
+            var url_home = "{{ url('app_home') }}"
+            var url_scope = "{{ url('settings_edit', {'setting': 'default_home_scope_filter', 'value': 'aaa'}) }}"
+            var url_limit = "{{ url('settings_edit', {'setting': 'default_home_limit_filter', 'value': 'aaa'}) }}"
+            var url_order = "{{ url('settings_edit', {'setting': 'default_home_order_filter', 'value': 'aaa'}) }}"
+            var url_markdown = "{{ url('markdown_render') }}"
+            var color = "c" + "{% if color is defined %}{{ color }}{% endif %}"
+            var twig_size = "{% if size is defined %}{{ size }}{% endif %}"
+        </script>
         <meta charset="UTF-8" />
         <link rel="icon" href="/ressources/HAYlogo.svg" />
         <link rel="stylesheet" href="https://theopenmedium.org/ressources/icofont/icofont.css" type="text/css" />
@@ -13,6 +23,8 @@
         <link rel="stylesheet" href="/styles/user.css" type="text/css" />
         <link rel="stylesheet" href="/styles/font.css" type="text/css" />
         <link rel="stylesheet" href="/styles/markdown.css" type="text/css" />
+        <script type="text/javascript" src="/scripts/functions.js"></script>
+        <script type="text/javascript" src="/scripts/ajax.js"></script>
         <title>{% block title %}Ce titre a un problème...{% endblock %}</title>
         <meta name="description" content="" />
         <meta name="keywords" content="" />
