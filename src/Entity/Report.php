@@ -102,6 +102,30 @@ class Report
 
     public function __construct()
     {
+        $this->date = new \Datetime();
+    }
+
+    public function __toString() {
+        return 'Report: '.$this->id.' | ['.$this->reporter.'] => ['.$this->reported_user.'] | Law: '.$this->law.' | Validated: '.(($this->validated != NULL) ? $this->validated : 'NULL');
+    }
+
+    public function browse()
+    {
+        $result = array();
+
+        foreach ($this as $key => $value) {
+            if ($value !== NULL) {
+                $result[$key] = $value;
+            } else {
+                $result[$key] = 'NULL';
+            }
+        }
+
+        return $result;
+    }
+
+    public function __construct()
+    {
         $this->moderators = new ArrayCollection();
     }
 
