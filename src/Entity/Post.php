@@ -66,10 +66,16 @@ class Post
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Report", mappedBy="reported_post")
+     */
+    private $reported;
+
     public function __construct()
     {
         $this->date_post = new \Datetime();
         $this->comments = new ArrayCollection();
+        $this->reported = new ArrayCollection();
     }
 
     public function __toString() {
@@ -197,6 +203,37 @@ class Post
             // set the owning side to null (unless already changed)
             if ($comment->getStatus() === $this) {
                 $comment->setStatus(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Report[]
+     */
+    public function getReported(): Collection
+    {
+        return $this->reported;
+    }
+
+    public function addReported(Report $reported): self
+    {
+        if (!$this->reported->contains($reported)) {
+            $this->reported[] = $reported;
+            $reported->setReportedPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReported(Report $reported): self
+    {
+        if ($this->reported->contains($reported)) {
+            $this->reported->removeElement($reported);
+            // set the owning side to null (unless already changed)
+            if ($reported->getReportedPost() === $this) {
+                $reported->setReportedPost(null);
             }
         }
 

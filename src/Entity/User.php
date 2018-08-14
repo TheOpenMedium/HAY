@@ -147,6 +147,21 @@ class User implements UserInterface, \Serializable
      */
     private $laws;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Report", mappedBy="reporter")
+     */
+    private $reports;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Report", mappedBy="reported_user", orphanRemoval=true)
+     */
+    private $reported;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Report", mappedBy="moderators")
+     */
+    private $processed_reports;
+
     public function __construct()
     {
         $this->date_sign = new \Datetime();
@@ -162,6 +177,9 @@ class User implements UserInterface, \Serializable
         $this->alt = 'Profile picture';
         $this->roles = array('ROLE_USER');
         $this->laws = new ArrayCollection();
+        $this->reports = new ArrayCollection();
+        $this->reported = new ArrayCollection();
+        $this->processed_reports = new ArrayCollection();
     }
 
     public function __toString() {
@@ -621,6 +639,96 @@ class User implements UserInterface, \Serializable
             if ($law->getUser() === $this) {
                 $law->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Report[]
+     */
+    public function getReports(): Collection
+    {
+        return $this->reports;
+    }
+
+    public function addReport(Report $report): self
+    {
+        if (!$this->reports->contains($report)) {
+            $this->reports[] = $report;
+            $report->setReporter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReport(Report $report): self
+    {
+        if ($this->reports->contains($report)) {
+            $this->reports->removeElement($report);
+            // set the owning side to null (unless already changed)
+            if ($report->getReporter() === $this) {
+                $report->setReporter(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Report[]
+     */
+    public function getReported(): Collection
+    {
+        return $this->reported;
+    }
+
+    public function addReported(Report $reported): self
+    {
+        if (!$this->reported->contains($reported)) {
+            $this->reported[] = $reported;
+            $reported->setReportedUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReported(Report $reported): self
+    {
+        if ($this->reported->contains($reported)) {
+            $this->reported->removeElement($reported);
+            // set the owning side to null (unless already changed)
+            if ($reported->getReportedUser() === $this) {
+                $reported->setReportedUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Report[]
+     */
+    public function getProcessedReports(): Collection
+    {
+        return $this->processed_reports;
+    }
+
+    public function addProcessedReport(Report $processedReport): self
+    {
+        if (!$this->processed_reports->contains($processedReport)) {
+            $this->processed_reports[] = $processedReport;
+            $processedReport->addModerator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProcessedReport(Report $processedReport): self
+    {
+        if ($this->processed_reports->contains($processedReport)) {
+            $this->processed_reports->removeElement($processedReport);
+            $processedReport->removeModerator($this);
         }
 
         return $this;
