@@ -1,0 +1,40 @@
+<div class="tabContent" id="manage_authorization">
+    <h1 style="margin-bottom: 0;">{{ 'manage_authorization'|trans }}</h1>
+    <div class="criteria" style="display: flex; padding: 0px; height: 40px;">
+        <a href="#" onclick="openSubTab('subTabUser')" class="user"><span>{{ 'user'|trans }}</span></a>
+        <a href="#" onclick="openSubTab('subTabHelper')" class="helper"><span>{{ 'helper'|trans }}</span></a>
+        <a href="#" onclick="openSubTab('subTabDev')" class="dev"><span>{{ 'dev'|trans }}</span></a>
+        <a href="#" onclick="openSubTab('subTabDesign')" class="design"><span>{{ 'design'|trans }}</span></a>
+        <a href="#" onclick="openSubTab('subTabTrans')" class="trans"><span>{{ 'trans'|trans }}</span></a>
+        <a href="#" onclick="openSubTab('subTabMod')" class="mod"><span>{{ 'mod'|trans }}</span></a>
+        {% if is_granted('ROLE_ROOT') %}<a href="#" onclick="openSubTab('subTabAdmin')" class="admin"><span>{{ 'admin'|trans }}</span></a>{% endif %}
+        {% if is_granted('ROLE_OWNER') %}<a href="#" onclick="openSubTab('subTabRoot')" class="root"><span>{{ 'root'|trans }}</span></a>{% endif %}
+    </div>
+    <div class="subTabContent" id="subTabUser">
+        <h1>{{ 'user'|trans }}</h1>
+    </div>
+    <div class="subTabContent" id="subTabHelper">
+        <h1>{{ 'helper'|trans }}</h1>
+    </div>
+    <div class="subTabContent" id="subTabDev">
+        <h1>{{ 'dev'|trans }}</h1>
+    </div>
+    <div class="subTabContent" id="subTabDesign">
+        <h1>{{ 'design'|trans }}</h1>
+    </div>
+    <div class="subTabContent" id="subTabTrans">
+        <h1>{{ 'trans'|trans }}</h1>
+    </div>
+    <div class="subTabContent" id="subTabMod">
+        <h1>{{ 'mod'|trans }}</h1>
+    </div>
+    <div class="subTabContent" id="subTabAdmin">
+        <h1>{{ 'admin'|trans }}</h1>
+    </div>
+    {% if is_granted('ROLE_OWNER') %}
+    <div class="subTabContent" id="subTabRoot">
+        <h1>{{ 'root'|trans }}</h1>
+    </div>
+    {% endif %}
+    <label class="submit" for="form_submit" style="grid-column: 1/3; display: none;" id="submit_authorization">{{ 'edit'|trans }}</label>
+</div>
