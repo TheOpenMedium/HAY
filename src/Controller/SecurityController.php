@@ -9,6 +9,7 @@ use App\Entity\Notification;
 use App\Entity\FriendRequest;
 use App\Entity\Statistics;
 use App\Entity\Laws;
+use App\Entity\Report;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -162,6 +163,8 @@ class SecurityController extends Controller
             $repo = $this->getDoctrine()->getRepository(Statistics::class);
         } elseif ($entity == "laws") {
             $repo = $this->getDoctrine()->getRepository(Laws::class);
+        } elseif ($entity == "report") {
+            $repo = $this->getDoctrine()->getRepository(Report::class);
         } else {
             throw new \Exception('Sorry, but this entity doesn\'t exist.');
         }
@@ -235,9 +238,9 @@ class SecurityController extends Controller
             }
         }
 
-        $response = 'There is no entity.';
+        $response = 'The query returned no entity.';
 
-        if ($entities) {
+        if (isset($entities[0])) {
             $response = '<table>';
             // Table Head
             $response .= '<tr>';

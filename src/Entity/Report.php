@@ -103,6 +103,7 @@ class Report
     public function __construct()
     {
         $this->date = new \Datetime();
+        $this->moderators = new ArrayCollection();
     }
 
     public function __toString() {
@@ -122,11 +123,6 @@ class Report
         }
 
         return $result;
-    }
-
-    public function __construct()
-    {
-        $this->moderators = new ArrayCollection();
     }
 
     public function getId(): ?int
