@@ -1,6 +1,21 @@
 <div class="reportBackground">
-    <div class="report">
+    {{ form_start(report, {'attr': {'class': 'report', 'action': path('report', {'type': entity, 'id': id})}}) }}
         <i class="icofont-close-line" style="float: right; cursor: pointer;" onclick="closeReportWindow();"></i>
         <h1 style="border-bottom: 5px solid var(--hay-color);">{{ 'report'|trans }}</h1>
-    </div>
+        <div style="display: grid; grid-template-columns: 50% 20% 30% auto; grid-gap: 5px; padding-right: 30px;">
+            <span>
+                <select id="reportLaw" onchange="changeReportLaws()">
+                    <option value="0" selected>{{ 'idk'|trans }}</option>
+                    {% for law in laws %}
+                        <option value="{{ law.id }}">{{ law.id }} - {{ law.title }}</option>
+                    {% endfor %}
+                </select>
+            </span>
+            <a href="{{ url('laws') }}" style="background-color: var(--hay-color); border-radius: 5px; display: flex; justify-content: center; align-items: center;">{{ 'see_laws'|trans }}</a>
+            {{ form_widget(report.emergency_level, {'attr': {'style': 'width: auto;', 'min': '0', 'max': '10', 'value': '0'}}) }}
+            <i class="icofont-question-square" title="{{ 'emergency_level_info_box'|trans }}"></i>
+            {{ form_widget(report.reporter_msg, {'attr': {'style': 'grid-column: 1/5; resize: none; height: 250px;'}}) }}
+            {{ form_widget(report.submit, {'attr': {'style': 'grid-column: 1/5;', 'class': 'submit'}, 'label': 'submit'|trans}) }}
+        </div>
+    {{ form_end(report) }}
 </div>

@@ -98,6 +98,12 @@ new_laws: Nouvelles lois
 # Signaler
 
 report: Signaler
+idk: Je ne sais pas
+submit: Envoyer
+emergency_level_info_box: |
+    Spécifiez l'importance du signalement
+    0- Pas très urgent (Comme une mauvaise blague)
+    10- Très urgent (Comme un suicide/meurtre/viol)
 
 ################################################################################
 

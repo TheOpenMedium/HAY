@@ -90,6 +90,12 @@ new_laws: New laws
 # Report
 
 report: Report
+idk: I Don't Know
+submit: Submit
+emergency_level_info_box: |
+    Specify the emergency of the report
+    0- Not urgent (Like a bad joke)
+    10- Very urgent (Like suicide/murder/rape)
 
 ################################################################################
 

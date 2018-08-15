@@ -7,9 +7,9 @@ function filterPosts() {
     limit = document.getElementById("limit").value
     order = document.getElementById("order").value
 
-    url = url_home + "/filter/" + scope + "/" + limit + "/" + order
+    url_filter = url_home + "/filter/" + scope + "/" + limit + "/" + order
 
-    window.location = url
+    window.location = url_filter
 }
 
 /**
@@ -17,9 +17,7 @@ function filterPosts() {
  */
 function recordAsDefault() {
     url_scope = url_scope.replace("aaa", document.getElementById("scope").value)
-
     url_limit = url_limit.replace("aaa", document.getElementById("limit").value)
-
     url_order = url_order.replace("aaa", document.getElementById("order").value)
 
     success = false
@@ -138,29 +136,4 @@ function getNewPosts() {
     };
     xmlhttp.open("GET", url_r, true);
     xmlhttp.send();
-}
-
-// Report
-
-function openReportWindow() {
-    var xmlhttp = new XMLHttpRequest()
-    xmlhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            document.body.style.overflowY = "hidden"
-            document.body.innerHTML += this.responseText
-        }
-    }
-    xmlhttp.open("GET", url_report, true);
-    xmlhttp.send();
-}
-
-function closeReportWindow() {
-    document.body.style.overflowY = "auto"
-    reports = document.getElementsByClassName('reportBackground')
-
-    length = reports.length
-
-    for (var i = 0; i < length; i++) {
-        reports[0].parentNode.removeChild(reports[0])
-    }
 }
