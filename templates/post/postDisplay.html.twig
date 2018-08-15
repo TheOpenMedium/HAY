@@ -19,7 +19,11 @@
                 <a class="icofont-pencil-alt-2 fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_edit', {'id': post.id}) }}"></a>
             {% endif %}
             {% endif %}
-            <i class="icofont-navigation-menu fs16"></i>
+            <i class="icofont-navigation-menu fs16 burgerMenu">
+                <div class="burgerMenuContent">
+                    <a href="{{ url('post_show', {'id': post.id}) }}">{{ 'show_post'|trans }}</a>
+                </div>
+            </i>
         </div>
         <div style="text-align: center; grid-row: 2; -ms-grid-row: 2; font-size: calc(8px * var(--length-multiplication)); margin: 0px calc(5px * var(--length-multiplication));">
             {{ post.datePost|date('date_format'|trans) }}
@@ -51,7 +55,11 @@
                         <a class="icofont-pencil-alt-2 fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: grey;" href="{{ url('comment_edit', {'id': comment.id}) }}"></a>
                     {% endif %}
                     {% endif %}
-                    <i class="icofont-navigation-menu fs16" style="color: grey;"></i>
+                    <i class="icofont-navigation-menu fs16 burgerMenu" style="color: grey;">
+                        <div class="burgerMenuContent">
+                            <a href="{{ url('comment_show', {'id': comment.id}) }}">{{ 'show_comment'|trans }}</a>
+                        </div>
+                    </i>
                 </div>
                 <div style="text-align: center; grid-row: 2; -ms-grid-row: 2; font-size: calc(8px * var(--length-multiplication)); color: grey; margin: 0px calc(5px * var(--length-multiplication));">
                     {{ comment.dateSend|date('date_format'|trans) }}

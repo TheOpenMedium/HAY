@@ -8,34 +8,43 @@
 
 {{ include("menu.html.twig") }}
 
-<div>
-    <div class="com" style="background-image: url('/ressources/anti-corner.png'); background-size: 50px; width: 600px; margin: auto;">
-        <table style="border: 0px; border-bottom: 1px solid grey; width: 550; margin-bottom: 5px;">
-            <tr>
-                <td style="padding-right: 2.5px;">
-                    <a href="{{ url('user_show', {'id': comment.user.id}) }}">
-                        <img src="{{ comment.user.url }}" width="40px" height="40px" alt="{{ comment.user.alt }}" style="position: relative; top: 2px;" />
+<div style="display: flex; justify-content: center;">
+    <div>
+        <div class="com fs16" style="width: calc(600px * var(--length-multiplication)); position: relative;">
+            <div class="infHAY-corner" style="position: absolute; left: calc(25px * var(--length-multiplication)); right: 0px; bottom: calc(30px * var(--length-multiplication));"></div>
+            <div class="commentContent" style="margin-top: 0;">
+                <div class="comInf" style="border: 0px; border-bottom: calc(1px * var(--length-multiplication)) solid grey; width: calc(550px * var(--length-multiplication)); margin-bottom: calc(5px * var(--length-multiplication));">
+                    <a style="justify-content: center;" href="{{ url('user_show', {'id': comment.user.id}) }}">
+                        <img src="{{ comment.user.url }}" alt="{{ comment.user.alt }}" style="width: calc(40px * var(--length-multiplication)); height: calc(40px * var(--length-multiplication));" />
                     </a>
-                </td>
-                <td style="border-left: 1px solid grey; padding-left: 15px; width: 85%; color: grey;"><a href="{{ url('user_show', {'id': comment.user.id}) }}">
-                    {{ comment.user.firstName }} {{ comment.user.lastName }}
-                    {% if comment.user.username %}{{ 'alias'|trans }} {{ comment.user.username }} {% endif %}
-                    {{ 'has_comment'|trans }}
-                </a></td>
-                <td style="width: 15%; cursor: default">
-                    {% if app.user %}
-                    {% if comment.user.id == app.user.id %}
-                        <a class="icofont-ui-delete" style="margin-right: 5px; text-decoration: none; color: grey;" href="{{ url('comment_delete', {'id': comment.id}) }}"></a>
-                        <a class="icofont-pencil-alt-2" style="margin-right: 5px; text-decoration: none; color: grey;" href="{{ url('comment_edit', {'id': comment.id}) }}"></a>
-                    {% endif %}
-                    {% endif %}
-                    <i class="icofont-navigation-menu" style="color: grey;"></i>
-                </td>
-            </tr>
-        </table>
-        {{ comment.comment|escape|replace({'&lt;br /&gt;': '<br />'})|raw }}
+                    <a href="{{ url('user_show', {'id': comment.user.id}) }}" class="fs16" style="border-left: calc(1px * var(--length-multiplication)) solid grey; padding-left: calc(15px * var(--length-multiplication)); width: 85%; color: grey;">
+                        {{ comment.user.firstName }} {{ comment.user.lastName }}
+                        {% if comment.user.username %}{{ 'alias'|trans }} {{ comment.user.username }} {% endif %}
+                        {{ 'has_comment'|trans }}
+                    </a>
+                    <div style="display: flex; padding: calc(5px * var(--length-multiplication)); cursor: default; padding-top: calc(2.5px * var(--length-multiplication)); grid-row: 1; -ms-grid-row: 1; justify-content: center;">
+                        {% if app.user %}
+                        {% if comment.user.id == app.user.id %}
+                            <a class="icofont-ui-delete fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: grey;" href="{{ url('comment_delete', {'id': comment.id}) }}"></a>
+                            <a class="icofont-pencil-alt-2 fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: grey;" href="{{ url('comment_edit', {'id': comment.id}) }}"></a>
+                        {% endif %}
+                        {% endif %}
+                        <i class="icofont-navigation-menu fs16 burgerMenu" style="color: grey;">
+                            <div class="burgerMenuContent">
+                                <a href="{{ url('comment_show', {'id': comment.id}) }}">{{ 'show_comment'|trans }}</a>
+                            </div>
+                        </i>
+                    </div>
+                    <div style="text-align: center; grid-row: 2; -ms-grid-row: 2; font-size: calc(8px * var(--length-multiplication)); color: grey; margin: 0px calc(5px * var(--length-multiplication));">
+                        {{ comment.dateSend|date('date_format'|trans) }}
+                    </div>
+                </div>
+                {{ comment.comment|escape|replace({'&lt;br /&gt;': '<br />'})|raw }}
+            </div>
+        </div>
+        <div class="end"></div>
+        <div class="comment-corner" style="background-color: var(--bg-light); bottom: calc(50px * var(--length-multiplication));"></div>
     </div>
-    <div class="end" style="width: 600px; margin: auto;"></div>
 </div>
 
 {% endblock %}
