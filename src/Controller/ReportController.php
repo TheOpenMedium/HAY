@@ -7,21 +7,22 @@ use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
 use App\Entity\Laws;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class ReportController extends AbstractController
+class ReportController extends Controller
 {
     /**
      * @Route("/{_locale}/report/{type}/{id}", name="report", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
-    public function reportAction(string $type, int $id)
+    public function reportAction(Request $request, string $type, int $id)
     {
         if ($type == 'user') {
             $entity = $this->getDoctrine()->getRepository(User::class)->find($id);
@@ -49,9 +50,24 @@ class ReportController extends AbstractController
         $reportForm = $this->createFormBuilder($report)
             ->add('law', HiddenType::class)
             ->add('emergency_level', IntegerType::class)
-            ->add('reporter_msg', TextareaType::class)
+            ->add('reporter_msg', TextareaType::class, array('required' => false))
             ->add('submit', SubmitType::class)
             ->getForm();
+
+        $reportForm->handleRequest($request);
+
+        // If he send a Report, the Report is saved into database.
+        if ($reportForm->isSubmitted() && $reportForm->isValid()) {
+            $report = $reportForm->getData();
+
+            // TODO: Sending notifications to reporter and reported
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($report);
+            $em->flush();
+
+            return $this->redirectToRoute('app_home');
+        }
 
         return $this->render('report/index.html.twig', array(
             'report' => $reportForm->createView(),
