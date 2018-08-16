@@ -14,6 +14,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ReportController extends Controller
@@ -79,7 +82,7 @@ class ReportController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/mod/list/report/{filter}/{limit}", name="list_report", requirements={
+     * @Route("/{_locale}/mod/list/report/{filter}/{limit}", name="report_list", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
@@ -145,12 +148,72 @@ class ReportController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/mod/advlist/report", name="adv_list_report", requirements={
+     * @Route("/{_locale}/mod/advlist/report", name="report_adv_list", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
     public function advReportListAction()
     {
         // code...
+    }
+
+    /**
+     * @Route("/{_locale}/mod/report/process/{report}", name="report_process", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function processReportAction(Request $request, Report $report)
+    {
+        $reportForm = $this->createFormBuilder($report)
+            ->add('validated', ChoiceType::class, array(
+                'choices' => array('Need Help' => NULL, 'Yes' => true, 'No' => false),
+                'multiple' => false,
+                'expanded' => true
+            ))
+            ->add('punishment', TextType::class, array('required' => false))
+            ->add('moderator_msg', TextareaType::class, array('required' => false))
+            ->add('submit', SubmitType::class)
+            ->getForm();
+
+        $reportForm->handleRequest($request);
+
+        // If he send a Report, the Report is saved into database.
+        if ($reportForm->isSubmitted() && $reportForm->isValid()) {
+            $report = $reportForm->getData();
+            $report->addModerator($this->getUser());
+            if ($report->getValidated() == NULL) {
+                $report->setNeedhelp(true);
+            }
+
+            // TODO: Sending notifications to reporter and reported
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirectToRoute('security_admin');
+        }
+
+        return $this->render('report/reportForm.html.twig', array(
+            'report' => $reportForm->createView(),
+            'id' => $report->getId()
+        ));
+    }
+
+    /**
+     * @Route("/{_locale}/mod/report/render/entity/{type}/{id}", name="report_render_entity", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function renderEntityReportAction($type, $id)
+    {
+        if ($type == 'post') {
+            $entity = $this->getDoctrine()->getRepository(Post::class)->find($id);
+
+            return $this->render('post/postDisplay.html.twig', array('postList' => [$entity]));
+        } else if ($type == 'comment') {
+            $entity = $this->getDoctrine()->getRepository(Comment::class)->find($id);
+
+            return $this->render('comment/commentDisplay.html.twig', array('comment' => $entity));
+        }
     }
 }

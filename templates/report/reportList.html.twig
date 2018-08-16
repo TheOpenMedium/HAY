@@ -1,31 +1,55 @@
 <div class="reportList">
-    <div class="reportElement">
         {% for report in reports %}
-            <div class="reportHeader">
-                {% if report.validated == NULL %}
-                    <i class="icofont-question-circle" style="color: orange;"></i>
-                {% elseif report.validated == true %}
-                    <i class="icofont-check-circled" style="color: green;"></i>
-                {% elseif report.validated == false %}
-                    <i class="icofont-close-circled" style="color: red;"></i>
-                {% endif %}
-                <div>
-                    {% if report.reportedComment != NULL %}
-                        <span style="font-weight: 900;">POST</span>
-                    {% elseif report.reportedPost != NULL %}
-                        <span style="font-weight: 900;">COMMENT</span>
-                    {% else %}
-                        <span style="font-weight: 900;">USER</span>
+            <div class="reportElement">
+                <div class="reportName">
+                    {% if report.validated == NULL %}
+                        <i class="icofont-question-circle" style="color: orange; grid-row: 1/3; font-size: 50px;"></i>
+                    {% elseif report.validated == true %}
+                        <i class="icofont-check-circled" style="color: green; grid-row: 1/3; font-size: 50px;"></i>
+                    {% elseif report.validated == false %}
+                        <i class="icofont-close-circled" style="color: red; grid-row: 1/3; font-size: 50px;"></i>
                     {% endif %}
-                    id: {{ report.id }} / law: {{ report.law }}
+                    <div>
+                        {% if report.reportedComment != NULL %}
+                            <span style="font-weight: 900;">COMMENT</span>
+                        {% elseif report.reportedPost != NULL %}
+                            <span style="font-weight: 900;">POST</span>
+                        {% else %}
+                            <span style="font-weight: 900;">USER</span>
+                        {% endif %}
+                        id: {{ report.id }} / law: {{ report.law }} / emergency: {{ report.emergencyLevel }}
+                    </div>
+                    <div style="overflow-y: auto; white-space: nowrap;">
+                        Reporter Message: {{ report.reporterMsg }}
+                    </div>
+                    <i class="icofont-thin-right" style="grid-row: 1/3; grid-column: 3; font-size: 50px; cursor: pointer;" onclick="showLaws(this, {{ report.id }});"></i>
                 </div>
-                <div>
-                    Reporter message: {{ report.reporterMsg }}
+                <div id="{{ report.id }}" style="display: none; padding: 10px;">
+                    <h1>Informations</h1>
+                    {% if report.reportedComment != NULL %}
+                        Comment: <br />
+                        <div style="padding: 50px; background-color: var(--bg-light);">
+                            {{ render(path('report_render_entity', {'type': 'comment', 'id': report.reportedComment.id})) }}
+                        </div>
+                        Original Post: <br />
+                        <div style="padding: 50px; background-color: var(--bg-light);">
+                            {{ render(path('report_render_entity', {'type': 'post', 'id': report.reportedComment.post.id})) }}
+                        </div>
+                    {% elseif report.reportedPost != NULL %}
+                        Post: <br />
+                        <div style="padding: 50px; background-color: var(--bg-light);">
+                            {{ render(path('report_render_entity', {'type': 'post', 'id': report.reportedPost.id})) }}
+                        </div>
+                    {% else %}
+                        NOT SUPPORTED YET
+                    {% endif %}
+                    {% if report.validated == NULL %}
+                        <h1>Process</h1>
+                        {{ render(path('report_process', {'report': report.id})) }}
+                    {% else %}
+                        Already Processed
+                    {% endif %}
                 </div>
-            </div>
-            <div class="reportFooter">
-                //
             </div>
         {% endfor %}
-    </div>
 </div>

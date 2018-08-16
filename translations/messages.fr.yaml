@@ -100,6 +100,7 @@ new_laws: Nouvelles lois
 report: Signaler
 idk: Je ne sais pas
 submit: Envoyer
+reporter_msg: Quelque chose dont vous voulez nous faire part ?
 emergency_level_info_box: |
     Spécifiez l'importance du signalement
     0- Pas très urgent (Comme une mauvaise blague)
@@ -158,6 +159,15 @@ admin: Administrateur
 admin_area: Zone Administrateur
 manage_roles: Gérer les roles
 manage_authorization: Gérer les autorisations
+emergency: Importance
+recent: Les plus récent
+oldest: Les plus ancient
+contested: Contesté
+needhelp: Besoin d'aide
+validated: Validé
+closed: Fermé
+all: Tous
+advanced: Avancé
 
 # Root Area
 # Zone Super Utilisateur

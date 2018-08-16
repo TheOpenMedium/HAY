@@ -110,8 +110,8 @@ function openSubTab(subTabName) {
 // Report
 
 function openReportWindow(entity, id) {
-    url_report = url_report.replace('aaa', entity)
-    url_report = url_report.replace('bbb', id)
+    url_report_temp = url_report.replace('aaa', entity)
+    url_report_temp = url_report_temp.replace('bbb', id)
 
     var xmlhttp = new XMLHttpRequest()
     xmlhttp.onreadystatechange = function () {
@@ -120,7 +120,7 @@ function openReportWindow(entity, id) {
             document.body.innerHTML += this.responseText
         }
     }
-    xmlhttp.open("GET", url_report, true);
+    xmlhttp.open("GET", url_report_temp, true);
     xmlhttp.send();
 }
 

@@ -14,7 +14,7 @@
             <a href="{{ url('laws') }}" style="background-color: var(--hay-color); border-radius: 5px; display: flex; justify-content: center; align-items: center;">{{ 'see_laws'|trans }}</a>
             {{ form_widget(report.emergency_level, {'attr': {'style': 'width: auto;', 'min': '0', 'max': '10', 'value': '0'}}) }}
             <i class="icofont-question-square" title="{{ 'emergency_level_info_box'|trans }}"></i>
-            {{ form_widget(report.reporter_msg, {'attr': {'style': 'grid-column: 1/5; resize: none; height: 250px;'}}) }}
+            {{ form_widget(report.reporter_msg, {'attr': {'style': 'grid-column: 1/5; resize: none; height: 250px;', 'placeholder': 'reporter_msg'}}) }}
             {{ form_widget(report.submit, {'attr': {'style': 'grid-column: 1/5;', 'class': 'submit'}, 'label': 'submit'|trans}) }}
         </div>
     {{ form_end(report) }}

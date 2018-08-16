@@ -20,3 +20,12 @@
     padding: 15px;
     border-top: 5px solid var(--hay-color);
 }
+
+.reportName {
+    display: grid;
+    grid-template-columns: 50px auto 50px;
+    grid-template-rows: 19px 31px; 
+    border-radius: 5px;
+    background-color: dimgrey;
+    padding: 25px;
+}

@@ -92,6 +92,7 @@ new_laws: New laws
 report: Report
 idk: I Don't Know
 submit: Submit
+reporter_msg: Something you want to inform us about?
 emergency_level_info_box: |
     Specify the emergency of the report
     0- Not urgent (Like a bad joke)
@@ -143,6 +144,15 @@ admin: Administrator
 admin_area: Administrator Area
 manage_roles: Manage roles
 manage_authorization: Manage authorization
+emergency: Emergency
+recent: The most recent
+oldest: Oldest
+contested: Contested
+needhelp: Need Help
+validated: Validated
+closed: Closed
+all: All
+advanced: Advanced
 
 # Root Area
 root: Super User

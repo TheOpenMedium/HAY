@@ -1,3 +1,50 @@
 <div class="tabContent" id="complaints_office">
-    <h1>{{ 'complaints_office'|trans }}</h1>
+    <h1 style="margin-bottom: 0;">{{ 'complaints_office'|trans }}</h1>
+    <div class="criteria" style="display: flex; padding: 0px; height: 40px;">
+        <a href="#" onclick="getReportList('emergency')" style="flex-grow: 1;"><span>{{ 'emergency'|trans }}</span></a>
+        <a href="#" onclick="getReportList('recent')" style="flex-grow: 1;"><span>{{ 'recent'|trans }}</span></a>
+        <a href="#" onclick="getReportList('oldest')" style="flex-grow: 1;"><span>{{ 'oldest'|trans }}</span></a>
+        <a href="#" onclick="getReportList('contested')" style="flex-grow: 1;"><span>{{ 'contested'|trans }}</span></a>
+        <a href="#" onclick="getReportList('needhelp')" style="flex-grow: 1;"><span>{{ 'needhelp'|trans }}</span></a>
+        <a href="#" onclick="getReportList('validated')" style="flex-grow: 1;"><span>{{ 'validated'|trans }}</span></a>
+        <a href="#" onclick="getReportList('closed')" style="flex-grow: 1;"><span>{{ 'closed'|trans }}</span></a>
+        <a href="#" onclick="getReportList('all')" style="flex-grow: 1;"><span>{{ 'all'|trans }}</span></a>
+        <a href="#" onclick="openSubTab('advanced')" style="flex-grow: 1;"><span>{{ 'advanced'|trans }}</span></a>
+    </div>
+    <div class="subTabContent" id="simple">
+    </div>
+    <div class="subTabContent" id="advanced">
+        Advanced
+    </div>
+    <script>
+        function getReportList(filter) {
+            var url_report_list = "{{ url('report_list', {'filter': 'aaa', 'limit': 'bbb'}) }}"
+            url_report_list = url_report_list.replace('aaa', filter)
+            url_report_list = url_report_list.replace('bbb', 10)
+
+            var xmlhttp = new XMLHttpRequest()
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById('simple').innerHTML = this.responseText
+                }
+            }
+            xmlhttp.open("GET", url_report_list, true);
+            xmlhttp.send();
+
+            openSubTab('simple')
+        }
+
+        function reportChangeValidated(id) {
+            if (document.getElementById('form_validated_0_' + id).checked) {
+                document.getElementById('form_punishment_' + id).disabled = true
+                document.getElementById('form_moderator_msg_' + id).disabled = false
+            } else if (document.getElementById('form_validated_1_' + id).checked) {
+                document.getElementById('form_punishment_' + id).disabled = false
+                document.getElementById('form_moderator_msg_' + id).disabled = false
+            } else if (document.getElementById('form_validated_2_' + id).checked) {
+                document.getElementById('form_punishment_' + id).disabled = true
+                document.getElementById('form_moderator_msg_' + id).disabled = true
+            }
+        }
+    </script>
 </div>

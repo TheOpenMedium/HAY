@@ -1,0 +1,11 @@
+{{ form_start(report, {'attr': {'style': 'display: grid; grid-template-columns: auto 80%; grid-column-gap: 10px;', 'action': path('report_process', {'report': id})}}) }}
+    <span style="display: flex; justify-content: center; align-items: center;">Validation:</span>
+    <div id="form_validated_{{ id }}" style="grid-row: 2; display: grid; background-color: var(--hay-color); padding: 5px;">
+        {{ form_row(report.validated[0], {'attr': {'style': 'float: left;', 'onchange': 'reportChangeValidated(' ~ id ~ ')'}, 'id': 'form_validated_0_' ~ id, 'name': 'validated_' ~ id}) }}
+        {{ form_row(report.validated[1], {'attr': {'style': 'float: left;', 'onchange': 'reportChangeValidated(' ~ id ~ ')'}, 'id': 'form_validated_1_' ~ id, 'name': 'validated_' ~ id}) }}
+        {{ form_row(report.validated[2], {'attr': {'style': 'float: left;', 'onchange': 'reportChangeValidated(' ~ id ~ ')'}, 'id': 'form_validated_2_' ~ id, 'name': 'validated_' ~ id}) }}
+    </div>
+    {{ form_widget(report.punishment, {'attr': {'style': 'grid-column: 2; background-color: var(--gray-color)', 'class': 'login', 'placeholder': 'punishment'}, 'id': 'form_punishment_' ~ id, 'disabled': true}) }}
+    {{ form_widget(report.moderator_msg, {'attr': {'style': 'grid-column: 2; resize: none; height: 100%;', 'placeholder': 'moderator_message'}, 'id': 'form_moderator_msg_' ~ id}) }}
+    {{ form_widget(report.submit, {'attr': {'style': 'grid-column: 1/3;', 'class': 'submit'}, 'label': 'submit'|trans}) }}
+{{ form_end(report) }}
