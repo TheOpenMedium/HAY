@@ -86,6 +86,11 @@ class Report
     private $moderator_msg;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $needhelp;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $date_limit_contest;
@@ -296,6 +301,18 @@ class Report
     public function setModeratorMsg(?string $moderator_msg): self
     {
         $this->moderator_msg = $moderator_msg;
+
+        return $this;
+    }
+
+    public function getNeedhelp(): ?bool
+    {
+        return $this->needhelp;
+    }
+
+    public function setNeedhelp(?bool $needhelp): self
+    {
+        $this->needhelp = $needhelp;
 
         return $this;
     }

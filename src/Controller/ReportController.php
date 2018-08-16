@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
 use App\Entity\Laws;
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -75,5 +76,81 @@ class ReportController extends Controller
             'id' => $id,
             'laws' => $laws
         ));
+    }
+
+    /**
+     * @Route("/{_locale}/mod/list/report/{filter}/{limit}", name="list_report", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function reportListAction(string $filter = 'emergency', int $limit = 10)
+    {
+        if ($filter == 'emergency') {
+            $reports = $this->getDoctrine()->getRepository(Report::class)->findBy(
+                ['validated' => NULL],
+                ['emergency_level' => 'DESC'],
+                $limit
+            );
+        } elseif ($filter == 'recent') {
+            $reports = $this->getDoctrine()->getRepository(Report::class)->findBy(
+                ['validated' => NULL],
+                ['date' => 'DESC'],
+                $limit
+            );
+        } elseif ($filter == 'oldest') {
+            $reports = $this->getDoctrine()->getRepository(Report::class)->findBy(
+                ['validated' => NULL],
+                ['date' => 'ASC'],
+                $limit
+            );
+        } elseif ($filter == 'contested') {
+            $reports = $this->getDoctrine()->getRepository(Report::class)->findBy(
+                ['contested' => true],
+                ['date' => 'ASC'],
+                $limit
+            );
+        } elseif ($filter == 'needhelp') {
+            $reports = $this->getDoctrine()->getRepository(Report::class)->findBy(
+                ['needhelp' => true],
+                ['date' => 'ASC'],
+                $limit
+            );
+        } elseif ($filter == 'validated') {
+            $reports = $this->getDoctrine()->getRepository(Report::class)->findBy(
+                ['validated' => true],
+                ['date' => 'DESC'],
+                $limit
+            );
+        } elseif ($filter == 'closed') {
+            $criteria = new Criteria;
+
+            $criteria->where($criteria->expr()->neq('validated', NULL));
+            $criteria->orderBy(['date' => 'DESC']);
+            $criteria->setMaxResults($limit);
+
+            $reports = $this->getDoctrine()->getRepository(Report::class)->matching($criteria);
+        } elseif ($filter == 'all') {
+            $reports = $this->getDoctrine()->getRepository(Report::class)->findBy(
+                [],
+                ['date' => 'DESC'],
+                $limit
+            );
+        } else {
+            throw new \Exception("This filter doesn't exist");
+        }
+
+        return $this->render('report/reportList.html.twig', array(
+            'reports' => $reports
+        ));
+    }
+
+    /**
+     * @Route("/{_locale}/mod/advlist/report", name="adv_list_report", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function advReportListAction()
+    {
+        // code...
     }
 }

@@ -15,9 +15,7 @@
     <a href="#" onclick="openTab('manage_authorization')" style="background-color: yellow; color: black;">{{ 'manage_authorization'|trans }}<i class="icofont-thin-double-right"></i></a>
 </div>
 
-<div class="tabContent" id="complaints_office">
-    <h1>{{ 'complaints_office'|trans }}</h1>
-</div>
+{% include 'security/mod/complaints_office.html.twig' %}
 <div class="tabContent" id="investigations">
     <h1>{{ 'investigations'|trans }}</h1>
 </div>

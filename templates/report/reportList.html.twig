@@ -1,0 +1,31 @@
+<div class="reportList">
+    <div class="reportElement">
+        {% for report in reports %}
+            <div class="reportHeader">
+                {% if report.validated == NULL %}
+                    <i class="icofont-question-circle" style="color: orange;"></i>
+                {% elseif report.validated == true %}
+                    <i class="icofont-check-circled" style="color: green;"></i>
+                {% elseif report.validated == false %}
+                    <i class="icofont-close-circled" style="color: red;"></i>
+                {% endif %}
+                <div>
+                    {% if report.reportedComment != NULL %}
+                        <span style="font-weight: 900;">POST</span>
+                    {% elseif report.reportedPost != NULL %}
+                        <span style="font-weight: 900;">COMMENT</span>
+                    {% else %}
+                        <span style="font-weight: 900;">USER</span>
+                    {% endif %}
+                    id: {{ report.id }} / law: {{ report.law }}
+                </div>
+                <div>
+                    Reporter message: {{ report.reporterMsg }}
+                </div>
+            </div>
+            <div class="reportFooter">
+                //
+            </div>
+        {% endfor %}
+    </div>
+</div>
