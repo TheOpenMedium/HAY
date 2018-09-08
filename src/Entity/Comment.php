@@ -54,10 +54,16 @@ class Comment
      */
     private $reported;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Survey", mappedBy="comments")
+     */
+    private $surveys;
+
     public function __construct()
     {
         $this->date_send = new \Datetime();
         $this->reported = new ArrayCollection();
+        $this->surveys = new ArrayCollection();
     }
 
     public function __toString() {
@@ -162,6 +168,34 @@ class Comment
             if ($reported->getReportedComment() === $this) {
                 $reported->setReportedComment(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Survey[]
+     */
+    public function getSurveys(): Collection
+    {
+        return $this->surveys;
+    }
+
+    public function addSurvey(Survey $survey): self
+    {
+        if (!$this->surveys->contains($survey)) {
+            $this->surveys[] = $survey;
+            $survey->addComment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSurvey(Survey $survey): self
+    {
+        if ($this->surveys->contains($survey)) {
+            $this->surveys->removeElement($survey);
+            $survey->removeComment($this);
         }
 
         return $this;

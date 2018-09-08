@@ -71,11 +71,17 @@ class Post
      */
     private $reported;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Survey", mappedBy="posts")
+     */
+    private $surveys;
+
     public function __construct()
     {
         $this->date_post = new \Datetime();
         $this->comments = new ArrayCollection();
         $this->reported = new ArrayCollection();
+        $this->surveys = new ArrayCollection();
     }
 
     public function __toString() {
@@ -235,6 +241,34 @@ class Post
             if ($reported->getReportedPost() === $this) {
                 $reported->setReportedPost(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Survey[]
+     */
+    public function getSurveys(): Collection
+    {
+        return $this->surveys;
+    }
+
+    public function addSurvey(Survey $survey): self
+    {
+        if (!$this->surveys->contains($survey)) {
+            $this->surveys[] = $survey;
+            $survey->addPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSurvey(Survey $survey): self
+    {
+        if ($this->surveys->contains($survey)) {
+            $this->surveys->removeElement($survey);
+            $survey->removePost($this);
         }
 
         return $this;

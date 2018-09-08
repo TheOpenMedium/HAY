@@ -46,6 +46,11 @@ class Laws
      */
     private $user;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Survey", mappedBy="law", cascade={"persist", "remove"})
+     */
+    private $survey;
+
     public function __construct()
     {
         $this->date = new \Datetime();
@@ -123,6 +128,24 @@ class Laws
     public function setUser(?user $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getSurvey(): ?Survey
+    {
+        return $this->survey;
+    }
+
+    public function setSurvey(?Survey $survey): self
+    {
+        $this->survey = $survey;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newLaw = $survey === null ? null : $this;
+        if ($newLaw !== $survey->getLaw()) {
+            $survey->setLaw($newLaw);
+        }
 
         return $this;
     }

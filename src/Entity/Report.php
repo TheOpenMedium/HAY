@@ -105,6 +105,11 @@ class Report
      */
     private $contest_result;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Survey", mappedBy="report", cascade={"persist", "remove"})
+     */
+    private $survey;
+
     public function __construct()
     {
         $this->date = new \Datetime();
@@ -349,6 +354,24 @@ class Report
     public function setContestResult(?bool $contest_result): self
     {
         $this->contest_result = $contest_result;
+
+        return $this;
+    }
+
+    public function getSurvey(): ?Survey
+    {
+        return $this->survey;
+    }
+
+    public function setSurvey(?Survey $survey): self
+    {
+        $this->survey = $survey;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newReport = $survey === null ? null : $this;
+        if ($newReport !== $survey->getReport()) {
+            $survey->setReport($newReport);
+        }
 
         return $this;
     }
