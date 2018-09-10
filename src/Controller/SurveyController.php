@@ -16,6 +16,20 @@ class SurveyController extends Controller
     }
 
     /**
+     * Render a single survey
+     *
+     * @param Survey $survey The survey to render
+     *
+     * @Route("/{_locale}/show/survey", name="survey_show", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function showSurveyAction()
+    {
+        return $this->render('survey/showSurvey.html.twig');
+    }
+
+    /**
      * CAN'T BE ACCESSED BY URL, ONLY USED FOR THE SURVEY ENTITY.
      */
     public function fetchSurveyUsers(array $answers)

@@ -27,7 +27,7 @@ class PostController extends Controller
     /**
      * Render a single post
      *
-     * @param Post $id The post to render
+     * @param Post $post The post to render
      *
      * @Route("/{_locale}/show/post/{id}", name="post_show", requirements={
      *     "_locale": "%app.locales%"

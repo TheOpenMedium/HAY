@@ -1,0 +1,43 @@
+<div class="survey">
+    <div class="question">
+        Question
+    </div>
+    <div class="surveyUser">
+        By Lyes Saadi
+    </div>
+    <i class="icofont-navigation-menu fs16 burgerMenu">
+        <div class="burgerMenuContent">
+            <a href="#">Test</a>
+        </div>
+    </i>
+    <div class="results">
+        <span style="background-color: red; width: 60%;">No</span>
+        <span style="background-color: green; width: 25%;">Yes</span>
+        <span style="background-color: lightgray; width: 15%;">...</span>
+    </div>
+    <div class="resultsValues">
+        <span style="width: 60%;">60%</span>
+        <span style="width: 25%;">25%</span>
+        <span style="width: 15%;">15%</span>
+    </div>
+    <form>
+        <label>
+            <input name="surveyOption" id="Yes" value="Yes" type="radio">Yes
+        </label>
+        <label>
+            <input name="surveyOption" id="No" value="No" type="radio">No
+        </label>
+        <label>
+            <input name="surveyOption" id="Idk" value="Idk" type="radio">I don't know
+        </label>
+        <button type="submit" class="send">Send</button>
+        <span>130 Votes</span>
+        <span><i class="icofont-check-alt"></i> Your vote has been sended</span>
+    </form>
+</div>
+<script>
+    re = new RegExp("^\\s+$")
+
+    document.getElementsByClassName("results")[0].childNodes.forEach(function (elt) {if (re.test(elt.data)) {elt.parentNode.removeChild(elt);}})
+    document.getElementsByClassName("resultsValues")[0].childNodes.forEach(function (elt) {if (re.test(elt.data)) {elt.parentNode.removeChild(elt);}})
+</script>
