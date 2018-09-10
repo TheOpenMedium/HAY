@@ -25,6 +25,12 @@ class Survey
     private $date;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="surveys")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $question;
@@ -39,6 +45,17 @@ class Survey
      *  ]
      */
     private $answers;
+
+    /**
+     * @ORM\Column(type="array")
+     *
+     * @example: Answer's color have this format:
+     *  [
+     *      ["Yes"] => "55FF99"
+     *      ["No"] => "FF0000"
+     *  ]
+     */
+    private $color;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Post", inversedBy="surveys")
@@ -124,6 +141,18 @@ class Survey
         return $this;
     }
 
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
     public function getQuestion(): ?string
     {
         return $this->question;
@@ -140,6 +169,37 @@ class Survey
     {
         $controller = new SurveyController();
         return $controller->fetchSurveyUsers($this->answers);
+    }
+
+    public function getAnswersByPercentage(): ?array
+    {
+        $answers = $this->answers->toArray();
+        $total = 0;
+        foreach ($answers as $value) {
+            $total += count($value);
+        }
+        foreach ($answers as $key => $value) {
+            $answers[$key] = (count($value) / $total) * 100;
+        }
+        $total = 0;
+        foreach ($answers as $value) {
+            $total += $value;
+        }
+        if ($total != 100) {
+            $answers[count($value) - 1] += 100 - $total;
+        }
+        arsort($answers);
+        return $answers;
+    }
+
+    public function getAnswersTotal()
+    {
+        $answers = $this->answers->toArray();
+        $total = 0;
+        foreach ($answers as $value) {
+            $total += count($value);
+        }
+        return $total;
     }
 
     public function addAnswer(string $key, User $user): self
@@ -178,6 +238,18 @@ class Survey
         if (array_key_exists($key, $this->answers)) {
             unset($this->answers[$key]);
         }
+
+        return $this;
+    }
+
+    public function getColor(): ?array
+    {
+        return $this->color;
+    }
+
+    public function setColor(array $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }

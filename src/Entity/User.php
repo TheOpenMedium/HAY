@@ -162,6 +162,11 @@ class User implements UserInterface, \Serializable
      */
     private $processed_reports;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Survey", mappedBy="user")
+     */
+    private $surveys;
+
     public function __construct()
     {
         $this->date_sign = new \Datetime();
@@ -180,6 +185,7 @@ class User implements UserInterface, \Serializable
         $this->reports = new ArrayCollection();
         $this->reported = new ArrayCollection();
         $this->processed_reports = new ArrayCollection();
+        $this->surveys = new ArrayCollection();
     }
 
     public function __toString() {
@@ -729,6 +735,37 @@ class User implements UserInterface, \Serializable
         if ($this->processed_reports->contains($processedReport)) {
             $this->processed_reports->removeElement($processedReport);
             $processedReport->removeModerator($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Survey[]
+     */
+    public function getSurveys(): Collection
+    {
+        return $this->surveys;
+    }
+
+    public function addSurvey(Survey $survey): self
+    {
+        if (!$this->surveys->contains($survey)) {
+            $this->surveys[] = $survey;
+            $survey->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSurvey(Survey $survey): self
+    {
+        if ($this->surveys->contains($survey)) {
+            $this->surveys->removeElement($survey);
+            // set the owning side to null (unless already changed)
+            if ($survey->getUser() === $this) {
+                $survey->setUser(null);
+            }
         }
 
         return $this;

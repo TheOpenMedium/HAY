@@ -80,6 +80,11 @@ conf_password: Your previous password
 alt: Brief description of user's picture
 choose: Choose
 
+# Survey
+
+by: By
+delete: Delete
+
 # Laws
 
 preview: Preview

@@ -20,11 +20,11 @@ class SurveyController extends Controller
      *
      * @param Survey $survey The survey to render
      *
-     * @Route("/{_locale}/show/survey", name="survey_show", requirements={
+     * @Route("/{_locale}/show/survey/{survey}", name="survey_show", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
-    public function showSurveyAction()
+    public function showSurveyAction(Survey $survey)
     {
         return $this->render('survey/showSurvey.html.twig');
     }

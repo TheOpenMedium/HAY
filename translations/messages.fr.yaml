@@ -86,6 +86,12 @@ conf_password: Votre ancient mot de passe
 alt: Courte description de la photo de profile
 choose: Choisir
 
+# Survey
+# Sondage
+
+by: Par
+delete: Supprimer
+
 # Laws
 # Lois
 

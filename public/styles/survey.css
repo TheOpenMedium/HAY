@@ -41,6 +41,7 @@
     font-family: sans-serif;
     text-align: center;
     position: relative;
+    white-space: nowrap;
 }
 
 .survey .resultsValues {

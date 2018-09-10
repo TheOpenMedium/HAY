@@ -1,38 +1,38 @@
 <div class="survey">
     <div class="question">
-        Question
+        {{ survey.question }}
     </div>
     <div class="surveyUser">
-        By Lyes Saadi
+        {{ 'by'|trans }} {{ survey.user.firstName }} {{ survey.user.lastName }}
     </div>
     <i class="icofont-navigation-menu fs16 burgerMenu">
         <div class="burgerMenuContent">
+            {% if app.user == survey.user %}
+                <a href="#">{{ 'edit'|trans }}</a>
+                <a href="#">{{ 'delete'|trans }}</a>
+            {% endif %}
             <a href="#">Test</a>
         </div>
     </i>
     <div class="results">
-        <span style="background-color: red; width: 60%;">No</span>
-        <span style="background-color: green; width: 25%;">Yes</span>
-        <span style="background-color: lightgray; width: 15%;">...</span>
+        {% for key, value in survey.answersByPercentage %}
+            <span style="background-color: {{ survey.color[key] }}; width: {{ value }}%;">{{ key }}</span>
+        {% endfor %}
     </div>
     <div class="resultsValues">
-        <span style="width: 60%;">60%</span>
-        <span style="width: 25%;">25%</span>
-        <span style="width: 15%;">15%</span>
+        {% for value in survey.answersByPercentage %}
+            <span style="width: {{ value }}%;">{{ value }}%</span>
+        {% endfor %}
     </div>
     <form>
-        <label>
-            <input name="surveyOption" id="Yes" value="Yes" type="radio">Yes
-        </label>
-        <label>
-            <input name="surveyOption" id="No" value="No" type="radio">No
-        </label>
-        <label>
-            <input name="surveyOption" id="Idk" value="Idk" type="radio">I don't know
-        </label>
+        {% for key, value in survey.answers %}
+            <label>
+                <input name="surveyOption" value="{{ key }}" type="radio">{{ key }}
+            </label>
+        {% endfor %}
         <button type="submit" class="send">Send</button>
-        <span>130 Votes</span>
-        <span><i class="icofont-check-alt"></i> Your vote has been sended</span>
+        <span>{{ survey.answersTotal }} Votes</span>
+        <span style="display: none;"><i class="icofont-check-alt"></i> Your vote has been sended</span>
     </form>
 </div>
 <script>
