@@ -10,9 +10,29 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class SurveyController extends Controller
 {
-    public function __construct(ContainerInterface $container)
+    /**
+     * Create a new survey
+     *
+     * @Route("/{_locale}/survey", name="survey", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function surveyAction()
     {
-        $this->container = $container;
+        $survey = new Survey;
+        $survey->setUser($this->getUser());
+        $survey->setQuestion("Une petite question");
+        $survey->addAnswerOption("Yes", "00FF00");
+        $survey->addAnswerOption("No", "FF0000");
+        $survey->addAnswerOption("I Don't Know", "CCCCCC");
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($survey);
+        $em->flush();
+
+        return $this->redirectToRoute('survey_show', array(
+            'survey' => $survey->getId()
+        ));
     }
 
     /**
@@ -26,7 +46,9 @@ class SurveyController extends Controller
      */
     public function showSurveyAction(Survey $survey)
     {
-        return $this->render('survey/showSurvey.html.twig');
+        return $this->render('survey/showSurvey.html.twig', array(
+            "survey" => $survey
+        ));
     }
 
     /**

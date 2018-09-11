@@ -92,6 +92,9 @@ class Survey
         $this->posts = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->answers = array();
+        $this->color = array();
+        $this->date = new \Datetime();
+        $this->role = "ROLE_USER";
     }
 
     public function __toString() {
@@ -173,20 +176,23 @@ class Survey
 
     public function getAnswersByPercentage(): ?array
     {
-        $answers = $this->answers->toArray();
+        $answers = $this->answers;
         $total = 0;
         foreach ($answers as $value) {
             $total += count($value);
         }
-        foreach ($answers as $key => $value) {
-            $answers[$key] = (count($value) / $total) * 100;
+        if ($total != 0) {
+            foreach ($answers as $key => $value) {
+                $answers[$key] = (count($value) / $total) * 100;
+            }
+        } else {
+            foreach ($answers as $key => $value) {
+                $answers[$key] = (1 / count($answers)) * 100;
+            }
         }
         $total = 0;
         foreach ($answers as $value) {
             $total += $value;
-        }
-        if ($total != 100) {
-            $answers[count($value) - 1] += 100 - $total;
         }
         arsort($answers);
         return $answers;
@@ -194,7 +200,7 @@ class Survey
 
     public function getAnswersTotal()
     {
-        $answers = $this->answers->toArray();
+        $answers = $this->answers;
         $total = 0;
         foreach ($answers as $value) {
             $total += count($value);
@@ -224,19 +230,21 @@ class Survey
         return $this;
     }
 
-    public function addAnswerOption(string $key): self
+    public function addAnswerOption(string $key, string $color): self
     {
         if (!array_key_exists($key, $this->answers)) {
             $this->answers[$key] = [];
+            $this->color[$key] = $color;
         }
 
         return $this;
     }
 
-    public function removeAnswerOption(string $key): self
+    public function removeAnswerOption(string $key, string $color): self
     {
         if (array_key_exists($key, $this->answers)) {
             unset($this->answers[$key]);
+            unset($this->color[$key]);
         }
 
         return $this;
@@ -245,13 +253,6 @@ class Survey
     public function getColor(): ?array
     {
         return $this->color;
-    }
-
-    public function setColor(array $color): self
-    {
-        $this->color = $color;
-
-        return $this;
     }
 
     /**
