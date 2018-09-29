@@ -6,7 +6,8 @@ use App\Entity\User;
 use App\Entity\Survey;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 class SurveyController extends Controller
 {
@@ -51,16 +52,26 @@ class SurveyController extends Controller
         ));
     }
 
+
     /**
-     * CAN'T BE ACCESSED BY URL, ONLY USED FOR THE SURVEY ENTITY.
+     * Answer to a survey
+     *
+     * @param Survey $survey The survey
+     *
+     * @Route("/{_locale}/vote/survey/{survey}", name="survey_vote", requirements={
+     *     "_locale": "%app.locales%"
+     * })
      */
-    public function fetchSurveyUsers(array $answers)
+    public function voteSurveyAction(Request $request, Survey $survey)
     {
-        foreach ($answers as $i => $answerOption) {
-            foreach ($answerOption as $j => $value) {
-                $answers[$i][$j] = $this->container->get('doctrine')->getRepository(User::class)->find($value);
-            }
+        if (!$request->isMethod('POST') || !array_key_exists("answer", $_POST)) {
+            return new Response("false");
         }
-        return $answers;
+
+        $survey->addAnswer($_POST['answer'], $this->getUser());
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        return new Response("true");
     }
 }

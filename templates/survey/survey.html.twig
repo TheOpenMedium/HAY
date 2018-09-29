@@ -14,26 +14,29 @@
             <a href="#">Test</a>
         </div>
     </i>
-    <div class="results">
-        {% for key, value in survey.answersByPercentage %}
-            <span style="background-color: #{{ survey.color[key] }}; width: {{ value }}%;">{{ key }}</span>
-        {% endfor %}
-    </div>
-    <div class="resultsValues">
-        {% for value in survey.answersByPercentage %}
-            <span style="width: {{ value }}%;">{{ value }}%</span>
-        {% endfor %}
-    </div>
-    <form>
+    {% if survey.answersTotal != 0 %}
+        <div class="results">
+            {% for key, value in survey.answersByPercentage %}
+                <span style="background-color: #{{ survey.color[key] }}; width: {{ value }}%;">{{ key }}</span>
+            {% endfor %}
+        </div>
+        <div class="resultsValues">
+            {% for value in survey.answersByPercentage %}
+                <span style="width: {{ value }}%;">{{ value|number_format(2, 'decimal_point'|trans) }}%</span>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="surveyForm">
         {% for key, value in survey.answers %}
             <label>
-                <input name="surveyOption" value="{{ key }}" type="radio">{{ key }}
+                <input name="surveyOption{{ survey.id }}" value="{{ key }}" type="radio">{{ key }}
             </label>
         {% endfor %}
-        <button type="submit" class="send">Send</button>
+        <button type="button" class="send" onclick="sendSurvey({{ survey.id }})">Send</button>
         <span>{{ survey.answersTotal }} Votes</span>
-        <span style="display: none;"><i class="icofont-check-alt"></i> Your vote has been sended</span>
-    </form>
+        <span style="display: none;" id="surveySuccess{{ survey.id }}"><i class="icofont-check-alt"></i> Your vote has been sent</span>
+        <span style="display: none; color: red;" id="surveyError{{ survey.id }}"><i class="icofont-close-line"></i> An error occured</span>
+    </div>
 </div>
 <script>
     re = new RegExp("^\\s+$")

@@ -9,6 +9,7 @@
             var url_order = "{{ url('settings_edit', {'setting': 'default_home_order_filter', 'value': 'aaa'}) }}"
             var url_markdown = "{{ url('markdown_render') }}"
             var url_report = "{{ url('report', {'type': 'aaa', 'id': 'bbb'}) }}"
+            var url_survey = "{{ url('survey_vote', {'survey': 'aaa'}) }}"
             var color = "c" + "{% if color is defined %}{{ color }}{% endif %}"
             var twig_size = "{% if size is defined %}{{ size }}{% endif %}"
         </script>

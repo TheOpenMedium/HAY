@@ -1,7 +1,7 @@
 .survey {
-    background-color: #55FF99;
+    background-color: var(--hay-color);
     width: 450px;
-    border-left: 3px solid #11BB55;
+    border-left: 3px solid var(--hay-very-dark);
     border-radius: 10px;
     padding: 10px;
     position: relative;
@@ -61,20 +61,20 @@
     position: relative;
 }
 
-.survey form {
+.survey .surveyForm {
     margin: 0;
     font-family: sans-serif;
     color: white;
 }
 
-.survey form label {
+.survey .surveyForm label {
     display: block;
     cursor: pointer;
     margin: 5px;
 }
 
 .survey .send {
-    background-color: #33DD77;
+    background-color: var(--hay-dark);
     border: 0;
     padding: 5px 10px;
     color: white;
@@ -83,6 +83,6 @@
     margin-top: 10px;
 }
 
-.survey form span {
+.survey .surveyForm span {
     margin-left: 10px;
 }

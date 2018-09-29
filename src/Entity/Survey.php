@@ -41,10 +41,19 @@ class Survey
      * @example: Answers have this format:
      *  [
      *      ["Yes"] => [15, 35, 78] // Numbers are user' id
-     *      ["No"] => [103, 67, 48] // But when we use $survey->getAnswers() ids are replaced by entities
+     *      ["No"] => [103, 67, 48] // But when we fetch the survey, they are replaced by entities
      *  ]
      */
     private $answers;
+
+    /**
+     * @example: Answers with fetched users, they have this format:
+     *  [
+     *      ["Yes"] => [User 15, User 35, User 78] // These are user entities
+     *      ["No"] => [User 103, User 67, User 48]
+     *  ]
+     */
+    private $_answers;
 
     /**
      * @ORM\Column(type="array")
@@ -168,10 +177,21 @@ class Survey
         return $this;
     }
 
+    public function getRawAnswers(): ?array
+    {
+        return $this->answers;
+    }
+
+    public function setDoneAnswers(array $answers): self
+    {
+        $this->_answers = $answers;
+
+        return $this;
+    }
+
     public function getAnswers(): ?array
     {
-        $controller = new SurveyController();
-        return $controller->fetchSurveyUsers($this->answers);
+        return $this->_answers;
     }
 
     public function getAnswersByPercentage(): ?array

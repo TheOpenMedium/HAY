@@ -31,3 +31,7 @@ services:
     App\EventListener\StatisticsListener:
         tags:
             - { name: doctrine.event_listener, event: postPersist }
+
+    App\EventListener\SurveyListener:
+        tags:
+            - { name: doctrine.event_listener, event: postLoad }

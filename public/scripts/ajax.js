@@ -137,3 +137,43 @@ function getNewPosts() {
     xmlhttp.open("GET", url_r, true);
     xmlhttp.send();
 }
+
+// Surveys
+
+/**
+ * Sending surveys
+ */
+function sendSurvey(id) {
+    document.getElementById('surveySuccess' + id).style.display = "none"
+    document.getElementById('surveyError' + id).style.display = "none"
+
+    var url_survey_temp = url_survey.replace('aaa', id)
+
+    try {
+        var answer = document.querySelector('input[name="surveyOption' + id + '"]:checked').value
+    } catch (e) {
+        document.getElementById('surveyError' + id).style.display = "inline"
+        return;
+    }
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.responseText == "true") {
+                document.getElementById('surveySuccess' + id).style.display = "inline"
+                updateSurvey()
+            } else {
+                document.getElementById('surveyError' + id).style.display = "inline"
+                console.log(this.responseText)
+                updateSurvey()
+            }
+        }
+    };
+    xmlhttp.onerror = function() {
+        document.getElementById('surveyError' + id).style.display = "inline"
+        updateSurvey()
+    };
+    xmlhttp.open("POST", url_survey_temp, true);
+    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xmlhttp.send("answer=" + encodeURIComponent(answer));
+}

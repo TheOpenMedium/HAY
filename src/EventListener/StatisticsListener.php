@@ -2,7 +2,7 @@
 
 namespace App\EventListener;
 
-use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
@@ -16,7 +16,7 @@ class StatisticsListener
 
         if ($entity instanceof User) {
             $em = $args->getEntityManager();
-            
+
             $stats = $em->getRepository(Statistics::class)->findByDate(\date('Y-m-d'));
 
             if (empty($stats[0])) {
@@ -31,7 +31,7 @@ class StatisticsListener
             $em->flush();
         } else if ($entity instanceof Post) {
             $em = $args->getEntityManager();
-            
+
             $stats = $em->getRepository(Statistics::class)->findByDate(\date('Y-m-d'));
 
             if (empty($stats[0])) {
@@ -46,7 +46,7 @@ class StatisticsListener
             $em->flush();
         } else if ($entity instanceof Comment) {
             $em = $args->getEntityManager();
-            
+
             $stats = $em->getRepository(Statistics::class)->findByDate(\date('Y-m-d'));
 
             if (empty($stats[0])) {
