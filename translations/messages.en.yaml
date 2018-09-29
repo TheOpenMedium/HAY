@@ -84,7 +84,12 @@ choose: Choose
 
 by: By
 delete: Delete
+refresh: Refresh
 decimal_point: .
+send: Send
+votes: Votes
+vote_success: Your vote has been sent
+vote_error: An error occured
 
 # Laws
 

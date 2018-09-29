@@ -91,7 +91,12 @@ choose: Choisir
 
 by: Par
 delete: Supprimer
+refresh: Actualiser
 decimal_point: ,
+send: Envoyer
+votes: Votes
+vote_success: Votre vote a été envoyé
+vote_error: Une erreur s'est produite
 
 # Laws
 # Lois

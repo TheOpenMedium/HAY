@@ -143,7 +143,8 @@ function getNewPosts() {
 /**
  * Sending surveys
  */
-function sendSurvey(id) {
+function sendSurvey(id, e) {
+    // TODO: Adding a security if a survey appear multiple times in a page
     document.getElementById('surveySuccess' + id).style.display = "none"
     document.getElementById('surveyError' + id).style.display = "none"
 
@@ -161,19 +162,43 @@ function sendSurvey(id) {
         if (this.readyState == 4 && this.status == 200) {
             if (this.responseText == "true") {
                 document.getElementById('surveySuccess' + id).style.display = "inline"
-                updateSurvey()
+                setTimeout(refreshSurvey, 5000, id, e);
             } else {
                 document.getElementById('surveyError' + id).style.display = "inline"
                 console.log(this.responseText)
-                updateSurvey()
+                setTimeout(refreshSurvey, 5000, id, e);
             }
         }
     };
     xmlhttp.onerror = function() {
         document.getElementById('surveyError' + id).style.display = "inline"
-        updateSurvey()
+        setTimeout(refreshSurvey, 5000, id, e);
     };
     xmlhttp.open("POST", url_survey_temp, true);
     xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xmlhttp.send("answer=" + encodeURIComponent(answer));
+}
+
+/**
+ * Refreshing survey
+ */
+function refreshSurvey(id, e) {
+    var url_survey_temp = url_survey_refresh.replace('aaa', id)
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            while (e.id !== "survey_" + id) {
+                e = e.parentNode
+            }
+            e.outerHTML = this.responseText
+
+            re = new RegExp("^\\s+$")
+
+            document.getElementsByClassName("results")[0].childNodes.forEach(function (elt) {if (re.test(elt.data)) {elt.parentNode.removeChild(elt);}})
+            document.getElementsByClassName("resultsValues")[0].childNodes.forEach(function (elt) {if (re.test(elt.data)) {elt.parentNode.removeChild(elt);}})
+        }
+    };
+    xmlhttp.open("GET", url_survey_temp, true);
+    xmlhttp.send();
 }

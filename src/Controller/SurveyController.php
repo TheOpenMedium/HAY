@@ -52,6 +52,21 @@ class SurveyController extends Controller
         ));
     }
 
+    /**
+     * Render HTML a single survey
+     *
+     * @param Survey $survey The survey to render
+     *
+     * @Route("/{_locale}/display/survey/{survey}", name="survey_display", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function displaySurveyAction(Survey $survey)
+    {
+        return $this->render('survey/survey.html.twig', array(
+            "survey" => $survey
+        ));
+    }
 
     /**
      * Answer to a survey

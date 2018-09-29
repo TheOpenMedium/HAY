@@ -1,4 +1,4 @@
-<div class="survey">
+<div class="survey" id="survey_{{ survey.id }}">
     <div class="question">
         {{ survey.question }}
     </div>
@@ -11,7 +11,7 @@
                 <a href="#">{{ 'edit'|trans }}</a>
                 <a href="#">{{ 'delete'|trans }}</a>
             {% endif %}
-            <a href="#">Test</a>
+            <a onclick="refreshSurvey({{ survey.id }}, this)">{{ 'refresh'|trans }}</a>
         </div>
     </i>
     {% if survey.answersTotal != 0 %}
@@ -32,10 +32,10 @@
                 <input name="surveyOption{{ survey.id }}" value="{{ key }}" type="radio">{{ key }}
             </label>
         {% endfor %}
-        <button type="button" class="send" onclick="sendSurvey({{ survey.id }})">Send</button>
-        <span>{{ survey.answersTotal }} Votes</span>
-        <span style="display: none;" id="surveySuccess{{ survey.id }}"><i class="icofont-check-alt"></i> Your vote has been sent</span>
-        <span style="display: none; color: red;" id="surveyError{{ survey.id }}"><i class="icofont-close-line"></i> An error occured</span>
+        <button type="button" class="send" onclick="sendSurvey({{ survey.id }}, this)">{{ 'send'|trans }}</button>
+        <span>{{ survey.answersTotal }} {{ 'votes'|trans }}</span>
+        <span style="display: none;" id="surveySuccess{{ survey.id }}"><i class="icofont-check-alt"></i> {{ 'vote_success'|trans }}</span>
+        <span style="display: none; color: red;" id="surveyError{{ survey.id }}"><i class="icofont-close-line"></i> {{ 'vote_error'|trans }}</span>
     </div>
 </div>
 <script>
