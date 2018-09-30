@@ -83,6 +83,7 @@ choose: Choose
 # Survey
 
 by: By
+show_survey: Show survey
 delete: Delete
 refresh: Refresh
 decimal_point: .

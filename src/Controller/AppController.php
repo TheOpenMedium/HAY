@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
 use App\Controller\AjaxController;
+use App\Controller\SurveyController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -80,7 +81,7 @@ class AppController extends Controller
      *     "_locale": "%app.locales%"
      * })
      */
-    public function homeAction(Request $request, AjaxController $ajaxController, ?string $filter = NULL, string $scope = "all", int $limit = 10, string $order = "DESC", ?string $date = NULL)
+    public function homeAction(Request $request, AjaxController $ajaxController, SurveyController $sc, ?string $filter = NULL, string $scope = "all", int $limit = 10, string $order = "DESC", ?string $date = NULL)
     {
         if (!$filter) {
             $securityContext =  $this->container->get('security.authorization_checker');
@@ -128,6 +129,7 @@ class AppController extends Controller
 
             // TODO: Sending notifications to followers
 
+            $post = $sc->surveyCheckPostAction($post);
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
             $em->flush();

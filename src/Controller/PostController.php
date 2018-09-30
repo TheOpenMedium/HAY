@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
+use App\Controller\SurveyController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -63,7 +64,7 @@ class PostController extends Controller
      *     "_locale": "%app.locales%"
      * })
      */
-    public function postEditAction(Request $request, Post $post)
+    public function postEditAction(Request $request, SurveyController $sc, Post $post)
     {
         $user = $this->getUser();
 
@@ -93,6 +94,7 @@ class PostController extends Controller
             if ($form->isSubmitted() && $form->isValid()) {
                 $post = $form->getData();
 
+                $post = $sc->surveyCheckPostAction($post);
                 $em = $this->getDoctrine()->getManager();
 
                 // And finaly, we save changes.

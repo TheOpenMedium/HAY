@@ -7,6 +7,7 @@
     </div>
     <i class="icofont-navigation-menu fs16 burgerMenu">
         <div class="burgerMenuContent">
+            <a href="{{ url('survey_show', {'survey': survey.id}) }}">{{ 'show_survey'|trans }}</a>
             {% if app.user == survey.user %}
                 <a href="#">{{ 'edit'|trans }}</a>
                 <a href="{{ url('survey_delete', {'survey': survey.id}) }}">{{ 'delete'|trans }}</a>

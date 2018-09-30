@@ -100,6 +100,7 @@ class Survey
     {
         $this->posts = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->question = "Survey";
         $this->answers = array();
         $this->color = array();
         $this->date = new \Datetime();

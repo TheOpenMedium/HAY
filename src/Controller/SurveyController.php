@@ -3,37 +3,72 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Post;
+use App\Entity\Comment;
 use App\Entity\Survey;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class SurveyController extends Controller
 {
-    /**
-     * Create a new survey
-     *
-     * @Route("/{_locale}/survey", name="survey", requirements={
-     *     "_locale": "%app.locales%"
-     * })
-     */
-    public function surveyAction()
+    public function __construct(ContainerInterface $container)
     {
-        $survey = new Survey;
-        $survey->setUser($this->getUser());
-        $survey->setQuestion("Une petite question");
-        $survey->addAnswerOption("Yes", "00FF00");
-        $survey->addAnswerOption("No", "FF0000");
-        $survey->addAnswerOption("I Don't Know", "CCCCCC");
+        $this->container = $container;
+    }
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($survey);
-        $em->flush();
+    /**
+     * Checking if a new survey have been created inside a post
+     */
+    public function surveyCheckPostAction(Post $post)
+    {
+        preg_match_all("/\[survey(?:(?: role=['\"](\w*)['\"])| (anonymous))*\]\s+((?:#|\-|\:|\"|\'|\,|\.|\;|\?|\!|\w|\s)*)\s+\[\/survey\]/iu", $post->getContent(), $matches, PREG_SET_ORDER);
+        foreach ($matches as $match) {
+            if (!empty($match[3])) {
+                preg_match_all("/(?:(?:# ((?:\w| |\#|\-|\:|\"|\'|\,|\.|\;|\?|\!)+))|(?:-(?:\:['\"](\w+)['\"])? ((?:\w| |\#|\-|\:|\"|\'|\,|\.|\;|\?|\!)+)))/ium", $match[3], $match[3], PREG_SET_ORDER);
+                if (!empty($match[3])) {
+                    $survey = new Survey;
+                    $survey->setUser($this->getUser());
+                    foreach ($match[3] as $submatch) {
+                        if ($submatch[1]) {
+                            $survey->setQuestion($submatch[1]);
+                        } elseif ($submatch[3]) {
+                            if ($submatch[2]) {
+                                $survey->addAnswerOption($submatch[3], $submatch[2]);
+                            } else {
+                                $survey->addAnswerOption($submatch[3], dechex(rand(0,10000000)));
+                            }
+                        }
+                    }
 
-        return $this->redirectToRoute('survey_show', array(
-            'survey' => $survey->getId()
-        ));
+                    // TODO: Create anonymous and non-anonymous surveys.
+                    // TODO: Adding a security to role param.
+                    if ($match[1]) {
+                        $survey->setRole(strtoupper($match[1]));
+                    }
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($survey);
+                    $em->flush();
+                    $post->setContent(preg_replace("/\[survey(?:(?: role=['\"](\w*)['\"])| (anonymous))*\]\s+((?:#|\-|\:|\"|\'|\,|\.|\;|\?|\!|\w|\s)*)\s+\[\/survey\]/iu", "[survey " . $survey->getId() . " /]", $post->getContent(), 1));
+                } else {
+                    $post->setContent(preg_replace("/\[survey(?:(?: role=['\"](\w*)['\"])| (anonymous))*\]\s+((?:#|\-|\:|\"|\'|\,|\.|\;|\?|\!|\w|\s)*)\s+\[\/survey\]/iu", "[PARSE ERROR: NEITHER QUESTION NOR ANSWER HAVE BEEN FOUND IN SURVEY]", $post->getContent(), 1));
+                }
+            } else {
+                $post->setContent(preg_replace("/\[survey(?:(?: role=['\"](\w*)['\"])| (anonymous))*\]\s+((?:#|\-|\:|\"|\'|\,|\.|\;|\?|\!|\w|\s)*)\s+\[\/survey\]/iu", "[PARSE ERROR: SURVEY IS EMPTY]", $post->getContent(), 1));
+            }
+        }
+        return $post;
+    }
+
+    /**
+     * Checking if a new survey have been created inside a comment
+     */
+    public function surveyCheckCommentAction(Comment $comment)
+    {
+        //
     }
 
     /**

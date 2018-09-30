@@ -172,7 +172,7 @@ function sendSurvey(id, e) {
     };
     xmlhttp.onerror = function() {
         document.getElementById('surveyError' + id).style.display = "inline"
-        setTimeout(refreshSurvey, 5000, id, e);
+        refreshSurvey(id, e);
     };
     xmlhttp.open("POST", url_survey_temp, true);
     xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');

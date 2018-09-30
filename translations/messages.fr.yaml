@@ -90,6 +90,7 @@ choose: Choisir
 # Sondage
 
 by: Par
+show_survey: Voir le sondage
 delete: Supprimer
 refresh: Actualiser
 decimal_point: ,
