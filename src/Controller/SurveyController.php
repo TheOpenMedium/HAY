@@ -89,4 +89,28 @@ class SurveyController extends Controller
 
         return new Response("true");
     }
+
+    /**
+     * Delete a survey from the database
+     *
+     * @param Survey $survey The survey to delete
+     *
+     * @Route("/{_locale}/delete/survey/{survey}", name="survey_delete", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function deleteSurveyAction(Survey $survey)
+    {
+        $user = $this->getUser();
+
+        // And delete it if the user and the author are the same.
+        if ($survey->getUser()->getId() == $user->getId()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($survey);
+            $entityManager->flush();
+        }
+
+        // Finally the user is redirected to home page.
+        return $this->redirectToRoute('app_home');
+    }
 }

@@ -9,7 +9,7 @@
         <div class="burgerMenuContent">
             {% if app.user == survey.user %}
                 <a href="#">{{ 'edit'|trans }}</a>
-                <a href="#">{{ 'delete'|trans }}</a>
+                <a href="{{ url('survey_delete', {'survey': survey.id}) }}">{{ 'delete'|trans }}</a>
             {% endif %}
             <a onclick="refreshSurvey({{ survey.id }}, this)">{{ 'refresh'|trans }}</a>
         </div>
