@@ -38,7 +38,7 @@ class SurveyController extends Controller
                             if ($submatch[2]) {
                                 $survey->addAnswerOption($submatch[3], $submatch[2]);
                             } else {
-                                $survey->addAnswerOption($submatch[3], dechex(rand(0,10000000)));
+                                $survey->addAnswerOption($submatch[3], sprintf('#%06X', mt_rand(0, 0xFFFFFF)));
                             }
                         }
                     }

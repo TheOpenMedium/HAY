@@ -133,6 +133,9 @@ function getNewPosts() {
 
             // And we refresh the number of new posts.
             getNbNewPosts();
+
+            // And we evaluate all script tags.
+            evalScript()
         }
     };
     xmlhttp.open("GET", url_r, true);
@@ -215,6 +218,12 @@ function getSurvey(id, e) {
         if (this.readyState == 4 && this.status == 200) {
             elt = document.getElementById(''+e)
             elt.outerHTML = this.responseText
+
+            // Removing empty nodes
+            re = new RegExp("^\\s+$")
+
+            Array.from(document.getElementsByClassName("results")).forEach(function (elt) {elt.childNodes.forEach(function (elt) {if (re.test(elt.data)) {elt.parentNode.removeChild(elt)}})})
+            Array.from(document.getElementsByClassName("resultsValues")).forEach(function (elt) {elt.childNodes.forEach(function (elt) {if (re.test(elt.data)) {elt.parentNode.removeChild(elt)}})})
         }
     };
     xmlhttp.open("GET", url_survey_temp, true);

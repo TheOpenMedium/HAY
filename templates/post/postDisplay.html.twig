@@ -31,8 +31,8 @@
         </div>
     </div>
     {########################################}
-    <div class="content c{{ post.color }} ff{{ post.font }} fs{{ post.size }}" style="border-color: {{ post.color != 'FFF' ? 'white' : 'black' }};">
-        {{ post.content|escape|replace({'&lt;br /&gt;': '<br />'})|raw }}
+    <div class="content markdown c{{ post.color }} ff{{ post.font }} fs{{ post.size }}" style="border-color: {{ post.color != 'FFF' ? 'white' : 'black' }};">
+        {{ post.content|raw }}
     </div>
     {{ render(url('comment', {'id': post.id, '_color': post.color})) }}
 {% if post.comments is not empty %}

@@ -42,6 +42,6 @@
 <script>
     re = new RegExp("^\\s+$")
 
-    document.getElementsByClassName("results")[0].childNodes.forEach(function (elt) {if (re.test(elt.data)) {elt.parentNode.removeChild(elt);}})
-    document.getElementsByClassName("resultsValues")[0].childNodes.forEach(function (elt) {if (re.test(elt.data)) {elt.parentNode.removeChild(elt);}})
+    Array.from(document.getElementsByClassName("results")).forEach(function (elt) {elt.childNodes.forEach(function (elt) {if (re.test(elt.data)) {elt.parentNode.removeChild(elt)}})})
+    Array.from(document.getElementsByClassName("resultsValues")).forEach(function (elt) {elt.childNodes.forEach(function (elt) {if (re.test(elt.data)) {elt.parentNode.removeChild(elt)}})})
 </script>

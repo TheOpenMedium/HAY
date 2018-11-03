@@ -183,10 +183,15 @@ class AjaxController extends Controller
 
         // If there is one Post or more:
         if ($postList) {
-            // We replace new lines by the <br /> tag.
+            // We use Markdown to format post content.
             foreach ($postList as $post) {
                 $content = $post->getContent();
-                $post->setContent(preg_replace('#\n#', '<br />', $content));
+                $post->setContent(\ParsedownHAYFlavored::instance()
+                    ->setSafeMode(true)
+                    ->setBreaksEnabled(true)
+                    ->setMarkupEscaped(true)
+                    ->setUrlsLinked(true)
+                    ->text($content));
                 if ($post->getComments()) {
                     foreach ($post->getComments() as $comment) {
                         $c = $comment->getComment();
