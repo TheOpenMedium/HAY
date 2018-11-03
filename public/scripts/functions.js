@@ -56,7 +56,7 @@ function init() {
 
 function closeMsg(msgButton) {
     var messageButton = document.getElementById(msgButton)
-    messageButton.parentNode.parentNode.removeChild(messageButton.parentNode)
+    messageButton.parentNode.style.display = "none"
 }
 
 // Laws

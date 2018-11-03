@@ -12,23 +12,24 @@ function filterPosts() {
     window.location = url_filter
 }
 
-/**
- * NOTE: There's a bug in this function, if you discovered the origin of the bug, please inform us (@see commented lines at the end)
- */
 function recordAsDefault() {
     url_scope = url_scope.replace("aaa", document.getElementById("scope").value)
     url_limit = url_limit.replace("aaa", document.getElementById("limit").value)
     url_order = url_order.replace("aaa", document.getElementById("order").value)
 
-    success = false
+    var success = true
+    var order = 0
 
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            if (this.responseText === "true") {
-                success = true
-            } else {
+            order++
+            if (this.responseText !== "true" && success === true) {
                 success = false
+                document.getElementById("filterError").style.display = "block"
+            }
+            if (order === 3 && success === true) {
+                document.getElementById("filterReady").style.display = "block"
             }
         }
     };
@@ -38,10 +39,13 @@ function recordAsDefault() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            if (this.responseText === "true") {
-                success = true
-            } else {
+            order++
+            if (this.responseText !== "true" && success === true) {
                 success = false
+                document.getElementById("filterError").style.display = "block"
+            }
+            if (order === 3 && success === true) {
+                document.getElementById("filterReady").style.display = "block"
             }
         }
     };
@@ -51,21 +55,18 @@ function recordAsDefault() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            if (this.responseText === "true") {
-                success = true
-            } else {
+            order++
+            if (this.responseText !== "true" && success === true) {
                 success = false
+                document.getElementById("filterError").style.display = "block"
+            }
+            if (order === 3 && success === true) {
+                document.getElementById("filterReady").style.display = "block"
             }
         }
     };
     xmlhttp.open("GET", url_order, true);
     xmlhttp.send();
-
-    //if (success === true) {
-        document.getElementById("filterReady").style.display = "block";
-    //} else {
-    //    document.getElementById("filterError").style.display = "block";
-    //}
 }
 
 // Fetching posts
