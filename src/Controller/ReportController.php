@@ -181,8 +181,10 @@ class ReportController extends Controller
         if ($reportForm->isSubmitted() && $reportForm->isValid()) {
             $report = $reportForm->getData();
             $report->addModerator($this->getUser());
-            if ($report->getValidated() == NULL) {
+            if ($report->getValidated() === NULL) {
                 $report->setNeedhelp(true);
+            } else {
+                $report->setNeedhelp(NULL);
             }
 
             // TODO: Sending notifications to reporter and reported

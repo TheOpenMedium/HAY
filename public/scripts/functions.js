@@ -81,6 +81,7 @@ function renderingMarkdown() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         document.getElementById('preview').innerHTML = this.responseText
+        evalScript()
     };
     xmlhttp.open("POST", url_markdown, true);
     xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');

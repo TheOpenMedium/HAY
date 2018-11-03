@@ -2,17 +2,21 @@
         {% for report in reports %}
             <div class="reportElement">
                 <div class="reportName">
-                    {% if report.validated == NULL %}
-                        <i class="icofont-question-circle" style="color: orange; grid-row: 1/3; font-size: 50px;"></i>
-                    {% elseif report.validated == true %}
-                        <i class="icofont-check-circled" style="color: green; grid-row: 1/3; font-size: 50px;"></i>
-                    {% elseif report.validated == false %}
-                        <i class="icofont-close-circled" style="color: red; grid-row: 1/3; font-size: 50px;"></i>
+                    {% if report.validated is null %}
+                        {% if report.needhelp is same as(true) %}
+                            <i class="icofont-exclamation-circle" style="color: dodgerblue; grid-row: 1/3; font-size: 50px;"></i>
+                        {% else %}
+                            <i class="icofont-question-circle" style="color: orange; grid-row: 1/3; font-size: 50px;"></i>
+                        {% endif %}
+                    {% elseif report.validated is same as(true) %}
+                        <i class="icofont-check-circled" style="color: mediumseagreen; grid-row: 1/3; font-size: 50px;"></i>
+                    {% elseif report.validated is same as(false) %}
+                        <i class="icofont-close-circled" style="color: tomato; grid-row: 1/3; font-size: 50px;"></i>
                     {% endif %}
                     <div>
-                        {% if report.reportedComment != NULL %}
+                        {% if report.reportedComment is not null %}
                             <span style="font-weight: 900;">COMMENT</span>
-                        {% elseif report.reportedPost != NULL %}
+                        {% elseif report.reportedPost is not null %}
                             <span style="font-weight: 900;">POST</span>
                         {% else %}
                             <span style="font-weight: 900;">USER</span>
@@ -26,7 +30,7 @@
                 </div>
                 <div id="{{ report.id }}" style="display: none; padding: 10px;">
                     <h1>Informations</h1>
-                    {% if report.reportedComment != NULL %}
+                    {% if report.reportedComment is not null %}
                         Comment: <br />
                         <div style="padding: 50px; background-color: var(--bg-light);">
                             {{ render(path('report_render_entity', {'type': 'comment', 'id': report.reportedComment.id})) }}
@@ -35,7 +39,7 @@
                         <div style="padding: 50px; background-color: var(--bg-light);">
                             {{ render(path('report_render_entity', {'type': 'post', 'id': report.reportedComment.post.id})) }}
                         </div>
-                    {% elseif report.reportedPost != NULL %}
+                    {% elseif report.reportedPost is not null %}
                         Post: <br />
                         <div style="padding: 50px; background-color: var(--bg-light);">
                             {{ render(path('report_render_entity', {'type': 'post', 'id': report.reportedPost.id})) }}
@@ -43,11 +47,11 @@
                     {% else %}
                         NOT SUPPORTED YET
                     {% endif %}
-                    {% if report.validated == NULL %}
+                    {% if report.validated is null %}
                         <h1>Process</h1>
                         {{ render(path('report_process', {'report': report.id})) }}
                     {% else %}
-                        Already Processed
+                        Moderators: {% for key, moderator in report.moderators %}{{ moderator.firstName }}{% if (report.moderators|length - 1) != key %}, {% endif %}{% endfor %}
                     {% endif %}
                 </div>
             </div>

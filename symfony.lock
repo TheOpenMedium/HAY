@@ -66,7 +66,10 @@
         "version": "v1.0.0"
     },
     "erusev/parsedown": {
-        "version": "1.7.1"
+        "version": "dev-master"
+    },
+    "erusev/parsedown-extra": {
+        "version": "0.7.1"
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
@@ -188,9 +191,6 @@
     "symfony/intl": {
         "version": "v4.0.2"
     },
-    "symfony/lts": {
-        "version": "4-dev"
-    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {
@@ -307,6 +307,9 @@
     },
     "symfony/yaml": {
         "version": "v4.0.2"
+    },
+    "theopenmedium/parsedownhayflavored": {
+        "version": "0.1.1"
     },
     "twig/twig": {
         "version": "v2.4.4"

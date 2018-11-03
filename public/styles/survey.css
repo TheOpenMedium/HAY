@@ -71,6 +71,7 @@
     display: block;
     cursor: pointer;
     margin: 5px;
+    text-align: left;
 }
 
 .survey .send {

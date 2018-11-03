@@ -17,8 +17,11 @@ class MarkdownController extends Controller
      */
     public function markdownRenderingAction()
     {
-        $parsedown = new \Parsedown();
-        $parsedown->setSafeMode(true);
+        $parsedown = new \ParsedownHAYFlavored();
+        $parsedown->setSafeMode(true)
+                  ->setBreaksEnabled(true)
+                  ->setMarkupEscaped(true)
+                  ->setUrlsLinked(true);
 
         return new Response($parsedown->text($_POST["markdown"]));
     }

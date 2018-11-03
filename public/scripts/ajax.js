@@ -202,3 +202,31 @@ function refreshSurvey(id, e) {
     xmlhttp.open("GET", url_survey_temp, true);
     xmlhttp.send();
 }
+
+/**
+ * Fetching a Survey
+ */
+function getSurvey(id, e) {
+    var url_survey_temp = url_survey_refresh.replace('aaa', id)
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            elt = document.getElementById(''+e)
+            elt.outerHTML = this.responseText
+        }
+    };
+    xmlhttp.open("GET", url_survey_temp, true);
+    xmlhttp.send();
+}
+
+/**
+ * Evaluate Script tags in posts
+ */
+function evalScript() {
+    var matches = document.querySelectorAll(".markdown script")
+
+    for (var i = 0; i < matches.length; i++) {
+        eval(matches[i].innerHTML)
+    }
+}
