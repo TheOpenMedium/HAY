@@ -222,3 +222,7 @@ a[id^="sql_"] {
     justify-content: center;
     align-items: center;
 }
+
+#preview {
+    display: block !important;
+}

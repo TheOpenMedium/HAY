@@ -38,7 +38,12 @@ class PostController extends Controller
     {
         // We replace new lines by the <br /> tag.
         $content = $post->getContent();
-        $post->setContent(preg_replace('#\n#', '<br />', $content));
+        $post->setContent(\ParsedownHAYFlavored::instance()
+            ->setSafeMode(true)
+            ->setBreaksEnabled(true)
+            ->setMarkupEscaped(true)
+            ->setUrlsLinked(true)
+            ->text($content));
         if ($post->getComments()) {
             foreach ($post->getComments() as $comment) {
                 $c = $comment->getComment();
