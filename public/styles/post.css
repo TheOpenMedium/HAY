@@ -383,11 +383,14 @@
 .burgerMenuContent a {
     display: block;
     padding: 5px;
+	color: black !important;
 }
 
 .burgerMenuContent a:hover {
     background-color: white;
     cursor: pointer;
+	color: black !important;
+    text-decoration: none !important;
 }
 
 .burgerMenu:hover .burgerMenuContent {
