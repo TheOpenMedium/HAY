@@ -14,7 +14,6 @@
             <label for="form_submit"><li class="menuChoices sendPost send fs16">
                 <i class="icofont-arrow-right optionMenu" aria-hidden="true"></i>
                 {{ form_widget(form.submit, {'attr': {'class': 'sendButton'}, 'label': false}) }}
-                {{ form_end(form) }}
             </li></label>
         </ul>
         <script>
@@ -23,4 +22,5 @@
             document.getElementsByClassName("footerMenu")[0].childNodes.forEach(function (elt) {if (re.test(elt.data)) {elt.parentNode.removeChild(elt);}})
         </script>
     </div>
+    {{ form_end(form) }}
 </div>
