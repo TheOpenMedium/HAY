@@ -7,3 +7,226 @@
 .markdown h1 {
     border-bottom: 5px solid var(--hay-color);
 }
+
+.markdown h2 {
+    display: inline-block;
+    border-bottom: 2px solid var(--hay-color);
+}
+
+.markdown a {
+    color: var(--hay-color);
+}
+
+.markdown a:visited {
+    color: var(--hay-very-dark);
+}
+
+.markdown a:hover {
+    text-decoration: underline;
+}
+
+.markdown img {
+    width: 100%;
+}
+
+.markdown img.left {
+    float: left;
+}
+
+.markdown img.right {
+    float: right;
+}
+
+.markdown img.w5 {
+    width: 5% !important;
+    height: auto;
+}
+
+.markdown img.w10 {
+    width: 10% !important;
+    height: auto;
+}
+
+.markdown img.w12 {
+    width: 12.5% !important;
+    height: auto;
+}
+
+.markdown img.w15 {
+    width: 15% !important;
+    height: auto;
+}
+
+.markdown img.w20 {
+    width: 20% !important;
+    height: auto;
+}
+
+.markdown img.w25 {
+    width: 25% !important;
+    height: auto;
+}
+
+.markdown img.w30 {
+    width: 30% !important;
+    height: auto;
+}
+
+.markdown img.w35 {
+    width: 35% !important;
+    height: auto;
+}
+
+.markdown img.w37 {
+    width: 37.5% !important;
+    height: auto;
+}
+
+.markdown img.w40 {
+    width: 40% !important;
+    height: auto;
+}
+
+.markdown img.w45 {
+    width: 45% !important;
+    height: auto;
+}
+
+.markdown img.w50 {
+    width: 50% !important;
+    height: auto;
+}
+
+.markdown img.w55 {
+    width: 55% !important;
+    height: auto;
+}
+
+.markdown img.w60 {
+    width: 60% !important;
+    height: auto;
+}
+
+.markdown img.w62 {
+    width: 62.5% !important;
+    height: auto;
+}
+
+.markdown img.w65 {
+    width: 65% !important;
+    height: auto;
+}
+
+.markdown img.w70 {
+    width: 70% !important;
+    height: auto;
+}
+
+.markdown img.w75 {
+    width: 25% !important;
+    height: auto;
+}
+
+.markdown img.w80 {
+    width: 80% !important;
+    height: auto;
+}
+
+.markdown img.w85 {
+    width: 85% !important;
+    height: auto;
+}
+
+.markdown img.w87 {
+    width: 87.5% !important;
+    height: auto;
+}
+
+.markdown img.w90 {
+    width: 90% !important;
+    height: auto;
+}
+
+.markdown img.w95 {
+    width: 95% !important;
+    height: auto;
+}
+
+.markdown img.h10 {
+    height: 10px !important;
+    width: auto;
+}
+
+.markdown img.h20 {
+    height: 20px !important;
+    width: auto;
+}
+
+.markdown img.h30 {
+    height: 30px !important;
+    width: auto;
+}
+
+.markdown img.h40 {
+    height: 40px !important;
+    width: auto;
+}
+
+.markdown img.h50 {
+    height: 50px !important;
+    width: auto;
+}
+
+.markdown img.h60 {
+    height: 60px !important;
+    width: auto;
+}
+
+.markdown img.h70 {
+    height: 70px !important;
+    width: auto;
+}
+
+.markdown img.h80 {
+    height: 80px !important;
+    width: auto;
+}
+
+.markdown img.h90 {
+    height: 90px !important;
+    width: auto;
+}
+
+.markdown img.h100 {
+    height: 100px !important;
+    width: auto;
+}
+
+.markdown > blockquote {
+  position: relative;
+  color: lightgrey;
+}
+
+.markdown > blockquote::before {
+  content: "";
+  display: inline;
+  font-family: IcoFont;
+  position: absolute;
+  left: -40px;
+  top: -15px;
+  font-size: 30px;
+}
+
+.markdown > blockquote::after {
+  content: "";
+  display: inline;
+  font-family: IcoFont;
+  position: absolute;
+  right: -40px;
+  bottom: -15px;
+  font-size: 30px;
+}
+
+.markdown hr {
+    border: 2px lightgrey solid;
+}
