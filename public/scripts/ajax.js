@@ -136,6 +136,9 @@ function getNewPosts() {
 
             // And we evaluate all script tags.
             evalScript()
+
+            // And Highlight.js do some highlighting
+            highlight()
         }
     };
     xmlhttp.open("GET", url_r, true);
@@ -238,5 +241,16 @@ function evalScript() {
 
     for (var i = 0; i < matches.length; i++) {
         eval(matches[i].innerHTML)
+    }
+}
+
+/**
+ * Reload Highlight.js
+ */
+function highlight() {
+    var matches = document.querySelectorAll(".markdown pre > code:not(.hljs)")
+
+    for (var i = 0; i < matches.length; i++) {
+        hljs.highlightBlock(matches[i])
     }
 }

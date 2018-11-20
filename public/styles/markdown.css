@@ -230,3 +230,20 @@
 .markdown hr {
     border: 2px lightgrey solid;
 }
+
+.markdown pre > code {
+	margin: 20px;
+	padding: 20px;
+	border-radius: 10px;
+    display: block;
+}
+
+.markdown :not(pre) code {
+	padding: 10px;
+	border-radius: 10px;
+	margin: 5px;
+}
+
+.markdown code:not(.hljs) {
+	background-color: rgba(127, 127, 127, 0.5);
+}
