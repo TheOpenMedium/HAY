@@ -246,4 +246,9 @@
 
 .markdown code:not(.hljs) {
 	background-color: rgba(127, 127, 127, 0.5);
+    overflow-x: scroll;
+}
+
+.markdown .katexBlock[displaymode="true"] {
+	text-align: center;
 }

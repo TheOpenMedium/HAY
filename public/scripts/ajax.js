@@ -137,8 +137,11 @@ function getNewPosts() {
             // And we evaluate all script tags.
             evalScript()
 
-            // And Highlight.js do some highlighting
+            // And Highlight.js do some highlighting.
             highlight()
+
+            // And KaTeX do some Math.
+            katexRender()
         }
     };
     xmlhttp.open("GET", url_r, true);
@@ -254,3 +257,18 @@ function highlight() {
         hljs.highlightBlock(matches[i])
     }
 }
+
+/**
+ * Render KaTeX blocks
+ */
+
+ function katexRender() {
+    var katexBlocks = document.getElementsByClassName('katexBlock')
+
+    for (var i = 0; i < katexBlocks.length; i++) {
+        katex.render(katexBlocks[i].innerHTML, katexBlocks[i], {
+            displayMode: (katexBlocks[i].attributes.displayMode.value === true),
+            throwOnError: false,
+        });
+    }
+ }
