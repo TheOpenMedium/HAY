@@ -1,0 +1,7 @@
+authorizations:
+    create_user: True
+__META__:
+    create_user:
+        translation: 'create_user'
+        type: 'boolean'
+        input: 'checkbox'

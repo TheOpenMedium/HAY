@@ -194,7 +194,7 @@ number_of_friends: Number of Friends
 date_sign_up: Date of sign up
 max_results: Results limit:
 first_result: From ID:
-DANGER: DANGER
+WARNING: WARNING
 
 ################################################################################
 

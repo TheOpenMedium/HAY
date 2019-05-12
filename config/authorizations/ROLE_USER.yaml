@@ -1,0 +1,5 @@
+authorizations:
+    #
+__META__:
+    __INCLUDE__:
+        - 'ANONYMOUS'
