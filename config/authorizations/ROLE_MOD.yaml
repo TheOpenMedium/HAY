@@ -1,5 +1,0 @@
-authorizations:
-    #
-__META__:
-    __INCLUDE__:
-        - 'ROLE_HELPER'

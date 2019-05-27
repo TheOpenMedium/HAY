@@ -1,0 +1,574 @@
+ANONYMOUS:
+    user_submit: Yes
+    user_edit: No
+    user_edit_other: No
+    user_delete: No
+    user_delete_other: No
+    user_review: False
+
+    post_submit: No
+    post_edit: No
+    post_edit_other: No
+    post_delete: No
+    post_delete_other: No
+    post_option_color: False
+    post_option_textsize: False
+    post_review: False
+
+    comment_submit: No
+    comment_edit: No
+    comment_edit_other: No
+    comment_delete: No
+    comment_delete_other: No
+    comment_review: False
+
+    survey_submit: No
+    survey_edit: No
+    survey_edit_other: No
+    survey_delete: No
+    survey_delete_other: No
+    survey_review: False
+
+    report_submit: False
+    report_review: False
+
+    statistics_access: False
+
+    friendship_submit: False
+
+    administration_access: #
+
+ROLE_USER:
+    user_submit: Yes
+    user_edit: Yes
+    user_edit_other: No
+    user_delete: Yes
+    user_delete_other: No
+    user_review: False
+
+    post_submit: Yes
+    post_edit: Yes
+    post_edit_other: No
+    post_delete: Yes
+    post_delete_other: No
+    post_option_color: True
+    post_option_textsize: True
+    post_review: False
+
+    comment_submit: Yes
+    comment_edit: Yes
+    comment_edit_other: No
+    comment_delete: Yes
+    comment_delete_other: No
+    comment_review: False
+
+    survey_submit: Yes
+    survey_edit: Needs Review
+    survey_edit_other: No
+    survey_delete: Yes
+    survey_delete_other: No
+    survey_review: False
+
+    report_submit: True
+    report_review: False
+
+    statistics_access: False
+
+    friendship_submit: True
+
+    administration_access: #
+
+ROLE_HELPER:
+    user_submit: Yes
+    user_edit: Yes
+    user_edit_other: Needs Review
+    user_delete: Yes
+    user_delete_other: Needs Review
+    user_review: False
+
+    post_submit: Yes
+    post_edit: Yes
+    post_edit_other: Needs Review
+    post_delete: Yes
+    post_delete_other: Needs Review
+    post_option_color: True
+    post_option_textsize: True
+    post_review: False
+
+    comment_submit: Yes
+    comment_edit: Yes
+    comment_edit_other: Needs Review
+    comment_delete: Yes
+    comment_delete_other: Needs Review
+    comment_review: False
+
+    survey_submit: Yes
+    survey_edit: Yes
+    survey_edit_other: Needs Review
+    survey_delete: Yes
+    survey_delete_other: Needs Review
+    survey_review: False
+
+    report_submit: True
+    report_review: False
+
+    statistics_access: False
+
+    friendship_submit: True
+
+    administration_access: #
+
+ROLE_MOD:
+    user_submit: Yes
+    user_edit: Yes
+    user_edit_other: Yes
+    user_delete: Yes
+    user_delete_other: Yes
+    user_review: True
+
+    post_submit: Yes
+    post_edit: Yes
+    post_edit_other: Yes
+    post_delete: Yes
+    post_delete_other: Yes
+    post_option_color: True
+    post_option_textsize: True
+    post_review: True
+
+    comment_submit: Yes
+    comment_edit: Yes
+    comment_edit_other: Yes
+    comment_delete: Yes
+    comment_delete_other: Yes
+    comment_review: True
+
+    survey_submit: Yes
+    survey_edit: Yes
+    survey_edit_other: Yes
+    survey_delete: Yes
+    survey_delete_other: Yes
+    survey_review: True
+
+    report_submit: True
+    report_review: True
+
+    statistics_access: False
+
+    friendship_submit: True
+
+    administration_access: #
+
+ROLE_DEV:
+    user_submit: Yes
+    user_edit: Yes
+    user_edit_other: Needs Review
+    user_delete: Yes
+    user_delete_other: Needs Review
+    user_review: False
+
+    post_submit: Yes
+    post_edit: Yes
+    post_edit_other: Needs Review
+    post_delete: Yes
+    post_delete_other: Needs Review
+    post_option_color: True
+    post_option_textsize: True
+    post_review: False
+
+    comment_submit: Yes
+    comment_edit: Yes
+    comment_edit_other: Needs Review
+    comment_delete: Yes
+    comment_delete_other: Needs Review
+    comment_review: False
+
+    survey_submit: Yes
+    survey_edit: Yes
+    survey_edit_other: Needs Review
+    survey_delete: Yes
+    survey_delete_other: Needs Review
+    survey_review: False
+
+    report_submit: True
+    report_review: False
+
+    statistics_access: False
+
+    friendship_submit: True
+
+    administration_access: #
+
+ROLE_DESIGN:
+    user_submit: Yes
+    user_edit: Yes
+    user_edit_other: Needs Review
+    user_delete: Yes
+    user_delete_other: Needs Review
+    user_review: False
+
+    post_submit: Yes
+    post_edit: Yes
+    post_edit_other: Needs Review
+    post_delete: Yes
+    post_delete_other: Needs Review
+    post_option_color: True
+    post_option_textsize: True
+    post_review: False
+
+    comment_submit: Yes
+    comment_edit: Yes
+    comment_edit_other: Needs Review
+    comment_delete: Yes
+    comment_delete_other: Needs Review
+    comment_review: False
+
+    survey_submit: Yes
+    survey_edit: Yes
+    survey_edit_other: Needs Review
+    survey_delete: Yes
+    survey_delete_other: Needs Review
+    survey_review: False
+
+    report_submit: True
+    report_review: False
+
+    statistics_access: False
+
+    friendship_submit: True
+
+    administration_access: #
+
+ROLE_TRANS:
+    user_submit: Yes
+    user_edit: Yes
+    user_edit_other: Needs Review
+    user_delete: Yes
+    user_delete_other: Needs Review
+    user_review: False
+
+    post_submit: Yes
+    post_edit: Yes
+    post_edit_other: Needs Review
+    post_delete: Yes
+    post_delete_other: Needs Review
+    post_option_color: True
+    post_option_textsize: True
+    post_review: False
+
+    comment_submit: Yes
+    comment_edit: Yes
+    comment_edit_other: Needs Review
+    comment_delete: Yes
+    comment_delete_other: Needs Review
+    comment_review: False
+
+    survey_submit: Yes
+    survey_edit: Yes
+    survey_edit_other: Needs Review
+    survey_delete: Yes
+    survey_delete_other: Needs Review
+    survey_review: False
+
+    report_submit: True
+    report_review: False
+
+    statistics_access: False
+
+    friendship_submit: True
+
+    administration_access: #
+
+ROLE_ADMIN:
+    user_submit: Yes
+    user_edit: Yes
+    user_edit_other: Yes
+    user_delete: Yes
+    user_delete_other: Yes
+    user_review: True
+
+    post_submit: Yes
+    post_edit: Yes
+    post_edit_other: Yes
+    post_delete: Yes
+    post_delete_other: Yes
+    post_option_color: True
+    post_option_textsize: True
+    post_review: True
+
+    comment_submit: Yes
+    comment_edit: Yes
+    comment_edit_other: Yes
+    comment_delete: Yes
+    comment_delete_other: Yes
+    comment_review: True
+
+    survey_submit: Yes
+    survey_edit: Yes
+    survey_edit_other: Yes
+    survey_delete: Yes
+    survey_delete_other: Yes
+    survey_review: True
+
+    report_submit: True
+    report_review: True
+
+    statistics_access: True
+
+    friendship_submit: True
+
+    administration_access: #
+
+ROLE_ROOT:
+    user_submit: Yes
+    user_edit: Yes
+    user_edit_other: Yes
+    user_delete: Yes
+    user_delete_other: Yes
+    user_review: True
+
+    post_submit: Yes
+    post_edit: Yes
+    post_edit_other: Yes
+    post_delete: Yes
+    post_delete_other: Yes
+    post_option_color: True
+    post_option_textsize: True
+    post_review: True
+
+    comment_submit: Yes
+    comment_edit: Yes
+    comment_edit_other: Yes
+    comment_delete: Yes
+    comment_delete_other: Yes
+    comment_review: True
+
+    survey_submit: Yes
+    survey_edit: Yes
+    survey_edit_other: Yes
+    survey_delete: Yes
+    survey_delete_other: Yes
+    survey_review: True
+
+    report_submit: True
+    report_review: True
+
+    statistics_access: True
+
+    friendship_submit: True
+
+    administration_access: #
+
+ROLE_OWNER:
+    user_submit: Yes
+    user_edit: Yes
+    user_edit_other: Yes
+    user_delete: Yes
+    user_delete_other: Yes
+    user_review: True
+
+    post_submit: Yes
+    post_edit: Yes
+    post_edit_other: Yes
+    post_delete: Yes
+    post_delete_other: Yes
+    post_option_color: True
+    post_option_textsize: True
+    post_review: True
+
+    comment_submit: Yes
+    comment_edit: Yes
+    comment_edit_other: Yes
+    comment_delete: Yes
+    comment_delete_other: Yes
+    comment_review: True
+
+    survey_submit: Yes
+    survey_edit: Yes
+    survey_edit_other: Yes
+    survey_delete: Yes
+    survey_delete_other: Yes
+    survey_review: True
+
+    report_submit: True
+    report_review: True
+
+    statistics_access: True
+
+    friendship_submit: True
+
+    administration_access: #
+
+__META__:
+    user_submit:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    user_edit:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    user_edit_other:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    user_delete:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    user_delete_other:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    user_review:
+        input: CheckboxType
+
+    post_submit:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    post_edit:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    post_edit_other:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    post_delete:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    post_delete_other:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    post_option_color:
+        input: CheckboxType
+    post_option_textsize:
+        input: CheckboxType
+    post_review:
+        input: CheckboxType
+
+    comment_submit:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    comment_edit:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    comment_edit_other:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    comment_delete:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    comment_delete_other:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    comment_review:
+        input: CheckboxType
+
+    survey_submit:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    survey_edit:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    survey_edit_other:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    survey_delete:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    survey_delete_other:
+        input: ChoiceType
+        input_var:
+            choices:
+                Yes: yes
+                No: no
+                Needs Review: needs_review
+    survey_review:
+        input: CheckboxType
+
+    report_submit:
+        input: CheckboxType
+    report_review:
+        input: CheckboxType
+
+    statistics_access:
+        input: CheckboxType
+
+    friendship_submit:
+        input: CheckboxType
+
+    administration_access:
+        input: ChoiceType
+        input_var:
+            choices:
+                #
+            multiple: True

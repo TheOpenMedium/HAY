@@ -1,8 +1,0 @@
-authorizations:
-    #
-__META__:
-    __INCLUDE__:
-        - 'ROLE_MOD'
-        - 'ROLE_DEV'
-        - 'ROLE_DESIGN'
-        - 'ROLE_TRANS'
