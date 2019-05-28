@@ -45,7 +45,7 @@ ANONYMOUS:
 
     laws:
         laws_submit: No
-        laws_review: No
+        laws_review: False
 
     administration:
         administration_access: False
@@ -97,7 +97,7 @@ ROLE_USER:
 
     laws:
         laws_submit: No
-        laws_review: No
+        laws_review: False
 
     administration:
         administration_access: False
@@ -149,7 +149,7 @@ ROLE_HELPER:
 
     laws:
         laws_submit: Needs Review
-        laws_review: No
+        laws_review: False
 
     administration:
         administration_access: True
@@ -201,7 +201,7 @@ ROLE_MOD:
 
     laws:
         laws_submit: Needs Review
-        laws_review: No
+        laws_review: False
 
     administration:
         administration_access: True
@@ -253,7 +253,7 @@ ROLE_DEV:
 
     laws:
         laws_submit: Needs Review
-        laws_review: No
+        laws_review: False
 
     administration:
         administration_access: True
@@ -305,7 +305,7 @@ ROLE_DESIGN:
 
     laws:
         laws_submit: Needs Review
-        laws_review: No
+        laws_review: False
 
     administration:
         administration_access: True
@@ -357,7 +357,7 @@ ROLE_TRANS:
 
     laws:
         laws_submit: Needs Review
-        laws_review: No
+        laws_review: False
 
     administration:
         administration_access: True
@@ -409,7 +409,7 @@ ROLE_ADMIN:
 
     laws:
         laws_submit: Yes
-        laws_review: Yes
+        laws_review: True
 
     administration:
         administration_access: True
@@ -461,7 +461,7 @@ ROLE_ROOT:
 
     laws:
         laws_submit: Yes
-        laws_review: Yes
+        laws_review: True
 
     administration:
         administration_access: True
@@ -469,194 +469,227 @@ ROLE_ROOT:
 __META__:
     user:
         user_submit:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         user_edit:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         user_edit_other:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         user_delete:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         user_delete_other:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         user_review:
-            input: CheckboxType
+            input: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+            default: False
 
     post:
         post_submit:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         post_edit:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         post_edit_other:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         post_delete:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         post_delete_other:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         post_option_color:
-            input: CheckboxType
+            input: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+            default: False
         post_option_textsize:
-            input: CheckboxType
+            input: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+            default: False
         post_review:
-            input: CheckboxType
+            input: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+            default: False
 
     comment:
         comment_submit:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         comment_edit:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         comment_edit_other:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         comment_delete:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         comment_delete_other:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         comment_review:
-            input: CheckboxType
+            input: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+            default: False
 
     survey:
         survey_submit:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         survey_edit:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         survey_edit_other:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         survey_delete:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         survey_delete_other:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         survey_review:
-            input: CheckboxType
+            input: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+            default: False
 
     report:
         report_submit:
-            input: CheckboxType
+            input: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+            default: False
         report_review:
-            input: CheckboxType
+            input: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+            default: False
 
     statistics:
         statistics_access:
-            input: CheckboxType
+            input: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+            default: False
 
     friendship:
         friendship_submit:
-            input: CheckboxType
+            input: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+            default: False
 
     laws:
         laws_submit:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     Yes: yes
                     No: no
                     Needs Review: needs_review
+            default: No
         laws_review:
-            input: CheckboxType
+            input: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+            default: False
 
     administration:
         administration_access:
-            input: CheckboxType
+            input: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+            default: False
         administration_tools:
-            input: ChoiceType
+            input: Symfony\Component\Form\Extension\Core\Type\ChoiceType
             input_var:
                 choices:
                     - questions_office
@@ -682,3 +715,4 @@ __META__:
                     - sql_interface
                     - manage_policy
                 multiple: True
+            default: []
