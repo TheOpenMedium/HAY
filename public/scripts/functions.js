@@ -107,7 +107,7 @@ function openSubTab(subTabName) {
         tabcontent[i].style.display = "none";
     }
 
-    document.getElementById(subTabName).style.display = "grid";
+    document.getElementById(subTabName).style.display = "block";
 }
 
 // Report

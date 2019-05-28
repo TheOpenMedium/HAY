@@ -24,5 +24,5 @@
 </div>
 {% include 'security/admin/manage_roles.html.twig' %}
 {% include 'security/mod/manage_laws.html.twig' %}
-{% include 'security/admin/manage_authorization.html.twig' %}
+{{ render(url("authorization_manage")) }}
 {% endblock %}
