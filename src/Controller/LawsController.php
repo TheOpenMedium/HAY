@@ -3,12 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Laws;
+use App\Form\LawsType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class LawsController extends Controller
 {
@@ -46,11 +44,7 @@ class LawsController extends Controller
     {
         $laws = new Laws;
 
-        $form = $this->createFormBuilder($laws)
-        ->add('title', TextType::class)
-        ->add('content', TextareaType::class)
-        ->add('submit', SubmitType::class)
-        ->getForm();
+        $form = $this->createForm(LawsType::class, $laws);
 
         $form->handleRequest($request);
 
@@ -67,7 +61,7 @@ class LawsController extends Controller
         }
 
         return $this->render('laws/newLaws.html.twig', array(
-            'form' => $form->createView()
+            'laws' => $form->createView()
         ));
     }
 
@@ -80,11 +74,7 @@ class LawsController extends Controller
      */
     public function editLawsAction(Request $request, Laws $laws)
     {
-        $form = $this->createFormBuilder($laws)
-        ->add('title', TextType::class)
-        ->add('content', TextareaType::class)
-        ->add('submit', SubmitType::class)
-        ->getForm();
+        $form = $this->createForm(LawsType::class, $laws);
 
         $form->handleRequest($request);
 
@@ -99,7 +89,7 @@ class LawsController extends Controller
         }
 
         return $this->render('laws/newLaws.html.twig', array(
-            'form' => $form->createView()
+            'laws' => $form->createView()
         ));
     }
 

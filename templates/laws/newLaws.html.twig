@@ -10,11 +10,11 @@
     <span style="text-align: center;" onclick="openTab('preview'); renderingMarkdown();">{{ 'preview'|trans }}</span>
 </div>
 
-{{ form_start(form, {'attr': {"class": "tabContent", "id": "write", "style": "width: 80%; margin: auto; display: grid; grid-template-columns: auto;"}}) }}
-{{ form_widget(form.title, {'attr': {"class": "login loginLarge", "placeholder": "Title"}}) }}
-{{ form_widget(form.content, {'attr': {"style": "resize: none; background-color: var(--gray-dark); border: 1px solid var(--gray-color); color: white; width: 100%; height: 500px;"}}) }}
-{{ form_widget(form.submit, {'attr': {"class": "submit"}}) }}
-{{ form_end(form) }}
+{{ form_start(laws, {'attr': {"class": "tabContent", "id": "write", "style": "width: 80%; margin: auto; display: grid; grid-template-columns: auto;"}}) }}
+{{ form_widget(laws.title, {'attr': {"class": "login loginLarge", "placeholder": "Title"}}) }}
+{{ form_widget(laws.content, {'attr': {"style": "resize: none; background-color: var(--gray-dark); border: 1px solid var(--gray-color); color: white; width: 100%; height: 500px;"}}) }}
+{{ form_widget(laws.submit, {'attr': {"class": "submit"}}) }}
+{{ form_end(laws) }}
 
 <div class="markdown tabContent" id="preview" style="margin: auto;">
 </div>

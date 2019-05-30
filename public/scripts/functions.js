@@ -76,7 +76,7 @@ function showLaws(e, id) {
 // Markdown
 
 function renderingMarkdown() {
-    param = "markdown=" + encodeURIComponent(document.getElementById('form_content').value)
+    param = "markdown=" + encodeURIComponent(document.getElementById('laws_content').value)
 
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
