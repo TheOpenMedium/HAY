@@ -18,7 +18,7 @@
     {% if survey.answersTotal != 0 %}
         <div class="results">
             {% for key, value in survey.answersByPercentage %}
-                <span style="background-color: #{{ survey.color[key] }}; width: {{ value }}%;">{{ key }}</span>
+                <span style="background-color: {{ survey.color[key] }}; width: {{ value }}%;">{{ key }}</span>
             {% endfor %}
         </div>
         <div class="resultsValues">

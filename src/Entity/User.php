@@ -33,7 +33,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * * laws
  *
  * List of extra variables:
- * * rememberme
  * * salt
  * * conf_password
  * * file
@@ -98,8 +97,6 @@ class User implements UserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="App\Entity\Notification", mappedBy="user", orphanRemoval=true)
      */
     private $notifications;
-
-    private $rememberme;
 
     private $salt;
 

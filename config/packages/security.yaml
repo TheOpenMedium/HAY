@@ -35,8 +35,8 @@ security:
             # anonymous: /{_locale}/signup
             anonymous: ~
             form_login:
-                username_parameter: 'form[username]'
-                password_parameter: 'form[password]'
+                username_parameter: 'log_in[username]'
+                password_parameter: 'log_in[password]'
                 login_path: app_login
                 check_path: app_login
                 default_target_path: app_index
@@ -45,7 +45,7 @@ security:
                 secret: '%kernel.secret%'
                 name: remember_me
                 lifetime: 15600000
-                remember_me_parameter: form[rememberme]
+                remember_me_parameter: log_in[rememberme]
                 path: /
             logout:
                 path: app_logout

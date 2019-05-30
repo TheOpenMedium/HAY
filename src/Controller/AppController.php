@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
 use App\Form\PostType;
+use App\Form\LogInType;
 use App\Controller\AjaxController;
 use App\Controller\SurveyController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,8 +17,6 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
@@ -144,14 +143,7 @@ class AppController extends Controller
         $user = new User();
 
         // Creating a Form to Authentify.
-        $form = $this->createFormBuilder($user)
-            ->add('username', TextType::class)
-            ->add('password', PasswordType::class)
-            ->add('rememberme', CheckboxType::class, array(
-                'required' => false
-            ))
-            ->add('submit', SubmitType::class)
-            ->getForm();
+        $form = $this->createForm(LogInType::class, $user);
 
         // In case of error. And getting last username.
         $error = $authUtils->getLastAuthenticationError();
@@ -159,7 +151,7 @@ class AppController extends Controller
 
         // All that is rendered with the login template sending a Form, errors and last username.
         return $this->render('login.html.twig', array(
-            'form' => $form->createView(),
+            'log_in' => $form->createView(),
             'last_username' => $lastUsername,
             'error' => $error
         ));

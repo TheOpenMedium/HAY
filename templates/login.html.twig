@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-{{ form_start(form) }}
+{{ form_start(log_in) }}
 <table class="loginBody" width="500px"  style="margin-top: 0px;">
     {# Icon display #}
     {# Affichage des icônes #}
@@ -33,27 +33,27 @@
     {# Formulaire de l'E-mail et du mot de passe #}
     <tr>
         <td width="50%">
-            {{ form_widget(form.username, {'attr': {'class': 'login', 'placeholder': 'username'|trans ~ ' ' ~ 'or'|trans ~ ' ' ~ 'email'|trans, 'value': last_username}}) }}
+            {{ form_widget(log_in.username, {'attr': {'class': 'login', 'placeholder': 'username'|trans ~ ' ' ~ 'or'|trans ~ ' ' ~ 'email'|trans, 'value': last_username}}) }}
         </td>
         <td width="50%">
-            {{ form_widget(form.password, {'attr': {'class': 'login', 'placeholder': 'password'|trans}}) }}
+            {{ form_widget(log_in.password, {'attr': {'class': 'login', 'placeholder': 'password'|trans}}) }}
         </td>
     </tr>
     {# Cookies #}
     <tr>
         <td colspan="2" class="loginRememberme">
-            <label for="form_rememberme">{{ 'rememberme'|trans }}{{ form_widget(form.rememberme) }}</label>
+            <label for="log_in_rememberme">{{ 'rememberme'|trans }}{{ form_widget(log_in.rememberme) }}</label>
         </td>
     </tr>
     {# Data send #}
     {# Envoie des données #}
     <tr>
         <td colspan="2">
-            {{ form_widget(form.submit, {'attr': {'class': 'submit'}, 'label': 'to_login'|trans}) }}
+            {{ form_widget(log_in.submit, {'attr': {'class': 'submit'}, 'label': 'to_login'|trans}) }}
         </td>
     </tr>
 </table>
-{{ form_end(form) }}
+{{ form_end(log_in) }}
 {% if error %}
 <div class="warning" id="Error" style="background: red;">
     {{ error.messageKey|trans(error.messageData, 'security') }}
