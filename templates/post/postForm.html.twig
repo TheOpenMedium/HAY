@@ -1,7 +1,7 @@
 {# Send post form #}
 <div class="write">
-    {{ form_start(form) }}
-    <div class="textarea fs16 c696">{{ 'write'|trans }}{{ form_widget(form.content, {'attr': {'class': 'ta fs16', 'required': false}}) }}</div>
+    {{ form_start(post) }}
+    <div class="textarea fs16 c696">{{ 'write'|trans }}{{ form_widget(post.content, {'attr': {'class': 'ta fs16', 'required': false}}) }}</div>
     <div class="footer">
         <div class="footer-corner"></div>
         <ul class="footerMenu">
@@ -11,9 +11,9 @@
             {{ include('post/postOptions/postSize.html.twig') }}
             {{ include('post/postOptions/postFont.html.twig') }}
             {{ include('post/postOptions/postAccount.html.twig') }}
-            <label for="form_submit"><li class="menuChoices sendPost send fs16">
+            <label for="post_submit"><li class="menuChoices sendPost send fs16">
                 <i class="icofont-arrow-right optionMenu" aria-hidden="true"></i>
-                {{ form_widget(form.submit, {'attr': {'class': 'sendButton'}, 'label': false}) }}
+                {{ form_widget(post.submit, {'attr': {'class': 'sendButton'}, 'label': false}) }}
             </li></label>
         </ul>
         <script>
@@ -22,5 +22,5 @@
             document.getElementsByClassName("footerMenu")[0].childNodes.forEach(function (elt) {if (re.test(elt.data)) {elt.parentNode.removeChild(elt);}})
         </script>
     </div>
-    {{ form_end(form) }}
+    {{ form_end(post) }}
 </div>

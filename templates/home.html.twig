@@ -81,15 +81,15 @@
 {% block js %}
 <script>
 
-document.getElementsByName('form[color]').forEach(function(element) {
+document.getElementsByName('post[color]').forEach(function(element) {
     element.addEventListener('change', changeColor)
 })
 
-document.getElementsByName('form[size]').forEach(function(element) {
+document.getElementsByName('post[size]').forEach(function(element) {
     element.addEventListener('change', changeSize)
 })
 
-document.getElementById('form_color_2').checked = true
+document.getElementById('post_color_2').checked = true
 
 </script>
 {% endblock %}

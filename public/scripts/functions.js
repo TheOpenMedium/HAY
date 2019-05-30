@@ -48,7 +48,7 @@ function init() {
     classesSize[0] += size
     sizeDisplay[0].className = classesSize[0]
 
-    sizeValue = document.getElementsByName('form[size]')
+    sizeValue = document.getElementsByName('post[size]')
     sizeValue[0].value = twig_size
 }
 

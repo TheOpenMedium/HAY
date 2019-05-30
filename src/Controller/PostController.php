@@ -5,15 +5,11 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
+use App\Form\PostType;
 use App\Controller\SurveyController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 /**
  * A controller related to the Post entity
@@ -76,22 +72,7 @@ class PostController extends Controller
         // Checking that the author and the user are the same.
         if ($post->getUser()->getId() == $user->getId()) {
             // Creating the form.
-            $form = $this->createFormBuilder($post)
-                ->add('content', TextareaType::class)
-                ->add('color', ChoiceType::class, array(
-                    'choices' => array(
-                        '000', '222', '696', '999', 'DDD', 'FFF',
-                        'E00', '72C', '008', '099', '0A0', 'F91',
-                        'F00', 'D0F', '22F', '6DF', '0F0', 'FD0',
-                        'F44', 'F2E', '08F', '0FF', 'BF0', 'EE0',
-                        'F05', 'F6F', '0AE', '9FF', '5F9', 'FF0'
-                    ),
-                    'multiple' => false,
-                    'expanded' => true
-                ))
-                ->add('size', IntegerType::class)
-                ->add('submit', SubmitType::class)
-                ->getForm();
+            $form = $this->createForm(PostType::class, $post);
 
             $form->handleRequest($request);
 
@@ -114,7 +95,7 @@ class PostController extends Controller
 
             // All that is rendered with the post edit template sending a From and the default Color and Size.
             return $this->render('post/editPost.html.twig', array(
-                'form' => $form->createView(),
+                'post' => $form->createView(),
                 'color' => $color,
                 'size' => $size
             ));

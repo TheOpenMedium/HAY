@@ -5,20 +5,18 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
+use App\Form\PostType;
 use App\Controller\AjaxController;
 use App\Controller\SurveyController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -102,22 +100,7 @@ class AppController extends Controller
         $post = new Post();
 
         // Creating Post submit Form in case he want to send a post.
-        $form = $this->createFormBuilder($post)
-            ->add('content', TextareaType::class)
-            ->add('color', ChoiceType::class, array(
-                'choices' => array(
-                    '000', '222', '696', '999', 'DDD', 'FFF',
-                    'E00', '72C', '008', '099', '0A0', 'F91',
-                    'F00', 'D0F', '22F', '6DF', '0F0', 'FD0',
-                    'F44', 'F2E', '08F', '0FF', 'BF0', 'EE0',
-                    'F05', 'F6F', '0AE', '9FF', '5F9', 'FF0'
-                ),
-                'multiple' => false,
-                'expanded' => true
-            ))
-            ->add('size', IntegerType::class)
-            ->add('submit', SubmitType::class)
-            ->getForm();
+        $form = $this->createForm(PostType::class, $post);
 
         $form->handleRequest($request);
 
@@ -140,7 +123,7 @@ class AppController extends Controller
 
         // All that is rendered with the home template sending a Form, Post List and Comment List.
         return $this->render('home.html.twig', array(
-            'form' => $form->createView(),
+            'post' => $form->createView(),
             'postList' => $postList,
             'scope' => $scope,
             'order' => $order

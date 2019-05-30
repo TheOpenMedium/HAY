@@ -238,11 +238,11 @@
     cursor: pointer;
 }
 
-[name="form[color]"] {
+[name="post[color]"] {
     margin: 0px;
 }
 
-[name="form[color]"]:hover {
+[name="post[color]"]:hover {
     cursor: pointer;
 }
 
