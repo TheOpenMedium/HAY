@@ -7,16 +7,12 @@ use App\Entity\Post;
 use App\Entity\Comment;
 use App\Form\PostType;
 use App\Form\LogInType;
+use App\Form\SignUpType;
 use App\Controller\AjaxController;
 use App\Controller\SurveyController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
@@ -171,18 +167,7 @@ class AppController extends Controller
         $user = new User();
 
         // Creating the Sign Up Form.
-        $form = $this->createFormBuilder($user)
-            ->add('first_name', TextType::class)
-            ->add('last_name', TextType::class)
-            ->add('username', TextType::class, array('required' => false))
-            ->add('email', RepeatedType::class, array(
-                'type' => EmailType::class
-            ))
-            ->add('password', RepeatedType::class, array(
-                'type' => PasswordType::class
-            ))
-            ->add('submit', SubmitType::class)
-            ->getForm();
+        $form = $this->createForm(SignUpType::class, $user);
 
         $form->handleRequest($request);
 
@@ -203,7 +188,7 @@ class AppController extends Controller
 
         // All that is rendered with the Sign Up template sending a Form.
         return $this->render('signup.html.twig', array(
-            'form' => $form->createView()
+            'sign_up' => $form->createView()
         ));
     }
 

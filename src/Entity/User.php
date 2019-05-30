@@ -34,7 +34,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  *
  * List of extra variables:
  * * salt
- * * conf_password
  * * file
  *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -114,8 +113,6 @@ class User implements UserInterface, \Serializable
      * @ORM\ManyToMany(targetEntity="App\Entity\User")
      */
     private $friends;
-
-    private $conf_password;
 
     /**
      * @ORM\Column(type="string", length=2000)
@@ -524,16 +521,6 @@ class User implements UserInterface, \Serializable
         }
 
         return $this;
-    }
-
-    public function getConfPassword()
-    {
-        return $this->conf_password;
-    }
-
-    public function setConfPassword($conf_password)
-    {
-        $this->conf_password = $conf_password;
     }
 
     public function getUrl(): ?string
