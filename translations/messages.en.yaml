@@ -77,8 +77,9 @@ edit_comment: Edit comment
 edit_user: Edit user
 cancel: Cancel
 conf_password: Your previous password
-alt: Brief description of user's picture
+alt: Description
 choose: Choose
+usr_name: User's name
 
 # Survey
 

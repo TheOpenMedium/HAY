@@ -5,55 +5,33 @@
 {% endblock %}
 
 {% block body %}
+{{ form_start(edit_user) }}
+<h1 class="userEditTitle fs40">{{ 'edit_user'|trans }} {{ app.user.firstName }} {{ app.user.lastName }}</h1>
 <div class="userEdit">
-    <span class="userEditTitle fs40">{{ 'edit_user'|trans }}</span>
-    <img src="{{ app.user.url }}" alt="{{ app.user.alt }}" />
-    <div class="userEditUserInfo">
-        {# First/last name form #}
-        {# Formulaire du nom/prénom #}
-        {{ form_start(form_name, {'attr': {'class': 'userEditName'}}) }}
-        {{ form_widget(form_name.first_name, {'attr': {'class': 'login', 'placeholder': 'first_name'|trans}, 'required': false}) }}
-        {{ form_widget(form_name.last_name, {'attr': {'class': 'login', 'placeholder': 'last_name'|trans}, 'required': false}) }}
-        {{ form_widget(form_name.conf_password, {'attr': {'class': 'login loginLarge', 'placeholder': 'conf_password'|trans}}) }}
-        {{ form_widget(form_name.submit, {'attr': {'class': 'submit'}, 'label': 'edit'|trans}) }}
-        {{ form_end(form_name) }}
-        {# Username form #}
-        {# Formulaire du pseudo #}
-        {{ form_start(form_username, {'attr': {'class': 'userEditUserName'}}) }}
-        {{ form_widget(form_username.username, {'attr': {'class': 'login loginLarge', 'placeholder': 'username'|trans}, 'required': false}) }}
-        {{ form_widget(form_username.conf_password, {'attr': {'class': 'login loginLarge', 'placeholder': 'conf_password'|trans}}) }}
-        {{ form_widget(form_username.submit, {'attr': {'class': 'submit'}, 'label': 'edit'|trans}) }}
-        {{ form_end(form_username) }}
-        {# Image form #}
-        {# Formulaire de l'Avatar #}
-        {{ form_start(form_image, {'attr': {'class': 'userEditImage'}}) }}
-        {{ form_widget(form_image.file, {'attr': {'accept': 'image/*', 'style': 'display: none;'}, 'required': false}) }}
-        <label for="form_file" class="submit">{{ 'choose'|trans }}...</label>
-        {{ form_widget(form_image.alt, {'attr': {'class': 'login', 'placeholder': 'alt'|trans}, 'required': false}) }}
-        {{ form_widget(form_image.conf_password, {'attr': {'class': 'login loginLarge', 'placeholder': 'conf_password'|trans}}) }}
-        {{ form_widget(form_image.submit, {'attr': {'class': 'submit'}, 'label': 'edit'|trans}) }}
-        {{ form_end(form_image) }}
-    </div>
-    {# E-mail form #}
-    {# Formulaire de l'E-mail #}
-    {{ form_start(form_email) }}
-    {{ form_widget(form_email.email.first, {'attr': {'class': 'login', 'placeholder': 'email'|trans}, 'required': false}) }}
-    {{ form_widget(form_email.email.second, {'attr': {'class': 'login', 'placeholder': 'repeat'|trans}, 'required': false}) }}
-    {{ form_widget(form_email.conf_password, {'attr': {'class': 'login loginLarge', 'placeholder': 'conf_password'|trans}}) }}
-    {{ form_widget(form_email.submit, {'attr': {'class': 'submit'}, 'label': 'edit'|trans}) }}
-    {{ form_end(form_email) }}
-    {# Password form #}
-    {# Formulaire du mot de passe #}
-    {{ form_start(form_password) }}
-    {{ form_widget(form_password.password.first, {'attr': {'class': 'login', 'placeholder': 'password'|trans, 'autocomplete': 'off'}, 'required': false}) }}
-    {{ form_widget(form_password.password.second, {'attr': {'class': 'login', 'placeholder': 'repeat'|trans, 'autocomplete': 'off'}, 'required': false}) }}
-    {{ form_widget(form_password.conf_password, {'attr': {'class': 'login loginLarge', 'placeholder': 'conf_password'|trans}}) }}
-    {{ form_widget(form_password.submit, {'attr': {'class': 'submit'}, 'label': 'edit'|trans}) }}
-    {{ form_end(form_password) }}
+    {#####}
+    <span>{{ 'usr_name'|trans }}</span>
+    <span>{{ form_widget(edit_user.first_name, {'attr': {'class': 'login', 'placeholder': 'first_name'}}) }}</span>
+    <span>{{ form_widget(edit_user.last_name, {'attr': {'class': 'login', 'placeholder': 'last_name'}}) }}</span>
+    {#####}
+    <span>{{ 'username'|trans }}</span>
+    <span style="grid-column: 2/4;">{{ form_widget(edit_user.username, {'attr': {'class': 'login loginLarge', 'placeholder': 'username'}}) }}</span>
+    {#####}
+    <span>{{ 'usr_img'|trans }}</span>
+    <span><img src="{{ app.user.url }}" alt="{{ app.user.alt }}" />{{ form_widget(edit_user.file, {'attr': {'accept': 'image/*'}}) }}</span>
+    <span>{{ form_widget(edit_user.alt, {'attr': {'class': 'login', 'placeholder': 'alt'}}) }}</span>
+    {#####}
+    <span>{{ 'email'|trans }}</span>
+    <span>{{ form_widget(edit_user.email.first, {'attr': {'class': 'login loginLarge', 'placeholder': 'email'}}) }}</span>
+    <span>{{ form_widget(edit_user.email.second, {'attr': {'class': 'login loginLarge', 'placeholder': 'repeat'}}) }}</span>
+    {#####}
+    <span>{{ 'password'|trans }}</span>
+    <span>{{ form_widget(edit_user.password.first, {'attr': {'class': 'login loginLarge', 'placeholder': 'password'}}) }}</span>
+    <span>{{ form_widget(edit_user.password.second, {'attr': {'class': 'login loginLarge', 'placeholder': 'repeat'}}) }}</span>
+    {#####}
+    <span style="grid-column: 1/3;">{{ form_widget(edit_user.conf_password, {'attr': {'class': 'login loginVeryLarge', 'placeholder': 'conf_password'}}) }}</span>
+    <span>{{ form_widget(edit_user.submit, {'attr': {'class': 'submit'}, 'label': 'edit'}) }}</span>
 </div>
-{# Data send #}
-{# Envoie des données #}
-<button class="submit" type="button" onclick="window.location='{{ url('app_index') }}';">{{ 'cancel'|trans }}</button>
+{{ form_end(edit_user) }}
 
 {% if error is defined %}
 <div class="warning" id="Error" style="background: red;">

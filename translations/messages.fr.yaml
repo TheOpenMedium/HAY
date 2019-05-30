@@ -83,8 +83,9 @@ edit_comment: Modifier le commentaire
 edit_user: Modifier l'utilisateur
 cancel: Annuler
 conf_password: Votre ancient mot de passe
-alt: Courte description de la photo de profile
+alt: Description
 choose: Choisir
+usr_name: Nom de l'utilisateur
 
 # Survey
 # Sondage

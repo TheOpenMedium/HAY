@@ -6,7 +6,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * User Entity
@@ -34,7 +33,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  *
  * List of extra variables:
  * * salt
- * * file
  *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
@@ -120,11 +118,9 @@ class User implements UserInterface, \Serializable
     private $url;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $alt;
-
-    private $file;
 
     /**
      * @ORM\Column(type="json", nullable=true)
@@ -191,7 +187,7 @@ class User implements UserInterface, \Serializable
         $result = array();
 
         foreach ($this as $key => $value) {
-            if ($key != 'password' && $key != 'rememberme' && $key != 'salt' && $key != 'conf_password' && $key != 'file') {
+            if ($key != 'password' && $key != 'salt') {
                 if ($value !== NULL && $key != 'mail_conf') {
                     $result[$key] = $value;
                 } elseif ($key == 'mail_conf') {
@@ -391,16 +387,6 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getRememberme()
-    {
-        return $this->rememberme;
-    }
-
-    public function setRememberme($rememberme)
-    {
-        $this->rememberme = $rememberme;
-    }
-
     public function getSalt()
     {
         return $this->salt;
@@ -545,16 +531,6 @@ class User implements UserInterface, \Serializable
         $this->alt = $alt;
 
         return $this;
-    }
-
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    public function setFile(UploadedFile $file)
-    {
-        $this->file = $file;
     }
 
     public function getSettings()

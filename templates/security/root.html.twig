@@ -64,7 +64,7 @@
     </script>
 </div>
 {% include 'security/admin/manage_roles.html.twig' %}
-{% include 'security/admin/manage_authorization.html.twig' %}
+{{ render(url("authorization_manage")) }}
 {% include 'security/mod/manage_laws.html.twig' %}
 <div class="tabContent" id="sql_interface">
     <h1 style="margin-bottom: 0;">{{ 'sql_interface'|trans }}</h1>
