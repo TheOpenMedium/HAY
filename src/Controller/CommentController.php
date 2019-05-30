@@ -6,12 +6,10 @@ use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
 use App\Entity\Notification;
+use App\Form\CommentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 /**
  * A controller related to the Comment entity
@@ -42,10 +40,7 @@ class CommentController extends Controller
         $com = new Comment();
 
         // Creating the Form if the user want to submit a comment.
-        $comment = $this->createFormBuilder($com)
-            ->add('comment', TextareaType::class)
-            ->add('submit', SubmitType::class)
-            ->getForm();
+        $comment = $this->createForm(CommentType::class, $com);
 
         $comment->handleRequest($request);
 
@@ -122,10 +117,7 @@ class CommentController extends Controller
         // Checking that the author and the user are the same.
         if ($comment->getUser()->getId() == $user->getId()) {
             // Creating a Form to edit comment.
-            $form = $this->createFormBuilder($comment)
-                ->add('comment', TextareaType::class)
-                ->add('submit', SubmitType::class)
-                ->getForm();
+            $form = $this->createForm(CommentType::class, $comment);
 
             $form->handleRequest($request);
 
