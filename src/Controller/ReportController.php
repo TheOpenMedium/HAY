@@ -7,17 +7,12 @@ use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
 use App\Entity\Laws;
+use App\Form\ReportType;
+use App\Form\ProcessReportType;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ReportController extends Controller
 {
@@ -51,12 +46,7 @@ class ReportController extends Controller
             $report->setReportedComment($entity);
         }
 
-        $reportForm = $this->createFormBuilder($report)
-            ->add('law', HiddenType::class)
-            ->add('emergency_level', IntegerType::class)
-            ->add('reporter_msg', TextareaType::class, array('required' => false))
-            ->add('submit', SubmitType::class)
-            ->getForm();
+        $reportForm = $this->createForm(ReportType::class, $report);
 
         $reportForm->handleRequest($request);
 
@@ -164,16 +154,7 @@ class ReportController extends Controller
      */
     public function processReportAction(Request $request, Report $report)
     {
-        $reportForm = $this->createFormBuilder($report)
-            ->add('validated', ChoiceType::class, array(
-                'choices' => array('Need Help' => NULL, 'Yes' => true, 'No' => false),
-                'multiple' => false,
-                'expanded' => true
-            ))
-            ->add('punishment', TextType::class, array('required' => false))
-            ->add('moderator_msg', TextareaType::class, array('required' => false))
-            ->add('submit', SubmitType::class)
-            ->getForm();
+        $reportForm = $this->createForm(ProcessReportType::class, $report);
 
         $reportForm->handleRequest($request);
 
