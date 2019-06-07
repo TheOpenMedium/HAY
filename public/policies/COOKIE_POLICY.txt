@@ -6,6 +6,6 @@ _ PHPSESSID :
 
 _ remember_me :
     This cookie is used for remembering the user for his next connection.
-    It remember the user for 6 months.
-    It's the user, and only him that decide if he want to use this cookie
+    It remembers the user for 6 months.
+    It's the user, and only him that decide if he wants to use this cookie
     by checking the "Remember me" option when logging in.
