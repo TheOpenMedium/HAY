@@ -339,16 +339,6 @@ class AdministrationController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/admintemp", name="administration_admin", requirements={
-     *     "_locale": "%app.locales%"
-     * })
-     */
-    public function adminAction()
-    {
-        return $this->render('administration/admin.html.twig');
-    }
-
-    /**
      * @Route("/{_locale}/admin/get_roles/{user}", name="administration_admin_get_roles", requirements={
      *     "_locale": "%app.locales%"
      * })
@@ -403,55 +393,5 @@ class AdministrationController extends Controller
         $em->flush();
 
         return new Response('true');
-    }
-
-    /**
-     * @Route("/{_locale}/mod", name="administration_mod", requirements={
-     *     "_locale": "%app.locales%"
-     * })
-     */
-    public function modAction()
-    {
-        return $this->render('administration/mod.html.twig');
-    }
-
-    /**
-     * @Route("/{_locale}/trans", name="administration_trans", requirements={
-     *     "_locale": "%app.locales%"
-     * })
-     */
-    public function transAction()
-    {
-        return $this->render('administration/trans.html.twig');
-    }
-
-    /**
-     * @Route("/{_locale}/design", name="administration_design", requirements={
-     *     "_locale": "%app.locales%"
-     * })
-     */
-    public function designAction()
-    {
-        return $this->render('administration/design.html.twig');
-    }
-
-    /**
-     * @Route("/{_locale}/dev", name="administration_dev", requirements={
-     *     "_locale": "%app.locales%"
-     * })
-     */
-    public function devAction()
-    {
-        return $this->render('administration/dev.html.twig');
-    }
-
-    /**
-     * @Route("/{_locale}/helper", name="administration_helper", requirements={
-     *     "_locale": "%app.locales%"
-     * })
-     */
-    public function helperAction()
-    {
-        return $this->render('administration/helper.html.twig');
     }
 }

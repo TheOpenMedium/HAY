@@ -127,6 +127,11 @@ ROLE_HELPER:
         laws_review: false
     administration:
         administration_access: true
+        administration_tools:
+            - questions_office
+            - ideas_office
+            - manage_doc
+            - submit_modif
 ROLE_MOD:
     user:
         user_submit: 'Yes'
@@ -170,6 +175,13 @@ ROLE_MOD:
         laws_review: false
     administration:
         administration_access: true
+        administration_tools:
+            - complaints_office
+            - investigations
+            - false_accounts
+            - manage_community
+            - manage_laws
+            - contact_administration
 ROLE_DEV:
     user:
         user_submit: 'Yes'
@@ -213,6 +225,11 @@ ROLE_DEV:
         laws_review: false
     administration:
         administration_access: true
+        administration_tools:
+            - manage_profiler
+            - source_code
+            - dev_tools
+            - gitlab_interface
 ROLE_DESIGN:
     user:
         user_submit: 'Yes'
@@ -256,6 +273,10 @@ ROLE_DESIGN:
         laws_review: false
     administration:
         administration_access: true
+        administration_tools:
+            - gitlab_interface
+            - manage_themes
+            - manage_css
 ROLE_TRANS:
     user:
         user_submit: 'Yes'
@@ -299,6 +320,8 @@ ROLE_TRANS:
         laws_review: false
     administration:
         administration_access: true
+        administration_tools:
+            - manage_translations
 ROLE_ADMIN:
     user:
         user_submit: 'Yes'
@@ -342,6 +365,9 @@ ROLE_ADMIN:
         laws_review: true
     administration:
         administration_access: true
+        administration_tools:
+            - manage_roles
+            - manage_authorization
 ROLE_ROOT:
     user:
         user_submit: 'Yes'
@@ -385,6 +411,11 @@ ROLE_ROOT:
         laws_review: true
     administration:
         administration_access: true
+        administration_tools:
+            - edit_website
+            - statistics
+            - sql_interface
+            - manage_policy
 __META__:
     user:
         user_submit:

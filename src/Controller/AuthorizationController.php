@@ -63,6 +63,6 @@ class AuthorizationController extends Controller
         }
         $yaml = Yaml::dump($yaml, 99, 4);
         file_put_contents(__dir__.'/../../config/authorizations.yaml', $yaml);
-        return $this->redirectToRoute('security_admin');
+        return $this->redirectToRoute('administration');
     }
 }
