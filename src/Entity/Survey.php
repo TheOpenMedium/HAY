@@ -116,10 +116,27 @@ class Survey
         $result = array();
 
         foreach ($this as $key => $value) {
-            if ($value !== NULL) {
-                $result[$key] = $value;
-            } else {
-                $result[$key] = 'NULL';
+            if ($key !== '_answers') {
+                if ($key == 'answers') {
+                    $answers = $this->getAnswers();
+                    $processed = '';
+                    foreach ($answers as $answername => $answervalues) {
+                        $processed .= $answername . " => [";
+                        foreach ($answervalues as $user) {
+                            $processed .= $user . ", ";
+                        }
+                        if ($processed !== $answername . " => [") {
+                            $processed = substr($processed, 0, -2);
+                        }
+                        $processed .= "] / ";
+                    }
+                    $processed = substr($processed, 0, -3);
+                    $result[$key] = $processed;
+                } else if ($value !== NULL) {
+                    $result[$key] = $value;
+                } else {
+                    $result[$key] = 'NULL';
+                }
             }
         }
 

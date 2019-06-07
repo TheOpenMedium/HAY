@@ -10,6 +10,7 @@ use App\Entity\FriendRequest;
 use App\Entity\Statistics;
 use App\Entity\Laws;
 use App\Entity\Report;
+use App\Entity\Survey;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -103,13 +104,13 @@ class AdministrationController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/manage_policy", name="administration_manage_policy", requirements={
+     * @Route("/{_locale}/admin/sql_interface", name="administration_sql_interface", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
-    public function managePolicyAction(Request $request)
+    public function sqlInterfaceAction()
     {
-        /*// If you found another file that should be excluded, please open an issue
+        // If you found another file that should be excluded, please open an issue
         $entities = array_diff(
             scandir(__dir__.'/../Entity'),
             array(
@@ -127,8 +128,20 @@ class AdministrationController extends Controller
 
         foreach ($entities as $entitykey => $entity) {
             $entities[$entitykey] = substr($entity, 0, -4);
-        }*/
+        }
 
+        return $this->render('administration/sql_interface.html.twig', [
+            'entities' => $entities
+        ]);
+    }
+
+    /**
+     * @Route("/{_locale}/manage_policy", name="administration_manage_policy", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function managePolicyAction(Request $request)
+    {
         $license = \fopen(__dir__.'/../../LICENSE', 'r');
         $privacy_policy = \fopen(__dir__.'/../../public/policies/PRIVACY_POLICY.txt', 'r');
         $cookie_policy = \fopen(__dir__.'/../../public/policies/COOKIE_POLICY.txt', 'r');
@@ -190,8 +203,7 @@ class AdministrationController extends Controller
         }
 
         return $this->render('administration/manage_policy.html.twig', array(
-            'manage_policy' => $form->createView(),
-            //'entities' => $entities
+            'manage_policy' => $form->createView()
         ));
     }
 
@@ -218,6 +230,8 @@ class AdministrationController extends Controller
             $repo = $this->getDoctrine()->getRepository(Laws::class);
         } elseif ($entity == "report") {
             $repo = $this->getDoctrine()->getRepository(Report::class);
+        } elseif ($entity == "survey") {
+            $repo = $this->getDoctrine()->getRepository(Survey::class);
         } else {
             throw new \Exception('Sorry, but this entity doesn\'t exist.');
         }
@@ -366,6 +380,8 @@ class AdministrationController extends Controller
             $repo = $this->getDoctrine()->getRepository(Statistics::class);
         } elseif ($entity == "laws") {
             $repo = $this->getDoctrine()->getRepository(Laws::class);
+        } elseif ($entity == "survey") {
+            $repo = $this->getDoctrine()->getRepository(Survey::class);
         } else {
             throw new \Exception('Sorry, but this entity doesn\'t exist.');
         }

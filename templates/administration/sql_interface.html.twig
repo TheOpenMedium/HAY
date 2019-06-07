@@ -1,0 +1,221 @@
+<div class="tabContent" id="sql_interface">
+    <h1 style="margin-bottom: 0;">{{ 'sql_interface'|trans }}</h1>
+    <div class="criteria" style="display: flex; padding: 0px; height: 40px;">
+        {% for entity in entities %}
+            <a href="#" id="sql_{{ entity|lower }}" onclick="showSQLEntity('{{ entity|lower }}')"><span>{{ entity }}</span></a>
+        {% endfor %}
+    </div>
+    <div id="sql_table" style="grid-column: 1/3; white-space: nowrap; overflow-x: scroll;">
+    </div>
+    <label style="grid-column: 1/3; border-bottom: 2px solid var(--hay-color); margin: 15px 0;"><input type="radio" name="filter" id="filter_simple" onclick="changeFilter()" checked />Filtres Simples</label>
+    <div style="grid-column: 1/3; display: grid; grid-template-columns: 50% 50%;">
+        <span>{{ 'max_results'|trans }} <input type="number" id="sql_max" min="1" max="500" value="10" onchange="showSQLEntity(last_entity)" /></span>
+        <span>{{ 'first_result'|trans }} <input type="number" id="sql_first" min="1" value="1" onchange="showSQLEntity(last_entity)" /></span>
+    </div>
+    <label style="grid-column: 1/3; border-bottom: 2px solid red; margin-top: 15px;"><input type="radio" name="filter" id="filter_advanced" onclick="changeFilter()" />Filtres Avancés</label>
+    <span style="grid-column: 1/3; background-color: red; padding: 15px; text-align: center; margin-bottom: 15px;">{{ 'WARNING'|trans }}</span>
+    <div class="sql_advanced">
+        <span id="sql_1_operation" class="sql_1" style="grid-column: 1; grid-row: 1;">SELECT</span>
+        <span id="sql_1_column" class="sql_1" style="grid-column: 2; grid-row: 1;"><select></select></span>
+        <span style="grid-column: 1; grid-row: 99;"><button type="button" style="float: left; background-color: blue; border: 0; padding: 10px; grid-column: 7; cursor: pointer;" onclick="showSQLEntity(last_entity, true);"><i class="icofont-arrow-right"></i></button></span>
+        <span style="grid-column: 6; grid-row: 99;"><button type="button" style="float: right; background-color: green; border: 0; padding: 10px; grid-column: 7; cursor: pointer;" onclick="addSQLQuery();"><i class="icofont-ui-add"></i></button></span>
+    </div>
+    <script>
+        // DO NOT PUT THESE FUNCTIONS IN COMMON FILES (FOR OBVIOUS SECURITY REASONS)
+
+        var last_entity = 'NULL'
+        var filter_nb = 1
+
+        function showSQLEntity(entity, adv = false) {
+            if (entity !== 'NULL') {
+                last_entity = entity
+
+                if (!adv) {
+                    url = "{{ url('administration_root_sql', {'entity': 'aaa', 'max': 'bbb', 'first': 'ccc'}) }}"
+                    url = url.replace('aaa', entity)
+                    url = url.replace('bbb', document.getElementById('sql_max').value)
+                    url = url.replace('ccc', document.getElementById('sql_first').value)
+
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                        document.getElementById("sql_table").innerHTML = this.responseText;
+                    };
+                    xmlhttp.open("GET", url, true);
+                    xmlhttp.send();
+
+                    getColumn()
+                } else {
+                    url = "{{ url('administration_root_sql', {'entity': 'aaa'}) }}"
+                    url = url.replace('aaa', entity)
+
+                    param = getAdvParam()
+
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("POST", url, true);
+                    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                    xmlhttp.onreadystatechange = function() {
+                        document.getElementById("sql_table").innerHTML = this.responseText;
+                    };
+                    xmlhttp.send(param);
+                }
+            }
+        }
+
+        function changeFilter() {
+            value_simple = !document.getElementById('filter_simple').checked
+            document.getElementById('sql_max').disabled = value_simple
+            document.getElementById('sql_first').disabled = value_simple
+
+            value_advanced = !document.getElementById('filter_advanced').checked
+            sql_adv = document.getElementsByClassName("sql_advanced")[0]
+            sql_adv.childNodes.forEach(function(elt) {
+                elt.childNodes.forEach(function(elt2) {
+                    elt2.disabled = value_advanced
+                })
+            })
+        }
+
+        function addSQLQuery() {
+            filter_nb++;
+            sql_html = `
+                <span id="sql_` + filter_nb + `_operation" class="sql_` + filter_nb + `" style="grid-column: 1; grid-row: ` + filter_nb + `;">
+                    <select onchange="changeSQLQuery(` + filter_nb + `);">
+                        <option value="SELECT">SELECT</option>
+                        <option value="WHERE">WHERE</option>
+                        <option value="ORDER BY">ORDER BY</option>
+                        <option value="LIMIT">LIMIT</option>
+                    </select>
+                </span>
+                <span id="sql_` + filter_nb + `_column" class="sql_` + filter_nb + `" style="grid-column: 2; grid-row: ` + filter_nb + `;"><select></select></span>
+                <span id="sql_` + filter_nb + `_comparison" class="sql_` + filter_nb + `" style="grid-column: 3; grid-row: ` + filter_nb + `;"></span>
+                <span id="sql_` + filter_nb + `_data" class="sql_` + filter_nb + `" style="grid-column: 4; grid-row: ` + filter_nb + `;"><input type="text" /></span>
+                <span id="sql_` + filter_nb + `_order" class="sql_` + filter_nb + `" style="grid-column: 5; grid-row: ` + filter_nb + `;">
+                    <select>
+                        <option value="DESC">DESC</option>
+                        <option value="ASC">ASC</option>
+                    </select>
+                </span>
+                <span class="sql_` + filter_nb + `" style="grid-column: 6; grid-row: ` + filter_nb + `;"><button type="button" style="float: right; background-color: red; border: 0; padding: 10px; cursor: pointer;" onclick="deleteSQLQuery(` + filter_nb + `);"><i class="icofont-ui-remove"></i></button></span>
+            `;
+            sql_adv = document.getElementsByClassName("sql_advanced")[0];
+            sql_adv.innerHTML = sql_html + sql_adv.innerHTML;
+            changeSQLQuery(filter_nb);
+            getColumn();
+        }
+
+        function deleteSQLQuery(nb) {
+            sql_elt = document.getElementsByClassName("sql_" + nb)
+
+            for (i = 0; i < 6; i++) {
+                sql_elt[0].parentNode.removeChild(sql_elt[0])
+            }
+        }
+
+        function changeSQLQuery(nb) {
+            value = document.getElementById('sql_' + nb + '_operation').children[0].value
+
+            if (value == "SELECT") {
+                document.getElementById('sql_' + nb + '_column').style.display = "grid";
+                document.getElementById('sql_' + nb + '_comparison').style.display = "none";
+                document.getElementById('sql_' + nb + '_data').style.display = "none";
+                document.getElementById('sql_' + nb + '_order').style.display = "none";
+            } else if (value == "WHERE") {
+                document.getElementById('sql_' + nb + '_column').style.display = "grid";
+                document.getElementById('sql_' + nb + '_comparison').style.display = "grid";
+                document.getElementById('sql_' + nb + '_data').style.display = "grid";
+                document.getElementById('sql_' + nb + '_order').style.display = "none";
+
+                document.getElementById('sql_' + nb + '_comparison').innerHTML = `
+                    <select>
+                        <option value="=">=</option>
+                        <option value="!=">!=</option>
+                        <option value="<">&lt;</option>
+                        <option value=">">&gt;</option>
+                        <option value="<=">&lt;=</option>
+                        <option value=">=">&gt;=</option>
+                    </select>
+                `;
+                document.getElementById('sql_' + nb + '_data').children[0].type = "text";
+            } else if (value == "ORDER BY") {
+                document.getElementById('sql_' + nb + '_column').style.display = "grid";
+                document.getElementById('sql_' + nb + '_comparison').style.display = "none";
+                document.getElementById('sql_' + nb + '_data').style.display = "none";
+                document.getElementById('sql_' + nb + '_order').style.display = "grid";
+            } else if (value == "LIMIT") {
+                document.getElementById('sql_' + nb + '_column').style.display = "none";
+                document.getElementById('sql_' + nb + '_comparison').style.display = "grid";
+                document.getElementById('sql_' + nb + '_data').style.display = "grid";
+                document.getElementById('sql_' + nb + '_order').style.display = "none";
+
+                document.getElementById('sql_' + nb + '_comparison').innerHTML = "=";
+                document.getElementById('sql_' + nb + '_data').children[0].type = "number";
+            }
+        }
+
+        function getColumn() {
+            var response = null;
+
+            if (last_entity !== 'NULL') {
+                url = "{{ url('administration_root_get_sql_entity_columns', {'entity': 'aaa'}) }}"
+                url = url.replace('aaa', last_entity.toLowerCase())
+
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("GET", url, false);
+                xmlhttp.send();
+
+                response = JSON.parse(xmlhttp.response)
+            } else {
+                response = ["SELECT ENTITY"];
+            }
+
+            result = '';
+
+            response.forEach(function(elt) {
+                result += '<option value="' + elt + '">' + elt + '</option>'
+            })
+
+            for (var i = 1; i <= filter_nb; i++) {
+                document.getElementById('sql_' + i + '_column').children[0].innerHTML = result
+            }
+        }
+
+        function getAdvParam() {
+            param = {}
+            param.select = []
+            param.where = []
+            param.orderby = {}
+            param.limit = null
+
+            for (var i = 1; i <= filter_nb; i++) {
+                if (i == 1) {
+                    param.select.push(document.getElementById('sql_1_column').children[0].value)
+                } else {
+                    if (document.getElementById('sql_' + i + '_operation') !== null) {
+                        operation = document.getElementById('sql_' + i + '_operation').children[0].value
+                        if (operation == "SELECT") {
+                            param.select.push(document.getElementById('sql_' + i + '_column').children[0].value)
+                        } else if (operation == "WHERE") {
+                            param.where.push(
+                                {
+                                    column: document.getElementById('sql_' + i + '_column').children[0].value,
+                                    comparison: document.getElementById('sql_' + i + '_comparison').children[0].value,
+                                    data: document.getElementById('sql_' + i + '_data').children[0].value
+                                }
+                            );
+                        } else if (operation == "ORDER BY") {
+                            param.orderby.column = document.getElementById('sql_' + i + '_column').children[0].value
+                            param.orderby.order = document.getElementById('sql_' + i + '_order').children[0].value
+                        } else if (operation == "LIMIT") {
+                            param.limit = document.getElementById('sql_' + i + '_data').children[0].value
+                        }
+                    }
+                }
+            }
+
+            return "q=" + encodeURI(JSON.stringify(param))
+        }
+
+        changeFilter()
+        getColumn()
+    </script>
+</div>
