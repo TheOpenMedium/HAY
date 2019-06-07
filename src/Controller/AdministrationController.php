@@ -17,6 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -56,15 +57,59 @@ class AdministrationController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/root", name="administration_root", requirements={
+     * @Route("/{_locale}/admin/edit_website", name="administration_edit_website", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
-    public function rootAction(Request $request)
+    public function editWebsiteAction(Request $request)
     {
         $yaml = Yaml::parseFile(__dir__.'/../../config/packages/twig.yaml');
+        $form = $this->container->get('form.factory')->createNamedBuilder('edit_website', FormType::class, ['version' => $yaml['twig']['globals']['is_version_displayed']], ['action' => $this->generateUrl('administration_edit_website')])
+            ->add('HAYlogo', FileType::class, array('required' => false))
+            ->add('icon', FileType::class, array('required' => false))
+            ->add('version', CheckboxType::class, array('required' => false))
+            ->add('submit', SubmitType::class)
+            ->getForm();
 
-        // If you found another file that should be excluded, please open an issue
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $datas = $form->getData();
+
+            if ($datas['HAYlogo'] !== NULL) {
+                if ($datas['HAYlogo']->guessExtension() == 'svg' || $datas['HAYlogo']->guessExtension() == 'svgz') {
+                    $datas['HAYlogo']->move(__dir__.'/../../public/ressources/', 'HAYlogo.svg');
+                } else {
+                    throw new \Exception('The image has to be of type SVG.');
+                }
+            }
+
+            if ($datas['icon'] !== NULL) {
+                if ($datas['icon']->guessExtension() == 'svg' || $datas['icon']->guessExtension() == 'svgz') {
+                    $datas['icon']->move(__dir__.'/../../public/ressources/', 'icon.svg');
+                } else {
+                    throw new \Exception('The image has to be of type SVG.');
+                }
+            }
+
+            $yaml['twig']['globals']['is_version_displayed'] = $datas['version'];
+            file_put_contents(__dir__.'/../../config/packages/twig.yaml', Yaml::dump($yaml));
+            return $this->redirectToRoute('administration');
+        }
+
+        return $this->render('administration/edit_website.html.twig', [
+            'edit_website' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/{_locale}/manage_policy", name="administration_manage_policy", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function managePolicyAction(Request $request)
+    {
+        /*// If you found another file that should be excluded, please open an issue
         $entities = array_diff(
             scandir(__dir__.'/../Entity'),
             array(
@@ -82,7 +127,7 @@ class AdministrationController extends Controller
 
         foreach ($entities as $entitykey => $entity) {
             $entities[$entitykey] = substr($entity, 0, -4);
-        }
+        }*/
 
         $license = \fopen(__dir__.'/../../LICENSE', 'r');
         $privacy_policy = \fopen(__dir__.'/../../public/policies/PRIVACY_POLICY.txt', 'r');
@@ -108,17 +153,13 @@ class AdministrationController extends Controller
         }
 
         $datas = array(
-            'version' => $yaml['twig']['globals']['is_version_displayed'],
             'license' => $license,
             'privacy_policy' => $privacy_policy,
             'cookie_policy' => $cookie_policy,
             'code_of_conduct' => $code_of_conduct
         );
 
-        $form = $this->createFormBuilder($datas)
-            ->add('HAYlogo', FileType::class, array('required' => false))
-            ->add('icon', FileType::class, array('required' => false))
-            ->add('version', CheckboxType::class, array('required' => false))
+        $form = $this->container->get('form.factory')->createNamedBuilder('manage_policy', FormType::class, $datas, ['action' => $this->generateUrl('administration_manage_policy')])
             ->add('license', TextareaType::class, array('required' => false))
             ->add('privacy_policy', TextareaType::class, array('required' => false))
             ->add('cookie_policy', TextareaType::class, array('required' => false))
@@ -130,22 +171,6 @@ class AdministrationController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $datas = $form->getData();
-
-            if ($datas['HAYlogo'] !== NULL) {
-                if ($datas['HAYlogo']->guessExtension() == 'svg' || $datas['HAYlogo']->guessExtension() == 'svgz') {
-                    $datas['HAYlogo']->move(__dir__.'/../../public/ressources/', 'HAYlogo.svg');
-                } else {
-                    throw new \Exception('The image has to be of type SVG.');
-                }
-            }
-
-            if ($datas['icon'] !== NULL) {
-                if ($datas['icon']->guessExtension() == 'svg' || $datas['icon']->guessExtension() == 'svgz') {
-                    $datas['icon']->move(__dir__.'/../../public/ressources/', 'icon.svg');
-                } else {
-                    throw new \Exception('The image has to be of type SVG.');
-                }
-            }
 
             if ($datas['license'] != $license) {
                 $license = \fopen(__dir__.'/../../LICENSE', 'w');
@@ -161,14 +186,12 @@ class AdministrationController extends Controller
                 \fwrite($code_of_conduct, $datas['code_of_conduct']);
             }
 
-            $yaml['twig']['globals']['is_version_displayed'] = $datas['version'];
-            $fp = \fopen(__dir__.'/../../config/packages/twig.yaml', 'w');
-            \fwrite($fp, Yaml::dump($yaml));
+            return $this->redirectToRoute('administration');
         }
 
-        return $this->render('administration/root.html.twig', array(
-            'form' => $form->createView(),
-            'entities' => $entities
+        return $this->render('administration/manage_policy.html.twig', array(
+            'manage_policy' => $form->createView(),
+            //'entities' => $entities
         ));
     }
 
