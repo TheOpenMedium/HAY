@@ -30,10 +30,30 @@ class AdministrationController extends Controller
      *     "_locale": "%app.locales%"
      * })
      */
-     public function administrationAction()
-     {
-         return $this->render('administration/index.html.twig');
-     }
+    public function administrationAction()
+    {
+        return $this->render('administration/index.html.twig');
+    }
+
+    /**
+     * @Route("/{_locale}/admin/complaints_office", name="administration_complaints_office", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function complaintsOfficeAction()
+    {
+        return $this->render('administration/complaints_office.html.twig');
+    }
+
+    /**
+     * @Route("/{_locale}/admin/manage_roles", name="administration_manage_roles", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function manageRolesAction()
+    {
+        return $this->render('administration/manage_roles.html.twig');
+    }
 
     /**
      * @Route("/{_locale}/root", name="administration_root", requirements={
