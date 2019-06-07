@@ -173,7 +173,7 @@ class ReportController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            return $this->redirectToRoute('security_admin');
+            return $this->redirectToRoute('administration_admin');
         }
 
         return $this->render('report/reportForm.html.twig', array(

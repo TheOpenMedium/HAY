@@ -12,37 +12,37 @@
     </li>
     {% if is_granted('ROLE_HELPER') %}
     <li class="optionMenuChoice" id="helper">
-        <a href="{{ path('security_helper') }}">{{ "helper_area"|trans }}</a>
+        <a href="{{ path('administration_helper') }}">{{ "helper_area"|trans }}</a>
     </li>
     {% endif %}
     {% if is_granted('ROLE_DEV') %}
     <li class="optionMenuChoice" id="dev">
-        <a href="{{ path('security_dev') }}">{{ "dev_area"|trans }}</a>
+        <a href="{{ path('administration_dev') }}">{{ "dev_area"|trans }}</a>
     </li>
     {% endif %}
     {% if is_granted('ROLE_DESIGN') %}
     <li class="optionMenuChoice" id="design">
-        <a href="{{ path('security_design') }}">{{ "design_area"|trans }}</a>
+        <a href="{{ path('administration_design') }}">{{ "design_area"|trans }}</a>
     </li>
     {% endif %}
     {% if is_granted('ROLE_TRANS') %}
     <li class="optionMenuChoice" id="trans">
-        <a href="{{ path('security_trans') }}">{{ "trans_area"|trans }}</a>
+        <a href="{{ path('administration_trans') }}">{{ "trans_area"|trans }}</a>
     </li>
     {% endif %}
     {% if is_granted('ROLE_MOD') %}
     <li class="optionMenuChoice" id="mod">
-        <a href="{{ path('security_mod') }}">{{ "mod_area"|trans }}</a>
+        <a href="{{ path('administration_mod') }}">{{ "mod_area"|trans }}</a>
     </li>
     {% endif %}
     {% if is_granted('ROLE_ADMIN') %}
     <li class="optionMenuChoice" id="admin">
-        <a href="{{ path('security_admin') }}">{{ "admin_area"|trans }}</a>
+        <a href="{{ path('administration_admin') }}">{{ "admin_area"|trans }}</a>
     </li>
     {% endif %}
     {% if is_granted('ROLE_ROOT') %}
     <li class="optionMenuChoice" id="root">
-        <a href="{{ path('security_root') }}">{{ "root_area"|trans }}</a>
+        <a href="{{ path('administration_root') }}">{{ "root_area"|trans }}</a>
     </li>
     {% endif %}
 </ul>

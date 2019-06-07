@@ -15,14 +15,14 @@
     <a href="#" onclick="openTab('manage_authorization')" style="background-color: yellow; color: black;">{{ 'manage_authorization'|trans }}<i class="icofont-thin-double-right"></i></a>
 </div>
 
-{% include 'security/mod/complaints_office.html.twig' %}
+{% include 'administration/mod/complaints_office.html.twig' %}
 <div class="tabContent" id="investigations">
     <h1>{{ 'investigations'|trans }}</h1>
 </div>
 <div class="tabContent" id="false_accounts">
     <h1>{{ 'false_accounts'|trans }}</h1>
 </div>
-{% include 'security/admin/manage_roles.html.twig' %}
-{% include 'security/mod/manage_laws.html.twig' %}
+{% include 'administration/admin/manage_roles.html.twig' %}
+{% include 'administration/mod/manage_laws.html.twig' %}
 {{ render(url("authorization_manage")) }}
 {% endblock %}

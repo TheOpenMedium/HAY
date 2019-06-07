@@ -23,10 +23,20 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Yaml\Yaml;
 
-class SecurityController extends Controller
+class AdministrationController extends Controller
 {
     /**
-     * @Route("/{_locale}/root", name="security_root", requirements={
+     * @Route("/{_locale}/admin", name="administration", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+     public function administrationAction()
+     {
+         return $this->render('administration/index.html.twig');
+     }
+
+    /**
+     * @Route("/{_locale}/root", name="administration_root", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
@@ -136,14 +146,14 @@ class SecurityController extends Controller
             \fwrite($fp, Yaml::dump($yaml));
         }
 
-        return $this->render('security/root.html.twig', array(
+        return $this->render('administration/root.html.twig', array(
             'form' => $form->createView(),
             'entities' => $entities
         ));
     }
 
     /**
-     * @Route("/{_locale}/root/sql/{entity}/{max}/{first}", name="security_root_sql", requirements={
+     * @Route("/{_locale}/root/sql/{entity}/{max}/{first}", name="administration_root_sql", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
@@ -291,7 +301,7 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/root/get_sql_entity_columns/{entity}", name="security_root_get_sql_entity_columns", requirements={
+     * @Route("/{_locale}/root/get_sql_entity_columns/{entity}", name="administration_root_get_sql_entity_columns", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
@@ -329,17 +339,17 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/admin", name="security_admin", requirements={
+     * @Route("/{_locale}/admintemp", name="administration_admin", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
     public function adminAction()
     {
-        return $this->render('security/admin.html.twig');
+        return $this->render('administration/admin.html.twig');
     }
 
     /**
-     * @Route("/{_locale}/admin/get_roles/{user}", name="security_admin_get_roles", requirements={
+     * @Route("/{_locale}/admin/get_roles/{user}", name="administration_admin_get_roles", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
@@ -362,7 +372,7 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/admin/manage_roles/{new_role}/{user}", name="security_admin_manage_roles", requirements={
+     * @Route("/{_locale}/admin/manage_roles/{new_role}/{user}", name="administration_admin_manage_roles", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
@@ -396,52 +406,52 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/mod", name="security_mod", requirements={
+     * @Route("/{_locale}/mod", name="administration_mod", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
     public function modAction()
     {
-        return $this->render('security/mod.html.twig');
+        return $this->render('administration/mod.html.twig');
     }
 
     /**
-     * @Route("/{_locale}/trans", name="security_trans", requirements={
+     * @Route("/{_locale}/trans", name="administration_trans", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
     public function transAction()
     {
-        return $this->render('security/trans.html.twig');
+        return $this->render('administration/trans.html.twig');
     }
 
     /**
-     * @Route("/{_locale}/design", name="security_design", requirements={
+     * @Route("/{_locale}/design", name="administration_design", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
     public function designAction()
     {
-        return $this->render('security/design.html.twig');
+        return $this->render('administration/design.html.twig');
     }
 
     /**
-     * @Route("/{_locale}/dev", name="security_dev", requirements={
+     * @Route("/{_locale}/dev", name="administration_dev", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
     public function devAction()
     {
-        return $this->render('security/dev.html.twig');
+        return $this->render('administration/dev.html.twig');
     }
 
     /**
-     * @Route("/{_locale}/helper", name="security_helper", requirements={
+     * @Route("/{_locale}/helper", name="administration_helper", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
     public function helperAction()
     {
-        return $this->render('security/helper.html.twig');
+        return $this->render('administration/helper.html.twig');
     }
 }

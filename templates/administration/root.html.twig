@@ -63,9 +63,9 @@
         }
     </script>
 </div>
-{% include 'security/admin/manage_roles.html.twig' %}
+{% include 'administration/admin/manage_roles.html.twig' %}
 {{ render(url("authorization_manage")) }}
-{% include 'security/mod/manage_laws.html.twig' %}
+{% include 'administration/mod/manage_laws.html.twig' %}
 <div class="tabContent" id="sql_interface">
     <h1 style="margin-bottom: 0;">{{ 'sql_interface'|trans }}</h1>
     <div class="criteria" style="display: flex; padding: 0px; height: 40px;">
@@ -99,7 +99,7 @@
                 last_entity = entity
 
                 if (!adv) {
-                    url = "{{ url('security_root_sql', {'entity': 'aaa', 'max': 'bbb', 'first': 'ccc'}) }}"
+                    url = "{{ url('administration_root_sql', {'entity': 'aaa', 'max': 'bbb', 'first': 'ccc'}) }}"
                     url = url.replace('aaa', entity)
                     url = url.replace('bbb', document.getElementById('sql_max').value)
                     url = url.replace('ccc', document.getElementById('sql_first').value)
@@ -113,7 +113,7 @@
 
                     getColumn()
                 } else {
-                    url = "{{ url('security_root_sql', {'entity': 'aaa'}) }}"
+                    url = "{{ url('administration_root_sql', {'entity': 'aaa'}) }}"
                     url = url.replace('aaa', entity)
 
                     param = getAdvParam()
@@ -224,7 +224,7 @@
             var response = null;
 
             if (last_entity !== 'NULL') {
-                url = "{{ url('security_root_get_sql_entity_columns', {'entity': 'aaa'}) }}"
+                url = "{{ url('administration_root_get_sql_entity_columns', {'entity': 'aaa'}) }}"
                 url = url.replace('aaa', last_entity.toLowerCase())
 
                 var xmlhttp = new XMLHttpRequest();
