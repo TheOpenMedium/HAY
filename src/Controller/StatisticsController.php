@@ -63,8 +63,6 @@ class StatisticsController extends Controller
      */
     public function graphAction(string $type, string $scope, int $n = 0)
     {
-        \header('Content-Type: image/png');
-
         $max = \strtotime('-'.$n.' '.$scope);
 
         if ($scope == "year") {
@@ -140,105 +138,6 @@ class StatisticsController extends Controller
         }
 
         $stats = \array_values($stats);
-
-        // NOTE: Thanks to Andry Aimé for his great tutorial on how to create graphs with the GD library and PHP
-        // SEE: https://andry.developpez.com/tutoriels/php/creation-graphes-statistiques-et-geometriques/?page=page_1 (french)
-
-        // Getting minimal and maximal values
-        $minValue = 999999999999999999999999;
-        $maxValue = 0;
-
-        foreach ($stats as $stat) {
-            if ($stat < $minValue) {
-                $minValue = $stat;
-            }
-            if ($stat > $maxValue) {
-                $maxValue = $stat;
-            }
-        }
-
-        // In case we have only one result
-        if ($maxValue == $minValue) {
-            $maxValue *= 2;
-            $minValue = 0;
-        }
-
-        // Setting up parameters
-        $width = \count($stats) * 50 + 90;
-        $height = 400;
-        $fontfile = __dir__ . '/../../public/fonts/amble/Amble-Regular.ttf';
-        $xAxisHeight = 80;
-        $yAxisLevels = 10;
-
-        $image = \imagecreatetruecolor($width, $height);
-
-        // Creating colors
-        $background = \imagecolorallocate($image, 64, 64, 64); # Main Background color
-        $lines = \imagecolorallocate($image, 85, 255, 153); # HAY color
-        $linesLight = \imagecolorallocate($image, 164, 164, 164); # HAY ligth
-        $text = \imagecolorallocate($image, 255, 255, 255); # White
-
-        // Filling Background
-        \imagefilledrectangle($image, 0, 0, $width, $height, $background);
-
-        // If the minValue isn't 0, we raise the line lower position from 10
-        $a = 0;
-        $xAxisHeight2 = $xAxisHeight;
-        if($minValue != 0)
-        {
-            $xAxisHeight += 10;
-            $a = 10;
-        }
-
-        // Calculating axis
-        $xAxis = ($width - 100) / \count($stats);
-        $yAxis = ($height - $xAxisHeight - 20) / $yAxisLevels;
-
-        $i = $minValue;
-        $py = ($maxValue - $minValue) / $yAxisLevels;
-        $stepY = $xAxisHeight;
-
-        // Drawing grids and numbers
-        while ($stepY < ($height - 19)) {
-            \imagestring($image, 4, 10, $height - $stepY - 6, \round($i), $text);
-            \imageline($image, 50, $height - $stepY, $width - 20, $height - $stepY, $linesLight);
-
-            $stepY += $yAxis;
-            $i += $py;
-        }
-
-        $j = -1;
-        $stepX = 90;
-
-        foreach ($stats as $statKeys => $stat) {
-            $y = $height - (($stat - $minValue) * ($yAxis / $py)) - $xAxisHeight;
-
-            // Drawing the text down
-            \imagettftext($image, 10, 315, $stepX, $height - $xAxisHeight + 20, $text, $fontfile, $key[$statKeys]);
-            // Drawing a line from the point to the bottom
-            \imageline($image, $stepX, $height - $xAxisHeight + $a, $stepX, $y, $linesLight);
-            // Drawing a point
-            \imagefilledellipse($image, $stepX, $y, 6, 6, $lines);
-            if ($j != -1) {
-                // Drawing a line between two points
-                \imageline($image, $stepX - $xAxis, $previous, $stepX, $y, $lines);
-            }
-
-            // Drawing the number next to the point
-            \imagestring($image, 2, $stepX - 15, $y - 14, $stat, $text);
-
-            $j = $stat;
-            $previous = $y;
-            $stepX += $xAxis;
-        }
-
-        // Drawing axis (x-axis then y-axis), we write them here, so we avoid them to be hidden by other lines.
-        \imageline($image, 50, $height - $xAxisHeight2, $width - 10, $height - $xAxisHeight2, $lines);
-        \imageline($image, 50, $height - $xAxisHeight2, 50, 10, $lines);
-
-        // Creating image
-        \imagepng($image);
-        \imagedestroy($image);
 
         return new Response('', 200, array('Content-Type' => 'image/png'));
     }

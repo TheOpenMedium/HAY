@@ -28,14 +28,11 @@
         <link rel="stylesheet" href="/styles/font.css" type="text/css" />
         <link rel="stylesheet" href="/styles/markdown.css" type="text/css" />
         <link rel="stylesheet" href="/styles/report.css" type="text/css" />
+        {{ encore_entry_link_tags('app') }}
         <script type="text/javascript" src="/scripts/functions.js"></script>
         <script type="text/javascript" src="/scripts/ajax.js"></script>
-        <!-- Highlight.js -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/atom-one-dark.min.css" integrity="sha384-nyXucUVWQWGGNq3mSgG/FGxW4Jmsv+0uCbHZ0VpHRsGZt/PlUT31hz9sUek822eI" crossorigin="anonymous">
-        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js" integrity="sha384-BlPof9RtjBqeJFskKv3sK3dh4Wk70iKlpIe92FeVN+6qxaGUOUu+mZNpALZ+K7ya" crossorigin="anonymous" onload="hljs.initHighlightingOnLoad();"></script>
-        <!-- KaTeX -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
-        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous" onload="katexRender()"></script>
+        {{ encore_entry_script_tags('app') }}
+        <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
         <title>{% block title %}Ce titre a un problème...{% endblock %}</title>
         <meta name="description" content="" />
         <meta name="keywords" content="" />
@@ -43,7 +40,7 @@
         {% block css %}
         {% endblock %}
     </head>
-    <body>
+    <body onload="katexRender();">
         {% block body %}
         <h1>Oulà !</h1>
         Un problème s'est produit !

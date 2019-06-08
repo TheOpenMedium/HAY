@@ -261,8 +261,7 @@ function highlight() {
 /**
  * Render KaTeX blocks
  */
-
- function katexRender() {
+function katexRender() {
     var katexBlocks = document.getElementsByClassName('katexBlock')
 
     for (var i = 0; i < katexBlocks.length; i++) {
@@ -271,4 +270,4 @@ function highlight() {
             throwOnError: false,
         });
     }
- }
+}
