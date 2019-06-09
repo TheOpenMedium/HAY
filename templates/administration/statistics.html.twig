@@ -1,0 +1,48 @@
+<div class="tabContent" id="statistics">
+    <h1 style="margin-bottom: 0;">{{ 'statistics'|trans }}</h1>
+    <div class="criteria">
+        Critères :
+        <span style="float: right;">
+            <select id="scope" onchange="change_graph()">
+                <option value="day" selected>{{ 'day'|trans }}</option>
+                <option value="month">{{ 'month'|trans }}</option>
+                <option value="year">{{ 'year'|trans }}</option>
+            </select>
+            <input id="n" type="number" value="0" min="0" onchange="change_graph()" />
+        </span>
+    </div>
+    <div id="stat_graph" style="grid-column: 1/3;">{{ render(url('statistics_graph', {'scope': 'day'})) }}</div>
+    <script>
+        // DO NOT PUT THESE FUNCTIONS IN COMMON FILES (FOR OBVIOUS SECURITY REASONS)
+
+        function change_graph() {
+            url = "{{ url('statistics_graph', {'scope': 'bbb', 'n': 'ccc'}) }}"
+
+            scope = document.getElementById("scope").value
+            n = document.getElementById("n").value
+
+            url = url.replace('bbb', scope)
+            url = url.replace('ccc', n)
+
+            $.ajax({
+                method: "GET",
+                url: url,
+                data: {updating: true}
+            }).done(function(response) {
+                console.log(response);
+                chart.data.labels = response.labels;
+                var new_datasets = [];
+                Object.keys(response.stats).forEach(function (key) {
+                   new_datasets.push({
+                       label: key,
+                       backgroundColor: '#'+response.colors[key]+'11',
+                       borderColor: '#'+response.colors[key],
+                       data: response.stats[key]
+                   });
+               });
+                chart.data.datasets = new_datasets;
+                chart.update()
+            });
+        }
+    </script>
+</div>

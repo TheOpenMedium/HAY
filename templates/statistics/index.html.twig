@@ -1,1 +1,20 @@
 <canvas id="chart"></canvas>
+<script type="text/javascript">
+    var ctx = document.getElementById('chart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+        // The data for our dataset
+        data: {
+            labels: {{ labels|json_encode()|raw }},
+            datasets: [{% for key, value in stats %}{
+                label: "{{ key|trans }}",
+                backgroundColor: '#{{ colors[key] }}11',
+                borderColor: '#{{ colors[key] }}',
+                data: {{ value|json_encode()|raw }}
+            },{% endfor %}]
+        },
+        // Configuration options go here
+        options: {}
+    });
+</script>

@@ -104,6 +104,16 @@ class AdministrationController extends Controller
     }
 
     /**
+     * @Route("/{_locale}/admin/statistics", name="administration_statistics", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function statisticsAction()
+    {
+        return $this->render('administration/statistics.html.twig');
+    }
+
+    /**
      * @Route("/{_locale}/admin/sql_interface", name="administration_sql_interface", requirements={
      *     "_locale": "%app.locales%"
      * })
