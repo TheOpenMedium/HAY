@@ -21,7 +21,7 @@ class ReportController extends Controller
      *     "_locale": "%app.locales%"
      * })
      */
-    public function reportAction(Request $request, string $type, int $id)
+    public function reportAction(Request $request, string $type, string $id)
     {
         if ($type == 'user') {
             $entity = $this->getDoctrine()->getRepository(User::class)->find($id);

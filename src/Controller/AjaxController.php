@@ -14,8 +14,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * List of actions:
  * * postGenerateAction($scope = "all", $order = "DESC", $limit = 10, $date = NULL, $from_id = NULL, $user_id = NULL) -- post_gen
  * * postRenderingAction($postList)
- * * isNewPostsSendedAction(int $last_id, string $scope = "all", int $user_id = NULL)                                 -- post_sended
- * * newPostsRenderedAction(int $last_id, string $scope = "all", int $user_id = NULL)                                 -- post_rendered
+ * * isNewPostsSendedAction(string $last_id, string $scope = "all", string $user_id = NULL)                                 -- post_sended
+ * * newPostsRenderedAction(string $last_id, string $scope = "all", string $user_id = NULL)                                 -- post_rendered
  *
  * DOCUMENTATION : How to use this class with Ajax
  *
@@ -56,8 +56,8 @@ class AjaxController extends Controller
      * @param string $order The order for fetching posts / available values : "DESC", "ASC"
      * @param int|null $limit The limit for fetching posts / available values : int, NULL (VERY DANGEROUS, USE AJAX INSTEAD!)
      * @param string $date The date interval for fetching posts / available values : string (see the examples), NULL
-     * @param int|null $from_id The id from where we begin fetching (used mainly for ajax) (the specified id is included) / available values : int, NULL
-     * @param int|null $user_id The user's id for fetching only his posts (only with $scope "user") / available values : int, NULL
+     * @param string|null $from_id The id from where we begin fetching (used mainly for ajax) (the specified id is included) / available values : int, NULL
+     * @param string|null $user_id The user's id for fetching only his posts (only with $scope "user") / available values : int, NULL
      *
      * @example Date Interval string : "^HERE THE BEGING DATE^ $HERE THE END DATE$" // Date can be in form of DATE or DATE TIME (use the sql syntax)
      * @example "^2018-8-28^ $2018-12-5 8:00:30$" if you don't want to specify one of the two dates replace it by NULL "^2018-8-28^ $NULL$"
@@ -71,7 +71,7 @@ class AjaxController extends Controller
      *     "_locale": "%app.locales%"
      * })
      */
-    public function postGenerateAction(string $scope = "all", string $order = "DESC", ?int $limit = 10, string $date = NULL, ?int $from_id = NULL, ?int $user_id = NULL)
+    public function postGenerateAction(string $scope = "all", string $order = "DESC", ?int $limit = 10, string $date = NULL, ?string $from_id = NULL, ?string $user_id = NULL)
     {
         // Fetching Post.
 
@@ -223,10 +223,10 @@ class AjaxController extends Controller
     /**
      * Verifying if new posts have been sended
      *
-     * @param int $last_id The last post id sended
+     * @param string $last_id The last post id sended
      * @param string $scope The post scope, @see above (postGenerateAction) for information about the scope parameter
      * @param string $order The order for fetching posts / available values : "DESC", "ASC"
-     * @param int|null $user_id For the "user" scope
+     * @param string|null $user_id For the "user" scope
      *
      * @example Use this function for Ajax with JavaScript (because NULL type, can't be passed with url, it detect it as a string, @see the class documentation)
      *
@@ -236,7 +236,7 @@ class AjaxController extends Controller
      *     "_locale": "%app.locales%"
      * })
      */
-    public function isNewPostsSendedAction(int $last_id, string $scope = "all", string $order = "DESC", ?int $user_id = NULL)
+    public function isNewPostsSendedAction(string $last_id, string $scope = "all", string $order = "DESC", ?string $user_id = NULL)
     {
         $post = $this->postGenerateAction($scope, $order, NULL, NULL, $last_id, $user_id);
         return new Response(sizeof($post));
@@ -251,7 +251,7 @@ class AjaxController extends Controller
      *     "_locale": "%app.locales%"
      * })
      */
-    public function newPostsRenderedAction(int $last_id, string $scope = "all", string $order = "DESC", ?int $user_id = NULL)
+    public function newPostsRenderedAction(string $last_id, string $scope = "all", string $order = "DESC", ?int $user_id = NULL)
     {
         $postList = $this->postGenerateAction($scope, $order, NULL, NULL, $last_id, $user_id);
         return new Response($postList[0]->getId() . '/' . $this->postRenderingAction($postList)->getContent());
