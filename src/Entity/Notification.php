@@ -60,7 +60,7 @@ class Notification
     private $url;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $url_id;
 
@@ -160,12 +160,12 @@ class Notification
         return $this;
     }
 
-    public function getUrlId(): ?int
+    public function getUrlId(): ?string
     {
         return $this->url_id;
     }
 
-    public function setUrlId(?int $url_id): self
+    public function setUrlId(?string $url_id): self
     {
         $this->url_id = $url_id;
 

@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
 use App\Entity\Survey;
+use App\Controller\AppController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,6 +31,8 @@ class SurveyController extends Controller
                 preg_match_all("/(?:(?:# ((?:\w| |\#|\-|\:|\"|\'|\,|\.|\;|\?|\!)+))|(?:-(?:\:['\"](\w+)['\"])? ((?:\w| |\#|\-|\:|\"|\'|\,|\.|\;|\?|\!)+)))/ium", $match[3], $match[3], PREG_SET_ORDER);
                 if (!empty($match[3])) {
                     $survey = new Survey;
+                    $appController = new AppController;
+                    $survey->setId($appController->generateIdAction($this->getDoctrine()->getRepository(Survey::class), 10));
                     $survey->setUser($this->getUser());
                     foreach ($match[3] as $submatch) {
                         if ($submatch[1]) {
