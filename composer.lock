@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "73d36c39be233af27d266b987c2f6be2",
+    "content-hash": "6cfda8c4261d01a198ee9f17ec262b8b",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -4968,16 +4968,16 @@
         },
         {
             "name": "theopenmedium/parsedownhayflavored",
-            "version": "0.1.5",
+            "version": "0.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TheOpenMedium/ParsedownHAYFlavored.git",
-                "reference": "3eeec9120a03a9ff0d2011bc96912e9bb41cf0dc"
+                "reference": "a0bf2b3eaead0bc44738dd1f128a040ad2fc5af3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TheOpenMedium/ParsedownHAYFlavored/zipball/3eeec9120a03a9ff0d2011bc96912e9bb41cf0dc",
-                "reference": "3eeec9120a03a9ff0d2011bc96912e9bb41cf0dc",
+                "url": "https://api.github.com/repos/TheOpenMedium/ParsedownHAYFlavored/zipball/a0bf2b3eaead0bc44738dd1f128a040ad2fc5af3",
+                "reference": "a0bf2b3eaead0bc44738dd1f128a040ad2fc5af3",
                 "shasum": ""
             },
             "require": {
@@ -4995,7 +4995,7 @@
                 "MIT"
             ],
             "description": "Parsedown flavored for the HAY project.",
-            "time": "2018-11-25T21:22:00+00:00"
+            "time": "2019-06-09T22:11:22+00:00"
         },
         {
             "name": "twig/twig",

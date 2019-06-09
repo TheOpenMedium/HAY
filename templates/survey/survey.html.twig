@@ -12,7 +12,7 @@
                 <a href="#">{{ 'edit'|trans }}</a>
                 <a href="{{ url('survey_delete', {'survey': survey.id}) }}">{{ 'delete'|trans }}</a>
             {% endif %}
-            <a onclick="refreshSurvey({{ survey.id }}, this)">{{ 'refresh'|trans }}</a>
+            <a onclick="refreshSurvey('{{ survey.id }}', this)">{{ 'refresh'|trans }}</a>
         </div>
     </i>
     {% if survey.answersTotal != 0 %}
@@ -33,7 +33,7 @@
                 <input name="surveyOption{{ survey.id }}" value="{{ key }}" type="radio">{{ key }}
             </label>
         {% endfor %}
-        <button type="button" class="send" onclick="sendSurvey({{ survey.id }}, this)">{{ 'send'|trans }}</button>
+        <button type="button" class="send" onclick="sendSurvey('{{ survey.id }}', this)">{{ 'send'|trans }}</button>
         <span>{{ survey.answersTotal }} {{ 'votes'|trans }}</span>
         <span style="display: none;" id="surveySuccess{{ survey.id }}"><i class="icofont-check-alt"></i> {{ 'vote_success'|trans }}</span>
         <span style="display: none; color: red;" id="surveyError{{ survey.id }}"><i class="icofont-close-line"></i> {{ 'vote_error'|trans }}</span>
