@@ -2,12 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Statistics;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Entity\Statistics;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class StatisticsController extends Controller
 {
@@ -56,13 +57,11 @@ class StatisticsController extends Controller
      * @param int $n Used for setting the number of scope before the actual day
      * @example if $n = 5 and $scope = "month" then the fetched datas are dated from actual month (like 7, july) - 5 (2, february)
      *
-     * WARNING: HERE BE THE DRAGONS... 🐉🐲
-     *
      * @Route("/{_locale}/statistics/graph/{scope}/{n}", name="statistics_graph", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
-    public function graphAction(Request $request, string $scope, int $n = 0)
+    public function graphAction(Request $request, TranslatorInterface $translator, string $scope, int $n = 0)
     {
         $max = \strtotime('-'.$n.' '.$scope);
 
@@ -80,101 +79,49 @@ class StatisticsController extends Controller
         $statsNonFormatted = $this->container->get('doctrine')->getRepository(Statistics::class)->findByDateInterval(\date('Y-m-d', $max), \date('Y-m-d', $min));
 
         $stats = [
-            "visits" => [],
-            "requests" => [],
-            "new_users" => [],
-            "new_posts" => [],
-            "new_comments" => []
+            $translator->trans("visits") => [],
+            $translator->trans("requests") => [],
+            $translator->trans("new_users") => [],
+            $translator->trans("new_posts") => [],
+            $translator->trans("new_comments") => []
         ];
 
         $colors = [
-            "visits" => "ff0000",
-            "requests" => "00ff00",
-            "new_users" => "0000ff",
-            "new_posts" => "ffff00",
-            "new_comments" => "ff00ff"
+            $translator->trans("visits") => "ff0000",
+            $translator->trans("requests") => "00ff00",
+            $translator->trans("new_users") => "0000ff",
+            $translator->trans("new_posts") => "ffff00",
+            $translator->trans("new_comments") => "ff00ff"
         ];
 
         if ($scope == "year") {
-            // code...
+            $dateformat = 'Y';
         } elseif ($scope == "month") {
-            // code...
+            $dateformat = 'F Y';
         } elseif ($scope == "day") {
-            for ($i=0; $i < $range; $i++) {
-                $labels[$i] = \date_format(\date_create('@'.\strtotime('-'.$i.' '.$scope, $max)), 'l Y-m-d');
-            }
-            $labels = array_reverse($labels);
-            foreach ($stats as $key => $value) {
-                foreach ($labels as $label) {
-                    $stats[$key][$label] = 0;
-                }
-            }
-            foreach ($statsNonFormatted as $key => $stat) {
-                $date = \date('l Y-m-d', $stat->getDate()->getTimestamp());
-                $stats["visits"][$date] = $stat->getVisits();
-                $stats["requests"][$date] = $stat->getRequests();
-                $stats["new_users"][$date] = $stat->getNewUsers();
-                $stats["new_posts"][$date] = $stat->getNewPosts();
-                $stats["new_comments"][$date] = $stat->getNewComments();
+            $dateformat = 'l Y-m-d';
+        }
+        for ($i=0; $i < $range; $i++) {
+            $labels[$i] = \date_format(\date_create('@'.\strtotime('-'.$i.' '.$scope, $max)), $dateformat);
+        }
+        $labels = array_reverse($labels);
+        foreach ($stats as $key => $value) {
+            foreach ($labels as $label) {
+                $stats[$key][$label] = 0;
             }
         }
+        foreach ($statsNonFormatted as $key => $stat) {
+            $date = \date($dateformat, $stat->getDate()->getTimestamp());
+            $stats[$translator->trans("visits")][$date] += $stat->getVisits();
+            $stats[$translator->trans("requests")][$date] += $stat->getRequests();
+            $stats[$translator->trans("new_users")][$date] += $stat->getNewUsers();
+            $stats[$translator->trans("new_posts")][$date] += $stat->getNewPosts();
+            $stats[$translator->trans("new_comments")][$date] += $stat->getNewComments();
+        }
+
         foreach ($stats as $key => $stat) {
             $stats[$key] = array_values($stat);
         }
-
-        /*$stats = array();
-        foreach ($statsNonFormatted as $stat) {
-            $stats["visits"][] = $stat->getVisits();
-            $stats["requests"][] = $stat->getRequests();
-            $stats["new_users"][] = $stat->getNewUsers();
-            $stats["new_posts"][] = $stat->getNewPosts();
-            $stats["new_comments"][] = $stat->getNewComments();
-        }
-
-        $last = [-1, ""];
-        if ($scope == "year") {
-            for ($i=0; $i < \count($stats); $i++) {
-                $key[$i] = \date_format($statsNonFormatted[$i]->getDate(), 'Y');
-            }
-            foreach ($statsNonFormatted as $k => $v) {
-                $l = \date_format($v->getDate(), 'Y');
-                if ($last[0] == -1) {
-                    $last[0] = $k;
-                    $last[1] = $l;
-                } else {
-                    if ($last[1] == $l) {
-                        $stats[$last[0]] += $stats[$k];
-                        unset($stats[$k]);
-                    } else {
-                        $last[0] = $k;
-                        $last[1] = $l;
-                    }
-                }
-            }
-        } else if ($scope == "month") {
-            for ($i=0; $i < \count($stats); $i++) {
-                $key[$i] = \date_format($statsNonFormatted[$i]->getDate(), 'F');
-            }
-            foreach ($statsNonFormatted as $k => $v) {
-                $l = \date_format($v->getDate(), 'm');
-                if ($last[0] == -1) {
-                    $last[0] = $k;
-                    $last[1] = $l;
-                } else {
-                    if ($last[1] == $l) {
-                        $stats[$last[0]] += $stats[$k];
-                        unset($stats[$k]);
-                    } else {
-                        $last[0] = $k;
-                        $last[1] = $l;
-                    }
-                }
-            }
-        } else if ($scope == "day") {
-            for ($i=0; $i < \count($stats); $i++) {
-                $key[$i] = \date_format($statsNonFormatted[$i]->getDate(), 'l');
-            }
-        }*/
 
         if ($request->get('updating') != true) {
             return $this->render('statistics/index.html.twig', [

@@ -8,13 +8,11 @@
         data: {
             labels: {{ labels|json_encode()|raw }},
             datasets: [{% for key, value in stats %}{
-                label: "{{ key|trans }}",
+                label: "{{ key }}",
                 backgroundColor: '#{{ colors[key] }}11',
                 borderColor: '#{{ colors[key] }}',
                 data: {{ value|json_encode()|raw }}
             },{% endfor %}]
-        },
-        // Configuration options go here
-        options: {}
+        }
     });
 </script>
