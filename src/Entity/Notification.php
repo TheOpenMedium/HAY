@@ -25,8 +25,8 @@ class Notification
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(type="string", length=10)
      */
     private $id;
 
@@ -88,9 +88,16 @@ class Notification
         return $result;
     }
 
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
+    }
+
+    public function setId($id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getType(): ?int

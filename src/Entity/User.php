@@ -40,8 +40,8 @@ class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(type="string", length=100)
      */
     private $id;
 
@@ -205,9 +205,16 @@ class User implements UserInterface, \Serializable
         return $result;
     }
 
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
+    }
+
+    public function setId($id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getFirstName(): ?string
