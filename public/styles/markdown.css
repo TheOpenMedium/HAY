@@ -249,6 +249,6 @@
     overflow-x: scroll;
 }
 
-.markdown .katexBlock[displaymode="true"] {
+.markdown .katexRendered[displaymode="true"] {
 	text-align: center;
 }
