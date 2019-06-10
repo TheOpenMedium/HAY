@@ -32,7 +32,7 @@
                         <i class="icofont-navigation-menu fs16 burgerMenu" style="color: grey;">
                             <div class="burgerMenuContent">
                                 <a href="{{ url('comment_show', {'id': comment.id}) }}">{{ 'show_comment'|trans }}</a>
-                                <a onclick="openReportWindow('comment', {{ comment.id }});" style="cursor: pointer;">{{ 'report'|trans }}</a>
+                                <a onclick="openReportWindow('comment', '{{ comment.id }}');" style="cursor: pointer;">{{ 'report'|trans }}</a>
                             </div>
                         </i>
                     </div>
