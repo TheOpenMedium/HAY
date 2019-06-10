@@ -36,15 +36,15 @@ class PostRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param $id The last ID
+     * @param $date_post The last date
      * @return Post[] Returns an array of Post objects
      */
-    public function findPostWithNoLimitAndFromId($id)
+    public function findPostWithNoLimitAndFromDate($date_post)
     {
         return $this->createQueryBuilder('p')
             ->select(array('p'))
-            ->andWhere('p.id > :id')
-            ->setParameter('id', $id)
+            ->andWhere('p.date_post > :date_post')
+            ->setParameter('date_post', $date_post)
             ->getQuery()
             ->getResult()
         ;
@@ -71,17 +71,17 @@ class PostRepository extends ServiceEntityRepository
 
     /**
      * @param $u The user's post
-     * @param $id The last ID
+     * @param $date_post The last date
      * @return Post[] Returns an array of Post objects
      */
-    public function findPostByUserWithNoLimitAndFromId($u, $id)
+    public function findPostByUserWithNoLimitAndFromDate($u, $date_post)
     {
         return $this->createQueryBuilder('p')
             ->select(array('p'))
             ->andWhere('p.user = :user_id')
             ->setParameter('user_id', $u)
-            ->andWhere('p.id > :id')
-            ->setParameter('id', $id)
+            ->andWhere('p.date_post > :date_post')
+            ->setParameter('date_post', $date_post)
             ->getQuery()
             ->getResult()
         ;
@@ -108,17 +108,17 @@ class PostRepository extends ServiceEntityRepository
 
     /**
      * @param $u The users' post
-     * @param $id The last ID
+     * @param $date_post The last date
      * @return Post[] Returns an array of Post objects
      */
-    public function findPostByFriendsWithNoLimitAndFromId($u, $id)
+    public function findPostByFriendsWithNoLimitAndFromDate($u, $date_post)
     {
         return $this->createQueryBuilder('p')
             ->select(array('p'))
             ->andWhere('p.user IN (:users_ids)')
             ->setParameter('users_ids', $u)
-            ->andWhere('p.id > :id')
-            ->setParameter('id', $id)
+            ->andWhere('p.date_post > :date_post')
+            ->setParameter('date_post', $date_post)
             ->getQuery()
             ->getResult()
         ;

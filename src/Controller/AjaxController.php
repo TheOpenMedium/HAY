@@ -12,10 +12,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * A controller related ***mainly*** to Ajax
  *
  * List of actions:
- * * postGenerateAction($scope = "all", $order = "DESC", $limit = 10, $date = NULL, $from_id = NULL, $user_id = NULL) -- post_gen
+ * * postGenerateAction($scope = "all", $order = "DESC", $limit = 10, $date = NULL, $from_post = NULL, $user_id = NULL) -- post_gen
  * * postRenderingAction($postList)
- * * isNewPostsSendedAction(string $last_id, string $scope = "all", string $user_id = NULL)                                 -- post_sended
- * * newPostsRenderedAction(string $last_id, string $scope = "all", string $user_id = NULL)                                 -- post_rendered
+ * * isNewPostsSendedAction(string $last_id, string $scope = "all", string $user_id = NULL)                             -- post_sended
+ * * newPostsRenderedAction(string $last_id, string $scope = "all", string $user_id = NULL)                             -- post_rendered
  *
  * DOCUMENTATION : How to use this class with Ajax
  *
@@ -30,7 +30,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * the specified ID. This function is used instead of postGenerateAction directly because JavaScript need
  * a url (@see templates/post/newPosts.html.twig). And we can't pass to the router through the url a null
  * type, it detect as a string ("null"). AND, the postGenerateAction, has this following prototype:
- * `postGenerateAction($scope = "all", $order = "DESC", $limit = 10, $date = NULL, $from_id = NULL,
+ * `postGenerateAction($scope = "all", $order = "DESC", $limit = 10, $date = NULL, $from_post = NULL,
  * $user_id = NULL);` as you can see, there's the $limit and the $date parameter that we need to be null.
  * And, in all cases, we would have needed to pass through a function to return a `Response()` with a
  * `json_encode()`.
@@ -56,7 +56,7 @@ class AjaxController extends Controller
      * @param string $order The order for fetching posts / available values : "DESC", "ASC"
      * @param int|null $limit The limit for fetching posts / available values : int, NULL (VERY DANGEROUS, USE AJAX INSTEAD!)
      * @param string $date The date interval for fetching posts / available values : string (see the examples), NULL
-     * @param string|null $from_id The id from where we begin fetching (used mainly for ajax) (the specified id is included) / available values : int, NULL
+     * @param string|null $from_post The id from where we begin fetching (used mainly for ajax) (the specified id is included) / available values : string, NULL
      * @param string|null $user_id The user's id for fetching only his posts (only with $scope "user") / available values : int, NULL
      *
      * @example Date Interval string : "^HERE THE BEGING DATE^ $HERE THE END DATE$" // Date can be in form of DATE or DATE TIME (use the sql syntax)
@@ -67,12 +67,16 @@ class AjaxController extends Controller
      *
      * @return Post[] $postList The post list
      *
-     * @Route("/{_locale}/generate/post/{scope}/{order}/{limit}/{date}/{from_id}/{user_id}", name="post_gen", requirements={
+     * @Route("/{_locale}/generate/post/{scope}/{order}/{limit}/{date}/{from_post}/{user_id}", name="post_gen", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
-    public function postGenerateAction(string $scope = "all", string $order = "DESC", ?int $limit = 10, string $date = NULL, ?string $from_id = NULL, ?string $user_id = NULL)
+    public function postGenerateAction(string $scope = "all", string $order = "DESC", ?int $limit = 10, string $date = NULL, ?string $from_post = NULL, ?string $user_id = NULL)
     {
+        if ($from_post) {
+            $from_post = $this->container->get('doctrine')->getRepository(Post::class)->find($from_post);
+        }
+
         // Fetching Post.
 
         if ($scope == "all")
@@ -82,10 +86,10 @@ class AjaxController extends Controller
             }
 
             // Mainly for Ajax
-            else if (!$limit && $from_id) {
+            else if (!$limit && $from_post) {
                 // Ajax CAN'T work with an ASC order... for obvious reasons... (You can't send posts back in time)
                 if ($order == "DESC") {
-                    $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostWithNoLimitAndFromId($from_id);
+                    $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostWithNoLimitAndFromDate($from_post->getDatePost());
                 }
             }
         }
@@ -97,10 +101,10 @@ class AjaxController extends Controller
             }
 
             // Mainly for Ajax
-            else if (!$limit && $from_id) {
+            else if (!$limit && $from_post) {
                 // Ajax CAN'T work with an ASC order... for obvious reasons... (You can't send posts back in time)
                 if ($order == "DESC") {
-                    $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByUserWithNoLimitAndFromId($user_id, $from_id);
+                    $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByUserWithNoLimitAndFromDate($user_id, $from_post->getDatePost());
                 }
             }
         }
@@ -122,10 +126,10 @@ class AjaxController extends Controller
             }
 
             // Mainly for Ajax
-            else if (!$limit && $from_id) {
+            else if (!$limit && $from_post) {
                 // Ajax CAN'T work with an ASC order... for obvious reasons... (You can't send posts back in time)
                 if ($order == "DESC") {
-                    $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByFriendsWithNoLimitAndFromId($ids, $from_id);
+                    $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByFriendsWithNoLimitAndFromDate($ids, $from_post->getDatePost());
                 }
             }
         }
@@ -158,10 +162,10 @@ class AjaxController extends Controller
             }
 
             // Mainly for Ajax
-            else if (!$limit && $from_id) {
+            else if (!$limit && $from_post) {
                 // Ajax CAN'T work with an ASC order... for obvious reasons... (You can't send posts back in time)
                 if ($order == "DESC") {
-                    $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByFriendsWithNoLimitAndFromId($ids, $from_id);
+                    $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByFriendsWithNoLimitAndFromDate($ids, $from_post->getDatePost());
                 }
             }
         }
@@ -173,10 +177,10 @@ class AjaxController extends Controller
             }
 
             // Mainly for Ajax
-            else if (!$limit && $from_id) {
+            else if (!$limit && $from_post) {
                 // Ajax CAN'T work with an ASC order... for obvious reasons... (You can't send posts back in time)
                 if ($order == "DESC") {
-                    $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByUserWithNoLimitAndFromId($this->getUser()->getId(), $from_id);
+                    $postList = $this->container->get('doctrine')->getRepository(Post::class)->findPostByUserWithNoLimitAndFromDate($this->getUser()->getId(), $from_post->getDatePost());
                 }
             }
         }
