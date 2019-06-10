@@ -218,11 +218,11 @@ class AdministrationController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/root/sql/{entity}/{max}/{first}", name="administration_root_sql", requirements={
+     * @Route("/{_locale}/root/sql/{entity}/{max}/{id}", name="administration_root_sql", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
-    public function sqlAction(Request $request, string $entity, int $max = 10, int $first = 1)
+    public function sqlAction(Request $request, string $entity, int $max = 10, ?string $id = NULL)
     {
         if ($entity == "user") {
             $repo = $this->getDoctrine()->getRepository(User::class);
@@ -251,8 +251,12 @@ class AdministrationController extends Controller
         if ($request->isMethod('GET')) {
             $criteria = new Criteria;
 
-            $criteria->where($criteria->expr()->gte('id', $first));
-            $criteria->setMaxResults($max);
+            if (empty($id)) {
+                $criteria->where($criteria->expr()->gte('id', 1));
+                $criteria->setMaxResults($max);
+            } else {
+                $criteria->where($criteria->expr()->eq('id', $id));
+            }
 
             $entities = $repo->matching($criteria);
         } else if ($request->isMethod('POST')) {

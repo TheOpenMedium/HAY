@@ -8,9 +8,10 @@
     <div id="sql_table" style="grid-column: 1/3; white-space: nowrap; overflow-x: scroll;">
     </div>
     <label style="grid-column: 1/3; border-bottom: 2px solid var(--hay-color); margin: 15px 0;"><input type="radio" name="filter" id="filter_simple" onclick="changeFilter()" checked />Filtres Simples</label>
-    <div style="grid-column: 1/3; display: grid; grid-template-columns: 50% 50%;">
+    <div style="grid-column: 1/4; display: grid; grid-template-columns: 45% 10% 45%;">
         <span>{{ 'max_results'|trans }} <input type="number" id="sql_max" min="1" max="500" value="10" onchange="showSQLEntity(last_entity)" /></span>
-        <span>{{ 'first_result'|trans }} <input type="number" id="sql_first" min="1" value="1" onchange="showSQLEntity(last_entity)" /></span>
+        <span>{{ 'or'|trans }}</span>
+        <span>{{ 'id'|trans }} <input type="text" id="sql_id" onchange="showSQLEntity(last_entity)" /></span>
     </div>
     <label style="grid-column: 1/3; border-bottom: 2px solid red; margin-top: 15px;"><input type="radio" name="filter" id="filter_advanced" onclick="changeFilter()" />Filtres Avancés</label>
     <span style="grid-column: 1/3; background-color: red; padding: 15px; text-align: center; margin-bottom: 15px;">{{ 'WARNING'|trans }}</span>
@@ -31,10 +32,10 @@
                 last_entity = entity
 
                 if (!adv) {
-                    url = "{{ url('administration_root_sql', {'entity': 'aaa', 'max': 'bbb', 'first': 'ccc'}) }}"
+                    url = "{{ url('administration_root_sql', {'entity': 'aaa', 'max': 'bbb', 'id': 'ccc'}) }}"
                     url = url.replace('aaa', entity)
                     url = url.replace('bbb', document.getElementById('sql_max').value)
-                    url = url.replace('ccc', document.getElementById('sql_first').value)
+                    url = url.replace('ccc', document.getElementById('sql_id').value)
 
                     var xmlhttp = new XMLHttpRequest();
                     xmlhttp.onreadystatechange = function() {
