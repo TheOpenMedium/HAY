@@ -7,6 +7,7 @@ use App\Entity\Post;
 use App\Entity\Comment;
 use App\Entity\Notification;
 use App\Form\CommentType;
+use App\Controller\AppController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,7 +27,7 @@ class CommentController extends Controller
      * Render the comment form
      *
      * @param Request $request The HTTP request
-     * @param int $id The post id
+     * @param string $id The post id
      * @param string $_color The color user for rendering the comment form
      *
      * @Route("/{_locale}/comment/{id}/{_color}",
@@ -46,7 +47,10 @@ class CommentController extends Controller
 
         // If a form was submitted, the Form's data are retrieved.
         if ($comment->isSubmitted() && $comment->isValid()) {
+            $appController = new AppController;
+
             $sendComment = $comment->getData();
+            $sendComment->setId($appController->generateIdAction($this->getDoctrine()->getRepository(Comment::class), 10));
             $post = $this->getDoctrine()->getRepository(Post::class)->find($id);
             $sendComment->setPost($post);
             $sendComment->setUser($this->getUser());
@@ -60,6 +64,7 @@ class CommentController extends Controller
             $notification = new Notification;
 
             // TODO: A better choice of notification's user
+            $notification->setId($appController->generateIdAction($this->getDoctrine()->getRepository(Notification::class), 10));
             $notification->setType(0);
             $notification->setUser($this->getUser());
             $notifContent = (strlen($sendComment->getComment()) > 40) ? substr($sendComment->getComment(), 0, 40) . "..." : $sendComment->getComment();

@@ -102,6 +102,7 @@ class AppController extends Controller
         // If he send a Post, the Post is saved into database.
         if ($form->isSubmitted() && $form->isValid()) {
             $post = $form->getData();
+            $post->setId($this->generateIdAction($this->getDoctrine()->getRepository(Post::class), 10));
             $post->setFont('SS');
             $post->setUser($this->getUser());
 
@@ -175,6 +176,8 @@ class AppController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
+            $user->setId($this->generateIdAction($this->getDoctrine()->getRepository(User::class), 7));
+
             // Password is hashed using the ARGON2I method.
             $user->setPassword(password_hash($user->getPassword(), PASSWORD_ARGON2I));
 
@@ -204,5 +207,19 @@ class AppController extends Controller
      */
     public function logoutAction()
     {
+    }
+
+    /**
+     * Generate a random ID.
+     */
+    public function generateIdAction($repository, $length)
+    {
+        $id = Null;
+        while ($id == Null || $repository->find($id)) {
+            // Thanks to Pr07o7yp3 on StackOverflow for this great function ;)!
+            // @see https://stackoverflow.com/questions/4356289/php-random-string-generator/13212994#13212994
+            $id = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_',ceil($length/strlen($x)))),1,$length);
+        }
+        return $id;
     }
 }

@@ -25,8 +25,8 @@ class Notification
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(type="string", length=10)
      */
     private $id;
 
@@ -60,7 +60,7 @@ class Notification
     private $url;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $url_id;
 
@@ -88,9 +88,16 @@ class Notification
         return $result;
     }
 
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
+    }
+
+    public function setId($id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getType(): ?int
@@ -153,12 +160,12 @@ class Notification
         return $this;
     }
 
-    public function getUrlId(): ?int
+    public function getUrlId(): ?string
     {
         return $this->url_id;
     }
 
-    public function setUrlId(?int $url_id): self
+    public function setUrlId(?string $url_id): self
     {
         $this->url_id = $url_id;
 
