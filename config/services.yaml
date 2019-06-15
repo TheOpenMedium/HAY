@@ -4,6 +4,9 @@ parameters:
     locale: 'en'
     app.locales: en|fr
 
+imports:
+    - { resource: 'config.yaml' }
+
 services:
     # default configuration for services in *this* file
     _defaults:

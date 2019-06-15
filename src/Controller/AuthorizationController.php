@@ -18,7 +18,7 @@ class AuthorizationController extends Controller
      */
     public function authorizationManageAction(Request $request)
     {
-        $yaml = Yaml::parseFile(__dir__.'/../../config/authorizations.yaml');
+        $yaml = $this->getParameter("authorizations");
         $forms = [];
         foreach ($yaml as $role => $authorizations) {
             if ($role != "__META__") {
@@ -50,7 +50,8 @@ class AuthorizationController extends Controller
      */
     public function authorizationManageSubmitAction(Request $request, string $role, string $category)
     {
-        $yaml = Yaml::parseFile(__dir__.'/../../config/authorizations.yaml');
+        $file_content = Yaml::parseFile(__dir__.'/../../config/config.yaml');
+        $yaml = $file_content["parameters"]["authorizations"];
         $form = $this->container->get('form.factory')->createNamedBuilder($role.'_'.$category, FormType::class, $yaml[$role][$category], ['action' => $this->generateUrl('authorization_manage_submit', ['role' => $role, 'category' => $category])]);
         foreach ($yaml["__META__"][$category] as $key => $options) {
             $input_var = key_exists("input_var", $options) ? $options["input_var"] : [];
@@ -61,8 +62,9 @@ class AuthorizationController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $yaml[$role][$category] = $form->getData();
         }
-        $yaml = Yaml::dump($yaml, 99, 4);
-        file_put_contents(__dir__.'/../../config/authorizations.yaml', $yaml);
+        $file_content["parameters"]["authorizations"] = $yaml;
+        $file_content = Yaml::dump($file_content, 99, 4);
+        file_put_contents(__dir__.'/../../config/config.yaml', $file_content);
         return $this->redirectToRoute('administration');
     }
 }

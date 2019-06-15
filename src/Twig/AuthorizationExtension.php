@@ -25,7 +25,7 @@ class AuthorizationExtension extends AbstractExtension
         if (in_array("ROLE_OWNER", $user_roles)) {
             return True;
         }
-        $yaml = Yaml::parseFile(__dir__.'/../../config/authorizations.yaml');
+        $yaml = Yaml::parseFile(__dir__.'/../../config/config.yaml')["parameters"]["authorizations"];
         $role_hierarchy = Yaml::parseFile(__dir__.'/../../config/packages/security.yaml')['security']['role_hierarchy'];
         $next = $user_roles;
         $roles = [];
