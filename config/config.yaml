@@ -1,4 +1,51 @@
 parameters:
+    roles:
+        list:
+            - ROLE_USER
+            - ROLE_HELPER
+            - ROLE_MOD
+            - ROLE_DEV
+            - ROLE_DESIGN
+            - ROLE_TRANS
+            - ROLE_ADMIN
+            - ROLE_ROOT
+            - ROLE_OWNER
+        alias:
+            u: ROLE_USER
+            user: ROLE_USER
+            h: ROLE_HELPER
+            help: ROLE_HELPER
+            helper: ROLE_HELPER
+            m: ROLE_MOD
+            mod: ROLE_MOD
+            moderator: ROLE_MOD
+            moderation: ROLE_MOD
+            d: ROLE_DEV
+            dev: ROLE_DEV
+            developer: ROLE_DEV
+            development: ROLE_DEV
+            p: ROLE_DEV
+            programmer: ROLE_DEV
+            programming: ROLE_DEV
+            ds: ROLE_DESIGN
+            design: ROLE_DESIGN
+            designer: ROLE_DESIGN
+            designing: ROLE_DESIGN
+            t: ROLE_TRANS
+            trans: ROLE_TRANS
+            translator: ROLE_TRANS
+            translation: ROLE_TRANS
+            a: ROLE_ADMIN
+            admin: ROLE_ADMIN
+            administrator: ROLE_ADMIN
+            administration: ROLE_ADMIN
+            r: ROLE_ROOT
+            root: ROLE_ROOT
+            o: ROLE_OWNER
+            owner: ROLE_OWNER
+            super_root: ROLE_OWNER
+            god: ROLE_OWNER
+            bdfl: ROLE_OWNER
     authorizations:
         ROLE_ANONYMOUS:
             user:

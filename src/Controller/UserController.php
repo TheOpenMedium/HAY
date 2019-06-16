@@ -9,19 +9,16 @@ use App\Form\EditUserType;
 use App\Controller\AjaxController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * A controller related to the User entity
  *
  * List of actions:
- * * userShowAction(User $user)               -- user_show
- * * userEditAction(Request $request)         -- user_edit
- * * userEditImageAction(Request $request)    -- user_edit_image
- * * userEditNameAction(Request $request)     -- user_edit_name
- * * userEditUserNameAction(Request $request) -- user_edit_username
- * * userEditEmailAction(Request $request)    -- user_edit_email
- * * userEditPasswordAction(Request $request) -- user_edit_password
+ * * userShowAction(User $user)       -- user_show
+ * * userEditAction(Request $request) -- user_edit
+ * * userTagAction(Request $request)  -- user_tag
  */
 class UserController extends Controller
 {
@@ -161,5 +158,77 @@ class UserController extends Controller
         return $this->render('user/editUser.html.twig', [
             'edit_user' => $form->createView()
         ]);
+    }
+
+    /**
+     * Tag a user
+     *
+     * @Route("/{_locale}/tag", name="user_tag", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function userTagAction(Request $request)
+    {
+        if (empty($_POST['tag'])) {
+            throw new \Exception('POST data is missing.');
+        }
+        $tag = \explode('/', $_POST['tag']);
+        unset($tag[0]);
+        $tag = \array_values($tag);
+        $result = [];
+        $user;
+        $roles = $this->getParameter('roles');
+        foreach ($tag as $key => $value) {
+            if ($key % 2 == 0) {
+                if (!\in_array(\strtoupper($value), $roles['list'])) {
+                    if (!empty($roles['alias'][\strtolower($value)])) {
+                        $value = $roles['alias'][\strtolower($value)];
+                    } else {
+                        return new Response(\json_encode(FALSE));
+                    }
+                }
+                $result['role'] = \strtoupper($value);
+            } else {
+                $result['id'][] = $value;
+            }
+        }
+        foreach ($result['id'] as $key => $value) {
+            if ($key != \sizeof($result['id']) - 1) {
+                // TODO: This will be used for a future feature (communities and groups).
+                return new Response(\json_encode(FALSE));
+            } else {
+                if ($value[0] == '#') {
+                    $user = $this->getDoctrine()
+                        ->getRepository(User::class)
+                        ->find(\substr($value, 1));
+                    if (empty($user)) {
+                        return new Response(\json_encode());
+                    }
+                } elseif ($value[0] == '@') {
+                    $user = $this->getDoctrine()
+                        ->getRepository(User::class)
+                        ->findOneByUsername(\substr($value, 1));
+                    if (empty($user)) {
+                        return new Response(\json_encode(FALSE));
+                    }
+                } else {
+                    return new Response(\json_encode(FALSE));
+                }
+            }
+        }
+        if (empty($user)) {
+            // TODO: This will be used for a future feature (role-based users).
+            return new Response(\json_encode(FALSE));
+        } elseif ($user) { // TODO: Check if user has the role
+        } else {
+            return new Response(\json_encode(FALSE));
+        }
+        return new Response(\json_encode(['url' => $this->generateUrl('user_show', ['id' => $user->getId()]), 'user' => [
+            "id" => $user->getId(),
+            "first_name" => $user->getFirstName(),
+            "last_name" => $user->getLastName(),
+            "username" => $user->getUsername(),
+            "image" => $user->getUrl()
+        ]]));
     }
 }
