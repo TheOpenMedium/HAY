@@ -142,6 +142,9 @@ function getNewPosts() {
 
             // And KaTeX do some Math.
             katexRender()
+
+            // And tagging users.
+            userTagRender()
         }
     };
     xmlhttp.open("GET", url_r, true);
@@ -265,7 +268,7 @@ function katexRender() {
     var katexBlocks = Array.from(document.getElementsByClassName('katexBlock'));
 
     for (var i = 0; i < katexBlocks.length; i++) {
-        katexBlocks[i].className = "katexRendered"; 
+        katexBlocks[i].className = "katexRendered";
         katex.render(katexBlocks[i].innerHTML, katexBlocks[i], {
             displayMode: (katexBlocks[i].attributes.displayMode.value === true),
             throwOnError: false,

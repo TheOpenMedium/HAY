@@ -142,3 +142,24 @@ function changeReportLaws() {
     v = document.getElementById('reportLaw').value
     document.getElementById('form_law').value = v
 }
+
+/**
+ * Render User tags
+ */
+function userTagRender() {
+    $(".usertag_unprocessed").each(function(i) {
+        var node = this;
+        $.ajax({
+                method: "POST",
+                url: url_user_tag,
+                data: {
+                    tag: this.innerHTML
+                }
+            })
+            .done(function (msg) {
+                console.log(msg);
+                msg = JSON.parse(msg);
+                node.outerHTML = '<a class="usertag" href="' + msg.url + '">' + msg.user.first_name + ' ' + msg.user.last_name + '</a>';
+            });
+    });
+}

@@ -252,3 +252,10 @@
 .markdown .katexRendered[displaymode="true"] {
 	text-align: center;
 }
+
+.markdown .usertag {
+    background-color: #00000033;
+    padding: 0px 3px;
+    border-radius: 5px;
+    margin: 0px 2px;
+}
