@@ -157,9 +157,14 @@ function userTagRender() {
                 }
             })
             .done(function (msg) {
-                console.log(msg);
                 msg = JSON.parse(msg);
-                node.outerHTML = '<a class="usertag" href="' + msg.url + '">' + msg.user.first_name + ' ' + msg.user.last_name + '</a>';
+                html = '<a class="usertag" href="' + msg.url + '">' + msg.user.first_name + ' ' + msg.user.last_name
+                html += '<div class="usertag_dropdown"><img src="' + msg.user.image + '" height="150px" /><span>' + msg.user.first_name + ' ' + msg.user.last_name + '</span><span>#' + msg.user.id + '</span>'
+                if (msg.user.username != null) {
+                    html += '<span>@' + msg.user.username + '</span>'
+                }
+                html += '</div></a>';
+                node.outerHTML = html;
             });
     });
 }

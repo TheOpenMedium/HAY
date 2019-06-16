@@ -254,8 +254,36 @@
 }
 
 .markdown .usertag {
+    display: inline-block;
     background-color: #00000033;
     padding: 0px 3px;
     border-radius: 5px;
     margin: 0px 2px;
+}
+
+.markdown .usertag .usertag_dropdown {
+    display: none;
+}
+
+.markdown .usertag:hover .usertag_dropdown {
+    z-index: 99;
+    display: grid;
+    position: absolute;
+    background-color: white;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;
+    grid-template-columns: 150px 150px;
+    grid-template-rows: 50px 50px 50px;
+}
+.markdown .usertag .usertag_dropdown img {
+    grid-row: 1/4;
+    grid-column: 1;
+}
+
+.markdown .usertag .usertag_dropdown span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
