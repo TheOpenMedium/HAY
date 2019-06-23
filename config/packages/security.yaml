@@ -7,8 +7,10 @@ security:
         data_base:
             entity:
                 class: App\Entity\User
+    access_decision_manager:
+        strategy: unanimous
+        allow_if_all_abstain: false
     role_hierarchy:
-        ROLE_USER: ROLE_ANONYMOUS
         ROLE_HELPER: ROLE_USER
         ROLE_MOD: ROLE_HELPER # For Moderators
         ROLE_DEV: ROLE_HELPER # For Developpers Contributors

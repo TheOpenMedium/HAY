@@ -48,16 +48,17 @@ parameters:
             bdfl: ROLE_OWNER
     authorizations:
         user:
-            submit: ROLE_ANONYMOUS
+            submit: ALL
             submit_with_review: NONE
             edit: ROLE_USER
             edit_with_review: NONE
-            edit_other_with_review: ROLE_HELPER
             edit_other: ROLE_MOD
+            edit_other_with_review: ROLE_HELPER
             delete: ROLE_USER
             delete_with_review: NONE
-            delete_other_with_review: ROLE_HELPER
             delete_other: ROLE_MOD
+            delete_other_with_review: ROLE_HELPER
+            friend_request: ROLE_USER
             review: ROLE_HELPER
             review_other: ROLE_MOD
         post:
@@ -65,12 +66,12 @@ parameters:
             submit_with_review: NONE
             edit: ROLE_USER
             edit_with_review: NONE
-            edit_other_with_review: ROLE_HELPER
             edit_other: ROLE_MOD
+            edit_other_with_review: ROLE_HELPER
             delete: ROLE_USER
             delete_with_review: NONE
-            delete_other_with_review: ROLE_HELPER
             delete_other: ROLE_MOD
+            delete_other_with_review: ROLE_HELPER
             review: ROLE_HELPER
             review_other: ROLE_MOD
             option_color: ROLE_USER
@@ -80,12 +81,12 @@ parameters:
             submit_with_review: NONE
             edit: ROLE_USER
             edit_with_review: NONE
-            edit_other_with_review: ROLE_HELPER
             edit_other: ROLE_MOD
+            edit_other_with_review: ROLE_HELPER
             delete: ROLE_USER
             delete_with_review: NONE
-            delete_other_with_review: ROLE_HELPER
             delete_other: ROLE_MOD
+            delete_other_with_review: ROLE_HELPER
             review: ROLE_HELPER
             review_other: ROLE_MOD
         survey:
@@ -93,19 +94,17 @@ parameters:
             submit_with_review: NONE
             edit: ROLE_HELPER
             edit_with_review: ROLE_USER
-            edit_other_with_review: ROLE_HELPER
             edit_other: ROLE_MOD
+            edit_other_with_review: ROLE_HELPER
             delete: ROLE_USER
             delete_with_review: NONE
-            delete_other_with_review: ROLE_HELPER
             delete_other: ROLE_MOD
+            delete_other_with_review: ROLE_HELPER
             review: ROLE_HELPER
             review_other: ROLE_MOD
         report:
             submit: ROLE_USER
             review: ROLE_MOD
-        friendship:
-            submit: ROLE_USER
         laws:
             submit: ROLE_ADMIN
             submit_with_review: ROLE_MOD
@@ -136,3 +135,8 @@ parameters:
                 statistics: ROLE_ROOT
                 sql_interface: ROLE_ROOT
                 manage_policy: ROLE_ROOT
+            do_action:
+                - process_report
+                - manage_investigation
+                - change_roles
+                - change_authorization
