@@ -9,6 +9,15 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class PostVoter extends Voter
 {
+    private $security;
+    private $parameters;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+        $this->parameters = Yaml::parseFile(__dir__.'/../../../config/config.yaml')['parameters']['authorizations']['post'];
+    }
+
     protected function supports($attribute, $post)
     {
         return in_array($attribute, ['post.submit', 'post.submit_with_review',

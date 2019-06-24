@@ -9,6 +9,15 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class SurveyVoter extends Voter
 {
+    private $security;
+    private $parameters;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+        $this->parameters = Yaml::parseFile(__dir__.'/../../../config/config.yaml')['parameters']['authorizations']['survey'];
+    }
+    
     protected function supports($attribute, $survey)
     {
         return in_array($attribute, ['survey.submit', 'survey.submit_with_review',
