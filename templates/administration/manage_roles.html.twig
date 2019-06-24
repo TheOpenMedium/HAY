@@ -35,7 +35,7 @@
         // DO NOT PUT THESE FUNCTIONS IN COMMON FILES (FOR OBVIOUS SECURITY REASONS)
 
         function searchUserById() {
-            user_search = "{{ url('administration_admin_get_roles', {'user': 'aaa'}) }}"
+            user_search = "{{ url('administration_get_roles', {'user': 'aaa'}) }}"
 
             user_search = user_search.replace('aaa', document.getElementById('userSearch').value)
 
@@ -128,7 +128,7 @@
         document.getElementById('userSearch').addEventListener("keypress", disableSendForm)
 
         function changeUserRole() {
-            user_role_url = "{{ url('administration_admin_manage_roles', {'new_role': 'aaa', 'user': 'bbb'}) }}"
+            user_role_url = "{{ url('administration_new_role', {'new_role': 'aaa', 'user': 'bbb'}) }}"
 
             user_role_url = user_role_url.replace('aaa', document.getElementById('userRolesSelect').value)
             user_role_url = user_role_url.replace('bbb', document.getElementById('userSearch').value)

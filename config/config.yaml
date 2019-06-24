@@ -120,7 +120,7 @@ parameters:
                 manage_profiler: ROLE_DEV
                 source_code: ROLE_DEV
                 dev_tools: ROLE_DEV
-                gitlab_interface: [ROLE_DEV, ROLE_DESIGN]
+                gitlab_interface: ROLE_HELPER
                 manage_themes: ROLE_DESIGN
                 manage_css: ROLE_DESIGN
                 manage_translations: ROLE_TRANS
@@ -130,7 +130,7 @@ parameters:
                 manage_community: ROLE_MOD
                 contact_administration: ROLE_MOD
                 manage_roles: ROLE_ADMIN
-                manage_authorization: ROLE_ADMIN
+                manage_authorizations: ROLE_ADMIN
                 edit_website: ROLE_ROOT
                 statistics: ROLE_ROOT
                 sql_interface: ROLE_ROOT

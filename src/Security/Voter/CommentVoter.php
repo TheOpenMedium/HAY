@@ -4,8 +4,10 @@ namespace App\Security\Voter;
 
 use App\Entity\User;
 use App\Entity\Comment;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Yaml\Yaml;
 
 class CommentVoter extends Voter
 {

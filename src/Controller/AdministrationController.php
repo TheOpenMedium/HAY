@@ -146,7 +146,7 @@ class AdministrationController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/manage_policy", name="administration_manage_policy", requirements={
+     * @Route("/{_locale}/admin/manage_policy", name="administration_manage_policy", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
@@ -218,7 +218,7 @@ class AdministrationController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/root/sql/{entity}/{max}/{id}", name="administration_root_sql", requirements={
+     * @Route("/{_locale}/admin/sql/{entity}/{max}/{id}", name="administration_sql", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
@@ -372,7 +372,7 @@ class AdministrationController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/root/get_sql_entity_columns/{entity}", name="administration_root_get_sql_entity_columns", requirements={
+     * @Route("/{_locale}/admin/get_sql_entity_columns/{entity}", name="administration_get_sql_entity_columns", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
@@ -412,7 +412,7 @@ class AdministrationController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/admin/get_roles/{user}", name="administration_admin_get_roles", requirements={
+     * @Route("/{_locale}/admin/get_roles/{user}", name="administration_get_roles", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
@@ -435,7 +435,7 @@ class AdministrationController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/admin/manage_roles/{new_role}/{user}", name="administration_admin_manage_roles", requirements={
+     * @Route("/{_locale}/admin/manage_roles/{new_role}/{user}", name="administration_new_role", requirements={
      *     "_locale": "%app.locales%"
      * })
      */

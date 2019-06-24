@@ -37,7 +37,7 @@
 
 {% if is_authorized(app.user, "administration", "administration_tools", "complaints_office") %}{{ render(url("administration_complaints_office")) }}{% endif %}
 {% if is_authorized(app.user, "administration", "administration_tools", "manage_roles") %}{{ render(url("administration_manage_roles")) }}{% endif %}
-{% if is_authorized(app.user, "administration", "administration_tools", "manage_authorization") %}{{ render(url("authorization_manage")) }}{% endif %}
+{% if is_authorized(app.user, "administration", "administration_tools", "manage_authorizations") %}{{ render(url("administration_manage_authorizations")) }}{% endif %}
 {% if is_authorized(app.user, "administration", "administration_tools", "edit_website") %}{{ render(url("administration_edit_website")) }}{% endif %}
 {% if is_authorized(app.user, "administration", "administration_tools", "statistics") %}{{ render(url("administration_statistics")) }}{% endif %}
 {% if is_authorized(app.user, "administration", "administration_tools", "sql_interface") %}{{ render(url("administration_sql_interface")) }}{% endif %}
