@@ -135,8 +135,3 @@ parameters:
                 statistics: ROLE_ROOT
                 sql_interface: ROLE_ROOT
                 manage_policy: ROLE_ROOT
-            do_action:
-                - process_report
-                - manage_investigation
-                - change_roles
-                - change_authorization
