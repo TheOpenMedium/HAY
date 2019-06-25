@@ -10,7 +10,7 @@
     <li class="optionMenuChoice">
         <a href="{{ path('app_logout') }}">{{ "to_logout"|trans }}</a>
     </li>
-    {% if is_authorized(app.user, "administration", "administration_access") %}
+    {% if is_granted("administration.access") %}
     <li class="optionMenuChoice" id="admin">
         <a href="{{ path('administration') }}">{{ "admin_area"|trans }}</a>
     </li>
