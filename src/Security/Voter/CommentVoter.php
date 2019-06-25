@@ -47,16 +47,20 @@ class CommentVoter extends Voter
             case 'comment.submit_with_review':
                 return $this->canSubmit($user, $comment, true);
                 break;
-            case ('comment.edit' || 'comment.edit_other'):
+            case 'comment.edit':
+			case 'comment.edit_other':
                 return $this->canEdit($user, $comment);
                 break;
-            case ('comment.edit_with_review' || 'comment.edit_other_with_review'):
+            case 'comment.edit_with_review':
+			case 'comment.edit_other_with_review':
                 return $this->canEdit($user, $comment, true);
                 break;
-            case ('comment.delete' || 'comment.delete_other'):
+            case 'comment.delete':
+			case 'comment.delete_other':
                 return $this->canDelete($user, $comment);
                 break;
-            case ('comment.delete_with_review' || 'comment.delete_other_with_review'):
+            case 'comment.delete_with_review':
+			case 'comment.delete_other_with_review':
                 return $this->canDelete($user, $comment, true);
                 break;
             case 'comment.review':

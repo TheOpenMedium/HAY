@@ -47,16 +47,20 @@ class PostVoter extends Voter
             case 'post.submit_with_review':
                 return $this->canSubmit($user, $post, true);
                 break;
-            case ('post.edit' || 'post.edit_other_with_review'):
+            case 'post.edit':
+			case 'post.edit_other_with_review':
                 return $this->canEdit($user, $post);
                 break;
-            case ('post.edit_with_review' || 'post.edit_other_with_review'):
+            case 'post.edit_with_review':
+			case 'post.edit_other_with_review':
                 return $this->canEdit($user, $post, true);
                 break;
-            case ('post.delete' || 'post.delete_other'):
+            case 'post.delete':
+			case 'post.delete_other':
                 return $this->canDelete($user, $post);
                 break;
-            case ('post.delete_with_review' || 'post.delete_other_with_review'):
+            case 'post.delete_with_review':
+			case 'post.delete_other_with_review':
                 return $this->canDelete($user, $post, true);
                 break;
             case 'post.review':

@@ -47,16 +47,20 @@ class SurveyVoter extends Voter
             case 'survey.submit_with_review':
                 return $this->canSubmit($user, $survey, true);
                 break;
-            case ('survey.edit' || 'survey.edit_other'):
+            case 'survey.edit':
+			case 'survey.edit_other':
                 return $this->canEdit($user, $survey);
                 break;
-            case ('survey.edit_with_review' || 'survey.edit_other_with_review'):
+            case 'survey.edit_with_review':
+			case 'survey.edit_other_with_review':
                 return $this->canEdit($user, $survey, true);
                 break;
-            case ('survey.delete' || 'survey.delete_other'):
+            case 'survey.delete':
+			case 'survey.delete_other':
                 return $this->canDelete($user, $survey);
                 break;
-            case ('survey.delete_with_review' || 'survey.delete_other_with_review'):
+            case 'survey.delete_with_review':
+			case 'survey.delete_other_with_review':
                 return $this->canDelete($user, $survey, true);
                 break;
             case 'survey.review':

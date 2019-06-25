@@ -45,16 +45,20 @@ class UserVoter extends Voter
             case 'user.submit_with_review':
                 return $this->canSubmit($user, $subject, true);
                 break;
-            case ('user.edit' || 'user.edit_other'):
+            case 'user.edit':
+            case 'user.edit_other':
                 return $this->canEdit($user, $subject);
                 break;
-            case ('user.edit_with_review' || 'user.edit_other_with_review'):
+            case 'user.edit_with_review':
+			case 'user.edit_other_with_review':
                 return $this->canEdit($user, $subject, true);
                 break;
-            case ('user.delete' || 'user.delete_other'):
+            case 'user.delete':
+			case 'user.delete_other':
                 return $this->canDelete($user, $subject);
                 break;
-            case ('user.delete_with_review' || 'user.delete_other_with_review'):
+            case 'user.delete_with_review':
+			case 'user.delete_other_with_review':
                 return $this->canDelete($user, $subject, true);
                 break;
             case 'user.friend_request':
