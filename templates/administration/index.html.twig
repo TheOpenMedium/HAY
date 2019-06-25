@@ -8,8 +8,8 @@
 {{ include("menu.html.twig") }}
 <div class="userMenu fs16 ffSS">
     {# MENU TEMPLATE :
-    {% if is_authorized("administration.accessible.") %}<a href="#" onclick="openTab('')">{{ ''|trans }}<i class="icofont-thin-double-right"></i></a>{% endif %}
-    {% if is_authorized("administration.accessible.") %}<a href="#" onclick="openTab('')" style="background-color: yellow; color: black;">{{ ''|trans }}<i class="icofont-thin-double-right"></i></a>{% endif %}
+    {% if is_granted("administration.accessible.") %}<a href="#" onclick="openTab('')">{{ ''|trans }}<i class="icofont-thin-double-right"></i></a>{% endif %}
+    {% if is_granted("administration.accessible.") %}<a href="#" onclick="openTab('')" style="background-color: yellow; color: black;">{{ ''|trans }}<i class="icofont-thin-double-right"></i></a>{% endif %}
     #}
     {% if is_granted("administration.accessible.questions_office") %}<a href="#questions_office" onclick="openTab('questions_office')" style="background-color: yellow; color: black;">{{ 'questions_office'|trans }}<i class="icofont-thin-double-right"></i></a>{% endif %}
     {% if is_granted("administration.accessible.ideas_office") %}<a href="#ideas_office" onclick="openTab('ideas_office')" style="background-color: yellow; color: black;">{{ 'ideas_office'|trans }}<i class="icofont-thin-double-right"></i></a>{% endif %}
