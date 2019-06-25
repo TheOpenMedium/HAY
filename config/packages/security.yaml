@@ -7,8 +7,10 @@ security:
         data_base:
             entity:
                 class: App\Entity\User
+    access_decision_manager:
+        strategy: unanimous
+        allow_if_all_abstain: false
     role_hierarchy:
-        ROLE_USER: ROLE_ANONYMOUS
         ROLE_HELPER: ROLE_USER
         ROLE_MOD: ROLE_HELPER # For Moderators
         ROLE_DEV: ROLE_HELPER # For Developpers Contributors
@@ -17,16 +19,8 @@ security:
         ROLE_ADMIN: [ROLE_MOD, ROLE_DEV, ROLE_DESIGN, ROLE_TRANS] # For Administrators
         ROLE_ROOT: ROLE_ADMIN # For Super Users
         ROLE_OWNER: ROLE_ROOT # For Owner, we recommend to assign this role to only ONE user
-    #access_control:
-    #    - { path: '^/[a-z]{2}(_[A-Z]{2})?/helper', roles: ROLE_HELPER }
-    #    - { path: '^/[a-z]{2}(_[A-Z]{2})?/mod', roles: ROLE_MOD }
-    #    - { path: '^/[a-z]{2}(_[A-Z]{2})?/dev', roles: ROLE_DEV }
-    #    - { path: '^/[a-z]{2}(_[A-Z]{2})?/design', roles: ROLE_DESIGN }
-    #    - { path: '^/[a-z]{2}(_[A-Z]{2})?/trans', roles: ROLE_TRANS }
-    #    - { path: '^/[a-z]{2}(_[A-Z]{2})?/admin', roles: ROLE_ADMIN }
-    #    - { path: '^/[a-z]{2}(_[A-Z]{2})?/root', roles: ROLE_ROOT }
-    #    - { path: '^/[a-z]{2}(_[A-Z]{2})?/admin/manage_roles/admin', roles: ROLE_ROOT }
-    #    - { path: '^/[a-z]{2}(_[A-Z]{2})?/admin/manage_roles/root', roles: ROLE_OWNER }
+    access_control:
+        - { path: '^/[a-z]{2}(_[A-Z]{2})?/admin[\/\w]*', roles: administration.access }
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

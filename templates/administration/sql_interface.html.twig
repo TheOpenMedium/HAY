@@ -32,7 +32,7 @@
                 last_entity = entity
 
                 if (!adv) {
-                    url = "{{ url('administration_root_sql', {'entity': 'aaa', 'max': 'bbb', 'id': 'ccc'}) }}"
+                    url = "{{ url('administration_sql', {'entity': 'aaa', 'max': 'bbb', 'id': 'ccc'}) }}"
                     url = url.replace('aaa', entity)
                     url = url.replace('bbb', document.getElementById('sql_max').value)
                     url = url.replace('ccc', document.getElementById('sql_id').value)
@@ -46,7 +46,7 @@
 
                     getColumn()
                 } else {
-                    url = "{{ url('administration_root_sql', {'entity': 'aaa'}) }}"
+                    url = "{{ url('administration_sql', {'entity': 'aaa'}) }}"
                     url = url.replace('aaa', entity)
 
                     param = getAdvParam()
@@ -157,7 +157,7 @@
             var response = null;
 
             if (last_entity !== 'NULL') {
-                url = "{{ url('administration_root_get_sql_entity_columns', {'entity': 'aaa'}) }}"
+                url = "{{ url('administration_get_sql_entity_columns', {'entity': 'aaa'}) }}"
                 url = url.replace('aaa', last_entity.toLowerCase())
 
                 var xmlhttp = new XMLHttpRequest();

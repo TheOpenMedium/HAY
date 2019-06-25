@@ -19,6 +19,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -146,7 +147,7 @@ class AdministrationController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/manage_policy", name="administration_manage_policy", requirements={
+     * @Route("/{_locale}/admin/manage_policy", name="administration_manage_policy", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
@@ -218,7 +219,7 @@ class AdministrationController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/root/sql/{entity}/{max}/{id}", name="administration_root_sql", requirements={
+     * @Route("/{_locale}/admin/sql/{entity}/{max}/{id}", name="administration_sql", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
@@ -372,7 +373,7 @@ class AdministrationController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/root/get_sql_entity_columns/{entity}", name="administration_root_get_sql_entity_columns", requirements={
+     * @Route("/{_locale}/admin/get_sql_entity_columns/{entity}", name="administration_get_sql_entity_columns", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
@@ -412,7 +413,7 @@ class AdministrationController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/admin/get_roles/{user}", name="administration_admin_get_roles", requirements={
+     * @Route("/{_locale}/admin/get_roles/{user}", name="administration_get_roles", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
@@ -435,7 +436,7 @@ class AdministrationController extends Controller
     }
 
     /**
-     * @Route("/{_locale}/admin/manage_roles/{new_role}/{user}", name="administration_admin_manage_roles", requirements={
+     * @Route("/{_locale}/admin/manage_roles/{new_role}/{user}", name="administration_new_role", requirements={
      *     "_locale": "%app.locales%"
      * })
      */
@@ -466,5 +467,75 @@ class AdministrationController extends Controller
         $em->flush();
 
         return new Response('true');
+    }
+
+    /**
+     * @Route("/{_locale}/admin/manage_authorizations", name="administration_manage_authorizations", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function authorizationManageAction(Request $request)
+    {
+        $yaml = $this->getParameter("authorizations");
+        $roles = [];
+        foreach ($this->getParameter("roles")['list'] as $role) {
+            if ($this->isGranted($role) || !\in_array($role, $this->getUser()->getRoles())) {
+                $roles[$role] = $role;
+            }
+        }
+        $roles = array_merge(['ALL' => 'ALL'], $roles, ['NONE' => 'NONE']);
+        $datas = [];
+        foreach ($yaml as $category => $authorizations) {
+            foreach ($authorizations as $slug => $value) {
+                if (gettype($value) != 'array') {
+                    $datas[$category.':'.$slug] = $value;
+                } else {
+                    foreach ($value as $subslug => $subvalue) {
+                        $datas[$category.':'.$slug.':'.$subslug] = $subvalue;
+                    }
+                }
+            }
+        }
+        $form = $this->container->get('form.factory')->createNamedBuilder('manage_authorizations', FormType::class, $datas, ['action' => $this->generateUrl('administration_manage_authorizations')]);
+        foreach ($yaml as $category => $authorizations) {
+            foreach ($authorizations as $slug => $value) {
+                if (gettype($value) != 'array') {
+                    $form = $form->add($category.':'.$slug, ChoiceType::class, ['choices' => $roles]);
+                } else {
+                    foreach ($value as $subslug => $subvalue) {
+                        $form = $form->add($category.':'.$slug.':'.$subslug, ChoiceType::class, ['choices' => $roles]);
+                    }
+                }
+            }
+        }
+        $form->add('submit', SubmitType::class);
+        $form = $form->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $datas = $form->getData();
+
+            foreach ($datas as $key => $data) {
+                $exploded_key = \explode(':', $key);
+                if (\sizeof($exploded_key) == 2) {
+                    $yaml[$exploded_key[0]][$exploded_key[1]] = $data;
+                } elseif (\sizeof($exploded_key) == 3) {
+                    $yaml[$exploded_key[0]][$exploded_key[1]][$exploded_key[2]] = $data;
+                }
+            }
+            
+            $file_content = Yaml::parseFile(__dir__.'/../../config/config.yaml');
+            $file_content["parameters"]["authorizations"] = $yaml;
+            $file_content = Yaml::dump($file_content, 99, 4);
+            file_put_contents(__dir__.'/../../config/config.yaml', $file_content);
+            
+            return $this->redirectToRoute('administration');
+        }
+
+        return $this->render('administration/manage_authorizations.html.twig', [
+            'manage_authorizations' => $form->createView(),
+            'categories' => array_keys($yaml),
+            'keys' => array_keys($datas)
+        ]);
     }
 }
