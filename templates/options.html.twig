@@ -4,9 +4,11 @@
             <img src="{{ app.user.url }}" alt="{{ app.user.alt }}" /><span>{{ 'hello'|trans }} {{ app.user.firstname }}</span>
         </li>
     </a>
+    {% if is_granted('user.edit') %}
     <li class="optionMenuChoice">
         <a href="{{ path('user_edit') }}">{{ "edit_user"|trans }}</a>
     </li>
+    {% endif %}
     <li class="optionMenuChoice">
         <a href="{{ path('app_logout') }}">{{ "to_logout"|trans }}</a>
     </li>

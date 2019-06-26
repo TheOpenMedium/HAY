@@ -8,7 +8,7 @@
     <span class="parameter"><i class="icofont-wrench"></i>{{ include('options.html.twig') }}</span>
     <span class="notification"><i class="icofont-notification"></i>{{ render(url('notification')) }}</span>
     <span class="users"><i class="icofont-users"></i>{{ include('users/users.html.twig') }}</span>
-    {% else %}
+    {% elseif is_granted('user.submit') %}
     <a class="loginPage" href="{{ url('app_login') }}">{{ 'login'|trans }}</a>
     <a class="loginPage" href="{{ url('app_signup') }}">{{ 'signup'|trans }}</a>
     {% endif %}

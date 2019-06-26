@@ -165,6 +165,8 @@ class AppController extends Controller
      */
     public function signupAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('user.submit');
+
         $user = new User();
 
         // Creating the Sign Up Form.

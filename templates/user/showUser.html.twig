@@ -16,9 +16,9 @@
     </div>
     {% if app.user %}
     {% if app.user.id != user.id %}
-    {% if friend == "no" %}
+    {% if friend == "no" and is_granted('user.friend_request') %}
     <a class="friend" href="{{ url('friend_add', {'id': user.id}) }}">{{ 'add_friend'|trans }}</a>
-    {% elseif friend == "accept" %}
+    {% elseif friend == "accept" and is_granted('user.friend_request') %}
     <a class="friend" href="{{ url('friend_add', {'id': user.id}) }}">{{ 'accept_friend'|trans }}</a>
     {% elseif friend == "requested" %}
     <a class="friend" id="fselected">{{ 'friend_requested'|trans }}</a>

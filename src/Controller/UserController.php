@@ -80,7 +80,7 @@ class UserController extends Controller
      */
     public function userEditAction(Request $request)
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+        $this->denyAccessUnlessGranted('user.edit');
 
         // Creating a new User as "interface".
         $user = new User;

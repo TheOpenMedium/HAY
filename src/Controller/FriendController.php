@@ -68,6 +68,7 @@ class FriendController extends Controller
      */
     public function friendAddAction(User $request, $id)
     {
+        $this->denyAccessUnlessGranted('user.friend_request');
         $user = $this->getUser();
         $bool = false;
 
