@@ -35,6 +35,7 @@ class AdministrationController extends Controller
      */
     public function administrationAction()
     {
+        $this->denyAccessUnlessGranted('administration.access');
         return $this->render('administration/index.html.twig');
     }
 
@@ -45,6 +46,8 @@ class AdministrationController extends Controller
      */
     public function complaintsOfficeAction()
     {
+        $this->denyAccessUnlessGranted('administration.access');
+        $this->denyAccessUnlessGranted('administration.accessible.complaints_office');
         return $this->render('administration/complaints_office.html.twig');
     }
 
@@ -55,6 +58,8 @@ class AdministrationController extends Controller
      */
     public function manageRolesAction()
     {
+        $this->denyAccessUnlessGranted('administration.access');
+        $this->denyAccessUnlessGranted('administration.accessible.manage_roles');
         return $this->render('administration/manage_roles.html.twig');
     }
 
@@ -65,6 +70,8 @@ class AdministrationController extends Controller
      */
     public function editWebsiteAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('administration.access');
+        $this->denyAccessUnlessGranted('administration.accessible.edit_website');
         $yaml = Yaml::parseFile(__dir__.'/../../config/packages/twig.yaml');
         $form = $this->container->get('form.factory')->createNamedBuilder('edit_website', FormType::class, ['version' => $yaml['twig']['globals']['is_version_displayed']], ['action' => $this->generateUrl('administration_edit_website')])
             ->add('HAYlogo', FileType::class, array('required' => false))
@@ -111,6 +118,8 @@ class AdministrationController extends Controller
      */
     public function statisticsAction()
     {
+        $this->denyAccessUnlessGranted('administration.access');
+        $this->denyAccessUnlessGranted('administration.accessible.statistics');
         return $this->render('administration/statistics.html.twig');
     }
 
@@ -121,6 +130,8 @@ class AdministrationController extends Controller
      */
     public function sqlInterfaceAction()
     {
+        $this->denyAccessUnlessGranted('administration.access');
+        $this->denyAccessUnlessGranted('administration.accessible.sql_interface');
         // If you found another file that should be excluded, please open an issue
         $entities = array_diff(
             scandir(__dir__.'/../Entity'),
@@ -153,6 +164,8 @@ class AdministrationController extends Controller
      */
     public function managePolicyAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('administration.access');
+        $this->denyAccessUnlessGranted('administration.accessible.manage_policy');
         $license = \fopen(__dir__.'/../../LICENSE', 'r');
         $privacy_policy = \fopen(__dir__.'/../../public/policies/PRIVACY_POLICY.txt', 'r');
         $cookie_policy = \fopen(__dir__.'/../../public/policies/COOKIE_POLICY.txt', 'r');
@@ -225,6 +238,8 @@ class AdministrationController extends Controller
      */
     public function sqlAction(Request $request, string $entity, int $max = 10, ?string $id = NULL)
     {
+        $this->denyAccessUnlessGranted('administration.access');
+        $this->denyAccessUnlessGranted('administration.accessible.sql_interface');
         if ($entity == "user") {
             $repo = $this->getDoctrine()->getRepository(User::class);
         } elseif ($entity == "post") {
@@ -379,6 +394,8 @@ class AdministrationController extends Controller
      */
     public function getSQLEntityColumnsAction(string $entity)
     {
+        $this->denyAccessUnlessGranted('administration.access');
+        $this->denyAccessUnlessGranted('administration.accessible.sql_interface');
         header('Content-Type: text/json');
 
         if ($entity == "user") {
@@ -419,6 +436,8 @@ class AdministrationController extends Controller
      */
     public function getUserRolesAction(User $user)
     {
+        $this->denyAccessUnlessGranted('administration.access');
+        $this->denyAccessUnlessGranted('administration.accessible.manage_roles');
         header('Content-Type: text/json');
 
         $array = array(
@@ -442,6 +461,8 @@ class AdministrationController extends Controller
      */
     public function manageUserRolesAction(string $new_role, User $user)
     {
+        $this->denyAccessUnlessGranted('administration.access');
+        $this->denyAccessUnlessGranted('administration.accessible.manage_roles');
         // We verify that what the user want to do isn't illegal.
         if (\strtolower($new_role) == "admin" || $user->getRoles()[0] == "ROLE_ADMIN") {
             $this->denyAccessUnlessGranted('ROLE_ROOT');
@@ -474,8 +495,10 @@ class AdministrationController extends Controller
      *     "_locale": "%app.locales%"
      * })
      */
-    public function authorizationManageAction(Request $request)
+    public function manageAuthorizationsAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('administration.access');
+        $this->denyAccessUnlessGranted('administration.accessible.manage_authorizations');
         $yaml = $this->getParameter("authorizations");
         $roles = [];
         foreach ($this->getParameter("roles")['list'] as $role) {
