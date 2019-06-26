@@ -8,12 +8,12 @@ use App\Entity\Comment;
 use App\Entity\Survey;
 use App\Controller\AppController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class SurveyController extends Controller
+class SurveyController extends AbstractController
 {
     public function __construct(ContainerInterface $container)
     {

@@ -10,7 +10,7 @@ use App\Form\LogInType;
 use App\Form\SignUpType;
 use App\Controller\AjaxController;
 use App\Controller\SurveyController;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -25,7 +25,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
  * * signupAction(Request $request)              -- app_signup
  * * logoutAction()                              -- app_logout
  */
-class AppController extends Controller
+class AppController extends AbstractController
 {
     /**
      * Choose the user's locale

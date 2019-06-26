@@ -7,7 +7,7 @@ use App\Entity\Post;
 use App\Entity\Comment;
 use App\Form\EditUserType;
 use App\Controller\AjaxController;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * * userEditAction(Request $request) -- user_edit
  * * userTagAction(Request $request)  -- user_tag
  */
-class UserController extends Controller
+class UserController extends AbstractController
 {
     /**
      * Render an user page

@@ -2,7 +2,7 @@ security:
     # https://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     encoders:
         App\Entity\User:
-            algorithm: argon2i
+            algorithm: auto
     providers:
         data_base:
             entity:

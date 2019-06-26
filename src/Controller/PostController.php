@@ -7,7 +7,7 @@ use App\Entity\Post;
 use App\Entity\Comment;
 use App\Form\PostType;
 use App\Controller\SurveyController;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * * postEditAction(Request $request, Post $postEdit) -- post_edit
  * * postDeleteAction(Post $post)                     -- post_delete
  */
-class PostController extends Controller
+class PostController extends AbstractController
 {
     /**
      * Render a single post

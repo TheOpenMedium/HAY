@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * List of functions:
  * * styleAction() -- fonction_style
  */
-class FunctionController extends Controller
+class FunctionController extends AbstractController
 {
     /**
      * Function to retrieve the stylesheets

@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
  * List of actions:
  * * settingsEditAction(string $setting, string $value) -- settings_edit
  */
-class SettingsController extends Controller
+class SettingsController extends AbstractController
 {
     /**
      * @Route("/{_locale}/edit/settings/{setting}/{value}", name="settings_edit", requirements={

@@ -4,11 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Laws;
 use App\Form\LawsType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-class LawsController extends Controller
+class LawsController extends AbstractController
 {
     /**
      * Show all laws

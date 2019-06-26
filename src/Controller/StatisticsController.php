@@ -4,13 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Statistics;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class StatisticsController extends Controller
+class StatisticsController extends AbstractController
 {
     public function __construct(ContainerInterface $container)
     {

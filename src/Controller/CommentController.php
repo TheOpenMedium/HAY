@@ -8,7 +8,7 @@ use App\Entity\Comment;
 use App\Entity\Notification;
 use App\Form\CommentType;
 use App\Controller\AppController;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * * commentEditAction(Request $request, Comment $commentEdit) -- comment_edit
  * * commentDeleteAction(Comment $comment)                     -- comment_delete
  */
-class CommentController extends Controller
+class CommentController extends AbstractController
 {
     /**
      * Render the comment form

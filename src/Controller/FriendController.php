@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\FriendRequest;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * A controller related to the FriendRequest entity
@@ -17,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  * List of functions:
  * * cmp($a, $b): List sorting function for usort()
  */
-class FriendController extends Controller
+class FriendController extends AbstractController
 {
     /**
      * Render the friend list of an user

@@ -10,11 +10,11 @@ use App\Entity\Laws;
 use App\Form\ReportType;
 use App\Form\ProcessReportType;
 use Doctrine\Common\Collections\Criteria;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ReportController extends Controller
+class ReportController extends AbstractController
 {
     /**
      * @Route("/{_locale}/report/{type}/{id}", name="report", requirements={

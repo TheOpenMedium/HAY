@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Notification;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * * notificationAction()                                 -- notification
  * * notificationDeleteAction(Notification $notification) -- notification_delete
  */
-class NotificationController extends Controller
+class NotificationController extends AbstractController
 {
     /**
      * Render the notifications of an user
