@@ -1,4 +1,5 @@
 {# Send post form #}
+{% if is_granted('post.submit') %}
 <div class="write">
     {{ form_start(post) }}
     <div class="textarea fs16 c696">{{ 'write'|trans }}{{ form_widget(post.content, {'attr': {'class': 'ta fs16', 'required': false}}) }}</div>
@@ -7,8 +8,8 @@
         <ul class="footerMenu">
             {{ include('post/postOptions/postOption.html.twig') }}
             {{ include('post/postOptions/postDownload.html.twig') }}
-            {{ include('post/postOptions/postColor.html.twig') }}
-            {{ include('post/postOptions/postSize.html.twig') }}
+            {% if is_granted('post.option_color') %}{{ include('post/postOptions/postColor.html.twig') }}{% endif %}
+            {% if is_granted('post.option_textsize') %}{{ include('post/postOptions/postSize.html.twig') }}{% endif %}
             {{ include('post/postOptions/postFont.html.twig') }}
             {{ include('post/postOptions/postAccount.html.twig') }}
             <label for="post_submit"><li class="menuChoices sendPost send fs16">
@@ -24,3 +25,4 @@
     </div>
     {{ form_end(post) }}
 </div>
+{% endif %}

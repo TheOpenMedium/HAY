@@ -15,8 +15,8 @@
         <div style="display: flex; padding: calc(5px * var(--length-multiplication)); cursor: default; padding-top: calc(2.5px * var(--length-multiplication)); grid-row: 1; -ms-grid-row: 1; justify-content: center;">
             {% if app.user %}
             {% if post.user.id == app.user.id %}
-                <a class="icofont-ui-delete fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_delete', {'id': post.id}) }}"></a>
-                <a class="icofont-pencil-alt-2 fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_edit', {'id': post.id}) }}"></a>
+                {% if is_granted('post.delete') %}<a class="icofont-ui-delete fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_delete', {'id': post.id}) }}"></a>{% endif %}
+                {% if is_granted('post.edit') %}<a class="icofont-pencil-alt-2 fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" href="{{ url('post_edit', {'id': post.id}) }}"></a>{% endif %}
             {% endif %}
             {% endif %}
             <i class="icofont-navigation-menu fs16 burgerMenu">

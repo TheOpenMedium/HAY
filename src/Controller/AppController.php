@@ -92,34 +92,54 @@ class AppController extends Controller
             }
         }
 
-        $post = new Post();
+        if ($this->isGranted('post.submit')) {
+            $post = new Post();
 
-        // Creating Post submit Form in case he want to send a post.
-        $form = $this->createForm(PostType::class, $post);
+            // Creating Post submit Form in case he want to send a post.
+            $form = $this->createForm(PostType::class, $post);
+            if (!$this->isGranted('post.option_color')) {
+                $form->remove("color");
+            }
+            if (!$this->isGranted('post.option_textsize')) {
+                $form->remove("size");
+            }
 
-        $form->handleRequest($request);
+            $form->handleRequest($request);
 
-        // If he send a Post, the Post is saved into database.
-        if ($form->isSubmitted() && $form->isValid()) {
-            $post = $form->getData();
-            $post->setId($this->generateIdAction($this->getDoctrine()->getRepository(Post::class), 10));
-            $post->setFont('SS');
-            $post->setUser($this->getUser());
+            // If he send a Post, the Post is saved into database.
+            if ($form->isSubmitted() && $form->isValid()) {
+                $post = $form->getData();
+                $post->setId($this->generateIdAction($this->getDoctrine()->getRepository(Post::class), 10));
+                if (!$this->isGranted('post.option_color')) {
+                    $post->setColor('696');
+                }
+                if (!$this->isGranted('post.option_textsize')) {
+                    $post->setSize('16');
+                }
+                $post->setFont('SS');
+                $post->setUser($this->getUser());
 
-            // TODO: Sending notifications to followers
+                // TODO: Sending notifications to followers
 
-            $post = $sc->surveyCheckPostAction($post);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($post);
-            $em->flush();
+                $post = $sc->surveyCheckPostAction($post);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($post);
+                $em->flush();
+            }
         }
 
         // Fetching Post.
         $postList = $ajaxController->postGenerateAction($scope, $order, $limit, $date);
 
+        if ($this->isGranted('post.submit')) {
+            $form = $form->createView();
+        } else {
+            $form = null;
+        }
+
         // All that is rendered with the home template sending a Form, Post List and Comment List.
         return $this->render('home.html.twig', array(
-            'post' => $form->createView(),
+            'post' => $form,
             'postList' => $postList,
             'scope' => $scope,
             'order' => $order

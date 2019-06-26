@@ -67,6 +67,8 @@ class PostController extends Controller
      */
     public function postEditAction(Request $request, SurveyController $sc, Post $post)
     {
+        $this->denyAccessUnlessGranted('post.edit');
+        
         $user = $this->getUser();
 
         // Checking that the author and the user are the same.
@@ -74,11 +76,26 @@ class PostController extends Controller
             // Creating the form.
             $form = $this->createForm(PostType::class, $post);
 
+            $color = $post->getColor();
+            $size = $post->getSize();
+            if (!$this->isGranted('post.option_color')) {
+                $form->remove("color");
+            }
+            if (!$this->isGranted('post.option_textsize')) {
+                $form->remove("size");
+            }
+
             $form->handleRequest($request);
 
             // If a post was edited, we retrieve data.
             if ($form->isSubmitted() && $form->isValid()) {
                 $post = $form->getData();
+                if (!$this->isGranted('post.option_color')) {
+                    $post->setColor($color);
+                }
+                if (!$this->isGranted('post.option_textsize')) {
+                    $post->setSize($size);
+                }
 
                 $post = $sc->surveyCheckPostAction($post);
                 $em = $this->getDoctrine()->getManager();
@@ -89,9 +106,6 @@ class PostController extends Controller
                 // And we redirect user to home page.
                 return $this->redirectToRoute('app_home');
             }
-
-            $color = $post->getColor();
-            $size = $post->getSize();
 
             // All that is rendered with the post edit template sending a From and the default Color and Size.
             return $this->render('post/editPost.html.twig', array(
@@ -116,6 +130,8 @@ class PostController extends Controller
      */
     public function postDeleteAction(Post $post)
     {
+        $this->denyAccessUnlessGranted('post.delete');
+
         $user = $this->getUser();
 
         // And delete it if the user and the author are the same.

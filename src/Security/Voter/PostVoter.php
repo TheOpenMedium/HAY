@@ -291,7 +291,7 @@ class PostVoter extends Voter
     {
         if ($this->parameters['option_color'] == 'ALL') {
             return true;
-        } elseif ($this->parameters['potion_color'] == 'NONE') {
+        } elseif ($this->parameters['option_color'] == 'NONE') {
             return false;
         } elseif (in_array('ROLE_OWNER', $user->getRoles())) {
             return true;
@@ -308,7 +308,7 @@ class PostVoter extends Voter
     {
         if ($this->parameters['option_textsize'] == 'ALL') {
             return true;
-        } elseif ($this->parameters['potion_textsize'] == 'NONE') {
+        } elseif ($this->parameters['option_textsize'] == 'NONE') {
             return false;
         } elseif (in_array('ROLE_OWNER', $user->getRoles())) {
             return true;
