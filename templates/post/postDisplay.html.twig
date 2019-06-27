@@ -35,7 +35,9 @@
         {{ post.content|raw }}
     </div>
     <div class="end c{{ post.color }}" style="float: left; position: relative;"></div>
+    {% if is_granted('comment.submit') %}
     {{ render(url('comment', {'id': post.id})) }}
+    {% endif %}
 {% if post.comments is not empty %}
 {% for comment in post.comments %}
     <div class="com fs16">
@@ -53,8 +55,8 @@
                 <div style="display: flex; padding: calc(5px * var(--length-multiplication)); cursor: default; padding-top: calc(2.5px * var(--length-multiplication)); grid-row: 1; -ms-grid-row: 1; justify-content: center;">
                     {% if app.user %}
                     {% if comment.user.id == app.user.id %}
-                        <a class="icofont-ui-delete fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: grey;" href="{{ url('comment_delete', {'id': comment.id}) }}"></a>
-                        <a class="icofont-pencil-alt-2 fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: grey;" href="{{ url('comment_edit', {'id': comment.id}) }}"></a>
+                        {% if is_granted('comment.delete') %}<a class="icofont-ui-delete fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: grey;" href="{{ url('comment_delete', {'id': comment.id}) }}"></a>{% endif %}
+                        {% if is_granted('comment.edit') %}<a class="icofont-pencil-alt-2 fs16" style="margin-right: calc(5px * var(--length-multiplication)); text-decoration: none; color: grey;" href="{{ url('comment_edit', {'id': comment.id}) }}"></a>{% endif %}
                     {% endif %}
                     {% endif %}
                     <i class="icofont-navigation-menu fs16 burgerMenu" style="color: grey;">

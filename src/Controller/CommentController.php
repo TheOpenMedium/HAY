@@ -38,6 +38,7 @@ class CommentController extends AbstractController
      */
     public function commentAction(Request $request, $id)
     {
+        $this->denyAccessUnlessGranted('comment.submit');
         $com = new Comment();
 
         // Creating the Form if the user want to submit a comment.
@@ -116,6 +117,7 @@ class CommentController extends AbstractController
      */
     public function commentEditAction(Request $request, Comment $comment)
     {
+        $this->denyAccessUnlessGranted('comment.edit');
         $user = $this->getUser();
 
         // Checking that the author and the user are the same.
@@ -157,6 +159,7 @@ class CommentController extends AbstractController
      */
     public function commentDeleteAction(Comment $comment)
     {
+        $this->denyAccessUnlessGranted('comment.delete');
         $entityManager = $this->getDoctrine()->getManager();
 
         $user = $this->getUser();
