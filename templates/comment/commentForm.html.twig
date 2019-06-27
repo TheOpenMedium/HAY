@@ -1,10 +1,17 @@
-{{ form_start(comment, {'attr': {'class': 'comment c' ~ color, 'action': path('comment', {'id': id})}}) }}
-<div class="end c{{ color }}" style="float: left; position: relative;"></div>
+{% if id is defined %}
+{{ form_start(comment, {'attr': {'class': 'comment', 'action': path('comment', {'id': id})}}) }}
+{% else %}
+{{ form_start(comment, {'attr': {'class': 'comment', 'style': 'margin: auto; position: relative;'}}) }}
+{% endif %}
 <div class="end" style="float: right; position: relative;"></div>
 <div class="end" style="float: left; position: relative; width: calc(600px * var(--length-multiplication))"></div>
 <div class="comment-corner" style="background-color: lavender;"></div>
 <div class="commentForm">
+    {% if id is defined %}
     <label for="comment_submit_{{ id }}" class="sendCom"><i class="icofont-comment"></i></label>{{ form_widget(comment.submit, {'attr': {'style': 'display: none;'}, 'id': 'comment_submit_' ~ id}) }}
+    {% else %}
+    <label for="comment_submit" class="sendCom"><i class="icofont-comment"></i></label>{{ form_widget(comment.submit, {'attr': {'style': 'display: none;'}, 'id': 'comment_submit'}) }}
+    {% endif %}
     {{ form_widget(comment.comment, {'attr': {'class': 'taCom', 'placeholder': 'comment'|trans, 'required': false}}) }}
 </div>
 {{ form_end(comment) }}

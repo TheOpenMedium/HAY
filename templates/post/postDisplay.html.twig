@@ -34,7 +34,8 @@
     <div class="content markdown c{{ post.color }} ff{{ post.font }} fs{{ post.size }}" style="border-color: {{ post.color != 'FFF' ? 'white' : 'black' }};">
         {{ post.content|raw }}
     </div>
-    {{ render(url('comment', {'id': post.id, '_color': post.color})) }}
+    <div class="end c{{ post.color }}" style="float: left; position: relative;"></div>
+    {{ render(url('comment', {'id': post.id})) }}
 {% if post.comments is not empty %}
 {% for comment in post.comments %}
     <div class="com fs16">

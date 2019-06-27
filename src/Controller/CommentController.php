@@ -30,13 +30,13 @@ class CommentController extends AbstractController
      * @param string $id The post id
      * @param string $_color The color user for rendering the comment form
      *
-     * @Route("/{_locale}/comment/{id}/{_color}",
+     * @Route("/{_locale}/comment/{id}",
      *     defaults={"_color": "696"},
      *     name="comment",
      *     requirements={"_locale": "%app.locales%"}
      *     )
      */
-    public function commentAction(Request $request, $id, $_color)
+    public function commentAction(Request $request, $id)
     {
         $com = new Comment();
 
@@ -81,9 +81,8 @@ class CommentController extends AbstractController
         }
 
         // All that is rendered with the comment template sending a Form, Color of the post and the Post Id.
-        return $this->render('comment/comment.html.twig', array(
+        return $this->render('comment/newComment.html.twig', array(
             'comment' => $comment->createView(),
-            'color' => $_color,
             'id' => $id
         ));
     }

@@ -9,18 +9,11 @@
 {{ include("menu.html.twig") }}
 
 <div>
-    {{ form_start(comment, {'attr': {'class': 'comment', 'style': 'margin: auto; position: relative;'}}) }}
-    <div class="infHAY-corner" style="position: absolute; left: calc(25px * var(--length-multiplication)); right: 0px; bottom: calc(30px * var(--length-multiplication));"></div>
-    <div class="end" style="float: right; position: relative;"></div>
-    <div class="end" style="float: left; position: relative; width: calc(600px * var(--length-multiplication))"></div>
-    <div class="comment-corner" style="background-color: lavender;"></div>
-    <div class="commentForm">
-        <label for="comment_submit" class="sendCom"><i class="icofont-comment"></i></label>{{ form_widget(comment.submit, {'attr': {'style': 'display: none;'}, 'id': 'comment_submit'}) }}
-        {{ form_widget(comment.comment, {'attr': {'class': 'taCom', 'placeholder': 'comment'|trans, 'required': false}}) }}
+    {% include "comment/commentForm.html.twig" %}
+    <div class="comment" style="margin: auto; position: relative;">
+        <div class="end"></div>
+        <div class="comment-corner" style="background-color: var(--bg-light); bottom: calc(50px * var(--length-multiplication));"></div>
     </div>
-    <div class="end" style="margin-top: -95px;"></div>
-    <div class="comment-corner" style="background-color: var(--bg-light); bottom: calc(50px * var(--length-multiplication));"></div>
-    {{ form_end(comment) }}
 </div>
 
 {% endblock %}
