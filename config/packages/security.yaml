@@ -11,6 +11,7 @@ security:
         strategy: unanimous
         allow_if_all_abstain: false
     role_hierarchy:
+        ROLE_USER: ROLE_PAGE
         ROLE_HELPER: ROLE_USER
         ROLE_MOD: ROLE_HELPER # For Moderators
         ROLE_DEV: ROLE_HELPER # For Developpers Contributors

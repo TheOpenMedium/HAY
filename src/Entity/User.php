@@ -157,6 +157,24 @@ class User implements UserInterface, \Serializable
      */
     private $surveys;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_child;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="parents")
+     * @ORM\JoinTable(name="users_children",
+     *      joinColumns={@ORM\JoinColumn(name="parent_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="child_id", referencedColumnName="id")})
+     */
+    private $children;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="children")
+     */
+    private $parents;
+
     public function __construct()
     {
         $this->date_sign = new \Datetime();
@@ -176,6 +194,9 @@ class User implements UserInterface, \Serializable
         $this->reported = new ArrayCollection();
         $this->processed_reports = new ArrayCollection();
         $this->surveys = new ArrayCollection();
+        $this->is_child= false;
+        $this->children = new ArrayCollection();
+        $this->parents = new ArrayCollection();
     }
 
     public function __toString() {
@@ -733,6 +754,72 @@ class User implements UserInterface, \Serializable
             if ($survey->getUser() === $this) {
                 $survey->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getIsChild(): ?bool
+    {
+        return $this->is_child;
+    }
+
+    public function setIsChild(bool $is_child): self
+    {
+        $this->is_child = $is_child;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+    public function addChild(self $child): self
+    {
+        if (!$this->children->contains($child)) {
+            $this->children[] = $child;
+        }
+
+        return $this;
+    }
+
+    public function removeChild(self $child): self
+    {
+        if ($this->children->contains($child)) {
+            $this->children->removeElement($child);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getParents(): Collection
+    {
+        return $this->parents;
+    }
+
+    public function addParent(self $parent): self
+    {
+        if (!$this->parents->contains($parent)) {
+            $this->parents[] = $parent;
+            $parent->addChild($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParent(self $parent): self
+    {
+        if ($this->parents->contains($parent)) {
+            $this->parents->removeElement($parent);
+            $parent->removeChild($this);
         }
 
         return $this;

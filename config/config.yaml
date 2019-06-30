@@ -1,6 +1,7 @@
 parameters:
     roles:
         list:
+            - ROLE_PAGE
             - ROLE_USER
             - ROLE_HELPER
             - ROLE_MOD
@@ -11,6 +12,9 @@ parameters:
             - ROLE_ROOT
             - ROLE_OWNER
         alias:
+            p: ROLE_PAGE
+            pg: ROLE_PAGE
+            page: ROLE_PAGE
             u: ROLE_USER
             user: ROLE_USER
             h: ROLE_HELPER
@@ -24,7 +28,7 @@ parameters:
             dev: ROLE_DEV
             developer: ROLE_DEV
             development: ROLE_DEV
-            p: ROLE_DEV
+            prog: ROLE_DEV
             programmer: ROLE_DEV
             programming: ROLE_DEV
             ds: ROLE_DESIGN
