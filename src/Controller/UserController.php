@@ -6,7 +6,9 @@ use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
 use App\Form\EditUserType;
+use App\Form\ChildUserType;
 use App\Controller\AjaxController;
+use App\Controller\AppController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -217,7 +219,7 @@ class UserController extends AbstractController
             }
         }
         if (empty($user)) {
-            // TODO: This will be used for a future feature (role-based users).
+            // TODO: This will be used for a future feature (role-based users tag).
             return new Response(\json_encode(FALSE));
         } elseif ($user) { // TODO: Check if user has the role
         } else {
@@ -230,5 +232,83 @@ class UserController extends AbstractController
             "username" => $user->getUsername(),
             "image" => $user->getUrl()
         ]]));
+    }
+
+    /**
+     * Tag a user
+     *
+     * @Route("/{_locale}/create/child/user", name="user_child_creation", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function userChildCreationAction(Request $request)
+    {
+        $user = $this->getUser();
+        $child = new User();
+        $form = $this->createForm(ChildUserType::class, $child);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $appController = new AppController();
+
+            $child = $form->getData();
+            $child->setId($appController->generateIdAction($this->getDoctrine()->getRepository(User::class), 7));
+            $child->setPassword($user->getPassword());
+            $child->setIsChild(true);
+            $child->setMailConf(true);
+
+            if ($form->get('is_page')->getData() == "true") {
+                // Pages
+                $child->setRoles(["ROLE_PAGE"]);
+            } else {
+                // Child Users
+                $child->setRoles(["ROLE_USER"]);
+            }
+            
+            $child->addParent($user);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($child);
+            $em->flush();
+
+            // And redirecting user to the home page.
+            return $this->redirectToRoute('app_home');
+        }
+
+        // All that is rendered with the new child user template sending the Form.
+        return $this->render('user/newChildUser.html.twig', [
+            'child_user' => $form->createView()
+        ]);
+    }
+
+    /**
+     * Render the child user list of an user
+     *
+     * @Route("/{_locale}/child/user", name="user_child", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function childUserAction()
+    {
+        $childUsers = null;
+
+        // Getting Child Users of current user.
+        $childUserObject = $this->getUser()->getChildren();
+
+        // "Converting" the Doctrine's array object to a PHP's array object
+        foreach ($childUserObject as $key => $value) {
+            $childUsers[$key] = $value;
+        }
+
+        // Sorting that user's array by the first name with the "cmp" function
+        if ($childUsers) {
+            usort($childUsers, array('App\Controller\FriendController', 'cmp'));
+        }
+
+        // All that is rendered with the childUser template sending childUser List.
+        return $this->render('users/childUser.html.twig', array(
+            'childUsers' => $childUsers
+        ));
     }
 }

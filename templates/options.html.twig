@@ -10,6 +10,9 @@
     </li>
     {% endif %}
     <li class="optionMenuChoice">
+        <a href="{{ path('user_child_creation') }}">{{ "create_child_user"|trans }}</a>
+    </li>
+    <li class="optionMenuChoice">
         <a href="{{ path('app_logout') }}">{{ "to_logout"|trans }}</a>
     </li>
     {% if is_granted("administration.access") %}

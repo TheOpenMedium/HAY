@@ -52,6 +52,11 @@ notif0: has commented one of your status
 # Users
 
 friends: Friends
+create_child_user: Create a child user / a page
+child_name: Name
+child_user: Child user
+page: Page
+childs_and_pages: Child users and pages
 
 # User page
 

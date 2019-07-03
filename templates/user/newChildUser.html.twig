@@ -1,0 +1,86 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+{{ 'create_child_user'|trans }} - HAY
+{% endblock %}
+
+{% block css %}
+<style>
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 80px);
+}
+
+form {
+	display: grid;
+	grid-template-columns: auto auto;
+}
+
+input[type="text"] {
+    margin: 10px;
+}
+
+.submit {
+    grid-column: 1/3;
+}
+
+#picker {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-column: 1/3;
+    margin: 10px;
+    cursor: pointer;
+}
+
+#picker span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--gray-dark);
+    color: white;
+    font-family: sans-serif;
+    height: 40px;
+}
+
+#picker span:hover, #picker .selected {
+    background-color: var(--gray-color);
+}
+
+#picker_child_user {
+    border-right: 1px solid var(--bg-light);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#picker_page {
+    border-left: 1px solid var(--bg-light);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+{{ form_start(child_user) }}
+<div id="picker"><span id="picker_child_user" class="selected" onclick="picker(this)">{{ 'child_user'|trans }}</span><span id="picker_page" onclick="picker(this)">{{ 'page'|trans }}</span></div>
+{{ form_widget(child_user.child_name, {'attr': {'placeholder': 'child_name'|trans}}) }}
+{{ form_widget(child_user.username, {'attr': {'placeholder': 'username'|trans ~ ' (' ~ 'optional'|trans ~ ')'}}) }}
+{{ form_widget(child_user.submit, {'attr': {'class': 'submit'}, 'label': 'submit'|trans}) }}
+{{ form_end(child_user) }}
+{% endblock %}
+
+{% block js %}
+<script>
+function picker(elt) {
+    $(".selected")[0].className = "";
+    elt.className = "selected";
+    if (elt.id === "picker_page") {
+        $("#child_user_is_page")[0].value = "true";
+    } else {
+        $("#child_user_is_page")[0].value = "false";
+    }
+}
+</script>
+{% endblock %}

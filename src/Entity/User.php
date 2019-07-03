@@ -46,17 +46,22 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $first_name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $last_name;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $child_name;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
      */
     private $email;
 
@@ -66,7 +71,7 @@ class User implements UserInterface, \Serializable
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $password;
 
@@ -258,6 +263,18 @@ class User implements UserInterface, \Serializable
     public function setLastName(string $last_name): self
     {
         $this->last_name = $last_name;
+
+        return $this;
+    }
+
+    public function getChildName(): ?string
+    {
+        return $this->child_name;
+    }
+
+    public function setChildName(string $child_name): self
+    {
+        $this->child_name = $child_name;
 
         return $this;
     }

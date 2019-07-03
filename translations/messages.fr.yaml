@@ -56,6 +56,11 @@ notif0: a laissé un commentaire sur un de vos statuts
 # Utilisateurs
 
 friends: Amis
+create_child_user: Créer un utilisateur enfant / une page
+child_name: Nom
+child_user: Utilisateur enfant
+page: Page
+childs_and_pages: Utilisateurs enfants et pages
 
 # User page
 # Page d'utilisateur
@@ -229,6 +234,7 @@ date_format: 'd/m/Y H:i:s' # allez voir https://secure.php.net/manual/fr/functio
 ################################################################################
 
 # Help messages
+# Messages d'aide
 
 user:submit: |
     Description

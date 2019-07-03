@@ -263,16 +263,8 @@
     color: white;
     font-family: sans-serif;
     font-size: 12px;
-    padding: 15px;
-    word-wrap: break-word;
-}
-
-.liFriend {
-    display: block;
     padding: 10px;
-    color: white;
-    font-family: sans-serif;
-    border-bottom: 1px solid var(--font-color-grey);
+    word-wrap: break-word;
     transition: var(--transition-default-duration) background;
 }
 
@@ -286,7 +278,7 @@
 
 .liFriend:hover {
     transition: var(--transition-default-duration) background;
-    background-color: var(--font-color-grey);
+    background-color: var(--gray-color);
 }
 
 .loginPage {

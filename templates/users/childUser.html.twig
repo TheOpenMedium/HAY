@@ -1,0 +1,10 @@
+<div class="usersTitle">{{ 'childs_and_pages'|trans }}</div>
+{% if childUsers is not null %}
+    {% for childUser in childUsers %}
+        <a href="{{ url('user_show', {'id': childUser.id}) }}">
+            <li class="liFriend">
+                <img src="{{ childUser.url }}" alt="{{ childUser.alt }}" />{{ childUser.childName }} <span style="font-size: 10px; color: var(--font-color-grey);">{% if 'ROLE_PAGE' in childUser.roles %}{{ 'page'|trans }}{% else %}{{ 'child_user'|trans }}{% endif %}</span>
+            </li>
+        </a>
+    {% endfor %}
+{% endif %}
