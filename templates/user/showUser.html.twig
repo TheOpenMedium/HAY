@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-{{ user.firstName }} {{ user.lastName }} - HAY
+{% if not user.isChild %}{{ user.firstName }} {{ user.lastName }}{% else %}{{user.childName}}{% endif %} - HAY
 {% endblock %}
 
 {% block body %}
@@ -11,14 +11,14 @@
 <div class="userMenu fs16 ffSS">
     <div class="userInfo">
         <img src="{{ user.url }}" alt="{{ user.url }}" class="userImg" />
-        {{ user.firstName }} {{ user.lastName }}
-        {% if user.username %}({{ user.username }}){% endif %}
+        {% if not user.isChild %}{{ user.firstName }} {{ user.lastName }}{% else %}{{user.childName}}{% endif %}
+        {% if user.username %}<br />@{{ user.username }}{% endif %}
     </div>
     {% if app.user %}
     {% if app.user.id != user.id %}
-    {% if friend == "no" and is_granted('user.friend_request') %}
+    {% if friend == "no" and is_granted('user.friend_request', user) %}
     <a class="friend" href="{{ url('friend_add', {'id': user.id}) }}">{{ 'add_friend'|trans }}</a>
-    {% elseif friend == "accept" and is_granted('user.friend_request') %}
+    {% elseif friend == "accept" and is_granted('user.friend_request', user) %}
     <a class="friend" href="{{ url('friend_add', {'id': user.id}) }}">{{ 'accept_friend'|trans }}</a>
     {% elseif friend == "requested" %}
     <a class="friend" id="fselected">{{ 'friend_requested'|trans }}</a>

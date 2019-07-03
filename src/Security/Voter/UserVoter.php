@@ -238,6 +238,10 @@ class UserVoter extends Voter
 
     private function canFriendRequest(User $user, User $subject)
     {
+        if (\in_array('ROLE_PAGE', $subject->getRoles())) {
+            return false;
+        }
+
         if ($this->parameters['friend_request'] == 'ALL') {
             return true;
         } elseif ($this->parameters['friend_request'] == 'NONE') {
