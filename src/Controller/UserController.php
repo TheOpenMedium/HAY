@@ -311,4 +311,20 @@ class UserController extends AbstractController
             'childUsers' => $childUsers
         ));
     }
+
+    /**
+     * Change the current user
+     *
+     * @Route("/{_locale}/change/user/{id}", name="user_change", requirements={
+     *     "_locale": "%app.locales%"
+     * })
+     */
+    public function changeUserAction(User $user)
+    {
+
+        // All that is rendered with the childUser template sending childUser List.
+        return $this->render('users/childUser.html.twig', array(
+            'childUsers' => $childUsers
+        ));
+    }
 }
