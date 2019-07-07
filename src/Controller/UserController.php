@@ -90,8 +90,12 @@ class UserController extends AbstractController
         $user = new User;
 
         // Retrieving old informations.
-        $user->setFirstName($this->getUser()->getFirstName());
-        $user->setLastName($this->getUser()->getLastName());
+        if (!$this->getUser()->getIsChild()) {
+            $user->setFirstName($this->getUser()->getFirstName());
+            $user->setLastName($this->getUser()->getLastName());
+        } else {
+            $user->setChildName($this->getUser()->getChildName()); 
+        }
         $user->setUsername($this->getUser()->getUsername());
         $user->setAlt($this->getUser()->getAlt());
 
@@ -108,12 +112,16 @@ class UserController extends AbstractController
                 return $this->redirectToRoute('user_edit');
             }
             // Handling the user's first name
-            if ($form->getData()->getFirstName() != $this->getUser()->getFirstName()) {
+            if ($form->getData()->getFirstName() != $this->getUser()->getFirstName() && !$this->getUser()->getIsChild()) {
                 $this->getUser()->setFirstName($form->getData()->getFirstName());
             }
             // Handling the user's last name
-            if ($form->getData()->getLastName() != $this->getUser()->getLastName()) {
+            if ($form->getData()->getLastName() != $this->getUser()->getLastName() && !$this->getUser()->getIsChild()) {
                 $this->getUser()->setLastName($form->getData()->getLastName());
+            }
+            // Handling the user's child name
+            if ($form->getData()->getChildName() != $this->getUser()->getChildName() && $this->getUser()->getIsChild()) {
+                $this->getUser()->setChildName($form->getData()->getChildName());
             }
             // Handling the user's username
             if ($form->getData()->getUsername() != $this->getUser()->getUsername()) {

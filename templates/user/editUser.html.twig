@@ -9,9 +9,12 @@
 <h1 class="userEditTitle fs40">{{ 'edit_user'|trans }} {{ app.user.name }}</h1>
 <div class="userEdit">
     {#####}
-    <span>{{ 'usr_name'|trans }}</span>
-    <span>{{ form_widget(edit_user.first_name, {'attr': {'class': 'login', 'placeholder': 'first_name'}}) }}</span>
-    <span>{{ form_widget(edit_user.last_name, {'attr': {'class': 'login', 'placeholder': 'last_name'}}) }}</span>
+    <span {% if app.user.isChild %}style="display: none;"{% endif %}>{{ 'usr_name'|trans }}</span>
+    <span {% if app.user.isChild %}style="display: none;"{% endif %}>{{ form_widget(edit_user.first_name, {'attr': {'class': 'login', 'placeholder': 'first_name'}}) }}</span>
+    <span {% if app.user.isChild %}style="display: none;"{% endif %}>{{ form_widget(edit_user.last_name, {'attr': {'class': 'login', 'placeholder': 'last_name'}}) }}</span>
+    {#####}
+    <span {% if not app.user.isChild %}style="display: none;"{% endif %}>{{ 'child_name'|trans }}</span>
+    <span style="grid-column: 2/4;{% if not app.user.isChild %}display: none;{% endif %}">{{ form_widget(edit_user.child_name, {'attr': {'class': 'login loginLarge', 'placeholder': 'child_name'}}) }}</span>
     {#####}
     <span>{{ 'username'|trans }}</span>
     <span style="grid-column: 2/4;">{{ form_widget(edit_user.username, {'attr': {'class': 'login loginLarge', 'placeholder': 'username'}}) }}</span>

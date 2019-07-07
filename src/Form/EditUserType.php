@@ -20,6 +20,7 @@ class EditUserType extends AbstractType
         $builder
             ->add('first_name', TextType::class, ['required' => false])
             ->add('last_name', TextType::class, ['required' => false])
+            ->add('child_name', TextType::class, ['required' => false])
             ->add('username', TextType::class, ['required' => false])
             ->add('file', FileType::class, [
                 'mapped' => false,
