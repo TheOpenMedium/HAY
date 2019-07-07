@@ -5,7 +5,7 @@
                 <a class="icofont-close-line"
                 style="float: right; position: relative; bottom: 10px; left: 10px; text-decoration: none; font-size: 24px;"
                 href="{{ url('notification_delete', {'id': notification.id}) }}"></a>
-                {{ notification.user.firstName }} {{ notification.user.lastName }} {{ 'notif0'|trans }} "{{ notification.content }}".
+                {{ notification.user.name }} {{ 'notif0'|trans }} "{{ notification.content }}".
             {% endif %}
             {% if notification.url %}
                 <a class="icofont-thin-double-right"

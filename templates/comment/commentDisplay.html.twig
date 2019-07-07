@@ -6,7 +6,7 @@
                 <img src="{{ comment.user.url }}" alt="{{ comment.user.alt }}" style="width: calc(40px * var(--length-multiplication)); height: calc(40px * var(--length-multiplication));" />
             </a>
             <a href="{{ url('user_show', {'id': comment.user.id}) }}" class="fs16" style="border-left: calc(1px * var(--length-multiplication)) solid grey; padding-left: calc(15px * var(--length-multiplication)); width: 85%; color: grey;">
-                {{ comment.user.firstName }} {{ comment.user.lastName }}
+                {{ comment.user.name }}
                 {% if comment.user.username %}{{ 'alias'|trans }} {{ comment.user.username }} {% endif %}
                 {{ 'has_comment'|trans }}
             </a>

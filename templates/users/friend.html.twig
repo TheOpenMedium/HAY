@@ -1,10 +1,11 @@
 <div class="usersTitle">{{ 'friends'|trans }}</div>
 {% if friends is not null %}
     {% for friend in friends %}
-        <a href="{{ url('user_show', {'id': friend.id}) }}">
-            <li class="liFriend">
-                <img src="{{ friend.url }}" alt="{{ friend.alt }}" />{{ friend.firstname }} {{ friend.lastname }}
-            </li>
+        <li class="childUser">
+            <a class="childUserName" href="{{ url('user_show', {'id': friend.id}) }}">
+                <img src="{{ friend.url }}" alt="{{ friend.alt }}" />
+                {{ friend.name }}
+            </a>
         </a>
     {% endfor %}
 {% endif %}

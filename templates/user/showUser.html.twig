@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-{% if not user.isChild %}{{ user.firstName }} {{ user.lastName }}{% else %}{{user.childName}}{% endif %} - HAY
+{{ user.name}} - HAY
 {% endblock %}
 
 {% block body %}
@@ -11,7 +11,7 @@
 <div class="userMenu fs16 ffSS">
     <div class="userInfo">
         <img src="{{ user.url }}" alt="{{ user.url }}" class="userImg" />
-        {% if not user.isChild %}{{ user.firstName }} {{ user.lastName }}{% else %}{{user.childName}}{% endif %}
+        {{ user.name }}
         {% if user.username %}<br />@{{ user.username }}{% endif %}
     </div>
     {% if app.user %}

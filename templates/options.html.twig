@@ -1,7 +1,7 @@
 <ul class="ulParameter">
     <a href="{{ url('user_show', {'id': app.user.id}) }}">
         <li class="userStats">
-            <img src="{{ app.user.url }}" alt="{{ app.user.alt }}" /><span>{{ 'hello'|trans }} {{ app.user.firstname }}</span>
+            <img src="{{ app.user.url }}" alt="{{ app.user.alt }}" /><span>{{ 'hello'|trans }} {{ app.user.name }}</span>
         </li>
     </a>
     {% if is_granted('user.edit') %}

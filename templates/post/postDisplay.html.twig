@@ -10,7 +10,7 @@
             <img src="{{ post.user.url }}" alt="{{ post.user.alt }}" style="width: calc(40px * var(--length-multiplication)); height: calc(40px * var(--length-multiplication));" />
         </a>
         <a href="{{ url('user_show', {'id': post.user.id}) }}" style="border-left: calc(1px * var(--length-multiplication)) solid {{ post.color != 'FFF' ? 'white' : 'black' }}; padding-left: calc(15px * var(--length-multiplication)); font-family: sans-serif; color: {{ post.color != 'FFF' ? 'white' : 'black' }};" class="fs16">
-            {{ post.user.firstName }} {{ post.user.lastName }} {% if post.user.username %}{{ 'alias'|trans }} {{ post.user.username }} {% endif %}{{ 'has_write'|trans }}
+            {{ post.user.name }} {% if post.user.username %}{{ 'alias'|trans }} {{ post.user.username }} {% endif %}{{ 'has_write'|trans }}
         </a>
         <div style="display: flex; padding: calc(5px * var(--length-multiplication)); cursor: default; padding-top: calc(2.5px * var(--length-multiplication)); grid-row: 1; -ms-grid-row: 1; justify-content: center;">
             {% if app.user %}
@@ -48,7 +48,7 @@
                     <img src="{{ comment.user.url }}" alt="{{ comment.user.alt }}" style="width: calc(40px * var(--length-multiplication)); height: calc(40px * var(--length-multiplication));" />
                 </a>
                 <a href="{{ url('user_show', {'id': comment.user.id}) }}" class="fs16" style="border-left: calc(1px * var(--length-multiplication)) solid grey; padding-left: calc(15px * var(--length-multiplication)); width: 85%; color: grey;">
-                    {{ comment.user.firstName }} {{ comment.user.lastName }}
+                    {{ comment.user.name }}
                     {% if comment.user.username %}{{ 'alias'|trans }} {{ comment.user.username }} {% endif %}
                     {{ 'has_comment'|trans }}
                 </a>

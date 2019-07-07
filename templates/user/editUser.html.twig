@@ -1,12 +1,12 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-{{ 'edit_user'|trans }} "{{ app.user.firstName }} {{ app.user.lastName }}" - HAY
+{{ 'edit_user'|trans }} "{{ app.user.name }}" - HAY
 {% endblock %}
 
 {% block body %}
 {{ form_start(edit_user) }}
-<h1 class="userEditTitle fs40">{{ 'edit_user'|trans }} {{ app.user.firstName }} {{ app.user.lastName }}</h1>
+<h1 class="userEditTitle fs40">{{ 'edit_user'|trans }} {{ app.user.name }}</h1>
 <div class="userEdit">
     {#####}
     <span>{{ 'usr_name'|trans }}</span>

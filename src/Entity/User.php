@@ -279,6 +279,14 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    public function getName(): ?string
+    {
+        if ($this->is_child == false) {
+            return $this->first_name.' '.$this->last_name;
+        }
+        return $this->child_name;
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;

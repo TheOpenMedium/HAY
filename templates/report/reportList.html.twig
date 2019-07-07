@@ -51,7 +51,7 @@
                         <h1>Process</h1>
                         {{ render(path('report_process', {'report': report.id})) }}
                     {% else %}
-                        Moderators: {% for key, moderator in report.moderators %}{{ moderator.firstName }}{% if (report.moderators|length - 1) != key %}, {% endif %}{% endfor %}
+                        Moderators: {% for key, moderator in report.moderators %}{{ moderator.name }}{% if (report.moderators|length - 1) != key %}, {% endif %}{% endfor %}
                     {% endif %}
                 </div>
             </div>
