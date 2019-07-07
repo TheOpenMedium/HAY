@@ -13,6 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Authentication\Token\SwitchUserToken;
 
 /**
  * A controller related to the User entity
@@ -291,15 +293,17 @@ class UserController extends AbstractController
      */
     public function childUserAction()
     {
+        $user = $this->getUser();
+        $parent = null;
         $childUsers = null;
 
-        // Getting Child Users of current user.
-        $childUserObject = $this->getUser()->getChildren();
-
-        // "Converting" the Doctrine's array object to a PHP's array object
-        foreach ($childUserObject as $key => $value) {
-            $childUsers[$key] = $value;
+        if ($user->getIsChild()) {
+            $user = $this->getDoctrine()->getRepository(User::class)->find($this->get('security.token_storage')->getToken()->getOriginalToken()->getUser()->getId());
+            $parent = $user;
         }
+
+        // Getting Child Users of current user.
+        $childUsers = $user->getChildren()->toArray();
 
         // Sorting that user's array by the first name with the "cmp" function
         if ($childUsers) {
@@ -308,6 +312,7 @@ class UserController extends AbstractController
 
         // All that is rendered with the childUser template sending childUser List.
         return $this->render('users/childUser.html.twig', array(
+            'parent' => $parent,
             'childUsers' => $childUsers
         ));
     }
@@ -321,10 +326,28 @@ class UserController extends AbstractController
      */
     public function changeUserAction(User $user)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
 
-        // All that is rendered with the childUser template sending childUser List.
-        return $this->render('users/childUser.html.twig', array(
-            'childUsers' => $childUsers
-        ));
+        $parent = $this->getUser();
+        if ($parent->getIsChild()) {
+            $parent = $this->getDoctrine()->getRepository(User::class)->find($this->get('security.token_storage')->getToken()->getOriginalToken()->getUser()->getId());
+        }
+
+        if (in_array("ROLE_PAGE", $user->getRoles()) ||
+            !in_array($parent, array_merge($user->getParents()->toArray(), $user->getChildren()->toArray(), [$parent]))) {
+            throw new AccessDeniedException();
+        }
+
+        $token_storage = $this->get('security.token_storage');
+        $original_token = $token_storage->getToken();
+        if ($original_token instanceof SwitchUserToken) {
+            $original_token = $original_token->getOriginalToken();
+        }
+            
+        $token = new SwitchUserToken($user, "none", "main", $user->getRoles(), $original_token);
+        $token_storage->setToken($token);
+
+        // Redirecting to home.
+        return $this->redirectToRoute('app_home');
     }
 }

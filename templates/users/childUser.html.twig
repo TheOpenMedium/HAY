@@ -1,10 +1,33 @@
 <div class="usersTitle">{{ 'childs_and_pages'|trans }}</div>
+{% if parent is not null %}
+<li class="childUser">
+    <a class="childUserName" href="{{ url('user_show', {'id': parent.id}) }}">
+        <img src="{{ parent.url }}" alt="{{ parent.alt }}" />
+        {{ parent.name }}
+        <span style="font-size: 10px; color: var(--font-color-grey);">
+            {{ 'parent'|trans }}
+        </span>
+    </a>
+    <a class="changeUser" href="{{ url('user_change', {id: parent.id}) }}">{{ 'change_user'|trans }}</a>
+</li>
+{% endif %}
 {% if childUsers is not null %}
     {% for childUser in childUsers %}
-        <a href="{{ url('user_show', {'id': childUser.id}) }}">
-            <li class="liFriend">
-                <img src="{{ childUser.url }}" alt="{{ childUser.alt }}" />{{ childUser.childName }} <span style="font-size: 10px; color: var(--font-color-grey);">{% if 'ROLE_PAGE' in childUser.roles %}{{ 'page'|trans }}{% else %}{{ 'child_user'|trans }}{% endif %}</span>
-            </li>
-        </a>
+        <li class="childUser">
+            <a class="childUserName" href="{{ url('user_show', {'id': childUser.id}) }}">
+                <img src="{{ childUser.url }}" alt="{{ childUser.alt }}" />
+                {{ childUser.childName }}
+                <span style="font-size: 10px; color: var(--font-color-grey);">
+                    {% if 'ROLE_PAGE' in childUser.roles %}
+                        {{ 'page'|trans }}
+                    {% else %}
+                        {{ 'child_user'|trans }}
+                    {% endif %}
+                </span>
+            </a>
+            {% if 'ROLE_PAGE' not in childUser.roles %}
+                <a class="changeUser" href="{{ url('user_change', {id: childUser.id}) }}">{{ 'change_user'|trans }}</a>
+            {% endif %}
+        </li>
     {% endfor %}
 {% endif %}

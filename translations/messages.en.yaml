@@ -56,7 +56,9 @@ create_child_user: Create a child user / a page
 child_name: Name
 child_user: Child user
 page: Page
+parent: Parent user
 childs_and_pages: Child users and pages
+change_user: Change user
 
 # User page
 

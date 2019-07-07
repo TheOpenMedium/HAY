@@ -101,7 +101,7 @@
     right: 0px;
     top: 34px;
     background-color: dimgrey;
-    height: calc(100% - 50px);
+    max-height: calc(100% - 50px);
     width: 183px;
     cursor: auto;
     padding: 0px;
@@ -197,7 +197,8 @@
     right: 0px;
     top: 34px;
     background-color: dimgrey;
-    height: 100%;
+    max-height: calc(100% - 50px);
+    overflow-y: auto;
     width: 183px;
     cursor: auto;
     padding: 0px;
@@ -238,7 +239,8 @@
     right: 0px;
     top: 34px;
     background-color: dimgrey;
-    height: 100%;
+    max-height: calc(100% - 50px);
+    overflow-y: auto;
     width: 183px;
     cursor: auto;
     padding: 0px;
@@ -297,4 +299,51 @@
 
 .loginPage:hover {
     background-color: var(--hay-dark);
+}
+
+.childUser {
+    display: block;
+    border-bottom: 1px solid var(--font-color-grey);
+    color: white;
+    font-family: sans-serif;
+    font-size: 12px;
+    padding-bottom: 0px;
+    word-wrap: break-word;
+    transition: var(--transition-default-duration) background;
+    position: relative;
+}
+
+.page {
+    padding-bottom: 10px !important;
+}
+
+.childUser img {
+    height: 25px;
+    width: 25px;
+    float: left;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+}
+
+.childUser:hover {
+    transition: var(--transition-default-duration) background;
+    background-color: var(--gray-color);
+}
+
+.childUserName {
+    padding-top: 5px;
+    display: block;
+    padding-left: 35px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    min-height: 35px;
+}
+
+.changeUser {
+    background-color: #08F;
+    display: flex;
+    padding: 10px 0px;
+    align-items: center;
+    justify-content: center;
 }

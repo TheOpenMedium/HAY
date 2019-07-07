@@ -60,7 +60,9 @@ create_child_user: Créer un utilisateur enfant / une page
 child_name: Nom
 child_user: Utilisateur enfant
 page: Page
+parent: Utilisateur parent
 childs_and_pages: Utilisateurs enfants et pages
+change_user: Changer d'utilisateur
 
 # User page
 # Page d'utilisateur
