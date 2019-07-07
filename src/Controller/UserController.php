@@ -246,6 +246,11 @@ class UserController extends AbstractController
     public function userChildCreationAction(Request $request)
     {
         $user = $this->getUser();
+        
+        if ($user->getIsChild()) {
+            throw new AccessDeniedException();
+        }
+        
         $child = new User();
         $form = $this->createForm(ChildUserType::class, $child);
 

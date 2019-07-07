@@ -9,9 +9,11 @@
         <a href="{{ path('user_edit') }}">{{ "edit_user"|trans }}</a>
     </li>
     {% endif %}
+    {% if not app.user.isChild %}
     <li class="optionMenuChoice">
         <a href="{{ path('user_child_creation') }}">{{ "create_child_user"|trans }}</a>
     </li>
+    {% endif %}
     <li class="optionMenuChoice">
         <a href="{{ path('app_logout') }}">{{ "to_logout"|trans }}</a>
     </li>
