@@ -8,7 +8,7 @@
             <a href="{{ url('user_show', {'id': comment.user.id}) }}" class="fs16" style="border-left: calc(1px * var(--length-multiplication)) solid grey; padding-left: calc(15px * var(--length-multiplication)); width: 85%; color: grey;">
                 {{ comment.user.name }}
                 {% if comment.user.username %}{{ 'alias'|trans }} {{ comment.user.username }} {% endif %}
-                {{ 'has_comment'|trans }}
+                {{ 'commented'|trans }}
             </a>
             <div style="display: flex; padding: calc(5px * var(--length-multiplication)); cursor: default; padding-top: calc(2.5px * var(--length-multiplication)); grid-row: 1; -ms-grid-row: 1; justify-content: center;">
                 {% if app.user %}

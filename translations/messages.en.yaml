@@ -23,18 +23,18 @@ write: Write
 hello: Hello
 usr_img: User image
 alias: alias
-has_write: 'has write:'
+wrote: 'wrote:'
 comment: Comment
-has_comment: 'has comment:'
+commented: 'commented:'
 new_posts_sent: 'new post(s) have been sent'
 scope: "Post's scope: "
 scope_world: World
 scope_friends: Friends
 scope_frd_and_frd: 'Friends and their friends'
-scope_sub: Subscribtion
-scope_sub_users: Subscribtion users
-scope_sub_pages: Subscribtion pages
-scope_sub_groups: Subscribtion groups
+scope_sub: Subscriptions
+scope_sub_users: Users subscription
+scope_sub_pages: Pages subscription
+scope_sub_groups: Groups Subscription
 scope_mod: Moderation
 scope_my_posts: My posts
 limit: "Post's number: "
@@ -47,7 +47,7 @@ filterError: Failed!
 
 # Notifications
 
-notif0: has commented one of your status
+notif0: commented one of your status
 
 # Users
 
@@ -212,7 +212,7 @@ error_password_or_no_image: Wrong password or you didn't upload any image
 
 # Others
 
-date_format: 'm/d/Y h:i:s a' # see https://secure.php.net/manual/en/function.date.php
+date_format: 'd/m/Y h:i:s a' # see https://secure.php.net/manual/en/function.date.php
 
 ################################################################################
 
