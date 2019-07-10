@@ -47,6 +47,12 @@ record: Enregistrer ces paramètres comme étant par défaut
 filterReady: C'est fait !
 filterError: Une erreur s'est produite !
 
+# Post form
+# Formulaire d'un post
+
+choose_user: Choisir l'expéditeur
+choose_scope: Choisir la portée
+
 # Notifications
 # Notifications
 

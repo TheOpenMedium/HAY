@@ -313,6 +313,8 @@ class UserController extends AbstractController
         if ($user->getIsChild()) {
             $user = $this->getDoctrine()->getRepository(User::class)->find($this->get('security.token_storage')->getToken()->getOriginalToken()->getUser()->getId());
             $parent = $user;
+        } else {
+            $parent = $this->getUser();
         }
 
         // Getting Child Users of current user.

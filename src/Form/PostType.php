@@ -29,6 +29,7 @@ class PostType extends AbstractType
                 'expanded' => true
             ))
             ->add('size', IntegerType::class)
+            ->add('user', ChoiceType::class, ['choices' => $options['users']])
             ->add('submit', SubmitType::class)
         ;
     }
@@ -37,6 +38,9 @@ class PostType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Post::class,
+            'users' => null,
         ]);
+
+        $resolver->setAllowedTypes('users', 'array');
     }
 }

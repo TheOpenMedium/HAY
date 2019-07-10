@@ -45,6 +45,10 @@ record: Record these filters as default
 filterReady: Done!
 filterError: Failed!
 
+# Post form
+choose_user: Choose the sender
+choose_scope: Choose the scope
+
 # Notifications
 
 notif0: commented one of your status

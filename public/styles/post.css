@@ -183,6 +183,10 @@
     padding: calc(17px * var(--length-multiplication)) calc(31.27px * var(--length-multiplication));
 }
 
+.menuChoices div {
+    cursor: auto;
+}
+
 .option {
     border: 0px;
     padding-left: calc(30px * var(--length-multiplication));
@@ -284,6 +288,31 @@
     height: calc(34px * var(--length-multiplication));
     width: calc(100%);
     text-align: center;
+}
+
+/* Account Options */
+
+.accountMenu {
+    display: none;
+    background-color: lavender;
+    padding: calc(5px * var(--length-multiplication));
+    border-bottom-left-radius: calc(10px * var(--length-multiplication));
+    border-bottom-right-radius: calc(10px * var(--length-multiplication));
+    width: calc(255px * var(--length-multiplication));
+    transform: skewX(45deg);
+    margin-top: calc(17px * var(--length-multiplication));
+    color: black;
+    line-height: normal;
+    grid-template-columns: 40% auto;
+    grid-gap: 5px;
+    right: calc(-128px * var(--length-multiplication));
+    word-wrap: break-word;
+}
+
+.optAccount:hover .accountMenu {
+    display: grid;
+    position: absolute;
+    z-index: 3;
 }
 
 /* Send Post Buttons */

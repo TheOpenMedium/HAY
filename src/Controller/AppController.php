@@ -94,9 +94,40 @@ class AppController extends AbstractController
 
         if ($this->isGranted('post.submit')) {
             $post = new Post();
+            $post->setUser($this->getUser());
+
+            $users = [];
+            if ($this->getUser()->getIsChild()) {
+                $users[] = $this->getDoctrine()->getRepository(User::class)->find($this->get('security.token_storage')->getToken()->getOriginalToken()->getUser()->getId());
+            } else {
+                $users[] = $this->getUser();
+            }
+
+            // Getting Child Users of current user.
+            $users = array_merge($users, $users[0]->getChildren()->toArray());
+
+            // Sorting that user's array by the first name with the "cmp" function
+            if ($users) {
+                usort($users, array('App\Controller\FriendController', 'cmp'));
+            }
+
+            $userlist = [];
+
+            foreach ($users as $user) {
+                if (!$user->getIsChild()) {
+                    $userlist["parent"][$user->getName()] = $user;
+                } else {
+                    if (!in_array("ROLE_PAGE", $user->getRoles())) {
+                        $userlist["child_user"][$user->getName()] = $user;
+                    } else {
+                        $userlist["page"][$user->getName()] = $user;
+                    }
+                }
+            }
+            $userlist = \array_reverse($userlist);
 
             // Creating Post submit Form in case he want to send a post.
-            $form = $this->createForm(PostType::class, $post);
+            $form = $this->createForm(PostType::class, $post, ["users" => $userlist]);
             if (!$this->isGranted('post.option_color')) {
                 $form->remove("color");
             }
@@ -109,6 +140,15 @@ class AppController extends AbstractController
             // If he send a Post, the Post is saved into database.
             if ($form->isSubmitted() && $form->isValid()) {
                 $post = $form->getData();
+                $parent = $this->getUser();
+                if ($parent->getIsChild()) {
+                    $parent = $this->getDoctrine()->getRepository(User::class)->find($this->get('security.token_storage')->getToken()->getOriginalToken()->getUser()->getId());
+                }
+
+                if (!in_array($parent, array_merge($post->getUser()->getParents()->toArray(), $post->getUser()->getChildren()->toArray(), [$parent]))) {
+                    throw new AccessDeniedException();
+                }
+
                 $post->setId($this->generateIdAction($this->getDoctrine()->getRepository(Post::class), 10));
                 if (!$this->isGranted('post.option_color')) {
                     $post->setColor('696');
@@ -117,7 +157,6 @@ class AppController extends AbstractController
                     $post->setSize('16');
                 }
                 $post->setFont('SS');
-                $post->setUser($this->getUser());
 
                 // TODO: Sending notifications to followers
 
