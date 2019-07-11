@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Post;
 use App\Entity\Comment;
+use App\Form\PostType;
 use App\Form\EditUserType;
 use App\Form\ChildUserType;
 use App\Controller\AjaxController;
 use App\Controller\AppController;
+use App\Controller\SurveyController;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,8 +37,68 @@ class UserController extends AbstractController
      *     "_locale": "%app.locales%"
      * })
      */
-    public function userShowAction(User $user, AjaxController $ajaxController)
+    public function userShowAction(Request $request, User $user, AjaxController $ajaxController, AppController $appController, SurveyController $sc)
     {
+        $parent = $this->getUser();
+        $submit_post_allowed = false;
+        if ($parent->getIsChild()) {
+            $parent = $this->getDoctrine()->getRepository(User::class)->find($this->get('security.token_storage')->getToken()->getOriginalToken()->getUser()->getId());
+        }
+
+        if (in_array($parent, array_merge($user->getParents()->toArray(), $user->getChildren()->toArray(), [$parent]))) {
+            $submit_post_allowed = true;
+        }
+
+        // Post form
+        if ($this->isGranted('post.submit', $user) && $submit_post_allowed) {
+            $post = new Post();
+            $post->setUser($user);
+
+            // Creating Post submit Form in case he want to send a post.
+            $form = $this->createForm(PostType::class, $post, ["users" => [$user->getName() => $user]]);
+            if (!$this->isGranted('post.option_color')) {
+                $form->remove("color");
+            }
+            if (!$this->isGranted('post.option_textsize')) {
+                $form->remove("size");
+            }
+
+            $form->handleRequest($request);
+
+            // If he send a Post, the Post is saved into database.
+            if ($form->isSubmitted() && $form->isValid()) {
+                $post = $form->getData();
+                $parent = $this->getUser();
+                if ($parent->getIsChild()) {
+                    $parent = $this->getDoctrine()->getRepository(User::class)->find($this->get('security.token_storage')->getToken()->getOriginalToken()->getUser()->getId());
+                }
+
+                if (!in_array($parent, array_merge($post->getUser()->getParents()->toArray(), $post->getUser()->getChildren()->toArray(), [$parent]))) {
+                    throw new AccessDeniedException();
+                }
+
+                $post->setId($appController->generateIdAction($this->getDoctrine()->getRepository(Post::class), 10));
+                if (!$this->isGranted('post.option_color')) {
+                    $post->setColor('696');
+                }
+                if (!$this->isGranted('post.option_textsize')) {
+                    $post->setSize('16');
+                }
+                $post->setFont('SS');
+
+                // TODO: Sending notifications to followers
+
+                $post = $sc->surveyCheckPostAction($post);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($post);
+                $em->flush();
+            }
+
+            $form = $form->createView();
+        } else {
+            $form = false;
+        }
+
         // Fetching Post.
         $postList = $ajaxController->postGenerateAction("user", "DESC", 10, NULL, NULL, $user->getId());
 
@@ -67,6 +129,7 @@ class UserController extends AbstractController
 
         // All that is rendered with the user show template sending Post List, Comment List and User.
         return $this->render('user/showUser.html.twig', array(
+            'post' => $form,
             'postList' => $postList,
             'user' => $user,
             'friend' => $bool,
