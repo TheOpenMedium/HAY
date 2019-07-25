@@ -193,7 +193,7 @@ class UserController extends AbstractController
             // Handling the user's image
             if ($form->get('file')->getData() != null) {
                 // We verify that the user hasn't already an image.
-                if ($this->getUser()->getUrl() != '/ressources/icon.svg') {
+                if ($this->getUser()->getUrl() != '/resources/icon.svg') {
                     // If it's the case, we remove it.
                     unlink(__dir__.'/../../public'.$this->getUser()->getUrl());
                 }

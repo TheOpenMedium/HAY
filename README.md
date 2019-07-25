@@ -1,4 +1,4 @@
-# HAY Project <img src="https://raw.githubusercontent.com/TheOpenMedium/HAY/master/public/ressources/HAYlogo.svg?sanitize=true" height="60" width="60" />
+# HAY Project <img src="https://raw.githubusercontent.com/TheOpenMedium/HAY/master/public/resources/HAYlogo.svg?sanitize=true" height="60" width="60" />
 
 [![Version](https://img.shields.io/badge/version-v0.0.1-red.svg?longCache=true&style=flat-square)](https://github.com/TheOpenMedium/HAY/releases) [![Release](https://img.shields.io/badge/release-pre--alpha-red.svg?longCache=true&style=flat-square)](https://github.com/TheOpenMedium/HAY/releases) [![Symfony](https://img.shields.io/badge/symfony-4.1.7-blue.svg?longCache=true&style=flat-square)](https://symfony.com/) [![PHP](https://img.shields.io/badge/php-+7.2.0-blue.svg?longCache=true&style=flat-square)](https://php.net/)
 > Code of conduct [here](https://github.com/TheOpenMedium/HAY/blob/master/CODE_OF_CONDUCT.md)

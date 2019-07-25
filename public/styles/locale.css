@@ -7,7 +7,7 @@
     height: 150px;
     text-align: center;
     background-color: var(--om-color);
-    background-image: url('../ressources/icon.svg');
+    background-image: url('../resources/icon.svg');
     background-repeat: no-repeat;
     background-position: 10px 10px;
     background-size: 130px;

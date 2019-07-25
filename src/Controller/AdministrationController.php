@@ -87,7 +87,7 @@ class AdministrationController extends AbstractController
 
             if ($datas['HAYlogo'] !== NULL) {
                 if ($datas['HAYlogo']->guessExtension() == 'svg' || $datas['HAYlogo']->guessExtension() == 'svgz') {
-                    $datas['HAYlogo']->move(__dir__.'/../../public/ressources/', 'HAYlogo.svg');
+                    $datas['HAYlogo']->move(__dir__.'/../../public/resources/', 'HAYlogo.svg');
                 } else {
                     throw new \Exception('The image has to be of type SVG.');
                 }
@@ -95,7 +95,7 @@ class AdministrationController extends AbstractController
 
             if ($datas['icon'] !== NULL) {
                 if ($datas['icon']->guessExtension() == 'svg' || $datas['icon']->guessExtension() == 'svgz') {
-                    $datas['icon']->move(__dir__.'/../../public/ressources/', 'icon.svg');
+                    $datas['icon']->move(__dir__.'/../../public/resources/', 'icon.svg');
                 } else {
                     throw new \Exception('The image has to be of type SVG.');
                 }
